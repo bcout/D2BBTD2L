@@ -1,0 +1,36 @@
+View Quizzes:
+
+The viewQuizzes realization demonstrates a Student actor requesting to view all
+quizzes available based on his student ID (sID). Once the students ID is
+gathered the function `getAvailableQuizzes` is called using the aforementioned
+ID. The viewQuizzes control then passes this information onto the data manager
+which queries the database to find the stored quizzes and returns them to the
+UI where the actor may view their quizzes.
+
+Post Quiz:
+
+The postQuiz realization demonstrates a professor uploading a quiz, which then
+activates the createNewQuiz function which passes the quiz information to the
+data manager. The data manager then inserts a new quiz object into the quiz
+table and returns a confirmation message which is displayed to the professor.
+The professor then is able to make the quiz public to students using the
+makeQuizPublic function.
+
+
+Post Quiz Results:
+
+The postQuizResults realization demonstrates a teaching assistant adding quiz
+results to a quiz object. The UI function postQuizResults passes the quiz
+results to the controller and then the data manager. The data manager then
+inserts the quiz results into the database.
+
+
+Take Quiz:
+
+The takeQuiz realization demonstrates a student choosing a quiz which is then
+queried from the database using the getQuiz function in takeQuizUI and
+takeQuizControl and the data manager functions to realted to retrieving the quiz
+and questions pertaining to the quiz. Next the student answers each question on
+the quiz and submits their answers. Using the UI and Control methods
+submitAnswers the answers are passed to the data manager which inserts them into
+the database.
