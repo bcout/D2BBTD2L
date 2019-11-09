@@ -1,0 +1,46 @@
+///UPLOAD_TO_LOCKER_REALIZATION
+This diagram represents the sequence of operations involved
+in the process of a student uploading files to their locker.
+The file paths are sent from the UI to the dataManager, where
+the file contents are copied and then added to the
+LockerItem table. Prior to being uploaded, the file sizes
+are checked to ensure they don't exceed 1GB, and the current
+size of the Locker is checked to ensure it has room for the
+additional files. The `displayConfirmation' function will
+display either confirmation or declination based on the
+state of its parameter - it handles both cases.
+
+///VIEW_COURSE_INFO_REALIZATION
+This diagram represents the sequence of operations involved
+in the process of a student or TA viewing the information
+for a specific course. The UI will immediately send a call
+to retrieve the course info once loaded, as the UI will only
+load once a course is selected. With this courseID, the
+appropriate rows will be retrieved from the database and
+displayed. The user then selects the item which they want to
+see the details of, where it will then be displayed.
+
+//POST_NOTIFICATION_REALIZATION
+This diagram represents the sequence of operations involved
+in the process of a Professor posting a notification. The
+information inserted by the user is used to create a
+notificationObject, which contains the data to be inserted
+into the Notification table. Booleans are returned to
+indicate the success state of the functions, which are
+passed to the displayConfirmation function. The
+`displayConfirmation' function will display either
+confirmation or declination based on the state of its
+parameter - it handles both cases.
+
+//ADD_COURSE_OFFERING_INFO_REALIZATION
+This diagram represents the sequence of operations involved
+in the process of Administration adding course offering
+information. If the course they add offering info for
+doesn't exist, it will be added to the Course table.
+Regardless of this, the remaining offering information will
+be added to the CourseOfferingInfo table. Booleans are
+returned to indicate the success state of eac. The
+`displayConfirmation' function will display either
+confirmation or declination based on the state of its
+parameter, which is the state boolean - it handles
+both cases.
