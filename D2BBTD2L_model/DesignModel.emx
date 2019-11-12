@@ -5380,7 +5380,7 @@
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ibs0IQWTEeqWIYW1YU-CKQ" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ibs0IAWTEeqWIYW1YU-CKQ" value="1"/>
       </ownedAttribute>
-      <ownedOperation xmi:id="_F2P7YPw3EemPiMo4x1l-CA" name="SQLAddTA"/>
+      <ownedAttribute xmi:id="_VdPGsAWgEeqaveFHRwBiFQ" name="email" visibility="private"/>
       <ownedOperation xmi:id="_13OiMAPyEeq7KuhEDhSDFQ" name="SQLGetTAUsers"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Association" xmi:id="_jGPSQPtIEemBGb1A3UmAhw" memberEnd="_jGP5UPtIEemBGb1A3UmAhw _jGQgYvtIEemBGb1A3UmAhw">
@@ -5471,10 +5471,7 @@
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_-OSKQQWTEeqWIYW1YU-CKQ" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_-OSKQAWTEeqWIYW1YU-CKQ" value="1"/>
       </ownedAttribute>
-      <ownedOperation xmi:id="_hsLV4Pw2EemPiMo4x1l-CA" name="SQLAddStudent"/>
       <ownedOperation xmi:id="_7EuskP82Eem4A-IBKl3EKQ" name="sql-update user unreadNotifications=0"/>
-      <ownedOperation xmi:id="_wQRtsP9FEem6XYd7hyJPTg" name="sqlinsert"/>
-      <ownedOperation xmi:id="_pqOxUP9GEem6XYd7hyJPTg" name="sqlInsert"/>
       <ownedOperation xmi:id="_4KFG4AP4Eeq7KuhEDhSDFQ" name="SQLGetStudentUsers"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_TmbkAPwGEemof8BG65t3Cw" name="professorAccount">
@@ -5499,7 +5496,6 @@
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_KZ4yMAWZEeqWIYW1YU-CKQ"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="_VeP3gAWZEeqWIYW1YU-CKQ" name="faculty" visibility="private"/>
-      <ownedOperation xmi:id="_iuPaYPw3EemPiMo4x1l-CA" name="SQLAddProf"/>
       <ownedOperation xmi:id="_QFyukAP4Eeq7KuhEDhSDFQ" name="SQLGetProfessorUsers"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_VvIV4PwGEemof8BG65t3Cw" name="adminAccount">
@@ -5516,7 +5512,6 @@
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_gyZUAAWTEeqWIYW1YU-CKQ" value="1"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="_QtWmQAWXEeqWIYW1YU-CKQ" name="position" visibility="private"/>
-      <ownedOperation xmi:id="_2yoVwPw3EemPiMo4x1l-CA" name="SQLAddAdmin"/>
       <ownedOperation xmi:id="_Xxe2oAPyEeq7KuhEDhSDFQ" name="SQLGetAdminUsers"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Association" xmi:id="_XF3fUPwGEemof8BG65t3Cw" memberEnd="_XF5UgPwGEemof8BG65t3Cw _XF7JsPwGEemof8BG65t3Cw">
@@ -7013,7 +7008,7 @@
       <ownedAttribute xmi:id="_FK8KAfw2EemPiMo4x1l-CA" name="createLoginAccountUI" type="_Ey5wQPtAEemsX8nO4jq5MQ"/>
       <ownedAttribute xmi:id="_FSp7kPw2EemPiMo4x1l-CA" name="createLoginAccountControl" type="_7Re9APtCEemBGb1A3UmAhw"/>
       <ownedAttribute xmi:id="_Fw1FUPw2EemPiMo4x1l-CA" name="dataManager" type="_G2nXoPtEEemBGb1A3UmAhw"/>
-      <ownedAttribute xmi:id="_NlU8YPw2EemPiMo4x1l-CA" name="userAccount" type="_SeH4IPwGEemof8BG65t3Cw"/>
+      <ownedAttribute xmi:id="_NlU8YPw2EemPiMo4x1l-CA" name="userAccount" type="_C3gNkAWTEeqWIYW1YU-CKQ"/>
     </packagedElement>
     <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_bizj4Pw2EemPiMo4x1l-CA" name="SendOperationEvent11" operation="_biy80Pw2EemPiMo4x1l-CA"/>
     <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_bizj4fw2EemPiMo4x1l-CA" name="ReceiveOperationEvent11" operation="_biy80Pw2EemPiMo4x1l-CA"/>
@@ -7246,7 +7241,7 @@
       <ownedAttribute xmi:id="_7MH7Afw2EemPiMo4x1l-CA" name="createLoginAccountUI" type="_Ey5wQPtAEemsX8nO4jq5MQ"/>
       <ownedAttribute xmi:id="_7UwSkfw2EemPiMo4x1l-CA" name="createLoginAccountControl" type="_7Re9APtCEemBGb1A3UmAhw"/>
       <ownedAttribute xmi:id="_70il4Pw2EemPiMo4x1l-CA" name="dataManager" type="_G2nXoPtEEemBGb1A3UmAhw"/>
-      <ownedAttribute xmi:id="_8rCJAPw2EemPiMo4x1l-CA" name="tA_Account" type="_NXS5kPtIEemBGb1A3UmAhw"/>
+      <ownedAttribute xmi:id="_8rCJAPw2EemPiMo4x1l-CA" name="tA_Account" type="_C3gNkAWTEeqWIYW1YU-CKQ"/>
     </packagedElement>
     <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_-9WJ4Pw2EemPiMo4x1l-CA" name="SendOperationEvent17" operation="_-9Vi0Pw2EemPiMo4x1l-CA"/>
     <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_-9WJ4fw2EemPiMo4x1l-CA" name="ReceiveOperationEvent17" operation="_-9Vi0Pw2EemPiMo4x1l-CA"/>
@@ -7450,11 +7445,11 @@
         <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_goKesfw3EemPiMo4x1l-CA" covered="_aYTqMPw3EemPiMo4x1l-CA" event="_htr8UPw3EemPiMo4x1l-CA" message="_goKesPw3EemPiMo4x1l-CA"/>
         <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_goKesvw3EemPiMo4x1l-CA" covered="_akSQsPw3EemPiMo4x1l-CA" event="_htr8Ufw3EemPiMo4x1l-CA" message="_goKesPw3EemPiMo4x1l-CA"/>
         <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_goLFwPw3EemPiMo4x1l-CA" covered="_akSQsPw3EemPiMo4x1l-CA" start="_goKesvw3EemPiMo4x1l-CA" finish="_goLFwfw3EemPiMo4x1l-CA"/>
-        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_iLt8Ifw3EemPiMo4x1l-CA" covered="_akSQsPw3EemPiMo4x1l-CA" event="_iuQBcPw3EemPiMo4x1l-CA" message="_iLt8IPw3EemPiMo4x1l-CA"/>
-        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_iLt8Ivw3EemPiMo4x1l-CA" covered="_bTzpIPw3EemPiMo4x1l-CA" event="_iuQBcfw3EemPiMo4x1l-CA" message="_iLt8IPw3EemPiMo4x1l-CA"/>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_iLt8Ifw3EemPiMo4x1l-CA" covered="_akSQsPw3EemPiMo4x1l-CA" event="_qde7cAWiEeqaveFHRwBiFQ" message="_iLt8IPw3EemPiMo4x1l-CA"/>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_iLt8Ivw3EemPiMo4x1l-CA" covered="_bTzpIPw3EemPiMo4x1l-CA" event="_qdfigAWiEeqaveFHRwBiFQ" message="_iLt8IPw3EemPiMo4x1l-CA"/>
         <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_iLujMPw3EemPiMo4x1l-CA" covered="_bTzpIPw3EemPiMo4x1l-CA" start="_iLt8Ivw3EemPiMo4x1l-CA" finish="_iLujMfw3EemPiMo4x1l-CA"/>
-        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_iLujMfw3EemPiMo4x1l-CA" covered="_bTzpIPw3EemPiMo4x1l-CA" event="_iuQBcPw3EemPiMo4x1l-CA" message="_iLujMvw3EemPiMo4x1l-CA"/>
-        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_iLujM_w3EemPiMo4x1l-CA" covered="_akSQsPw3EemPiMo4x1l-CA" event="_iuQBcfw3EemPiMo4x1l-CA" message="_iLujMvw3EemPiMo4x1l-CA"/>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_iLujMfw3EemPiMo4x1l-CA" covered="_bTzpIPw3EemPiMo4x1l-CA" event="_qde7cAWiEeqaveFHRwBiFQ" message="_iLujMvw3EemPiMo4x1l-CA"/>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_iLujM_w3EemPiMo4x1l-CA" covered="_akSQsPw3EemPiMo4x1l-CA" event="_qdfigAWiEeqaveFHRwBiFQ" message="_iLujMvw3EemPiMo4x1l-CA"/>
         <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_goLFwfw3EemPiMo4x1l-CA" covered="_akSQsPw3EemPiMo4x1l-CA" event="_htr8UPw3EemPiMo4x1l-CA" message="_goLFwvw3EemPiMo4x1l-CA"/>
         <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_goLs0Pw3EemPiMo4x1l-CA" covered="_aYTqMPw3EemPiMo4x1l-CA" event="_htr8Ufw3EemPiMo4x1l-CA" message="_goLFwvw3EemPiMo4x1l-CA"/>
         <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_fb6G8Pw3EemPiMo4x1l-CA" covered="_aYTqMPw3EemPiMo4x1l-CA" event="_gHwgUPw3EemPiMo4x1l-CA" message="_fb6G8fw3EemPiMo4x1l-CA"/>
@@ -7472,14 +7467,14 @@
         <message xmi:id="_goKesPw3EemPiMo4x1l-CA" name="handleCreateProf" receiveEvent="_goKesvw3EemPiMo4x1l-CA" sendEvent="_goKesfw3EemPiMo4x1l-CA" connector="_goLs0fw3EemPiMo4x1l-CA"/>
         <message xmi:id="_goLFwvw3EemPiMo4x1l-CA" name="ok" messageSort="reply" receiveEvent="_goLs0Pw3EemPiMo4x1l-CA" sendEvent="_goLFwfw3EemPiMo4x1l-CA" connector="_goLs0fw3EemPiMo4x1l-CA"/>
         <message xmi:id="_iLt8IPw3EemPiMo4x1l-CA" name="SQLAddProf" receiveEvent="_iLt8Ivw3EemPiMo4x1l-CA" sendEvent="_iLt8Ifw3EemPiMo4x1l-CA" connector="_iLvKQPw3EemPiMo4x1l-CA"/>
-        <message xmi:id="_iLujMvw3EemPiMo4x1l-CA" name="ok" messageSort="reply" receiveEvent="_iLujM_w3EemPiMo4x1l-CA" sendEvent="_iLujMfw3EemPiMo4x1l-CA" connector="_iLvKQPw3EemPiMo4x1l-CA"/>
+        <message xmi:id="_iLujMvw3EemPiMo4x1l-CA" name="SQLAddProf" messageSort="reply" receiveEvent="_iLujM_w3EemPiMo4x1l-CA" sendEvent="_iLujMfw3EemPiMo4x1l-CA" connector="_iLvKQPw3EemPiMo4x1l-CA"/>
         <message xmi:id="_kMXlQPw3EemPiMo4x1l-CA" name="displayProfAccountCreationConfirmation" receiveEvent="_kMYMUPw3EemPiMo4x1l-CA" sendEvent="_kMXlQfw3EemPiMo4x1l-CA" connector="_bw7qAfw3EemPiMo4x1l-CA"/>
       </ownedBehavior>
       <ownedAttribute xmi:id="_Y7HTcPw3EemPiMo4x1l-CA" name="admin" type="_Rmj20PwuEemHUq2bFqgVmA"/>
       <ownedAttribute xmi:id="_aQjcYfw3EemPiMo4x1l-CA" name="createLoginAccountUI" type="_Ey5wQPtAEemsX8nO4jq5MQ"/>
       <ownedAttribute xmi:id="_aYURQPw3EemPiMo4x1l-CA" name="createLoginAccountControl" type="_7Re9APtCEemBGb1A3UmAhw"/>
       <ownedAttribute xmi:id="_akS3wPw3EemPiMo4x1l-CA" name="dataManager" type="_G2nXoPtEEemBGb1A3UmAhw"/>
-      <ownedAttribute xmi:id="_bT0QMPw3EemPiMo4x1l-CA" name="professorAccount" type="_TmbkAPwGEemof8BG65t3Cw"/>
+      <ownedAttribute xmi:id="_bT0QMPw3EemPiMo4x1l-CA" name="professorAccount" type="_C3gNkAWTEeqWIYW1YU-CKQ"/>
     </packagedElement>
     <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_c-1AgPw3EemPiMo4x1l-CA" name="SendOperationEvent23" operation="_c-0ZcPw3EemPiMo4x1l-CA"/>
     <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_c-1nkPw3EemPiMo4x1l-CA" name="ReceiveOperationEvent23" operation="_c-0ZcPw3EemPiMo4x1l-CA"/>
@@ -7489,8 +7484,8 @@
     <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_gHxHYPw3EemPiMo4x1l-CA" name="ReceiveOperationEvent25" operation="_gHurIPw3EemPiMo4x1l-CA"/>
     <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_htr8UPw3EemPiMo4x1l-CA" name="SendOperationEvent26" operation="_htrVQPw3EemPiMo4x1l-CA"/>
     <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_htr8Ufw3EemPiMo4x1l-CA" name="ReceiveOperationEvent26" operation="_htrVQPw3EemPiMo4x1l-CA"/>
-    <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_iuQBcPw3EemPiMo4x1l-CA" name="SendOperationEvent27" operation="_iuPaYPw3EemPiMo4x1l-CA"/>
-    <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_iuQBcfw3EemPiMo4x1l-CA" name="ReceiveOperationEvent27" operation="_iuPaYPw3EemPiMo4x1l-CA"/>
+    <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_iuQBcPw3EemPiMo4x1l-CA" name="SendOperationEvent27"/>
+    <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_iuQBcfw3EemPiMo4x1l-CA" name="ReceiveOperationEvent27"/>
     <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_lyG0Afw3EemPiMo4x1l-CA" name="SendOperationEvent28" operation="_lyG0APw3EemPiMo4x1l-CA"/>
     <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_lyHbEPw3EemPiMo4x1l-CA" name="ReceiveOperationEvent28" operation="_lyG0APw3EemPiMo4x1l-CA"/>
     <packagedElement xmi:type="uml:Collaboration" xmi:id="_oLwL8Pw3EemPiMo4x1l-CA" name="createAdminLoginAccountCollaboration">
@@ -7683,11 +7678,11 @@
         <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_1Pg9Mfw3EemPiMo4x1l-CA" covered="_ul5k4Pw3EemPiMo4x1l-CA" event="_14BHoPw3EemPiMo4x1l-CA" message="_1Pg9MPw3EemPiMo4x1l-CA"/>
         <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_1Pg9Mvw3EemPiMo4x1l-CA" covered="_vdNnYPw3EemPiMo4x1l-CA" event="_14BHofw3EemPiMo4x1l-CA" message="_1Pg9MPw3EemPiMo4x1l-CA"/>
         <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_1PhkQPw3EemPiMo4x1l-CA" covered="_vdNnYPw3EemPiMo4x1l-CA" start="_1Pg9Mvw3EemPiMo4x1l-CA" finish="_1PhkQfw3EemPiMo4x1l-CA"/>
-        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_2UCVQPw3EemPiMo4x1l-CA" covered="_vdNnYPw3EemPiMo4x1l-CA" event="_2yo80Pw3EemPiMo4x1l-CA" message="_2UBuMPw3EemPiMo4x1l-CA"/>
-        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_2UCVQfw3EemPiMo4x1l-CA" covered="_v4TA4Pw3EemPiMo4x1l-CA" event="_2yo80fw3EemPiMo4x1l-CA" message="_2UBuMPw3EemPiMo4x1l-CA"/>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_2UCVQPw3EemPiMo4x1l-CA" covered="_vdNnYPw3EemPiMo4x1l-CA" event="_wXusUAWiEeqaveFHRwBiFQ" message="_2UBuMPw3EemPiMo4x1l-CA"/>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_2UCVQfw3EemPiMo4x1l-CA" covered="_v4TA4Pw3EemPiMo4x1l-CA" event="_wXv6cAWiEeqaveFHRwBiFQ" message="_2UBuMPw3EemPiMo4x1l-CA"/>
         <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_2UCVQvw3EemPiMo4x1l-CA" covered="_v4TA4Pw3EemPiMo4x1l-CA" start="_2UCVQfw3EemPiMo4x1l-CA" finish="_2UC8UPw3EemPiMo4x1l-CA"/>
-        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_2UC8UPw3EemPiMo4x1l-CA" covered="_v4TA4Pw3EemPiMo4x1l-CA" event="_2yo80Pw3EemPiMo4x1l-CA" message="_2UC8Ufw3EemPiMo4x1l-CA"/>
-        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_2UC8Uvw3EemPiMo4x1l-CA" covered="_vdNnYPw3EemPiMo4x1l-CA" event="_2yo80fw3EemPiMo4x1l-CA" message="_2UC8Ufw3EemPiMo4x1l-CA"/>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_2UC8UPw3EemPiMo4x1l-CA" covered="_v4TA4Pw3EemPiMo4x1l-CA" event="_wXusUAWiEeqaveFHRwBiFQ" message="_2UC8Ufw3EemPiMo4x1l-CA"/>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_2UC8Uvw3EemPiMo4x1l-CA" covered="_vdNnYPw3EemPiMo4x1l-CA" event="_wXv6cAWiEeqaveFHRwBiFQ" message="_2UC8Ufw3EemPiMo4x1l-CA"/>
         <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_1PhkQfw3EemPiMo4x1l-CA" covered="_vdNnYPw3EemPiMo4x1l-CA" event="_14BHoPw3EemPiMo4x1l-CA" message="_1PhkQvw3EemPiMo4x1l-CA"/>
         <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_1PiLUPw3EemPiMo4x1l-CA" covered="_ul5k4Pw3EemPiMo4x1l-CA" event="_14BHofw3EemPiMo4x1l-CA" message="_1PhkQvw3EemPiMo4x1l-CA"/>
         <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_0SWKUPw3EemPiMo4x1l-CA" covered="_ul5k4Pw3EemPiMo4x1l-CA" event="_00HaoPw3EemPiMo4x1l-CA" message="_0SWKUfw3EemPiMo4x1l-CA"/>
@@ -7705,14 +7700,14 @@
         <message xmi:id="_1Pg9MPw3EemPiMo4x1l-CA" name="handleCreateAdmin" receiveEvent="_1Pg9Mvw3EemPiMo4x1l-CA" sendEvent="_1Pg9Mfw3EemPiMo4x1l-CA" connector="_1PiLUfw3EemPiMo4x1l-CA"/>
         <message xmi:id="_1PhkQvw3EemPiMo4x1l-CA" name="ok" messageSort="reply" receiveEvent="_1PiLUPw3EemPiMo4x1l-CA" sendEvent="_1PhkQfw3EemPiMo4x1l-CA" connector="_1PiLUfw3EemPiMo4x1l-CA"/>
         <message xmi:id="_2UBuMPw3EemPiMo4x1l-CA" name="SQLAddAdmin" receiveEvent="_2UCVQfw3EemPiMo4x1l-CA" sendEvent="_2UCVQPw3EemPiMo4x1l-CA" connector="_2UC8U_w3EemPiMo4x1l-CA"/>
-        <message xmi:id="_2UC8Ufw3EemPiMo4x1l-CA" name="ok" messageSort="reply" receiveEvent="_2UC8Uvw3EemPiMo4x1l-CA" sendEvent="_2UC8UPw3EemPiMo4x1l-CA" connector="_2UC8U_w3EemPiMo4x1l-CA"/>
+        <message xmi:id="_2UC8Ufw3EemPiMo4x1l-CA" name="SQLAddAdmin" messageSort="reply" receiveEvent="_2UC8Uvw3EemPiMo4x1l-CA" sendEvent="_2UC8UPw3EemPiMo4x1l-CA" connector="_2UC8U_w3EemPiMo4x1l-CA"/>
         <message xmi:id="_4jUQQPw3EemPiMo4x1l-CA" name="displayAdminAccountCreationConfirmation" receiveEvent="_4jU3UPw3EemPiMo4x1l-CA" sendEvent="_4jUQQfw3EemPiMo4x1l-CA" connector="_wSm-Uvw3EemPiMo4x1l-CA"/>
       </ownedBehavior>
       <ownedAttribute xmi:id="_t-Bskfw3EemPiMo4x1l-CA" name="admin" type="_Rmj20PwuEemHUq2bFqgVmA"/>
       <ownedAttribute xmi:id="_ucXOYfw3EemPiMo4x1l-CA" name="createLoginAccountUI" type="_Ey5wQPtAEemsX8nO4jq5MQ"/>
       <ownedAttribute xmi:id="_ul5k4fw3EemPiMo4x1l-CA" name="createLoginAccountControl" type="_7Re9APtCEemBGb1A3UmAhw"/>
       <ownedAttribute xmi:id="_vdNnYfw3EemPiMo4x1l-CA" name="dataManager" type="_G2nXoPtEEemBGb1A3UmAhw"/>
-      <ownedAttribute xmi:id="_v4Tn8Pw3EemPiMo4x1l-CA" name="adminAccount" type="_VvIV4PwGEemof8BG65t3Cw"/>
+      <ownedAttribute xmi:id="_v4Tn8Pw3EemPiMo4x1l-CA" name="adminAccount" type="_C3gNkAWTEeqWIYW1YU-CKQ"/>
     </packagedElement>
     <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_xYDjcfw3EemPiMo4x1l-CA" name="SendOperationEvent29" operation="_xYDjcPw3EemPiMo4x1l-CA"/>
     <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_xYDjcvw3EemPiMo4x1l-CA" name="ReceiveOperationEvent29" operation="_xYDjcPw3EemPiMo4x1l-CA"/>
@@ -7722,8 +7717,8 @@
     <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_00IBsPw3EemPiMo4x1l-CA" name="ReceiveOperationEvent31" operation="_00GzkPw3EemPiMo4x1l-CA"/>
     <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_14BHoPw3EemPiMo4x1l-CA" name="SendOperationEvent32" operation="_14AgkPw3EemPiMo4x1l-CA"/>
     <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_14BHofw3EemPiMo4x1l-CA" name="ReceiveOperationEvent32" operation="_14AgkPw3EemPiMo4x1l-CA"/>
-    <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_2yo80Pw3EemPiMo4x1l-CA" name="SendOperationEvent33" operation="_2yoVwPw3EemPiMo4x1l-CA"/>
-    <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_2yo80fw3EemPiMo4x1l-CA" name="ReceiveOperationEvent33" operation="_2yoVwPw3EemPiMo4x1l-CA"/>
+    <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_2yo80Pw3EemPiMo4x1l-CA" name="SendOperationEvent33"/>
+    <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_2yo80fw3EemPiMo4x1l-CA" name="ReceiveOperationEvent33"/>
     <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_5suIUPw3EemPiMo4x1l-CA" name="SendOperationEvent34" operation="_5sthQPw3EemPiMo4x1l-CA"/>
     <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_5suIUfw3EemPiMo4x1l-CA" name="ReceiveOperationEvent34" operation="_5sthQPw3EemPiMo4x1l-CA"/>
     <packagedElement xmi:type="uml:Collaboration" xmi:id="_2ygUUP80Eem4A-IBKl3EKQ" name="viewNotification">
@@ -9079,8 +9074,8 @@
         <message xmi:id="_lCFW8P9FEem6XYd7hyJPTg" name="enterMarkDetails" receiveEvent="_lCF-AP9FEem6XYd7hyJPTg" sendEvent="_lCFW8f9FEem6XYd7hyJPTg" connector="_lCHMIP9FEem6XYd7hyJPTg"/>
         <message xmi:id="_pYL0gP9FEem6XYd7hyJPTg" name="addMark" receiveEvent="_pYMbkf9FEem6XYd7hyJPTg" sendEvent="_pYMbkP9FEem6XYd7hyJPTg" connector="_pYNpsf9FEem6XYd7hyJPTg"/>
         <message xmi:id="_rI8AcP9FEem6XYd7hyJPTg" name="addMark" receiveEvent="_rI8ngf9FEem6XYd7hyJPTg" sendEvent="_rI8ngP9FEem6XYd7hyJPTg" connector="_rI91of9FEem6XYd7hyJPTg"/>
-        <message xmi:id="_sjMX8P9FEem6XYd7hyJPTg" name="sqlinsert" receiveEvent="_sjM_Af9FEem6XYd7hyJPTg" sendEvent="_sjM_AP9FEem6XYd7hyJPTg" connector="_sjONIf9FEem6XYd7hyJPTg"/>
-        <message xmi:id="_z70LUf9FEem6XYd7hyJPTg" name="sqlinsert" messageSort="reply" receiveEvent="_z70LUP9FEem6XYd7hyJPTg" sendEvent="_sjONIP9FEem6XYd7hyJPTg" connector="_sjONIf9FEem6XYd7hyJPTg"/>
+        <message xmi:id="_sjMX8P9FEem6XYd7hyJPTg" name="\Unspecified\" receiveEvent="_sjM_Af9FEem6XYd7hyJPTg" sendEvent="_sjM_AP9FEem6XYd7hyJPTg" connector="_sjONIf9FEem6XYd7hyJPTg"/>
+        <message xmi:id="_z70LUf9FEem6XYd7hyJPTg" name="\Unspecified\" messageSort="reply" receiveEvent="_z70LUP9FEem6XYd7hyJPTg" sendEvent="_sjONIP9FEem6XYd7hyJPTg" connector="_sjONIf9FEem6XYd7hyJPTg"/>
         <message xmi:id="_1vUJQP9FEem6XYd7hyJPTg" name="addMark" messageSort="reply" receiveEvent="_1vTiMP9FEem6XYd7hyJPTg" sendEvent="_rI91oP9FEem6XYd7hyJPTg" connector="_rI91of9FEem6XYd7hyJPTg"/>
         <message xmi:id="_2moLwP9FEem6XYd7hyJPTg" name="addMark" messageSort="reply" receiveEvent="_2mnksP9FEem6XYd7hyJPTg" sendEvent="_pYNpsP9FEem6XYd7hyJPTg" connector="_pYNpsf9FEem6XYd7hyJPTg"/>
         <message xmi:id="_8chLoP9GEem6XYd7hyJPTg" name="displayEnterMarkConfirmation" receiveEvent="_8chysP9GEem6XYd7hyJPTg" sendEvent="_8chLof9GEem6XYd7hyJPTg" connector="_hEwlwP9FEem6XYd7hyJPTg"/>
@@ -9099,8 +9094,8 @@
     <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_qhK10f9FEem6XYd7hyJPTg" name="ReceiveOperationEvent64" operation="_qhKOwP9FEem6XYd7hyJPTg"/>
     <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_r8pVUP9FEem6XYd7hyJPTg" name="SendOperationEvent65" operation="_r8m5EP9FEem6XYd7hyJPTg"/>
     <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_r8p8YP9FEem6XYd7hyJPTg" name="ReceiveOperationEvent65" operation="_r8m5EP9FEem6XYd7hyJPTg"/>
-    <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_wQSUwP9FEem6XYd7hyJPTg" name="SendOperationEvent66" operation="_wQRtsP9FEem6XYd7hyJPTg"/>
-    <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_wQSUwf9FEem6XYd7hyJPTg" name="ReceiveOperationEvent66" operation="_wQRtsP9FEem6XYd7hyJPTg"/>
+    <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_wQSUwP9FEem6XYd7hyJPTg" name="SendOperationEvent66"/>
+    <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_wQSUwf9FEem6XYd7hyJPTg" name="ReceiveOperationEvent66"/>
     <packagedElement xmi:type="uml:Collaboration" xmi:id="_6DCoQP9FEem6XYd7hyJPTg" name="professorEnterMarkCollaboration">
       <ownedBehavior xmi:type="uml:Interaction" xmi:id="_6DD2YP9FEem6XYd7hyJPTg" name="professorEnterMarkInteraction">
         <eAnnotations xmi:id="_6DEdcP9FEem6XYd7hyJPTg" source="uml2.diagrams">
@@ -9316,8 +9311,8 @@
         <message xmi:id="_jU_GgP9GEem6XYd7hyJPTg" name="enterMarkDetails" receiveEvent="_jVAUoP9GEem6XYd7hyJPTg" sendEvent="_jU_tkP9GEem6XYd7hyJPTg" connector="_jVBiwP9GEem6XYd7hyJPTg"/>
         <message xmi:id="_kf_hEP9GEem6XYd7hyJPTg" name="addMark" receiveEvent="_kgAIIP9GEem6XYd7hyJPTg" sendEvent="_kf_hEf9GEem6XYd7hyJPTg" connector="_kgBWQP9GEem6XYd7hyJPTg"/>
         <message xmi:id="_lgAMkP9GEem6XYd7hyJPTg" name="addMark" receiveEvent="_lgAzof9GEem6XYd7hyJPTg" sendEvent="_lgAzoP9GEem6XYd7hyJPTg" connector="_lgCBwf9GEem6XYd7hyJPTg"/>
-        <message xmi:id="_oqBRgP9GEem6XYd7hyJPTg" name="sqlInsert" receiveEvent="_oqCfoP9GEem6XYd7hyJPTg" sendEvent="_oqB4kP9GEem6XYd7hyJPTg" connector="_oqDGsf9GEem6XYd7hyJPTg"/>
-        <message xmi:id="_qt3_oP9GEem6XYd7hyJPTg" name="sqlInsert" messageSort="reply" receiveEvent="_qt3YkP9GEem6XYd7hyJPTg" sendEvent="_oqDGsP9GEem6XYd7hyJPTg" connector="_oqDGsf9GEem6XYd7hyJPTg"/>
+        <message xmi:id="_oqBRgP9GEem6XYd7hyJPTg" name="\Unspecified\" receiveEvent="_oqCfoP9GEem6XYd7hyJPTg" sendEvent="_oqB4kP9GEem6XYd7hyJPTg" connector="_oqDGsf9GEem6XYd7hyJPTg"/>
+        <message xmi:id="_qt3_oP9GEem6XYd7hyJPTg" name="\Unspecified\" messageSort="reply" receiveEvent="_qt3YkP9GEem6XYd7hyJPTg" sendEvent="_oqDGsP9GEem6XYd7hyJPTg" connector="_oqDGsf9GEem6XYd7hyJPTg"/>
         <message xmi:id="_rIjJcP9GEem6XYd7hyJPTg" name="addMark" messageSort="reply" receiveEvent="_rIiiYP9GEem6XYd7hyJPTg" sendEvent="_lgCBwP9GEem6XYd7hyJPTg" connector="_lgCBwf9GEem6XYd7hyJPTg"/>
         <message xmi:id="_rkwkUf9GEem6XYd7hyJPTg" name="addMark" messageSort="reply" receiveEvent="_rkwkUP9GEem6XYd7hyJPTg" sendEvent="_kgAvMf9GEem6XYd7hyJPTg" connector="_kgBWQP9GEem6XYd7hyJPTg"/>
         <message xmi:id="_CJNBoP9HEem6XYd7hyJPTg" name="displayEnterMarkConfirmation" receiveEvent="_CJNosP9HEem6XYd7hyJPTg" sendEvent="_CJNBof9HEem6XYd7hyJPTg" connector="_gOugMf9GEem6XYd7hyJPTg"/>
@@ -9328,8 +9323,8 @@
       <ownedAttribute xmi:id="_c7AFof9GEem6XYd7hyJPTg" name="dataManager" type="_G2nXoPtEEemBGb1A3UmAhw"/>
       <ownedAttribute xmi:id="_fK_LQP9GEem6XYd7hyJPTg" name="userAccount" type="_SeH4IPwGEemof8BG65t3Cw"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_pqPYYP9GEem6XYd7hyJPTg" name="SendOperationEvent67" operation="_pqOxUP9GEem6XYd7hyJPTg"/>
-    <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_pqPYYf9GEem6XYd7hyJPTg" name="ReceiveOperationEvent67" operation="_pqOxUP9GEem6XYd7hyJPTg"/>
+    <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_pqPYYP9GEem6XYd7hyJPTg" name="SendOperationEvent67"/>
+    <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_pqPYYf9GEem6XYd7hyJPTg" name="ReceiveOperationEvent67"/>
     <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_6UtKkP9GEem6XYd7hyJPTg" name="SendOperationEvent68" operation="_6UrVYP9GEem6XYd7hyJPTg"/>
     <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_6UtxoP9GEem6XYd7hyJPTg" name="ReceiveOperationEvent68" operation="_6UrVYP9GEem6XYd7hyJPTg"/>
     <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="__K6EgP9GEem6XYd7hyJPTg" name="SendOperationEvent69" operation="__K5dcP9GEem6XYd7hyJPTg"/>
@@ -14457,6 +14452,10 @@
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_gRIgYQWbEeqWIYW1YU-CKQ" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_gRIgYAWbEeqWIYW1YU-CKQ" value="1"/>
       </ownedAttribute>
+      <ownedOperation xmi:id="_iuPaYPw3EemPiMo4x1l-CA" name="SQLAddProf"/>
+      <ownedOperation xmi:id="_2yoVwPw3EemPiMo4x1l-CA" name="SQLAddAdmin"/>
+      <ownedOperation xmi:id="_hsLV4Pw2EemPiMo4x1l-CA" name="SQLAddStudent"/>
+      <ownedOperation xmi:id="_F2P7YPw3EemPiMo4x1l-CA" name="SQLAddTA"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Association" xmi:id="_edU6EAWTEeqWIYW1YU-CKQ" memberEnd="_edWvQAWTEeqWIYW1YU-CKQ _edYkcAWTEeqWIYW1YU-CKQ">
       <ownedEnd xmi:id="_edYkcAWTEeqWIYW1YU-CKQ" name="" visibility="private" type="_G2nXoPtEEemBGb1A3UmAhw" association="_edU6EAWTEeqWIYW1YU-CKQ">
@@ -14507,6 +14506,10 @@
     <packagedElement xmi:type="uml:Association" xmi:id="_V93WQAWaEeqWIYW1YU-CKQ" memberEnd="_V94kYAWaEeqWIYW1YU-CKQ _V96ZkAWaEeqWIYW1YU-CKQ"/>
     <packagedElement xmi:type="uml:Association" xmi:id="_bpWSYAWaEeqWIYW1YU-CKQ" memberEnd="_bpXggAWaEeqWIYW1YU-CKQ _bpYuoAWaEeqWIYW1YU-CKQ"/>
     <packagedElement xmi:type="uml:Association" xmi:id="_gRGrMAWbEeqWIYW1YU-CKQ" memberEnd="_gRH5UAWbEeqWIYW1YU-CKQ _gRJHcAWbEeqWIYW1YU-CKQ"/>
+    <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_qde7cAWiEeqaveFHRwBiFQ" name="SendOperationEvent176" operation="_iuPaYPw3EemPiMo4x1l-CA"/>
+    <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_qdfigAWiEeqaveFHRwBiFQ" name="ReceiveOperationEvent176" operation="_iuPaYPw3EemPiMo4x1l-CA"/>
+    <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_wXusUAWiEeqaveFHRwBiFQ" name="SendOperationEvent177" operation="_2yoVwPw3EemPiMo4x1l-CA"/>
+    <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_wXv6cAWiEeqaveFHRwBiFQ" name="ReceiveOperationEvent177" operation="_2yoVwPw3EemPiMo4x1l-CA"/>
     <profileApplication xmi:id="_KywPVPs_EemsX8nO4jq5MQ">
       <eAnnotations xmi:id="_KywPVfs_EemsX8nO4jq5MQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/Standard.profile.uml#_yzU58YinEdqtvbnfB2L_5w"/>
