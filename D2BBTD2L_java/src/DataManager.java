@@ -3,11 +3,10 @@
  * 
  */
 
-/*
-import static CourseInfoObject.*;
-import static CourseOfferingInfoObject.*;
-import static notificationObject.*;
-*/
+//import static CourseInfoObject.*;
+//import static CourseOfferingInfoObject.*;
+//import static notificationObject.*;
+import java.sql.*;
 import java.util.Set;
 
 /** 
@@ -17,6 +16,49 @@ import java.util.Set;
 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 */
 public class DataManager {
+	
+	Connection connection = null;
+	
+	/*
+	 * Put your prepared statements here
+	 * PreparedStatement example1;
+	 * PreparedStatement example2;
+	 */
+	
+	/*
+	 * Put your query strings here
+	 * String example1Query = "select * from table;"; 
+	 * String example2Query = "select * from 
+	 */
+	
+	/**
+	 * This is the DataManager constructor that forms a connection to the cs204301ateam2 database
+	 * A potential place for update would be the fact that a connection is established every time 
+	 * a data manager is created, which may not be necessary as we could have 1 general data manager 
+	 * that we pass around references to. Hasn't been decided as of November 13, 2019
+	 *  -  Brennan Couturier
+	 */
+	public DataManager() 
+	{
+		try 
+		{
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+		}
+		catch (Exception e) 
+		{
+			System.err.println(e.toString());
+		}
+		String url = "jdbc:mysql://cs2043.cs.unb.ca:3306/cs204301ateam2";
+		try 
+		{
+			connection = DriverManager.getConnection(url, "cs204301ateam2", "Z34SRYfW");
+		}
+		catch (SQLException e)
+		{
+			System.err.println("Database connection error.");
+		}
+	}
+	
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -52,7 +94,7 @@ public class DataManager {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	private Locker locker;
+	private LockerItem locker;
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -88,19 +130,19 @@ public class DataManager {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	private professorAccount professorAccount;
+	private ProfessorAccount professorAccount;
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	private userAccount userAccount;
+	private StudentAccount userAccount;
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	private adminAccount adminAccount;
+	private AdminAccount adminAccount;
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -113,6 +155,42 @@ public class DataManager {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	private CourseOfferingInfo courseOfferingInfo;
+	/** 
+	* <!-- begin-UML-doc -->
+	* <!-- end-UML-doc -->
+	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	*/
+	private Account account5;
+	/** 
+	* <!-- begin-UML-doc -->
+	* <!-- end-UML-doc -->
+	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	*/
+	private CourseOfferingInfo courseOfferingInfo2;
+	/** 
+	* <!-- begin-UML-doc -->
+	* <!-- end-UML-doc -->
+	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	*/
+	private AdminAccount adminAccount2;
+	/** 
+	* <!-- begin-UML-doc -->
+	* <!-- end-UML-doc -->
+	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	*/
+	private ProfessorAccount professorAccount2;
+	/** 
+	* <!-- begin-UML-doc -->
+	* <!-- end-UML-doc -->
+	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	*/
+	private TA_Account tA_Account;
+	/** 
+	* <!-- begin-UML-doc -->
+	* <!-- end-UML-doc -->
+	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	*/
+	private StudentAccount studentAccount;
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -466,6 +544,18 @@ public class DataManager {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		return 0;
+		// end-user-code
+	}
+
+	/** 
+	* <!-- begin-UML-doc -->
+	* <!-- end-UML-doc -->
+	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	*/
+	public void checkLoginCredentials() {
+		// begin-user-code
+		// TODO Auto-generated method stub
+
 		// end-user-code
 	}
 }
