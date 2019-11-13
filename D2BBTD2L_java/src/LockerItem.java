@@ -38,7 +38,7 @@ public class LockerItem {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	private Object accountType;
+	private Account account;
 
 	/** 
 	* <!-- begin-UML-doc -->
