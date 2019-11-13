@@ -2178,3 +2178,10 @@ Caused by: org.eclipse.core.runtime.CoreException: The Liberty Gradle integratio
 
 !ENTRY org.eclipse.ui 2 2 2019-11-13 15:45:58.914
 !MESSAGE Invalid preference category path: org.eclipse.buildship.ui.preferences (bundle: com.ibm.ws.st.liberty.gradle, page: com.ibm.ws.st.liberty.gradle.ui.internal.LibertyIntegrationPreferencePage)
+
+!ENTRY org.eclipse.core.resources 2 2 2019-11-13 16:11:39.566
+!MESSAGE Save operation warnings.
+!SUBENTRY 1 org.eclipse.core.resources 2 234 2019-11-13 16:11:39.566
+!MESSAGE The project description file (.project) for 'implementation' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.
+!SUBENTRY 1 org.eclipse.core.resources 2 234 2019-11-13 16:11:39.566
+!MESSAGE The project description file (.project) for 'models' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.
