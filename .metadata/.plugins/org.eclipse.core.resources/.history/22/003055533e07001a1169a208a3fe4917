@@ -1,5 +1,4 @@
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 /**
  * 
@@ -18,11 +17,6 @@ public class viewMessagesControl {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	private DataManager dm;
-	
-	public viewMessagesControl()
-	{
-		dm = new DataManager();
-	}
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -30,21 +24,17 @@ public class viewMessagesControl {
 	 * @throws SQLException 
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public ArrayList<Message> getMessages(int userId) throws SQLException {
+	public void getMessages(int userId) throws SQLException {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		ArrayList<Message> messages = new ArrayList<Message>();
 		try
 		{
-			messages = dm.requestMessages(userId);
+			dm.requestMessages(userId);
 		}
 		catch (SQLException e)
 		{
 			throw e;
 		}
-		
-		return messages;
-		
 		
 		// end-user-code
 	}

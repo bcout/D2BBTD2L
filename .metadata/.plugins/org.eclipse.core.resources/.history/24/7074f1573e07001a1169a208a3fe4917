@@ -18,11 +18,6 @@ public class viewMessagesControl {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	private DataManager dm;
-	
-	public viewMessagesControl()
-	{
-		dm = new DataManager();
-	}
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -33,17 +28,16 @@ public class viewMessagesControl {
 	public ArrayList<Message> getMessages(int userId) throws SQLException {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		ArrayList<Message> messages = new ArrayList<Message>();
+		ArrayList<Message> messages = new ArrayList<Messages>();
 		try
 		{
-			messages = dm.requestMessages(userId);
+			dm.requestMessages(userId);
 		}
 		catch (SQLException e)
 		{
 			throw e;
 		}
 		
-		return messages;
 		
 		
 		// end-user-code
