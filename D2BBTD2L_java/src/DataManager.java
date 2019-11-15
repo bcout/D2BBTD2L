@@ -192,6 +192,7 @@ public class DataManager {
 	*/
 	private StudentAccount studentAccount;
 
+	
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -216,28 +217,61 @@ public class DataManager {
 		// end-user-code
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void handleCreateStudent() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public int handleCreateAccount(Account ac, int type) {
+		try {
+			Statement stmt = connection.createStatement();
+			String query = "insert into Account (username,password,accountType,firstName,lastName)" + 
+							"values ('" + ac.username + "'," +
+							"sha1('" + ac.password + "', "+ type + ", '" + 
+							ac.firstName + "', '" + ac.lastName + "')";
+			stmt.executeQuery(query);
+			
+			Statement getID  = connection.createStatement();
+			String query2 = "select accountId from Account where username = '" +
+															ac.username + "'";
+			ResultSet rs = getID.executeQuery(query2);
+			int id = 0;
+			
+			while(rs.next()) {
+				 id = Integer.parseInt(rs.getString(0));
+			}
+			return id;
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			return -1;
+		}
+		
 	}
-
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void handleCreateTA() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void handleCreateStudent(StudentAccount st) {
+		try {
+			Statement stmt = connection.createStatement();
+			String query = "insert into StudentAccount (accountId, hasReadNotifications) values ('" + st.accountId + 
+							"', " + st.hasUnreadNotifications + ")";
+			stmt.executeQuery(query);
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+	
+	/** 
+	* <!-- begin-UML-doc -->
+	* <!-- end-UML-doc -->
+	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	*/
+	public void handleCreateTA(TA_Account ta) {
+		try {
+			Statement stmt = connection.createStatement();
+			String query = "insert into TA_Account (accountId,email) values ('" +
+							ta.accountId + "', '" + ta.email + "')";
+			stmt.executeQuery(query);
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		}
 	}
 
 	/** 
