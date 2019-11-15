@@ -7,6 +7,7 @@
 //import static CourseOfferingInfoObject.*;
 //import static notificationObject.*;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Set;
 
 /** 
@@ -16,6 +17,47 @@ import java.util.Set;
 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 */
 public class DataManager {
+	
+	Connection connection = null;
+	
+	/*
+	 * Put your prepared statements here
+	 */
+	PreparedStatement requestMessagesPs;
+	
+	/*
+	 * Put your query strings here
+	 */
+	String requestMessagesQuery = "select * from Message where to_accountId = ?;";
+	
+	/**
+	 * This is the DataManager constructor that forms a connection to the cs204301ateam2 database
+	 * A potential place for update would be the fact that a connection is established every time 
+	 * a data manager is created, which may not be necessary as we could have 1 general data manager 
+	 * that we pass around references to. Hasn't been decided as of November 13, 2019
+	 *  -  Brennan Couturier
+	 */
+	public DataManager() 
+	{
+		try 
+		{
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+		}
+		catch (Exception e) 
+		{
+			System.err.println(e.toString());
+		}
+		String url = "jdbc:mysql://cs2043.cs.unb.ca:3306/cs204301ateam2";
+		try 
+		{
+			connection = DriverManager.getConnection(url, "cs204301ateam2", "Z34SRYfW");
+		}
+		catch (SQLException e)
+		{
+			System.err.println("Database connection error.");
+		}
+	}
+	
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -164,12 +206,66 @@ public class DataManager {
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
+	 * @throws SQLException
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void requestMessages() {
+	
+	public ArrayList<Message> requestMessages(int userId) throws SQLException {
 		// begin-user-code
 		// TODO Auto-generated method stub
-
+		ArrayList<Message> messages = new ArrayList<Message>();
+		int messageId;
+		Timestamp timeSent;
+		String messageText;
+		int from_accountId;
+		int to_accountId;
+		
+		try
+		{
+			requestMessagesPs = connection.prepareStatement(requestMessagesQuery);
+			
+			requestMessagesPs.setInt(1, userId);
+			
+			ResultSet rs = requestMessagesPs.executeQuery();
+			
+			while (rs.next())
+			{
+				Message m = new Message();
+				
+				messageId = rs.getInt(1);
+				timeSent = rs.getTimestamp(2);
+				messageText = rs.getString(3);
+				from_accountId = rs.getInt(4);
+				to_accountId = rs.getInt(5);
+				
+				m.setMessageId(messageId);
+				m.setSentTimestamp(timeSent);
+				m.setMessageText(messageText);
+				m.setFromAccountId(from_accountId);
+				m.setToAccountId(to_accountId);
+				
+				messages.add(m);
+			}
+		}
+		catch (SQLException e)
+		{
+			throw e;
+		}
+		
+		if (requestMessagesPs != null)
+		{
+			try
+			{
+				requestMessagesPs.close();
+				System.out.println("closed requestMessagesPs");
+			}
+			catch (SQLException e)
+			{
+				throw e;
+			}
+		}
+		
+		return messages;
 		// end-user-code
 	}
 

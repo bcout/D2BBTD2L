@@ -214,88 +214,45 @@ public class DataManager {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		ArrayList<Message> messages = new ArrayList<Message>();
-		SQLException cachedException = null;
 		int messageId;
 		Timestamp timeSent;
 		String messageText;
 		int from_accountId;
 		int to_accountId;
 		
-		
 		try
 		{
 			requestMessagesPs = connection.prepareStatement(requestMessagesQuery);
 			
-			try
+			requestMessagesPs.setInt(1, userId);
+			
+			ResultSet rs = requestMessagesPs.executeQuery();
+			
+			while (rs.next())
 			{
-				requestMessagesPs.setInt(1, userId);
+				Message m = new Message();
 				
-				ResultSet rs = requestMessagesPs.executeQuery();
+				messageId = rs.getInt(1);
+				timeSent = rs.getTimestamp(2);
+				messageText = rs.getString(3);
+				from_accountId = rs.getInt(4);
+				to_accountId = rs.getInt(5);
 				
-				try
-				{
-					while (rs.next())
-					{
-						Message m = new Message();
-						
-						messageId = rs.getInt(1);
-						timeSent = rs.getTimestamp(2);
-						messageText = rs.getString(3);
-						from_accountId = rs.getInt(4);
-						to_accountId = rs.getInt(5);
-						
-						m.setMessageId(messageId);
-						m.setSentTimestamp(timeSent);
-						m.setMessageText(messageText);
-						m.setFromAccountId(from_accountId);
-						m.setToAccountId(to_accountId);
-						
-						messages.add(m);
-					}
-				}
-				catch (SQLException e)
-				{
-					cachedException = e;
-					throw e;
-				}
-				finally
-				{
-					try
-					{
-						rs.close();
-					}
-					catch (SQLException e)
-					{
-						if (cachedException != null)
-						{
-							e.initCause(cachedException);
-						}
-						cachedException = e;
-						throw e;
-					}
-				}
+				m.setMessageId(messageId);
+				m.setSentTimestamp(timeSent);
+				m.setMessageText(messageText);
+				m.setFromAccountId(from_accountId);
+				m.setToAccountId(to_accountId);
 				
-			}
-			catch (SQLException e)
-			{
-				if (cachedException != null)
-				{
-					e.initCause(cachedException);
-				}
-				cachedException = e;
-				throw e;
+				messages.add(m);
 			}
 		}
 		catch (SQLException e)
 		{
-			if (cachedException != null)
-			{
-				e.initCause(cachedException);
-			}
-			cachedException = e;
 			throw e;
 		}
-		finally
+		
+		if (requestMessagesPs != null)
 		{
 			try
 			{
@@ -303,10 +260,6 @@ public class DataManager {
 			}
 			catch (SQLException e)
 			{
-				if (cachedException != null)
-				{
-					e.initCause(cachedException);
-				}
 				throw e;
 			}
 		}
