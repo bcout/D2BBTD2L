@@ -7,14 +7,13 @@
 //import static CourseOfferingInfoObject.*;
 //import static notificationObject.*;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Set;
+import java.sql.Date;
+import java.util.*;
 
 /** 
 * <!-- begin-UML-doc -->
 * <!-- end-UML-doc -->
-* @author bcouturi
-* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+* @author Brennan Couturier
 */
 public class DataManager {
 	
@@ -23,12 +22,12 @@ public class DataManager {
 	/*
 	 * Put your prepared statements here
 	 */
-	PreparedStatement requestMessagesPs;
+	
 	
 	/*
 	 * Put your query strings here
 	 */
-	String requestMessagesQuery = "select * from Message where to_accountId = ?;";
+	
 	
 	/**
 	 * This is the DataManager constructor that forms a connection to the cs204301ateam2 database
@@ -82,12 +81,7 @@ public class DataManager {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	private Notification notification;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Message message;
+
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -194,26 +188,72 @@ public class DataManager {
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 * @throws SQLException 
 	*/
-	public void handleMessageSubmit() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public boolean handleMessageSubmit(String messageText, int from_accountId, int to_accountId) throws SQLException 
+	{
+		
+		boolean submitSuccessful = false;
+		
+		PreparedStatement submitMessagePs;
+		
+		String submitMessageQuery = "insert into Messages (sentTimestamp, messageText, from_accountId, to_accountId) values (?, ?, ?, ?);";
+		
+		Timestamp timeSent = new Timestamp(System.currentTimeMillis());
+		
+		try
+		{
+			submitMessagePs = connection.prepareStatement(submitMessageQuery);
+			submitMessagePs.setTimestamp(1, timeSent);
+			submitMessagePs.setString(2, messageText);
+			submitMessagePs.setInt(3, from_accountId);
+			submitMessagePs.setInt(4, to_accountId);
+			
+			int numRowsChanged = submitMessagePs.executeUpdate();
+			
+			if (numRowsChanged == 1)
+			{
+				submitSuccessful = true;
+			}
+		}
+		catch (SQLException e)
+		{
+			throw e;
+		}
+		
+		if (submitMessagePs != null)
+		{
+			try
+			{
+				submitMessagePs.close();
+			}
+			catch (SQLException e)
+			{
+				throw e;
+			}
+		}
+		
+		return submitSuccessful;
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
+	* This method retrieves from the database all the messages that have a passed user's id as the recipient's id
 	 * @throws SQLException
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 * @param userId The id of the user whose messages will be retrieved
 	*/
 	
-	public ArrayList<Message> requestMessages(int userId) throws SQLException {
-		// begin-user-code
-		// TODO Auto-generated method stub
+	public ArrayList<Message> requestMessages(int userId) throws SQLException 
+	{
+		//Declare the prepared statement
+		PreparedStatement requestMessagesPs;
+		
+		//Initialize the message request query. Will select all the messages that have the user's id as the to_accountId value
+		String requestMessagesQuery = "select * from Message where to_accountId = ?;";
+		
+		//Create a list of all messages
 		ArrayList<Message> messages = new ArrayList<Message>();
+		
+		//Declare message variables
 		int messageId;
 		Timestamp timeSent;
 		String messageText;
@@ -222,27 +262,26 @@ public class DataManager {
 		
 		try
 		{
+			//Prepare the message request query
 			requestMessagesPs = connection.prepareStatement(requestMessagesQuery);
 			
+			//Put the user's id number into the query, so that only messages addressed to that user are retrieved
 			requestMessagesPs.setInt(1, userId);
 			
+			//Execute the query to retrieve a set of SQL rows
 			ResultSet rs = requestMessagesPs.executeQuery();
 			
+			//If there are any message rows retrieved, create message objects out of them then add them to a linked list
+			//If there are no message rows retrieved, return an empty list
 			while (rs.next())
-			{
-				Message m = new Message();
-				
+			{				
 				messageId = rs.getInt(1);
 				timeSent = rs.getTimestamp(2);
 				messageText = rs.getString(3);
 				from_accountId = rs.getInt(4);
 				to_accountId = rs.getInt(5);
 				
-				m.setMessageId(messageId);
-				m.setSentTimestamp(timeSent);
-				m.setMessageText(messageText);
-				m.setFromAccountId(from_accountId);
-				m.setToAccountId(to_accountId);
+				Message m = new Message(messageId, timeSent, messageText, from_accountId, to_accountId);
 				
 				messages.add(m);
 			}
@@ -265,7 +304,6 @@ public class DataManager {
 		}
 		
 		return messages;
-		// end-user-code
 	}
 
 	/** 

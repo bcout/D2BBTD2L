@@ -2,10 +2,11 @@
  * 
  */
 
+import java.util.*;
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
- * @author bcouturi
+ * @author Brennan Couturier 3638808
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class postMessageUI {
@@ -14,7 +15,23 @@ public class postMessageUI {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	private postMessageControl class11;
+	private postMessageControl pmc;
+	
+	private boolean postSuccessful;
+	private int from_id;
+	private int to_id;
+	private Scanner scan = new Scanner(System.in);
+	private String messageText;
+	
+	public postMessageUI()
+	{
+		pmc = new postMessageControl();
+	}
+	
+	public postMessageUI(int num)
+	{
+		
+	}
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -24,7 +41,16 @@ public class postMessageUI {
 	public void displayCreateMessageForm() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-
+		System.out.println("Enter sender id");
+		from_id = scan.nextInt();
+		System.out.println("Enter recipient id");
+		to_id = scan.nextInt();
+		
+		postMessageUI pmu = new postMessageUI(1);
+		pmu.writeMessage();
+		
+		scan.close();
+		
 		// end-user-code
 	}
 
@@ -36,7 +62,10 @@ public class postMessageUI {
 	public void writeMessage() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-
+		System.out.println("Enter message:");
+		messageText = scan.nextLine();
+		
+		System.out.println(messageText);
 		// end-user-code
 	}
 

@@ -14,7 +14,7 @@ public class Message
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
 	*/
-	private static int messageId;
+	private int messageId;
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -45,24 +45,23 @@ public class Message
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
 	*/
-	private Timestamp sentTimestamp;
+	private Timestamp timeSent;
 	
 	/**
-	 * This is the constructor for a message. 
+	 * This constructor is to be used when retrieving messages from the database, when all values are known
+	 * @param messageId The id number of the message
+	 * @param timeSent The time the message was stored in the database
+	 * @param messageText The textual aspect of the message
+	 * @param from_accountId The id of the user sending the message
+	 * @param to_accountId The id of the user receiving the message
 	 */
-	public Message()
+	public Message(int messageId, Timestamp timeSent, String messageText, int from_accountId, int to_accountId)
 	{
-		
-	}
-	
-	/**
-	 * This sets the message id.
-	 * Used to store the id from the database
-	 * @param id The id of the message
-	 */
-	public void setMessageId(int id)
-	{
-		messageId = id;
+		this.messageId = messageId;
+		this.timeSent = timeSent;
+		this.messageText = messageText;
+		this.from_accountId = from_accountId;
+		this.to_accountId = to_accountId;
 	}
 	
 	/**
@@ -96,9 +95,9 @@ public class Message
 	 * This sets the time that the message was sent (stored in the database)
 	 * @param timeSent The time the message was stored in the database
 	 */
-	public void setSentTimestamp(Timestamp timeSent)
+	public void setTimeSent(Timestamp timeSent)
 	{
-		sentTimestamp = timeSent;
+		timeSent = timeSent;
 	}
 	
 	public int getMessageId()
@@ -123,7 +122,7 @@ public class Message
 	
 	public Timestamp getTimeSent()
 	{
-		return sentTimestamp;
+		return timeSent;
 	}
 
 	/** 
