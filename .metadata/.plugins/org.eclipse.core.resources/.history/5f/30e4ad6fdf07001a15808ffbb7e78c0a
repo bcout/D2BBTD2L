@@ -1,8 +1,9 @@
-
+/**
+ * 
+ */
 
 import java.sql.SQLException;
 import java.util.*;
-
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
@@ -10,17 +11,18 @@ import java.util.*;
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class postMessageUI {
-	
-	//Non javafx variables
+	/** 
+	* <!-- begin-UML-doc -->
+	* <!-- end-UML-doc -->
+	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	*/
 	private postMessageControl pmc;
+	
 	private boolean postSuccessful;
 	private int from_id;
 	private int to_id;
 	private Scanner scan = new Scanner(System.in);
 	private String messageText;
-	
-	//javafx variables
-	
 	
 	/**
 	 * This is used to create a new instance of postMessageUI
@@ -77,19 +79,19 @@ public class postMessageUI {
 		{
 			System.err.println("Error sending message");
 		}
-		else
-		{
-			displayPostMessageConfirmation();
-		}
 			
 		// end-user-code
 	}
 
-	
+	/** 
+	* <!-- begin-UML-doc -->
+	* <!-- end-UML-doc -->
+	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	*/
 	public void displayPostMessageConfirmation() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		System.out.println("Message saved to database");
+
 		// end-user-code
 	}
 }

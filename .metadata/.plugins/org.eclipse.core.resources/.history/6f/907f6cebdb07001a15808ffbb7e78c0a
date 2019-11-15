@@ -19,6 +19,15 @@ public class DataManager {
 	
 	Connection connection = null;
 	
+	/*
+	 * Put your prepared statements here
+	 */
+	
+	
+	/*
+	 * Put your query strings here
+	 */
+	
 	
 	/**
 	 * This is the DataManager constructor that forms a connection to the cs204301ateam2 database
