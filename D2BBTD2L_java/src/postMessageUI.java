@@ -2,6 +2,7 @@
  * 
  */
 
+import java.sql.SQLException;
 import java.util.*;
 /** 
  * <!-- begin-UML-doc -->
@@ -23,12 +24,10 @@ public class postMessageUI {
 	private Scanner scan = new Scanner(System.in);
 	private String messageText;
 	
+	/**
+	 * This is used to create a new instance of postMessageUI
+	 */
 	public postMessageUI()
-	{
-		pmc = new postMessageControl();
-	}
-	
-	public postMessageUI(int num)
 	{
 		
 	}
@@ -46,7 +45,7 @@ public class postMessageUI {
 		System.out.println("Enter recipient id");
 		to_id = scan.nextInt();
 		
-		postMessageUI pmu = new postMessageUI(1);
+		postMessageUI pmu = new postMessageUI();
 		pmu.writeMessage();
 		
 		scan.close();
@@ -64,8 +63,23 @@ public class postMessageUI {
 		// TODO Auto-generated method stub
 		System.out.println("Enter message:");
 		messageText = scan.nextLine();
+		pmc = new postMessageControl();
 		
 		System.out.println(messageText);
+		try
+		{
+			postSuccessful = pmc.postMessage(messageText, from_id, to_id);
+		}
+		catch(SQLException e)
+		{
+			System.err.println(e.getMessage());
+		}
+		
+		if (!postSuccessful)
+		{
+			System.err.println("Error sending message");
+		}
+			
 		// end-user-code
 	}
 
