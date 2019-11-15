@@ -7,6 +7,7 @@
 //import static CourseOfferingInfoObject.*;
 //import static notificationObject.*;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Set;
 
 /** 
@@ -21,15 +22,13 @@ public class DataManager {
 	
 	/*
 	 * Put your prepared statements here
-	 * PreparedStatement example1;
-	 * PreparedStatement example2;
 	 */
+	PreparedStatement requestMessagesPs;
 	
 	/*
 	 * Put your query strings here
-	 * String example1Query = "select * from table;"; 
-	 * String example2Query = "select * from 
 	 */
+	String requestMessagesQuery = "select * from Message where to_accountId = ?;";
 	
 	/**
 	 * This is the DataManager constructor that forms a connection to the cs204301ateam2 database
@@ -207,12 +206,112 @@ public class DataManager {
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
+	 * @throws SQLException
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void requestMessages() {
+	
+	public ArrayList<Message> requestMessages(int userId) throws SQLException {
 		// begin-user-code
 		// TODO Auto-generated method stub
-
+		ArrayList<Message> messages = new ArrayList<Message>();
+		SQLException cachedException = null;
+		int messageId;
+		Timestamp timeSent;
+		String messageText;
+		int from_accountId;
+		int to_accountId;
+		
+		
+		try
+		{
+			requestMessagesPs = connection.prepareStatement(requestMessagesQuery);
+			
+			try
+			{
+				requestMessagesPs.setInt(1, userId);
+				
+				ResultSet rs = requestMessagesPs.executeQuery();
+				
+				try
+				{
+					while (rs.next())
+					{
+						Message m = new Message();
+						
+						messageId = rs.getInt(1);
+						timeSent = rs.getTimestamp(2);
+						messageText = rs.getString(3);
+						from_accountId = rs.getInt(4);
+						to_accountId = rs.getInt(5);
+						
+						m.setMessageId(messageId);
+						m.setSentTimestamp(timeSent);
+						m.setMessageText(messageText);
+						m.setFromAccountId(from_accountId);
+						m.setToAccountId(to_accountId);
+						
+						messages.add(m);
+					}
+				}
+				catch (SQLException e)
+				{
+					cachedException = e;
+					throw e;
+				}
+				finally
+				{
+					try
+					{
+						rs.close();
+					}
+					catch (SQLException e)
+					{
+						if (cachedException != null)
+						{
+							e.initCause(cachedException);
+						}
+						cachedException = e;
+						throw e;
+					}
+				}
+				
+			}
+			catch (SQLException e)
+			{
+				if (cachedException != null)
+				{
+					e.initCause(cachedException);
+				}
+				cachedException = e;
+				throw e;
+			}
+		}
+		catch (SQLException e)
+		{
+			if (cachedException != null)
+			{
+				e.initCause(cachedException);
+			}
+			cachedException = e;
+			throw e;
+		}
+		finally
+		{
+			try
+			{
+				requestMessagesPs.close();
+			}
+			catch (SQLException e)
+			{
+				if (cachedException != null)
+				{
+					e.initCause(cachedException);
+				}
+				throw e;
+			}
+		}
+		
+		return messages;
 		// end-user-code
 	}
 
