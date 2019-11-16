@@ -1,0 +1,9 @@
+import javafx.application.*;
+
+public class PostMessageGUITest extends Application
+{
+	public void start(Stage primaryStage)
+	{
+		
+	}
+}
