@@ -1,4 +1,5 @@
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * 
@@ -22,6 +23,11 @@ public class postMessageControl
 	public postMessageControl()
 	{
 		dm = new DataManager();
+	}
+	
+	public ArrayList<Account> getAllAccounts() throws SQLException
+	{
+		return dm.getAllAccounts();
 	}
 
 	/** 
