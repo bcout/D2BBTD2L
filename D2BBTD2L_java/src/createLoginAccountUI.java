@@ -57,7 +57,7 @@ public class createLoginAccountUI {
 		ac.firstName = sc.nextLine();
 		ac.lastName = sc.nextLine();
 		ac.accountType = 1;
-		
+		sc.close();
 		enterStudentAccountInfo(ac);
 		
 	}
@@ -70,14 +70,17 @@ public class createLoginAccountUI {
 	
 	public void enterStudentAccountInfo(Account ac) {
 		//create account with generic info
-		int id = control.createAccount(ac,1);
-		
-		//create student account with specific info
-		StudentAccount stdAcc = new StudentAccount();
-		stdAcc.accountId = id;
-		stdAcc.hasUnreadNotifications = 0;
-		control.createStudent(stdAcc);
-		displayStudentLoginCreationConfirmation();
+		int id = control.createAccount(ac);
+		if (id == -1) {
+			displayFailureMessage();
+		} else {
+			//create student account with specific info
+			StudentAccount stdAcc = new StudentAccount();
+			stdAcc.accountId = id;
+			stdAcc.hasUnreadNotifications = 0;
+			control.createStudent(stdAcc);
+			displayStudentLoginCreationConfirmation();
+		}
 	}
 
 	/** 
@@ -89,11 +92,9 @@ public class createLoginAccountUI {
 		System.out.println("Success");
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	public void displayFailureMessage() {
+		System.out.println("Failure");
+	}
 	
 	/** 
 	* <!-- begin-UML-doc -->
@@ -101,24 +102,31 @@ public class createLoginAccountUI {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void enterTAAccountInfo(Account ac, String email) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		int id = control.createAccount(ac,3);
-		
-		//create ta account with specific info
-		TA_Account TA_Acc = new TA_Account();
-		TA_Acc.accountId = id;
-		TA_Acc.email = email;
-		control.createTA(TA_Acc);
-		displayTAAccountCreationConfirmation();
-		// end-user-code
+		int id = control.createAccount(ac);
+		if (id == -1) {
+			displayFailureMessage();
+		} else {
+			//create ta account with specific info
+			TA_Account TA_Acc = new TA_Account();
+			TA_Acc.accountId = id;
+			TA_Acc.email = email;
+			control.createTA(TA_Acc);
+			displayTAAccountCreationConfirmation();
+		}
 	}
 	
 	public void displayTAAccountCreationForm() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		System.out.println("Enter username, password, fname, lname, email");
+		Scanner sc = new Scanner(System.in);
+		Account ac = new Account();
+		ac.username = sc.nextLine();
+		ac.password = sc.nextLine();
+		ac.firstName = sc.nextLine();
+		ac.lastName = sc.nextLine();
+		String email = sc.nextLine();
+		ac.accountType = 3;
+		sc.close();
+		enterTAAccountInfo(ac, email);
 	}
 
 	/** 
@@ -127,23 +135,26 @@ public class createLoginAccountUI {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void displayTAAccountCreationConfirmation() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		System.out.println("Success");
 	}
 
-	
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void enterProfAccountInfo() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void enterProfAccountInfo(Account ac, String faculty) {
+		int id = control.createAccount(ac);
+		
+		if (id == -1) {
+			displayFailureMessage();
+		} else {
+			ProfessorAccount profAc = new ProfessorAccount();
+			profAc.accountId = id;
+			profAc.faculty = faculty;
+			control.createProf(profAc);
+			displayProfAccountCreationConfirmation();
+		}
 	}
 	
 	/** 
@@ -152,10 +163,17 @@ public class createLoginAccountUI {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void displayProfAccountCreationForm() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		System.out.println("Enter username, password, fname, lname, faculty");
+		Scanner sc = new Scanner(System.in);
+		Account ac = new Account();
+		ac.username = sc.nextLine();
+		ac.password = sc.nextLine();
+		ac.firstName = sc.nextLine();
+		ac.lastName = sc.nextLine();
+		String faculty = sc.nextLine();
+		ac.accountType = 4;
+		sc.close();
+		enterProfAccountInfo(ac, faculty);
 	}
 
 	/** 
@@ -164,10 +182,7 @@ public class createLoginAccountUI {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void displayProfAccountCreationConfirmation() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		System.out.println("Success");
 	}
 
 	/** 
@@ -175,11 +190,17 @@ public class createLoginAccountUI {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void enterAdminAccountInfo() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void enterAdminAccountInfo(Account ac, String position) {
+		int id = control.createAccount(ac);
+		if (id == -1) {
+			displayFailureMessage();
+		} else {
+			AdminAccount adminAc = new AdminAccount();
+			adminAc.accountId = id;
+			adminAc.position = position;
+			control.createAdmin(adminAc);
+			displayAdminAccountCreationConfirmation();
+		}
 	}
 	
 	/** 
@@ -188,10 +209,17 @@ public class createLoginAccountUI {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void displayAdminAccountCreationForm() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		System.out.println("Enter username, password, fname, lname, position");
+		Scanner sc = new Scanner(System.in);
+		Account ac = new Account();
+		ac.username = sc.nextLine();
+		ac.password = sc.nextLine();
+		ac.firstName = sc.nextLine();
+		ac.lastName = sc.nextLine();
+		String position = sc.nextLine();
+		ac.accountType = 2;
+		sc.close();
+		enterAdminAccountInfo(ac, position);
 	}
 
 	/** 
@@ -200,9 +228,6 @@ public class createLoginAccountUI {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void displayAdminAccountCreationConfirmation() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		System.out.println("Success");
 	}
 }
