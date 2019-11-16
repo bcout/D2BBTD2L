@@ -7,9 +7,7 @@
 //import static CourseOfferingInfoObject.*;
 //import static notificationObject.*;
 import java.sql.*;
-import java.sql.Date;
 import java.util.*;
-
 /** 
 * <!-- begin-UML-doc -->
 * <!-- end-UML-doc -->
