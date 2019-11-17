@@ -7,6 +7,9 @@
 //import static notificationObject.*;
 import java.sql.*;
 import java.util.*;
+import java.util.ArrayList;
+import java.util.Set;
+
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
@@ -790,6 +793,28 @@ public class DataManager{
           ps.setBoolean(13, offering.getDOW()[4]);
           
           ps.executeUpdate();
+	}
+	/** 
+	* <!-- begin-UML-doc -->
+	* <!-- end-UML-doc -->
+	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	*/
+	public boolean addCourseRegistrationInfo(ArrayList<CourseRegistration> cr) {
+		try {
+			Statement st = connection.createStatement();
+			String query = "insert into CourseRegistration (accountId,courseOfferingId) values ";
+			for (int i=0; i<cr.size();i++) {
+				query += "('" + cr.get(i).accountIdstudent + "', '" + cr.get(i).courseOfferingId + "')";
+				if (i-1 != cr.size()) {
+					query += ",";
+				}
+			}
+			st.executeUpdate(query);
+			return true;
+		} catch (SQLException e) {
+			System.err.println(e.toString());
+			return false;
+		}
 	}
 
 

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * 
  */
@@ -16,6 +18,10 @@ public class addCourseRegistrationInfoUI {
 	*/
 	private addCourseRegistrationInfoControl control;
 
+	public addCourseRegistrationInfoUI(addCourseRegistrationInfoControl control) {
+		this.control = control;
+	}
+	
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -33,8 +39,9 @@ public class addCourseRegistrationInfoUI {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void enterCourseRegistrationInfo(CourseRegistration cr) {
 		
+	public boolean enterCourseRegistrationInfo(ArrayList<CourseRegistration> cr) {
+		return control.submitCourseRegistrationInfo(cr);
 	}
 
 	/** 
@@ -44,5 +51,9 @@ public class addCourseRegistrationInfoUI {
 	*/
 	public void displayConfirmationMessage() {
 		System.out.println("Success");
+	}
+	
+	public void displayFailureMessage() {
+		
 	}
 }
