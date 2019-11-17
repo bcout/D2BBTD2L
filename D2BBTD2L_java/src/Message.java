@@ -1,50 +1,37 @@
-/**
- * 
- */
+
 
 import java.sql.Timestamp;
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author bcouturi
+
+/**
+ * This class represents a Message object
+ * @author Brennan Couturier, 3638808
+ *
  */
 public class Message 
 {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	*/
+	/**
+	 * This is the id of the message. This is the primary key in the message table
+	 */
 	private int messageId;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	*/
+	
+	/**
+	 * This is the textual aspect of the message
+	 */
 	private String messageText;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	*/
+	
+	/**
+	 * This is the id number of the user who sent the message
+	 */
 	private int from_accountId;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	*/
+	
+	/**
+	 * This is the id number of the user to whom the message was sent.
+	 */
 	private int to_accountId;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Account account;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	*/
-	private Account account2;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	*/
+	
+	/**
+	 * This is a Timestamp of when the message was sent
+	 */
 	private Timestamp timeSent;
 	
 	/**
@@ -91,62 +78,58 @@ public class Message
 		to_accountId = ToId;
 	}
 	
+	
 	/**
 	 * This sets the time that the message was sent (stored in the database)
-	 * @param timeSent The time the message was stored in the database
+	 * @param timeSentIn The time the message was stored in the database
 	 */
-	public void setTimeSent(Timestamp timeSent)
+	public void setTimeSent(Timestamp timeSentIn)
 	{
-		timeSent = timeSent;
+		timeSent = timeSentIn;
 	}
 	
+	/**
+	 * This returns the id of the calling message object
+	 * @return The id of the calling message object
+	 */
 	public int getMessageId()
 	{
 		return messageId;
 	}
 	
+	/**
+	 * This returns the textual portion of the message
+	 * @return The textual portion of the message
+	 */
 	public String getMessageText()
 	{
 		return messageText;
 	}
 	
+	/**
+	 * This returns the id number of the user who sent the message
+	 * @return The id number of the user who sent the message
+	 */
 	public int getFromAccountId()
 	{
 		return from_accountId;
 	}
 	
+	/**
+	 * This returns the id number of the user to whom the message was sent
+	 * @return The id number of the user to whom the message was sent
+	 */
 	public int getToAccountId()
 	{
 		return to_accountId;
 	}
 	
+	/**
+	 * This returns the time the message was sent as a Timestamp
+	 * @return The time the message was sent as a Timestamp
+	 */
 	public Timestamp getTimeSent()
 	{
 		return timeSent;
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void SQLInsertMessage() 
-	{
-		// begin-user-code
-		// TODO Auto-generated method stub
-		
-		// end-user-code
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void SQLGetMessages() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
 	}
 }

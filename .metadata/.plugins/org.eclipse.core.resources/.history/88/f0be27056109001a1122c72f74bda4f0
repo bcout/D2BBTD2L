@@ -1,0 +1,4 @@
+#btnExit
+{
+	-fx-background-color: blue;
+}

@@ -140,6 +140,11 @@ public class Account
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
+	
+	public int getAccountId()
+	{
+		return accountId;
+	}
 
 	/** 
 	* <!-- begin-UML-doc -->

@@ -1,56 +1,59 @@
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javafx.event.ActionEvent;
 
 import javafx.scene.control.Button;
 
 /**
- * 
- */
-
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author bcouturi
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+ * This class handles all of the GUI aspects of the viewMessages use case
+ * @author Brennan Couturier, 3638808
+ *
  */
 public class viewMessagesUI {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	
+	
+	
+	//Non-javafx variables
+	//-------------------------------------------------------------------------------
+	
 	private viewMessagesControl vmc;
 	
-	//Javafx variables
+	//-------------------------------------------------------------------------------
 	
+	//Javafx variables
+	//-------------------------------------------------------------------------------
 	/**
-	 * This button will allow the user to display all the messages they've sent
+	 * This button will display all of the messages the current user has sent
 	 */
 	private Button btnSentItems;
 	
 	/**
-	 * This button will allow the user to display all the messages they've recieved
+	 * This button will display all of the messages the current user has recieved
 	 */
 	private Button btnRecievedItems;
 	
-	private void initViewMessagesComponents()
-	{
-		btnSentItems = new Button("Sent Items");
-		//btnSentItems.setOnAction(this::processSentItemsButtonPress);
-		
-		btnRecievedItems = new Button("Inbox");
-	}
+	//-------------------------------------------------------------------------------
 	
 	public viewMessagesUI()
 	{
 		vmc = new viewMessagesControl();
 	}
+	
+	private void initViewMessagesComponents()
+	{
+		btnSentItems = new Button("Sent Items");
+		btnSentItems.setOnAction(this::processSentItemsButtonPress);
+		
+		btnRecievedItems = new Button("Inbox");
+		btnRecievedItems.setOnAction(this::processRecievedItemsButtonPress);
+	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	public void initViewMessagesScene()
+	{
+		initViewMessagesComponents();
+		
+	}
+	
 	public void displayMessages(int userId) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -78,7 +81,15 @@ public class viewMessagesUI {
 				System.out.println(i + ": " + messageId);
 			}
 		}
+	}
+	
+	private void processSentItemsButtonPress(ActionEvent event)
+	{
 		
-		// end-user-code
+	}
+	
+	private void processRecievedItemsButtonPress(ActionEvent event)
+	{
+		
 	}
 }

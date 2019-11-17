@@ -1,24 +1,23 @@
 
 
-import java.sql.SQLException;
-import java.util.*;
 
-import javafx.collections.FXCollections;
+import java.sql.SQLException;
+
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
-import javafx.geometry.HPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ComboBox;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author Brennan Couturier 3638808
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+
+/**
+ * This class handles all of the GUI aspects of the post message UI
+ * @author Brennan Couturier, 3638808
+ *
  */
 public class postMessageUI {
 	
@@ -75,7 +74,11 @@ public class postMessageUI {
 	 * This label will direct the user to select a user to send a message to from a drop down menu
 	 */
 	private Label lblSelectRecipient;
-	
+
+	/**
+	 * This label will let a user know if they made a mistake writing a message. Non-editable
+	 */
+	private Label lblErrorMessage;
 	/**
 	 * This will be the text field where the user will write their message
 	 */
@@ -86,19 +89,22 @@ public class postMessageUI {
 	 */
 	private ComboBox<Account> cbAvailableRecipients;
 	
-	/**
-	 * This will be a list of all the accounts a user can send a message to. Their names will be shown in the combo box
-	 */
-	private ArrayList<Account> availableAccounts;
-	
 	
 	//-------------------------------------------------------------------------------
+	
+	/**
+	 * This is used to create a new instance of postMessageUI
+	 */
+	public postMessageUI()
+	{
+		
+	}
 	
 	/**
 	 * This initializes all the GUI variables
 	 */
 	private void initPostMessageComponents()
-	{
+	{		
 		btnExit = new Button("Back");
 		btnExit.setOnAction(this::processExitButtonPress);
 		btnExit.setPrefWidth(80);
@@ -109,11 +115,23 @@ public class postMessageUI {
 		
 		lblSelectRecipient = new Label("Choose a recipient");
 		
+		lblErrorMessage = new Label("");
+		lblErrorMessage.setPrefWidth(400);
+		lblErrorMessage.setPrefHeight(50);
+		
 		txtMessageInput = new TextField();
 		txtMessageInput.setPrefSize(400, 200);
 		txtMessageInput.setAlignment(Pos.TOP_LEFT);
 		
-		cbAvailableRecipients = fillAccountsComboBox();
+		postMessageControl pmu = new postMessageControl();
+		try 
+		{
+			cbAvailableRecipients = pmu.fillAccountsComboBox();
+		} 
+		catch (SQLException e) 
+		{
+			displayErrorMessage(" SQLException: Problem loading available accounts.");
+		}
 		cbAvailableRecipients.setPrefWidth(300);
 		
 		postMessagePane = new GridPane();
@@ -125,94 +143,91 @@ public class postMessageUI {
 	}
 	
 	/**
-	 * This creates a scene object with all the GUI elements to post a message
+	 * This creates a scene object with all the postMessageUI GUI components
+	 * @return A scene object with all the postMessageUI GUI components
 	 */
 	public Scene initPostMessageScene()
 	{
 		initPostMessageComponents();
+		
 		
 		postMessagePane.add(btnExit, 10, 1);
 		postMessagePane.add(btnPostMessage, 10, 10);
 		postMessagePane.add(lblSelectRecipient, 0, 1);
 		postMessagePane.add(txtMessageInput, 0, 3, 11, 7);
 		postMessagePane.add(cbAvailableRecipients, 1, 1, 3, 1);
+		postMessagePane.add(lblErrorMessage, 0, 10, 9, 1);
 		
-		scPostMessage = new Scene(postMessagePane, 900, 600);
+		scPostMessage = new Scene(postMessagePane, 900, 600, Color.WHITESMOKE);
 		return scPostMessage;
 	}
-	
-	
-	
+
+
 	/**
-	 * This is used to create a new instance of postMessageUI
+	 * Used to set the scene in the main window/stage
+	 * @param stg The main window that the program is using
 	 */
-	public postMessageUI()
+	public void displayCreateMessageForm(Stage stg)
 	{
-		
-	}
-
-
-	public void displayCreateMessageForm(Stage stg) 
-	{
-		stg.setScene(initPostMessageScene());
+	    stg.setScene(initPostMessageScene());
 		stg.show();
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	*/
-	public void writeMessage() {
+	/**
+	 * This gets values from the textfield and drop down menu and stores a message in the database
+	 */
+	public void writeMessage() 
+	{
+		messageText = txtMessageInput.getText().trim();
+		//from_id = currently logged in user id
+		String errorMessage = "";
+		
 		
 		//Take message String and account ids from gui
-		
-		
-		try
+		if (messageText.isEmpty())
 		{
-			postSuccessful = pmc.postMessage(messageText, from_id, to_id);
+			errorMessage = errorMessage + " Message is a required field.";
 		}
-		catch(SQLException e)
+		if (cbAvailableRecipients.getValue() == null)
 		{
-			System.err.println(e.getMessage());
-		}
-		
-		if (!postSuccessful)
-		{
-			System.err.println("Error sending message");
+			errorMessage = errorMessage + " Please select a recipient.";
 		}
 		else
 		{
-			displayPostMessageConfirmation();
+			to_id = cbAvailableRecipients.getValue().getAccountId();
 		}
+		
+		if (!errorMessage.isEmpty())
+		{
+			displayErrorMessage(errorMessage);
+		}
+		else
+		{
+			try
+			{
+				postSuccessful = pmc.postMessage(messageText, from_id, to_id);
+			}
+			catch(SQLException e)
+			{
+				displayErrorMessage(" SQLException: " + e.getMessage());
+			}
 			
+			if (!postSuccessful)
+			{
+				displayErrorMessage(" A problem occurred. Message was not successfully sent.");
+			}
+			else
+			{
+				displayPostMessageConfirmation();
+			}
+		}
 	}
 
 	
 	public void displayPostMessageConfirmation() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		System.out.println("Message saved to database");
-		// end-user-code
-	}
-	
-	private ComboBox<Account> fillAccountsComboBox()
-	{
-		pmc = new postMessageControl();
-		//This would populate an arraylist with all the accounts in the system
-		try
-		{
-			availableAccounts = pmc.getAllAccounts(); 
-		}
-		catch (SQLException e)
-		{
-			System.err.println(e.getMessage());
-		}
-				
-		Account accounts[] = new Account[availableAccounts.size()];
-		accounts = availableAccounts.toArray(accounts);
-		ComboBox<Account> cb = new ComboBox<Account>(FXCollections.observableArrayList(accounts));
-		
-		return cb;
+		lblErrorMessage.setText(" Message successfully sent");
+		lblErrorMessage.setBorder(new Border(new BorderStroke(Color.STEELBLUE, BorderStrokeStyle.SOLID, null, new BorderWidths(1))));
+		lblErrorMessage.setBackground(new Background(new BackgroundFill(Color.LIGHTSTEELBLUE, CornerRadii.EMPTY, null)));
 	}
 	
 	private void processExitButtonPress(ActionEvent event)
@@ -222,7 +237,14 @@ public class postMessageUI {
 	
 	private void processPostMessageButtonPress(ActionEvent event)
 	{
-		//Call writeMessage()
+		writeMessage();
+	}
+	
+	private void displayErrorMessage(String errorMessage)
+	{
+		lblErrorMessage.setText(errorMessage);
+		lblErrorMessage.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, null, new BorderWidths(1))));
+		lblErrorMessage.setBackground(new Background(new BackgroundFill(Color.MISTYROSE, CornerRadii.EMPTY, null)));
 	}
 	
 	
