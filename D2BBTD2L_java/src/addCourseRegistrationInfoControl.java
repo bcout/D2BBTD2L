@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * 
  */
@@ -21,10 +23,7 @@ public class addCourseRegistrationInfoControl {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void submitCourseRegistrationInfoArrayListCourseRegistrationObject() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public boolean submitCourseRegistrationInfo(ArrayList<CourseRegistration> cr) {
+		return dataManager.addCourseRegistrationInfo(cr);
 	}
 }
