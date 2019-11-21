@@ -19,7 +19,8 @@ import javafx.stage.Stage;
  * @author Brennan Couturier, 3638808
  *
  */
-public class postMessageUI {
+public class postMessageUI 
+{
 	
 	//Non javafx variables
 	//-------------------------------------------------------------------------------
@@ -123,10 +124,10 @@ public class postMessageUI {
 		txtMessageInput.setPrefSize(400, 200);
 		txtMessageInput.setAlignment(Pos.TOP_LEFT);
 		
-		postMessageControl pmu = new postMessageControl();
+		postMessageControl pmc = new postMessageControl();
 		try 
 		{
-			cbAvailableRecipients = pmu.fillAccountsComboBox();
+			cbAvailableRecipients = pmc.fillAccountsComboBox();
 		} 
 		catch (SQLException e) 
 		{
@@ -138,7 +139,7 @@ public class postMessageUI {
 		postMessagePane.setHgap(20);
 		postMessagePane.setVgap(20);
 		postMessagePane.setAlignment(Pos.CENTER);
-		//postMessagePane.setGridLinesVisible(true);
+		postMessagePane.setGridLinesVisible(true);
 		
 	}
 	
@@ -146,7 +147,7 @@ public class postMessageUI {
 	 * This creates a scene object with all the postMessageUI GUI components
 	 * @return A scene object with all the postMessageUI GUI components
 	 */
-	public Scene initPostMessageScene()
+	private Scene initPostMessageScene()
 	{
 		initPostMessageComponents();
 		
@@ -224,7 +225,8 @@ public class postMessageUI {
 	}
 
 	
-	public void displayPostMessageConfirmation() {
+	public void displayPostMessageConfirmation() 
+	{
 		lblErrorMessage.setText(" Message successfully sent");
 		lblErrorMessage.setBorder(new Border(new BorderStroke(Color.STEELBLUE, BorderStrokeStyle.SOLID, null, new BorderWidths(1))));
 		lblErrorMessage.setBackground(new Background(new BackgroundFill(Color.LIGHTSTEELBLUE, CornerRadii.EMPTY, null)));
@@ -232,7 +234,8 @@ public class postMessageUI {
 	
 	private void processExitButtonPress(ActionEvent event)
 	{
-		//Return to main menu
+		PostMessageGUITest pmgt = new PostMessageGUITest();
+		pmgt.resetToMainMenu();
 	}
 	
 	private void processPostMessageButtonPress(ActionEvent event)

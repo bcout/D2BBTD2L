@@ -324,13 +324,13 @@ public class DataManager {
 	 * @param userId The id of the user whose messages will be retrieved
 	*/
 	
-	public ArrayList<Message> requestMessages(int userId) throws SQLException 
+	public ArrayList<Message> requestMessagesReceived(int userId) throws SQLException 
 	{
 		//Declare the prepared statement
-		PreparedStatement requestMessagesPs;
+		PreparedStatement requestMessagesReceivedPs;
 		
 		//Initialize the message request query. Will select all the messages that have the user's id as the to_accountId value
-		String requestMessagesQuery = "select * from Message where to_accountId = ?;";
+		String requestMessagesReceivedQuery = "select * from Message where to_accountId = ?;";
 		
 		//Create a list of all messages
 		ArrayList<Message> messages = new ArrayList<Message>();
@@ -345,13 +345,13 @@ public class DataManager {
 		try
 		{
 			//Prepare the message request query
-			requestMessagesPs = connection.prepareStatement(requestMessagesQuery);
+			requestMessagesReceivedPs = connection.prepareStatement(requestMessagesReceivedQuery);
 			
 			//Put the user's id number into the query, so that only messages addressed to that user are retrieved
-			requestMessagesPs.setInt(1, userId);
+			requestMessagesReceivedPs.setInt(1, userId);
 			
 			//Execute the query to retrieve a set of SQL rows
-			ResultSet rs = requestMessagesPs.executeQuery();
+			ResultSet rs = requestMessagesReceivedPs.executeQuery();
 			
 			//If there are any message rows retrieved, create message objects out of them then add them to a linked list
 			//If there are no message rows retrieved, return an empty list
@@ -373,11 +373,11 @@ public class DataManager {
 			throw e;
 		}
 		
-		if (requestMessagesPs != null)
+		if (requestMessagesReceivedPs != null)
 		{
 			try
 			{
-				requestMessagesPs.close();
+				requestMessagesReceivedPs.close();
 			}
 			catch (SQLException e)
 			{
@@ -385,6 +385,67 @@ public class DataManager {
 			}
 		}
 		
+		return messages;
+	}
+	
+	public ArrayList<Message> requestMessagesSent(int userId) throws SQLException
+	{
+		PreparedStatement requestMessagesSentPs;
+		
+		String requestMessagesSentQuery = "select * from Message where from_accountId = ?;";
+		
+		ArrayList<Message> messages = new ArrayList<Message>();
+		
+		//Declare message variables
+		int messageId;
+		Timestamp timeSent;
+		String messageText;
+		int from_accountId;
+		int to_accountId;
+		
+		try
+		{
+			//Prepare the message request query
+			requestMessagesSentPs = connection.prepareStatement(requestMessagesSentQuery);
+					
+			//Put the user's id number into the query, so that only messages addressed to that user are retrieved
+			requestMessagesSentPs.setInt(1, userId);
+					
+			//Execute the query to retrieve a set of SQL rows
+			ResultSet rs = requestMessagesSentPs.executeQuery();
+					
+			//If there are any message rows retrieved, create message objects out of them then add them to a linked list
+			//If there are no message rows retrieved, return an empty list
+			while (rs.next())
+			{				
+				messageId = rs.getInt(1);
+				timeSent = rs.getTimestamp(2);
+				messageText = rs.getString(3);
+				from_accountId = rs.getInt(4);
+				to_accountId = rs.getInt(5);
+						
+				Message m = new Message(messageId, timeSent, messageText, from_accountId, to_accountId);
+						
+				messages.add(m);
+			}
+		}
+		catch (SQLException e)
+		{
+			throw e;
+		}
+		
+		if (requestMessagesSentPs != null)
+		{
+			try
+			{
+				requestMessagesSentPs.close();
+			}
+			catch (SQLException e)
+			{
+				throw e;
+			}
+		}
+				
 		return messages;
 	}
 

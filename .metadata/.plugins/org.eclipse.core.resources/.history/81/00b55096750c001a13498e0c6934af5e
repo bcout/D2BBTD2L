@@ -1,0 +1,115 @@
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javafx.event.ActionEvent;
+
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+
+/**
+ * This class handles all of the GUI aspects of the viewMessages use case
+ * @author Brennan Couturier, 3638808
+ *
+ */
+public class viewMessagesUI 
+{
+	
+	
+	
+	//Non-javafx variables
+	//-------------------------------------------------------------------------------
+	
+	private viewMessagesControl vmc;
+	
+	//-------------------------------------------------------------------------------
+	
+	//Javafx variables
+	//-------------------------------------------------------------------------------
+	/**
+	 * This button will display all of the messages the current user has sent
+	 */
+	private Button btnSentItems;
+	
+	/**
+	 * This button will display all of the messages the current user has recieved
+	 */
+	private Button btnRecievedItems;
+	
+	private TableView<Message> messagesTable;
+	
+	//-------------------------------------------------------------------------------
+	
+	public viewMessagesUI()
+	{
+		vmc = new viewMessagesControl();
+	}
+	
+	private void initViewMessagesComponents()
+	{
+		initMessagesTable();
+		
+		btnSentItems = new Button("Sent Items");
+		btnSentItems.setOnAction(this::processSentItemsButtonPress);
+		
+		btnRecievedItems = new Button("Inbox");
+		btnRecievedItems.setOnAction(this::processRecievedItemsButtonPress);
+		
+		
+	}
+
+	public void initViewMessagesScene()
+	{
+		initViewMessagesComponents();
+		
+	}
+	
+	public void displayMessages(int userId) 
+	{
+		ArrayList<Message> messages = new ArrayList<Message>();
+		
+		try
+		{
+			messages = vmc.getMessages(userId);
+		}
+		catch (SQLException e)
+		{
+			System.err.println(e.getMessage());
+		}
+		
+		if (messages.isEmpty())
+		{
+			System.out.println("No messages");
+		}
+		else
+		{
+			System.out.println("Messages");
+			for (int i = 0; i < messages.size(); i++)
+			{
+				int messageId = messages.get(i).getMessageId();
+				System.out.println(i + ": " + messageId);
+			}
+		}
+	}
+	
+	private void initMessagesTable()
+	{
+		messagesTable = new TableView<Message>();
+		messagesTable.setEditable(false);
+		
+		TableColumn<TableView<Message>, String> nameCol = new TableColumn<TableView<Message>, String>("Name");
+		TableColumn<TableView<Message>, String> accountTypeCol = new TableColumn<TableView<Message>, String>("Account Type");
+		TableColumn<TableView<Message>, String> messageCol = new TableColumn<TableView<Message>, String>("Message");
+		
+		messagesTable.getColumns().addAll(nameCol, accountTypeCol, messageCol);
+	}
+	
+	private void processSentItemsButtonPress(ActionEvent event)
+	{
+		//Populate table with list of messages the user sent
+	}
+	
+	private void processRecievedItemsButtonPress(ActionEvent event)
+	{
+		//populate table with list of messages the user received
+	}
+}

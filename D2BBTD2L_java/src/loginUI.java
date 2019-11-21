@@ -1,3 +1,5 @@
+import javafx.stage.Stage;
+
 /**
  * 
  */
@@ -9,7 +11,11 @@
  * @author bcouturi
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
-public class loginUI {
+public class loginUI 
+{
+	private Boolean loginSuccessful;
+	
+	private int userId;
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -22,11 +28,9 @@ public class loginUI {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void displayLoginForm() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void displayLoginForm(Stage stg) 
+	{
+		
 	}
 
 	/** 
@@ -52,4 +56,11 @@ public class loginUI {
 
 		// end-user-code
 	}
+	
+	public int getUserId()
+	{
+		return userId;
+	}
+	
+	
 }

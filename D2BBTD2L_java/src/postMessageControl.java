@@ -22,7 +22,8 @@ public class postMessageControl
 	 */
 	public postMessageControl()
 	{
-		dm = new DataManager();
+		PostMessageGUITest pmgt = new PostMessageGUITest();
+		dm = pmgt.getDataManager();
 	}
 	
 	/**
