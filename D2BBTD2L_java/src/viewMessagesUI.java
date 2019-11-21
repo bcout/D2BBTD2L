@@ -29,6 +29,11 @@ public class viewMessagesUI
 	
 	private viewMessagesControl vmc;
 	
+	private int userId;
+	
+	
+	
+	
 	//-------------------------------------------------------------------------------
 	
 	//Javafx variables
@@ -37,43 +42,46 @@ public class viewMessagesUI
 	 * This button will display all of the messages the current user has sent
 	 */
 	private Button btnSentItems;
-	
-	private int userId;
-	
 	/**
 	 * This button will display all of the messages the current user has recieved
 	 */
 	private Button btnRecievedItems;
 	
-	private ListView<Message> tableValues;
+	private Button btnNewMessage;
 	
 	private GridPane viewMessagesPane;
 	
 	private Scene scViewMessages;
 	
+	private TableView messagesTable;
+
 	//-------------------------------------------------------------------------------
 	
 	public viewMessagesUI()
 	{
 		vmc = new viewMessagesControl();
-		MainMenu mm = new MainMenu();
-		
-		userId = mm.getUserId();
 	}
 	
 	private void initViewMessagesComponents()
 	{
-		tableValues = getListViewMessagesReceived(userId);
+		initReceivedMessagesTable();
+		
 		
 		btnSentItems = new Button("Sent Items");
 		btnSentItems.setOnAction(this::processSentItemsButtonPress);
+		btnSentItems.setPrefWidth(150);
 		
 		btnRecievedItems = new Button("Inbox");
 		btnRecievedItems.setOnAction(this::processRecievedItemsButtonPress);
+		btnRecievedItems.setPrefWidth(150);
+		
+		btnNewMessage = new Button("New Message");
+		btnNewMessage.setOnAction(this::processNewMessageButtonPress);
+		btnNewMessage.setPrefWidth(150);
 		
 		viewMessagesPane = new GridPane();
 		viewMessagesPane.setHgap(20);
-		viewMessagesPane.setVgap(20);
+		viewMessagesPane.setVgap(5);
 		viewMessagesPane.setAlignment(Pos.CENTER);
 	}
 
@@ -81,7 +89,10 @@ public class viewMessagesUI
 	{
 		initViewMessagesComponents();
 		
-		viewMessagesPane.add(tableValues, 0, 0);
+		viewMessagesPane.add(btnSentItems, 1, 4);
+		viewMessagesPane.add(btnRecievedItems, 1, 3);
+		viewMessagesPane.add(btnNewMessage, 1, 1);
+		viewMessagesPane.add(messagesTable, 2, 1, 8, 10);
 		
 		scViewMessages = new Scene(viewMessagesPane, 900, 600);
 		return scViewMessages;
@@ -150,6 +161,7 @@ public class viewMessagesUI
 		}
 	}
 	
+	/*
 	private ListView<Message> getListViewMessagesReceived(int userId)
 	{
 		ArrayList<Message> messages = new ArrayList<Message>();
@@ -187,6 +199,7 @@ public class viewMessagesUI
 		}
 		return messagesListView;
 	}
+	*/
 	
 	
 	private void processSentItemsButtonPress(ActionEvent event)
@@ -198,4 +211,44 @@ public class viewMessagesUI
 	{
 		//populate table with list of messages the user received
 	}
+	
+	private void processNewMessageButtonPress(ActionEvent event)
+	{
+		postMessageUI pmu = new postMessageUI();
+		viewMessagesGUITest vmgt = new viewMessagesGUITest();
+		
+		pmu.displayCreateMessageForm(vmgt.getStage());
+	}
+
+	public void resetToViewMessagesUI() 
+	{
+		viewMessagesGUITest vmgt = new viewMessagesGUITest();
+		displayViewMessages(vmgt.getStage());
+	}
+	
+	private void initReceivedMessagesTable()
+	{
+		messagesTable = new TableView();
+		messagesTable.setEditable(false);
+		TableColumn nameCol = new TableColumn("From");
+		TableColumn dateCol = new TableColumn("Received");
+		TableColumn textPreviewCol = new TableColumn("Message Preview");
+		
+		nameCol.setPrefWidth(120);
+		dateCol.setPrefWidth(100);
+		textPreviewCol.setPrefWidth(180);
+		
+		messagesTable.getColumns().addAll(nameCol, dateCol, textPreviewCol);
+		messagesTable.setPrefSize(400, 500);
+	}
 }
+
+
+
+
+
+
+
+
+
+

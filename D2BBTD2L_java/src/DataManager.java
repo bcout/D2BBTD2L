@@ -174,6 +174,51 @@ public class DataManager {
 	*/
 	private StudentAccount studentAccount;
 	
+	public Account getAccountFromId(int idIn) throws SQLException
+	{
+		PreparedStatement getAccountFromIdPs;
+		String getAccountFromIdQuery = "select * from Account where accountId = ?;";
+		
+		Account a = null;
+		
+		try
+		{
+			getAccountFromIdPs = connection.prepareStatement(getAccountFromIdQuery);
+			getAccountFromIdPs.setInt(1, idIn);
+			ResultSet rs = getAccountFromIdPs.executeQuery();
+			
+			if (rs != null)
+			{
+				int id = rs.getInt(1);
+				String username = rs.getString(2);
+				String password = rs.getString(3);
+				int accountType = rs.getInt(4);
+				String firstName = rs.getString(5);
+				String lastName = rs.getString(6);
+				
+				a = new Account(id, username, password, accountType, firstName, lastName);
+			}
+		}
+		catch (SQLException e)
+		{
+			throw e;
+		}
+		
+		if (getAccountFromIdPs != null)
+		{
+			try
+			{
+				getAccountFromIdPs.close();
+			}
+			catch (SQLException e)
+			{
+				throw e;
+			}
+		}
+		
+		return a;
+	}
+	
 	public ArrayList<Account> getAllAccounts() throws SQLException
 	{
 		PreparedStatement getAllAccountsPs;

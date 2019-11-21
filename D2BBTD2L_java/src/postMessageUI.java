@@ -72,6 +72,11 @@ public class postMessageUI
 	private Button btnPostMessage;
 	
 	/**
+	 * This button allows the user to go back to the view messages screen
+	 */
+	private Button btnBack;
+	
+	/**
 	 * This label will direct the user to select a user to send a message to from a drop down menu
 	 */
 	private Label lblSelectRecipient;
@@ -106,13 +111,17 @@ public class postMessageUI
 	 */
 	private void initPostMessageComponents()
 	{		
-		btnExit = new Button("Back");
+		btnExit = new Button("Main Menu");
 		btnExit.setOnAction(this::processExitButtonPress);
-		btnExit.setPrefWidth(80);
+		btnExit.setPrefWidth(100);
+		
+		btnBack = new Button("Back");
+		btnBack.setOnAction(this::processBackButtonPress);
+		btnBack.setPrefWidth(100);
 		
 		btnPostMessage = new Button("Submit");
 		btnPostMessage.setOnAction(this::processPostMessageButtonPress);
-		btnPostMessage.setPrefWidth(80);
+		btnPostMessage.setPrefWidth(100);
 		
 		lblSelectRecipient = new Label("Choose a recipient");
 		
@@ -139,7 +148,7 @@ public class postMessageUI
 		postMessagePane.setHgap(20);
 		postMessagePane.setVgap(20);
 		postMessagePane.setAlignment(Pos.CENTER);
-		postMessagePane.setGridLinesVisible(true);
+		//postMessagePane.setGridLinesVisible(true);
 		
 	}
 	
@@ -152,7 +161,8 @@ public class postMessageUI
 		initPostMessageComponents();
 		
 		
-		postMessagePane.add(btnExit, 10, 1);
+		postMessagePane.add(btnExit, 9, 1);
+		postMessagePane.add(btnBack, 10, 1);
 		postMessagePane.add(btnPostMessage, 10, 10);
 		postMessagePane.add(lblSelectRecipient, 0, 1);
 		postMessagePane.add(txtMessageInput, 0, 3, 11, 7);
@@ -234,13 +244,19 @@ public class postMessageUI
 	
 	private void processExitButtonPress(ActionEvent event)
 	{
-		PostMessageGUITest pmgt = new PostMessageGUITest();
-		pmgt.resetToMainMenu();
+		viewMessagesGUITest vmgt = new viewMessagesGUITest();
+		vmgt.resetToMainMenu();
 	}
 	
 	private void processPostMessageButtonPress(ActionEvent event)
 	{
 		writeMessage();
+	}
+	
+	private void processBackButtonPress(ActionEvent event)
+	{
+		viewMessagesUI vmu = new viewMessagesUI();
+		vmu.resetToViewMessagesUI();
 	}
 	
 	private void displayErrorMessage(String errorMessage)

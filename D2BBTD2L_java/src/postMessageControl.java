@@ -22,8 +22,8 @@ public class postMessageControl
 	 */
 	public postMessageControl()
 	{
-		PostMessageGUITest pmgt = new PostMessageGUITest();
-		dm = pmgt.getDataManager();
+		viewMessagesGUITest vmgt = new viewMessagesGUITest();
+		dm = vmgt.getDataManager();
 	}
 	
 	/**
