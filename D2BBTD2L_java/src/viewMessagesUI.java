@@ -1,20 +1,23 @@
+
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.event.*;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 /**
  * This class handles all of the GUI aspects of the viewMessages use case
@@ -32,8 +35,6 @@ public class viewMessagesUI
 	private int userId;
 	
 	
-	
-	
 	//-------------------------------------------------------------------------------
 	
 	//Javafx variables
@@ -47,13 +48,53 @@ public class viewMessagesUI
 	 */
 	private Button btnRecievedItems;
 	
+	/**
+	 * This button will open the postMessageUI and allow the user to post a message
+	 */
 	private Button btnNewMessage;
 	
+	private Button btnExit;
+	
+	/**
+	 * Used to neatly format the screen
+	 */
 	private GridPane viewMessagesPane;
 	
+	/**
+	 * This scene is used to display a list of messages as well as the information of a selected one
+	 */
 	private Scene scViewMessages;
 	
-	private TableView messagesTable;
+	/**
+	 * This is the table listing all the messages a user has received or sent, depending on which button is pressed
+	 * Received messages are displayed by default
+	 */
+	private TableView<Message> messagesTable;
+	
+	/**
+	 * This displays a brief description of each message in the table
+	 */
+	private TableColumn messagesCol;
+	
+	/**
+	 * This label will display the textual aspect of a selected message
+	 */
+	private Label lblTxtMessage;
+	
+	/**
+	 * This label will display "From" if the user is looking at received messages, and "To" if they are looking at sent messages
+	 */
+	private Label lblFromTo;
+	
+	/**
+	 * This label will display the name of the user who sent the message, or the name of the user who received the message, depending on what button is pressed
+	 */
+	private Label lblName;
+	
+	/**
+	 * This label will display a Timestamp of when the message was received/sent.
+	 */
+	private Label lblDate;
 
 	//-------------------------------------------------------------------------------
 	
@@ -64,8 +105,27 @@ public class viewMessagesUI
 	
 	private void initViewMessagesComponents()
 	{
-		initReceivedMessagesTable();
+		initMessagesTable();
+
+		lblTxtMessage = new Label("");
+		lblTxtMessage.setPrefSize(480, 400);
+		lblTxtMessage.setStyle("-fx-background-color: WHITE");
+		lblTxtMessage.setBorder(new Border(new BorderStroke(Color.LIGHTGRAY, BorderStrokeStyle.SOLID, null, new BorderWidths(1))));
 		
+		lblFromTo = new Label("From:");
+		lblFromTo.setPrefWidth(50);
+		lblFromTo.setAlignment(Pos.CENTER_RIGHT);
+		
+		lblName = new Label("");
+		lblName.setPrefWidth(200);
+		
+		
+		lblDate = new Label("");
+		lblDate.setPrefWidth(150);
+		
+		btnExit = new Button("Back");
+		btnExit.setOnAction(this::processExitButtonPress);
+		btnExit.setPrefWidth(50);
 		
 		btnSentItems = new Button("Sent Items");
 		btnSentItems.setOnAction(this::processSentItemsButtonPress);
@@ -80,19 +140,26 @@ public class viewMessagesUI
 		btnNewMessage.setPrefWidth(150);
 		
 		viewMessagesPane = new GridPane();
-		viewMessagesPane.setHgap(20);
-		viewMessagesPane.setVgap(5);
+		viewMessagesPane.setHgap(10);
+		viewMessagesPane.setVgap(10);
 		viewMessagesPane.setAlignment(Pos.CENTER);
+		//viewMessagesPane.setGridLinesVisible(true);
 	}
 
 	public Scene initViewMessagesScene()
 	{
 		initViewMessagesComponents();
+		//displayMessagesReceived(userId);
 		
-		viewMessagesPane.add(btnSentItems, 1, 4);
-		viewMessagesPane.add(btnRecievedItems, 1, 3);
-		viewMessagesPane.add(btnNewMessage, 1, 1);
-		viewMessagesPane.add(messagesTable, 2, 1, 8, 10);
+		viewMessagesPane.add(btnExit, 5, 1);
+		viewMessagesPane.add(lblFromTo, 2, 5);
+		viewMessagesPane.add(lblName, 3, 5);
+		viewMessagesPane.add(lblDate, 4, 5);
+		viewMessagesPane.add(lblTxtMessage, 2, 2, 4, 10);
+		viewMessagesPane.add(btnSentItems, 0, 6);
+		viewMessagesPane.add(btnRecievedItems, 0, 5);
+		viewMessagesPane.add(btnNewMessage, 0, 1);
+		viewMessagesPane.add(messagesTable, 1, 1, 1, 10);
 		
 		scViewMessages = new Scene(viewMessagesPane, 900, 600);
 		return scViewMessages;
@@ -109,6 +176,7 @@ public class viewMessagesUI
 	{
 		ArrayList<Message> messages = new ArrayList<Message>();
 		
+		
 		try
 		{
 			messages = vmc.getMessagesReceived(userId);
@@ -117,20 +185,12 @@ public class viewMessagesUI
 		{
 			System.err.println(e.getMessage());
 		}
+		ObservableList<Message> listMessages = FXCollections.observableArrayList(messages);
 		
-		if (messages.isEmpty())
-		{
-			System.out.println("No messages");
-		}
-		else
-		{
-			System.out.println("Messages");
-			for (int i = 0; i < messages.size(); i++)
-			{
-				int messageId = messages.get(i).getMessageId();
-				System.out.println(i + ": " + messageId);
-			}
-		}
+		messagesCol.setCellValueFactory(new PropertyValueFactory<Message, String>("receivedDescription"));
+		messagesTable.setItems(listMessages);
+		messagesTable.setOnMousePressed(this::processReceivedMessageChosen);
+		//fill table with messages
 	}
 	
 	public void displayMessagesSent(int userId)
@@ -145,71 +205,22 @@ public class viewMessagesUI
 		{
 			System.err.println(e.getMessage());
 		}
+		ObservableList<Message> listMessages = FXCollections.observableArrayList(messages);
 		
-		if (messages.isEmpty())
-		{
-			System.out.println("No messages");
-		}
-		else
-		{
-			System.out.println("Messages");
-			for (int i = 0; i < messages.size(); i++)
-			{
-				int messageId = messages.get(i).getMessageId();
-				System.out.println(i + ": " + messageId);
-			}
-		}
+		messagesCol.setCellValueFactory(new PropertyValueFactory<Message, String>("sentDescription"));
+		messagesTable.setItems(listMessages);
+		//fill table with messages
 	}
-	
-	/*
-	private ListView<Message> getListViewMessagesReceived(int userId)
-	{
-		ArrayList<Message> messages = new ArrayList<Message>();
-		try 
-		{
-			messages = vmc.getMessagesReceived(userId);
-		} 
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-		}
-		ObservableList<Message> messagesList = FXCollections.observableArrayList(messages);
-		
-		ListView<Message> messagesListView = new ListView<Message>(messagesList);
-		messagesListView.setCellFactory(param -> new ListCell<Message>()
-				{
-					@Override
-					protected void updateItem(Message item, boolean empty)
-					{
-						super.updateItem(item, empty);
-						
-						if (empty || item == null || item.getMessageText() == null)
-						{
-							setText(null);
-						}
-						else
-						{
-							setText(item.getMessageText());
-						}
-					}
-				});
-		if(messages.isEmpty())
-		{
-			System.err.println("no messages");
-		}
-		return messagesListView;
-	}
-	*/
 	
 	
 	private void processSentItemsButtonPress(ActionEvent event)
 	{
-		//Populate table with list of messages the user sent
+		//displayMessagesSent(userId);
 	}
 	
 	private void processRecievedItemsButtonPress(ActionEvent event)
 	{
-		//populate table with list of messages the user received
+		//displayMessagesReceived(userId);
 	}
 	
 	private void processNewMessageButtonPress(ActionEvent event)
@@ -219,6 +230,21 @@ public class viewMessagesUI
 		
 		pmu.displayCreateMessageForm(vmgt.getStage());
 	}
+	
+	private void processExitButtonPress(ActionEvent event)
+	{
+		viewMessagesGUITest vmgt = new viewMessagesGUITest();
+		vmgt.resetToMainMenu();
+	}
+	
+	private void processReceivedMessageChosen(MouseEvent event)
+	{
+		viewMessagesControl vmu = new viewMessagesControl();
+		Message m = messagesTable.getSelectionModel().getSelectedItem();
+		lblTxtMessage.setText(m.getMessageText());
+		lblName.setText(m.getFromAccount().getFullName());
+		lblDate.setText(string);
+	}
 
 	public void resetToViewMessagesUI() 
 	{
@@ -226,20 +252,17 @@ public class viewMessagesUI
 		displayViewMessages(vmgt.getStage());
 	}
 	
-	private void initReceivedMessagesTable()
+	private void initMessagesTable()
 	{
-		messagesTable = new TableView();
+		messagesTable = new TableView<Message>();
 		messagesTable.setEditable(false);
-		TableColumn nameCol = new TableColumn("From");
-		TableColumn dateCol = new TableColumn("Received");
-		TableColumn textPreviewCol = new TableColumn("Message Preview");
+		messagesTable.setPrefSize(200, 500);
+		messagesCol = new TableColumn("Messages");
+		messagesCol.setMinWidth(200);
+		messagesTable.getColumns().addAll(messagesCol);
 		
-		nameCol.setPrefWidth(120);
-		dateCol.setPrefWidth(100);
-		textPreviewCol.setPrefWidth(180);
+		messagesTable.setOnMousePressed(this::processReceivedMessageChosen);
 		
-		messagesTable.getColumns().addAll(nameCol, dateCol, textPreviewCol);
-		messagesTable.setPrefSize(400, 500);
 	}
 }
 

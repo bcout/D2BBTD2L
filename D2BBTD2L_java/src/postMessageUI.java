@@ -161,7 +161,7 @@ public class postMessageUI
 		initPostMessageComponents();
 		
 		
-		postMessagePane.add(btnExit, 9, 1);
+		//postMessagePane.add(btnExit, 9, 1);
 		postMessagePane.add(btnBack, 10, 1);
 		postMessagePane.add(btnPostMessage, 10, 10);
 		postMessagePane.add(lblSelectRecipient, 0, 1);
@@ -205,6 +205,7 @@ public class postMessageUI
 		}
 		else
 		{
+			
 			to_id = cbAvailableRecipients.getValue().getAccountId();
 		}
 		

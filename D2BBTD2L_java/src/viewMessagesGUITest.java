@@ -21,6 +21,7 @@ public class viewMessagesGUITest extends Application
 	public void start(Stage primaryStage)
 	{
 		stgMain = primaryStage;
+		stgMain.setResizable(false);
 		dm = new DataManager();
 		displayMainMenu(stgMain);
 	}

@@ -7,4 +7,4 @@ eclipse.preferences.version=1
 org.eclipse.launchbar.core.descriptorType.default\:PostMessageGUITest/activeLaunchMode=run
 org.eclipse.launchbar.core.descriptorType.default\:RequestMessagesTestMain/activeLaunchMode=run
 org.eclipse.launchbar.core.descriptorType.default\:RequestMessagesTestMain/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
-org.eclipse.launchbar.core.descriptorType.default\:viewMessagesGUITest/activeLaunchMode=debug
+org.eclipse.launchbar.core.descriptorType.default\:viewMessagesGUITest/activeLaunchMode=run

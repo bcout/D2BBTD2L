@@ -145,6 +145,11 @@ public class Account
 	{
 		return accountId;
 	}
+	
+	public String getFullName()
+	{
+		return lastName + ", " + firstName;
+	}
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -196,6 +201,6 @@ public class Account
 	
 	public String toString()
 	{
-		return username;
+		return lastName + ", " + firstName;
 	}
 }
