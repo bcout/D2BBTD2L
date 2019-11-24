@@ -8,14 +8,15 @@ import javafx.stage.Stage;
 
 public class ViewMarksUITest extends Application
 {
-	public void start(Stage pS)
+	public void start(Stage ps)
 	{
+		ps.setResizable(false);
 		ViewMarksUI v = new ViewMarksUI();
-		v.display(pS);
+		v.display(ps);
 	}
+
 	public static void main(String[] args)
 	{
-		
-		
+		launch(args);
 	}
 }

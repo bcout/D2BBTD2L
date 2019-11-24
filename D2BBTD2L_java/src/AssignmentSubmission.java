@@ -8,25 +8,26 @@
  * @author bcouturi
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
-public class AssignmentSubmission {
+public class AssignmentSubmission
+{
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	private Object assignmentSubmissionId;
+	private int id;
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	private Object feedbackRead;
+	private boolean feedbackRead;
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	private Object accountIdstudent;
+	private int accountIdstudent;
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -63,6 +64,12 @@ public class AssignmentSubmission {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
+
+	public AssignmentSubmission()
+	{
+		
+	}
+	
 	public void sqlselectassignmentsmatchinguser() {
 		// begin-user-code
 		// TODO Auto-generated method stub

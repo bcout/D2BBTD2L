@@ -1,7 +1,6 @@
 
 
 import java.util.Set;
-
 import java.sql.Blob;
 import java.util.Date;
 import java.util.Set;
@@ -29,5 +28,17 @@ public class Assignment {
 	public Assignment() {
 		
 	}
+
+    public Assignment() {}
 	
+	public Assignment(String name, int id)
+	{
+		this.name = name;
+		this.id = id;
+	}
+
+	public String toString()
+	{
+		return "ID: " + id + "| " + name;
+	}
 }

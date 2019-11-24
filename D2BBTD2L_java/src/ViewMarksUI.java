@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.scene.control.ListView;
 
 /**
  * 
@@ -19,6 +20,12 @@ import javafx.stage.Stage;
 public class ViewMarksUI
 {
 	private Scene assSum; //Assignment summary
+	private ViewMarksControl ctrl;
+
+	public ViewMarksUI()
+	{
+		ctrl = new ViewMarksControl();
+	}
 
 	private Scene initScene()
 	{
@@ -26,8 +33,22 @@ public class ViewMarksUI
 		pane.setHgap(10);
 		pane.setVgap(10);
 		pane.setAlignment(Pos.CENTER);
-		assSum = new Scene(pane, 900, 600);
 
+		//Listview
+		ListView<Assignment> lv = new ListView<Assignment>();
+		for(Assignment a : ctrl.getAssignments())
+		{
+			lv.getItems().add(a);
+		}
+		pane.add(lv, 5, 1);
+		
+		//Back btn
+		Button btnExit = new Button("Back");
+		btnExit.setOnAction(this::backToMenu);
+		btnExit.setPrefWidth(50);
+		pane.add(btnExit, 5, 1);
+		
+		assSum = new Scene(pane, 900, 600);
 		return assSum;
 	}
 
@@ -81,5 +102,11 @@ public class ViewMarksUI
 		// TODO Auto-generated method stub
 
 		// end-user-code
+	}
+
+	private void backToMenu(ActionEvent event)
+	{
+		MainMenu mm = new MainMenu();
+		mm.resetToMainMenu();
 	}
 }
