@@ -1,6 +1,0 @@
-#btnExit
-{
-	-fx-background-color: blue;
-	-fx-text-fill: white;
-	-fx-padding: 6 6 6 6;
-}
