@@ -19,7 +19,7 @@ public class MainMenu extends Application
 
 	private Scene scMain;
 	private GridPane mainPane;
-	private Button btnPostMessage;
+	private Button btnViewMessages;
 	private Button btnQuit;
 	private Label lblWelcome;
 
@@ -45,11 +45,12 @@ public class MainMenu extends Application
 		lblWelcome.setAlignment(Pos.CENTER);
 		
 		btnQuit = new Button("Quit");
+		btnQuit.setOnAction(this::processExitButtonPress);
 		btnQuit.setPrefWidth(50);
 		
-		btnPostMessage = new Button("New Message");
-		btnPostMessage.setOnAction(this::processPostMessageButtonPress);
-		btnPostMessage.setPrefWidth(120);
+		btnViewMessages = new Button("View Messages");
+		btnViewMessages.setOnAction(this::processPostMessageButtonPress);
+		btnViewMessages.setPrefWidth(120);
 
 		mainPane = new GridPane();
 		mainPane.setHgap(20);
@@ -63,7 +64,7 @@ public class MainMenu extends Application
 
 		mainPane.add(btnQuit, 10, 1);
 		mainPane.add(lblWelcome, 5, 5);
-		mainPane.add(btnPostMessage, 1, 1);
+		mainPane.add(btnViewMessages, 1, 1);
 
 		scMain = new Scene(mainPane, 900, 600);
 		return scMain;
@@ -96,5 +97,10 @@ public class MainMenu extends Application
 	{
 		viewMessagesUI vmu = new viewMessagesUI();
 		vmu.displayViewMessages(stgMain);
+	}
+	
+	public void processExitButtonPress(ActionEvent event)
+	{
+		stgMain.close();
 	}
 }
