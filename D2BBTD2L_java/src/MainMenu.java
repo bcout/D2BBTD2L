@@ -1,9 +1,5 @@
-
-
-
 import javafx.application.*;
 import javafx.event.ActionEvent;
-import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,14 +10,15 @@ import javafx.stage.Stage;
 
 public class MainMenu extends Application
 {
-	private static Stage stgMain;
 	private static DataManager dm;
-
-	private Scene scMain;
-	private GridPane mainPane;
-	private Button btnViewMessages;
-	private Button btnQuit;
-	private Label lblWelcome;
+	private static int userId;
+	
+	private static Stage stgMain;
+	private static Scene scMain;
+	private static GridPane mainPane;
+	private static Button btnViewMessages;
+	private static Button btnQuit;
+	private static Label lblWelcome;
 
 	public void start(Stage primaryStage)
 	{
@@ -48,9 +45,9 @@ public class MainMenu extends Application
 		btnQuit.setOnAction(this::processExitButtonPress);
 		btnQuit.setPrefWidth(50);
 		
-		btnViewMessages = new Button("View Messages");
+		btnViewMessages = new Button("Messages");
 		btnViewMessages.setOnAction(this::processPostMessageButtonPress);
-		btnViewMessages.setPrefWidth(120);
+		btnViewMessages.setPrefWidth(100);
 
 		mainPane = new GridPane();
 		mainPane.setHgap(20);
@@ -80,6 +77,11 @@ public class MainMenu extends Application
 	{
 		return stgMain;
 	}
+	
+	public static int getUserId()
+	{
+		return userId;
+	}
 
 
 	public static DataManager getDataManager()
@@ -102,5 +104,10 @@ public class MainMenu extends Application
 	public void processExitButtonPress(ActionEvent event)
 	{
 		stgMain.close();
+	}
+	
+	public static void setUserId(int userIdIn)
+	{
+		userId = userIdIn;
 	}
 }

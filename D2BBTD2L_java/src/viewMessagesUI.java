@@ -101,6 +101,7 @@ public class viewMessagesUI
 	public viewMessagesUI()
 	{
 		vmc = new viewMessagesControl();
+		userId = MainMenu.getUserId();
 	}
 
 	private void initViewMessagesComponents()
@@ -238,10 +239,10 @@ public class viewMessagesUI
 
 	private void processReceivedMessageChosen(MouseEvent event)
 	{
-		viewMessagesControl vmu = new viewMessagesControl();
 		Message m = messagesTable.getSelectionModel().getSelectedItem();
 		lblTxtMessage.setText(m.getMessageText());
 		lblName.setText(m.getFromAccount().getFullName());
+		
 		//lblDate.setText(string);
 	}
 
