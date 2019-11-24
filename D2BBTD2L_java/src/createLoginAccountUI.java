@@ -14,7 +14,17 @@ import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
 import javafx.event.ActionEvent;
 import java.util.Scanner;
-
+import javafx.application.Application; 
+import javafx.scene.Scene; 
+import javafx.scene.control.*; 
+import javafx.scene.layout.*; 
+import javafx.event.ActionEvent; 
+import javafx.event.EventHandler; 
+import javafx.collections.*; 
+import javafx.stage.Stage; 
+import javafx.scene.text.Text.*; 
+import javafx.scene.paint.*; 
+import javafx.scene.text.*;
 /**
  * 
  */
@@ -33,33 +43,162 @@ public class createLoginAccountUI {
 	*/
 	private createLoginAccountControl control;
 
+	private ComboBox typesComboBox;
+	private TextField unameTF;
+	private TextField passTF;
+	private TextField fnameTF;
+	private TextField lnameTF;
 	
+	private TextField emailTF;
+	private TextField facultyTF;
+	private TextField positionTF;
+	
+	private Button enterStudent;
+	private Button enterTA;
+	private Button enterProf;
+	private Button enterAdmin;
+	
+	Label emailL = new Label("E-mail:");
+	Label facultyL = new Label("Faculty:");
+	Label positionL = new Label("Position:");
+	
+	private GridPane root;
+	private GridPane specific;
+	
+	private Text message;
 	public createLoginAccountUI(createLoginAccountControl control) {
 		this.control = control;
 	}
 	
+	public void initSceneComponents() {
+		String[] types  = {"Student", "Professor", "TA", "Administrator"};
+		typesComboBox = new ComboBox(FXCollections.observableArrayList(types));
+		
+	
+		EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() { 
+          public void handle(ActionEvent e) 
+          { 
+        	  String type = (String)typesComboBox.getValue();
+        	  
+        	  if (type.equals("Student")) {
+        		  specific.getChildren().removeAll(specific.getChildren());
+        		  specific.setConstraints(enterStudent,0,0);
+        		  specific.getChildren().add(enterStudent);
+        	  }
+        	  else if (type.equals("Administrator")) {
+        		  specific.getChildren().removeAll(specific.getChildren());
+        		  specific.setConstraints(positionL,0,0);
+        		  specific.setConstraints(positionTF,1,0);
+        		  specific.setConstraints(enterAdmin,0,1,2,1);
+        		  specific.getChildren().addAll(positionL,positionTF,enterAdmin);
+        	  }
+        	  
+        	  else if (type.equals("Professor")) {
+        		  specific.getChildren().removeAll(specific.getChildren());
+        		  specific.setConstraints(facultyL,0,0);
+        		  specific.setConstraints(facultyTF,1,0);
+        		  specific.setConstraints(enterProf,0,1,2,1);
+        		  specific.getChildren().addAll(facultyL,facultyTF, enterProf);
+        	  }
+        	  else {
+        		  specific.getChildren().removeAll(specific.getChildren());
+        		  specific.setConstraints(facultyL,0,0);
+        		  specific.setConstraints(emailTF,1,0);
+        		  specific.setConstraints(enterTA,0,1,2,1);
+        		  specific.getChildren().addAll(emailL,emailTF,enterTA);
+        	  }
+          } 
+		}; 
+      	typesComboBox.setOnAction(event);
+      	
+		unameTF = new TextField();
+		passTF = new TextField();
+		fnameTF = new TextField();
+		lnameTF = new TextField();
+		
+		emailTF = new TextField();
+		facultyTF = new TextField();
+		positionTF = new TextField();
+		
+		enterStudent = new Button("Create account");
+		enterTA = new Button("Create account");
+		enterProf = new Button("Create account");
+		enterAdmin = new Button("Create account");
+		message = new Text();
+		
+		enterStudent.setOnAction(e -> submitStudentAccountCreationForm());
+		enterTA.setOnAction(e -> submitTAAccountCreationForm());
+		enterProf.setOnAction(e -> submitProfAccountCreationForm());
+		enterAdmin.setOnAction(e -> submitAdminAccountCreationForm());
+	}
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	
-	public void displayAccountCreationForm() {
+	public Scene displayAccountCreationForm() {
+		initSceneComponents();
+		GridPane pane = new GridPane();
 		
+		Label typeL = new Label("Choose account type:");
+		Label unameL = new Label("Username:");
+		Label passL = new Label("Password:");
+		Label fnameL = new Label("First name:");
+		Label lnameL = new Label("Last name:");
+		
+		pane.setAlignment(Pos.CENTER);
+		pane.setHgap(20);
+		pane.setVgap(10);
+		
+		pane.setConstraints(typeL,0,0);
+		pane.setConstraints(typesComboBox,1,0);
+		pane.setConstraints(unameL,0,1);
+		pane.setConstraints(unameTF,1,1);
+		pane.setConstraints(passL,0,2);
+		pane.setConstraints(passTF,1,2);
+		pane.setConstraints(fnameL,0,3);
+		pane.setConstraints(fnameTF,1,3);
+		pane.setConstraints(lnameL,0,4);
+		pane.setConstraints(lnameTF,1,4);
+		
+		pane.getChildren().addAll(typesComboBox,typeL,unameL,unameTF,passL,passTF,fnameL,fnameTF,lnameL,lnameTF);
+		
+		root = new GridPane();
+		root.setAlignment(Pos.CENTER);
+		root.setConstraints(pane, 0, 0);
+		root.getChildren().add(pane);
+
+		specific = new GridPane();
+		
+		specific.setAlignment(Pos.CENTER);
+		
+		specific.setVgap(20);
+		specific.setHgap(20);
+	
+		root.setVgap(10);
+		root.setConstraints(specific,0,1);
+		root.setConstraints(message, 0, 2, 1, 2);
+		root.getChildren().add(specific);
+		root.getChildren().add(message);
+		
+		Scene scene = new Scene(root, 400, 400);
+		return scene;
 	}
 	
-	public void displayStudentAccountCreationForm() {
-		System.out.println("Enter username, password, fname, lname");
-		Scanner sc = new Scanner(System.in);
+	public Account makeAccount() {
 		Account ac = new Account();
-		ac.username = sc.nextLine();
-		ac.password = sc.nextLine();
-		ac.firstName = sc.nextLine();
-		ac.lastName = sc.nextLine();
+		ac.username = unameTF.getText();
+		ac.password = passTF.getText();
+		ac.firstName = fnameTF.getText();
+		ac.lastName = lnameTF.getText();
+		return ac;
+	}
+	
+	public void submitStudentAccountCreationForm() {
+		Account ac = makeAccount();
 		ac.accountType = 1;
-		sc.close();
 		enterStudentAccountInfo(ac);
-		
 	}
 
 	/** 
@@ -89,11 +228,11 @@ public class createLoginAccountUI {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void displayStudentLoginCreationConfirmation() {
-		System.out.println("Success");
+		message.setText("Student account successfully created");
 	}
 
 	public void displayFailureMessage() {
-		System.out.println("Failure");
+		message.setText("Failure to make account");
 	}
 	
 	/** 
@@ -115,17 +254,10 @@ public class createLoginAccountUI {
 		}
 	}
 	
-	public void displayTAAccountCreationForm() {
-		System.out.println("Enter username, password, fname, lname, email");
-		Scanner sc = new Scanner(System.in);
-		Account ac = new Account();
-		ac.username = sc.nextLine();
-		ac.password = sc.nextLine();
-		ac.firstName = sc.nextLine();
-		ac.lastName = sc.nextLine();
-		String email = sc.nextLine();
+	public void submitTAAccountCreationForm() {
+		Account ac = makeAccount();
 		ac.accountType = 3;
-		sc.close();
+		String email = emailTF.getText();
 		enterTAAccountInfo(ac, email);
 	}
 
@@ -135,7 +267,7 @@ public class createLoginAccountUI {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void displayTAAccountCreationConfirmation() {
-		System.out.println("Success");
+		message.setText("TA account successfully created");
 	}
 
 	/** 
@@ -162,17 +294,10 @@ public class createLoginAccountUI {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void displayProfAccountCreationForm() {
-		System.out.println("Enter username, password, fname, lname, faculty");
-		Scanner sc = new Scanner(System.in);
-		Account ac = new Account();
-		ac.username = sc.nextLine();
-		ac.password = sc.nextLine();
-		ac.firstName = sc.nextLine();
-		ac.lastName = sc.nextLine();
-		String faculty = sc.nextLine();
+	public void submitProfAccountCreationForm() {
+		Account ac = makeAccount();
+		String faculty = facultyTF.getText();
 		ac.accountType = 4;
-		sc.close();
 		enterProfAccountInfo(ac, faculty);
 	}
 
@@ -182,7 +307,7 @@ public class createLoginAccountUI {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void displayProfAccountCreationConfirmation() {
-		System.out.println("Success");
+		message.setText("Professor account successfully created");
 	}
 
 	/** 
@@ -208,17 +333,10 @@ public class createLoginAccountUI {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void displayAdminAccountCreationForm() {
-		System.out.println("Enter username, password, fname, lname, position");
-		Scanner sc = new Scanner(System.in);
-		Account ac = new Account();
-		ac.username = sc.nextLine();
-		ac.password = sc.nextLine();
-		ac.firstName = sc.nextLine();
-		ac.lastName = sc.nextLine();
-		String position = sc.nextLine();
+	public void submitAdminAccountCreationForm() {
+		Account ac = makeAccount();
+		String position = positionTF.getText();
 		ac.accountType = 2;
-		sc.close();
 		enterAdminAccountInfo(ac, position);
 	}
 
@@ -228,6 +346,6 @@ public class createLoginAccountUI {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void displayAdminAccountCreationConfirmation() {
-		System.out.println("Success");
+		message.setText("Administrator account successfully created");
 	}
 }

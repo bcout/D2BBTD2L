@@ -219,19 +219,24 @@ public class DataManager {
 
 	public int handleCreateAccount(Account ac, int type) {
 		try {
-			Statement stmt = connection.createStatement();
 			String query = "insert into Account (username,password,accountType,firstName,lastName)" + 
-							"values ('" + ac.username + "'," +
-							"sha1('" + ac.password + "'), "+ type + ", '" + 
-							ac.firstName + "', '" + ac.lastName + "')";
-			stmt.executeUpdate(query);
+							"values (?,sha1(?),?,?,?)";
+			PreparedStatement pst = connection.prepareStatement(query);
+			pst.setString(1, ac.username);
+			pst.setString(2, ac.password);
+			pst.setInt(3, ac.accountType);
+			pst.setString(4, ac.firstName);
+			pst.setString(5,ac.lastName);
 			
-			Statement getID  = connection.createStatement();
-			String query2 = "select accountId from Account where username = '" +
-															ac.username + "'";
-			ResultSet rs = getID.executeQuery(query2);
+			pst.executeUpdate();
+			
+			String query2 = "select accountId from Account where username = ?;";
+			PreparedStatement getID  = connection.prepareStatement(query2);
+			getID.setString(1, ac.username);
+			System.out.println(query2);
+			ResultSet rs = getID.executeQuery();
+			
 			int id = 0;
-			
 			while(rs.next()) {
 				 id = Integer.parseInt(rs.getString(1));
 			}
