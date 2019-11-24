@@ -3,10 +3,13 @@
 
 import javafx.application.*;
 import javafx.event.ActionEvent;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class MainMenu extends Application
@@ -17,6 +20,8 @@ public class MainMenu extends Application
 	private Scene scMain;
 	private GridPane mainPane;
 	private Button btnPostMessage;
+	private Button btnQuit;
+	private Label lblWelcome;
 
 	public void start(Stage primaryStage)
 	{
@@ -32,10 +37,19 @@ public class MainMenu extends Application
 	}
 
 	private void initMainMenuComponents()
-	{
+	{		
+		lblWelcome = new Label("Welcome to D2BBTD2L");
+		lblWelcome.setPrefSize(300, 100);
+		lblWelcome.setStyle("-fx-background-color: WHITE");
+		lblWelcome.setFont(Font.font ("Verdana", 20));
+		lblWelcome.setAlignment(Pos.CENTER);
+		
+		btnQuit = new Button("Quit");
+		btnQuit.setPrefWidth(50);
+		
 		btnPostMessage = new Button("New Message");
 		btnPostMessage.setOnAction(this::processPostMessageButtonPress);
-		btnPostMessage.setPrefSize(100, 100);
+		btnPostMessage.setPrefWidth(120);
 
 		mainPane = new GridPane();
 		mainPane.setHgap(20);
@@ -47,6 +61,8 @@ public class MainMenu extends Application
 	{
 		initMainMenuComponents();
 
+		mainPane.add(btnQuit, 10, 1);
+		mainPane.add(lblWelcome, 5, 5);
 		mainPane.add(btnPostMessage, 1, 1);
 
 		scMain = new Scene(mainPane, 900, 600);
