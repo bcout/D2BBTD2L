@@ -22,8 +22,7 @@ public class postMessageControl
 	 */
 	public postMessageControl()
 	{
-		MainMenu mm = new MainMenu();
-		dm = mm.getDataManager();
+		dm = MainMenu.getDataManager();
 	}
 
 	/**

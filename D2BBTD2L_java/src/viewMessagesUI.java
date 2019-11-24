@@ -226,9 +226,8 @@ public class viewMessagesUI
 	private void processNewMessageButtonPress(ActionEvent event)
 	{
 		postMessageUI pmu = new postMessageUI();
-		MainMenu mm = new MainMenu();
 
-		pmu.displayCreateMessageForm(mm.getStage());
+		pmu.displayCreateMessageForm(MainMenu.getStage());
 	}
 
 	private void processExitButtonPress(ActionEvent event)
@@ -243,13 +242,12 @@ public class viewMessagesUI
 		Message m = messagesTable.getSelectionModel().getSelectedItem();
 		lblTxtMessage.setText(m.getMessageText());
 		lblName.setText(m.getFromAccount().getFullName());
-		lblDate.setText(string);
+		//lblDate.setText(string);
 	}
 
 	public void resetToViewMessagesUI()
 	{
-		MainMenu mm = new MainMenu();
-		displayViewMessages(mm.getStage());
+		displayViewMessages(MainMenu.getStage());
 	}
 
 	private void initMessagesTable()

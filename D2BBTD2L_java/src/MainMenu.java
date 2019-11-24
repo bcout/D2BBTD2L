@@ -59,13 +59,13 @@ public class MainMenu extends Application
 		stg.show();
 	}
 
-	public Stage getStage()
+	public static Stage getStage()
 	{
 		return stgMain;
 	}
 
 
-	public DataManager getDataManager()
+	public static DataManager getDataManager()
 	{
 		return dm;
 	}

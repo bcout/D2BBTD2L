@@ -2,18 +2,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-public class viewMessagesControl 
+public class viewMessagesControl
 {
 
 	private DataManager dm;
-	
+
 	public viewMessagesControl()
 	{
-		dm = new DataManager();
+		dm = MainMenu.getDataManager();
 	}
 
-	
-	public ArrayList<Message> getMessagesReceived(int userId) throws SQLException 
+
+	public ArrayList<Message> getMessagesReceived(int userId) throws SQLException
 	{
 		ArrayList<Message> messages = new ArrayList<Message>();
 		try
@@ -24,10 +24,10 @@ public class viewMessagesControl
 		{
 			throw e;
 		}
-		
+
 		return messages;
 	}
-	
+
 	public ArrayList<Message> getMessagesSent(int userId) throws SQLException
 	{
 		ArrayList<Message> messages = new ArrayList<Message>();
@@ -39,7 +39,7 @@ public class viewMessagesControl
 		{
 			throw e;
 		}
-		
+
 		return messages;
 	}
 }
