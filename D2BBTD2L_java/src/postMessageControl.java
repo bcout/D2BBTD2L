@@ -9,23 +9,23 @@ import javafx.scene.control.ComboBox;
  * @author Brennan Couturier, 3638808
  *
  */
-public class postMessageControl 
+public class postMessageControl
 {
-	
+
 	/**
 	 * A DataManager object to call methods in the DataManager to execute queries
 	 */
 	private DataManager dm;
-	
+
 	/**
 	 * This constructor creates an instance of the postMessageControl class and instantiates the DataManager object dm
 	 */
 	public postMessageControl()
 	{
-		viewMessagesGUITest vmgt = new viewMessagesGUITest();
-		dm = vmgt.getDataManager();
+		MainMenu mm = new MainMenu();
+		dm = mm.getDataManager();
 	}
-	
+
 	/**
 	 * This calls the DataManager's getAllAccounts method to get a list of all the accounts in the database
 	 * @return A list of all the accounts in the database
@@ -35,7 +35,7 @@ public class postMessageControl
 	{
 		return dm.getAllAccounts();
 	}
-	
+
 	/**
 	 * This fills a combo box with all of the accounts in the database for use by the UI
 	 * @return A combo box filled with all of the accounts in the database for use by the UI
@@ -44,20 +44,20 @@ public class postMessageControl
 	public ComboBox<Account> fillAccountsComboBox() throws SQLException
 	{
 		ArrayList<Account> availableAccounts = new ArrayList<Account>();
-		
+
 		try
 		{
-			availableAccounts = getAllAccounts(); 
+			availableAccounts = getAllAccounts();
 		}
 		catch (SQLException e)
 		{
 			throw e;
 		}
-		
+
 		Account accounts[] = new Account[availableAccounts.size()];
 		accounts = availableAccounts.toArray(accounts);
 		ComboBox<Account> cb = new ComboBox<Account>(FXCollections.observableArrayList(accounts));
-		
+
 		return cb;
 	}
 
@@ -69,10 +69,10 @@ public class postMessageControl
 	 * @return A boolean indicating whether the insertion of the message into the database was successful.
 	 * @throws SQLException An SQLException is thrown if a problem occurs in the insert statement in the DataManager's handleMessageSubmit method
 	 */
-	public boolean postMessage(String messageText, int from_accountId, int to_accountId) throws SQLException 
+	public boolean postMessage(String messageText, int from_accountId, int to_accountId) throws SQLException
 	{
 		boolean successful = false;
-		
+
 		try
 		{
 			if (dm.accountExists(to_accountId))
@@ -84,7 +84,7 @@ public class postMessageControl
 		{
 			throw e;
 		}
-		
+
 		return successful;
 	}
 }
