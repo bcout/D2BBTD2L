@@ -16,6 +16,12 @@ public class createLoginAccountControl {
 	*/
 	private DataManager dataManager;
 
+	
+	public createLoginAccountControl(DataManager dm) {
+		dataManager = dm;
+	}
+	
+	
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->

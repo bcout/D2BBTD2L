@@ -24,7 +24,7 @@ insert into Account (username,password,accountType,firstName,lastName)
 values ('root',sha1('password'),'root','root');
 
 create table Course (
-  courseId int,
+  courseId int AUTO_INCREMENT,
   courseNumber varchar(10) unique not null,
   courseDescription text not null,
   primary key(courseId)
