@@ -57,8 +57,7 @@ public class Message
 	 */
 	public Message(int messageId, Timestamp timeSent, String messageText, int from_accountId, int to_accountId)
 	{
-		viewMessagesGUITest mm = new viewMessagesGUITest();
-		dm = mm.getDataManager();
+		dm = MainMenu.getDataManager();
 		try 
 		{
 			fromAccount = dm.getAccountFromId(from_accountId);
