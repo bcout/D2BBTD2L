@@ -530,15 +530,27 @@ public class DataManager {
 	*/
 	public boolean addCourseRegistrationInfo(ArrayList<CourseRegistration> cr) {
 		try {
-			Statement st = connection.createStatement();
-			String query = "insert into CourseRegistration (accountId,courseOfferingId) values ";
+			
+			String query = "insert into CourseRegistration (accountId,courseOfferingId) values";
+			
+			//Creates a string for the prepared statement with an appropriate amount of '?'s
 			for (int i=0; i<cr.size();i++) {
-				query += "('" + cr.get(i).accountIdstudent + "', '" + cr.get(i).courseOfferingId + "')";
-				if (i-1 != cr.size()) {
-					query += ",";
-				}
+				query += " (?,?)";
 			}
-			st.executeUpdate(query);
+			System.out.println(query);
+			PreparedStatement pst = connection.prepareStatement(query);
+			
+			//Adds all of the CourseRegistration info into the query
+			for (int i=0; i<cr.size(); i++) {
+				//int stdID = cr.get(i).accountIdstudent;
+				//***********implement check for if the student is in the student account table ******
+				pst.setInt((2*i + 1), cr.get(i).accountIdstudent);
+				//*****implement check for if the course is being offered*****
+				pst.setInt((2*i + 2),cr.get(i).courseOfferingId);
+			}
+			
+			//execute the sql statement
+			pst.execute();
 			return true;
 		} catch (SQLException e) {
 			System.err.println(e.toString());

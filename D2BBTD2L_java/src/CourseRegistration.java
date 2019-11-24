@@ -18,6 +18,11 @@ public class CourseRegistration {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public int accountIdstudent;
+	
+	public CourseRegistration(int stdntID, int offID) {
+		accountIdstudent = stdntID;
+		courseOfferingId = offID;
+	}
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
