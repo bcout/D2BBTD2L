@@ -3,6 +3,7 @@
 	<item key="org.eclipse.jdt.ui.lastextjar" value="/home1/ugrads/bcouturi/CS2043"/>
 	<item key="org.eclipse.jdt.ui.last.selected.jre.kind2" value="0"/>
 	<item key="org.eclipse.jdt.ui.last.selected.project.jre" value="jdk"/>
+	<item key="filters_last_used" value="filter_imports;"/>
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
 		<item key="layout" value="2"/>
 		<item key="group_libraries" value="true"/>
