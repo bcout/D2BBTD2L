@@ -7,29 +7,16 @@
 //import static CourseOfferingInfoObject.*;
 //import static notificationObject.*;
 import java.sql.*;
-import java.util.Set;
-
+import java.util.*;
 /** 
 * <!-- begin-UML-doc -->
 * <!-- end-UML-doc -->
-* @author bcouturi
-* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+* @author Brennan Couturier
 */
 public class DataManager {
 	
 	Connection connection = null;
 	
-	/*
-	 * Put your prepared statements here
-	 * PreparedStatement example1;
-	 * PreparedStatement example2;
-	 */
-	
-	/*
-	 * Put your query strings here
-	 * String example1Query = "select * from table;"; 
-	 * String example2Query = "select * from 
-	 */
 	
 	/**
 	 * This is the DataManager constructor that forms a connection to the cs204301ateam2 database
@@ -83,12 +70,7 @@ public class DataManager {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	private Notification notification;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Message message;
+
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -191,29 +173,325 @@ public class DataManager {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	private StudentAccount studentAccount;
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void handleMessageSubmit() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	
+	public Account getAccountFromId(int idIn) throws SQLException
+	{
+		PreparedStatement getAccountFromIdPs;
+		String getAccountFromIdQuery = "select * from Account where accountId = ?;";
+		
+		Account a = null;
+		
+		try
+		{
+			getAccountFromIdPs = connection.prepareStatement(getAccountFromIdQuery);
+			getAccountFromIdPs.setInt(1, idIn);
+			ResultSet rs = getAccountFromIdPs.executeQuery();
+			
+			if (rs != null)
+			{
+				int id = rs.getInt(1);
+				String username = rs.getString(2);
+				String password = rs.getString(3);
+				int accountType = rs.getInt(4);
+				String firstName = rs.getString(5);
+				String lastName = rs.getString(6);
+				
+				a = new Account(id, username, password, accountType, firstName, lastName);
+			}
+		}
+		catch (SQLException e)
+		{
+			throw e;
+		}
+		
+		if (getAccountFromIdPs != null)
+		{
+			try
+			{
+				getAccountFromIdPs.close();
+			}
+			catch (SQLException e)
+			{
+				throw e;
+			}
+		}
+		
+		return a;
+	}
+	
+	public ArrayList<Account> getAllAccounts() throws SQLException
+	{
+		PreparedStatement getAllAccountsPs;
+		String getAllAccountsQuery = "select * from Account;";
+		
+		ArrayList<Account> accounts = new ArrayList<Account>();
+		
+		try
+		{
+			getAllAccountsPs = connection.prepareStatement(getAllAccountsQuery);
+			
+			ResultSet rs = getAllAccountsPs.executeQuery();
+			
+			while (rs.next())
+			{
+				int id = rs.getInt(1);
+				String username = rs.getString(2);
+				String password = rs.getString(3);
+				int accountType = rs.getInt(4);
+				String firstName = rs.getString(5);
+				String lastName = rs.getString(6);
+				
+				Account a = new Account(id, username, password, accountType, firstName, lastName);
+				
+				accounts.add(a);
+			}
+		}
+		catch (SQLException e)
+		{
+			throw e;
+		}
+		
+		if (getAllAccountsPs != null)
+		{
+			try
+			{
+				getAllAccountsPs.close();
+			}
+			catch (SQLException e)
+			{
+				throw e;
+			}
+			
+		}
+		
+		return accounts;
+	}
+	
+	public boolean accountExists(int accountId) throws SQLException
+	{
+		PreparedStatement checkAccountExistsPs;
+		String checkAccountExistQuery = "select count(*) from Account where accountId = ?;";
+		int rowNum = 0;
+		int numAccounts = 0;
+		
+		try
+		{
+			checkAccountExistsPs = connection.prepareStatement(checkAccountExistQuery);
+			checkAccountExistsPs.setInt(1, accountId);
+			ResultSet rs = checkAccountExistsPs.executeQuery();
+			
+			if(rs != null)
+			{
+				rs.last();
+				rowNum = rs.getRow();
+				numAccounts = rs.getInt(rowNum);
+			}
+			
+			if (numAccounts == 1)
+			{
+				return true;
+			}
+		}
+		catch (SQLException e)
+		{
+			throw e;
+		}
+		
+		if (checkAccountExistsPs != null)
+		{
+			try
+			{
+				checkAccountExistsPs.close();
+			}
+			catch(SQLException e)
+			{
+				throw e;
+			}
+		}
+		
+		return false;
 	}
 
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 * @throws SQLException 
 	*/
-	public void requestMessages() {
-		// begin-user-code
-		// TODO Auto-generated method stub
+	public boolean handleMessageSubmit(String messageText, int from_accountId, int to_accountId) throws SQLException 
+	{
+		
+		boolean submitSuccessful = false;
+		
+		PreparedStatement submitMessagePs;
+		
+		String submitMessageQuery = "insert into Message (sentTimestamp, messageText, from_accountId, to_accountId) values (?, ?, ?, ?);";
+		
+		Timestamp timeSent = new Timestamp(System.currentTimeMillis());
+		
+		try
+		{
+			submitMessagePs = connection.prepareStatement(submitMessageQuery);
+			submitMessagePs.setTimestamp(1, timeSent);
+			submitMessagePs.setString(2, messageText);
+			submitMessagePs.setInt(3, from_accountId);
+			submitMessagePs.setInt(4, to_accountId);
+			
+			int numRowsChanged = submitMessagePs.executeUpdate();
+			
+			if (numRowsChanged == 1)
+			{
+				submitSuccessful = true;
+			}
+		}
+		catch (SQLException e)
+		{
+			throw e;
+		}
+		
+		if (submitMessagePs != null)
+		{
+			try
+			{
+				submitMessagePs.close();
+			}
+			catch (SQLException e)
+			{
+				throw e;
+			}
+		}
+		
+		return submitSuccessful;
+	}
 
-		// end-user-code
+	/** 
+	* This method retrieves from the database all the messages that have a passed user's id as the recipient's id
+	 * @throws SQLException
+	 * @param userId The id of the user whose messages will be retrieved
+	*/
+	
+	public ArrayList<Message> requestMessagesReceived(int userId) throws SQLException 
+	{
+		//Declare the prepared statement
+		PreparedStatement requestMessagesReceivedPs;
+		
+		//Initialize the message request query. Will select all the messages that have the user's id as the to_accountId value
+		String requestMessagesReceivedQuery = "select * from Message where to_accountId = ?;";
+		
+		//Create a list of all messages
+		ArrayList<Message> messages = new ArrayList<Message>();
+		
+		//Declare message variables
+		int messageId;
+		Timestamp timeSent;
+		String messageText;
+		int from_accountId;
+		int to_accountId;
+		
+		try
+		{
+			//Prepare the message request query
+			requestMessagesReceivedPs = connection.prepareStatement(requestMessagesReceivedQuery);
+			
+			//Put the user's id number into the query, so that only messages addressed to that user are retrieved
+			requestMessagesReceivedPs.setInt(1, userId);
+			
+			//Execute the query to retrieve a set of SQL rows
+			ResultSet rs = requestMessagesReceivedPs.executeQuery();
+			
+			//If there are any message rows retrieved, create message objects out of them then add them to a linked list
+			//If there are no message rows retrieved, return an empty list
+			while (rs.next())
+			{				
+				messageId = rs.getInt(1);
+				timeSent = rs.getTimestamp(2);
+				messageText = rs.getString(3);
+				from_accountId = rs.getInt(4);
+				to_accountId = rs.getInt(5);
+				
+				Message m = new Message(messageId, timeSent, messageText, from_accountId, to_accountId);
+				
+				messages.add(m);
+			}
+		}
+		catch (SQLException e)
+		{
+			throw e;
+		}
+		
+		if (requestMessagesReceivedPs != null)
+		{
+			try
+			{
+				requestMessagesReceivedPs.close();
+			}
+			catch (SQLException e)
+			{
+				throw e;
+			}
+		}
+		
+		return messages;
+	}
+	
+	public ArrayList<Message> requestMessagesSent(int userId) throws SQLException
+	{
+		PreparedStatement requestMessagesSentPs;
+		
+		String requestMessagesSentQuery = "select * from Message where from_accountId = ?;";
+		
+		ArrayList<Message> messages = new ArrayList<Message>();
+		
+		//Declare message variables
+		int messageId;
+		Timestamp timeSent;
+		String messageText;
+		int from_accountId;
+		int to_accountId;
+		
+		try
+		{
+			//Prepare the message request query
+			requestMessagesSentPs = connection.prepareStatement(requestMessagesSentQuery);
+					
+			//Put the user's id number into the query, so that only messages addressed to that user are retrieved
+			requestMessagesSentPs.setInt(1, userId);
+					
+			//Execute the query to retrieve a set of SQL rows
+			ResultSet rs = requestMessagesSentPs.executeQuery();
+					
+			//If there are any message rows retrieved, create message objects out of them then add them to a linked list
+			//If there are no message rows retrieved, return an empty list
+			while (rs.next())
+			{				
+				messageId = rs.getInt(1);
+				timeSent = rs.getTimestamp(2);
+				messageText = rs.getString(3);
+				from_accountId = rs.getInt(4);
+				to_accountId = rs.getInt(5);
+						
+				Message m = new Message(messageId, timeSent, messageText, from_accountId, to_accountId);
+						
+				messages.add(m);
+			}
+		}
+		catch (SQLException e)
+		{
+			throw e;
+		}
+		
+		if (requestMessagesSentPs != null)
+		{
+			try
+			{
+				requestMessagesSentPs.close();
+			}
+			catch (SQLException e)
+			{
+				throw e;
+			}
+		}
+				
+		return messages;
 	}
 
 	/** 

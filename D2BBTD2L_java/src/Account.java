@@ -11,25 +11,27 @@ import java.util.Set;
 * @author bcouturi
 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 */
-public class Account {
+public class Account 
+{
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	private Object accountId;
+	private int accountId;
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	private Object username;
+	private String username;
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	private Object password;
+	private String password;
+	
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -71,7 +73,7 @@ public class Account {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	private Object accountType;
+	private int accountType;
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -89,13 +91,13 @@ public class Account {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	private Object firstName;
+	private String firstName;
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	private Object lastName;
+	private String lastName;
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -120,6 +122,34 @@ public class Account {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	private AccountType accountType2;
+	
+	/**
+	 * This constructor is not used to make a new user, it is to make an object out of an existing user. It is used by the DataManager's getAllAccounts method
+	 * @param accountId The id number of the account
+	 * @param username The username associated of the account
+	 * @param password The password associated with the account
+	 * @param accountType The integer representation of the account type
+	 * @param firstName The first name of the user
+	 * @param lastName The last name of the user
+	 */
+	public Account(int accountId, String username, String password, int accountType, String firstName, String lastName)
+	{
+		this.username = username;
+		this.password = password;
+		this.accountType = accountType;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+	
+	public int getAccountId()
+	{
+		return accountId;
+	}
+	
+	public String getFullName()
+	{
+		return lastName + ", " + firstName;
+	}
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -167,5 +197,10 @@ public class Account {
 		// TODO Auto-generated method stub
 
 		// end-user-code
+	}
+	
+	public String toString()
+	{
+		return lastName + ", " + firstName;
 	}
 }

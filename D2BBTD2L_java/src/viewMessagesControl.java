@@ -1,30 +1,45 @@
-/**
- * 
- */
+import java.sql.SQLException;
+import java.util.ArrayList;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author bcouturi
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
-public class viewMessagesControl {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private DataManager dataManager;
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void getMessages() {
-		// begin-user-code
-		// TODO Auto-generated method stub
+public class viewMessagesControl 
+{
 
-		// end-user-code
+	private DataManager dm;
+	
+	public viewMessagesControl()
+	{
+		dm = new DataManager();
+	}
+
+	
+	public ArrayList<Message> getMessagesReceived(int userId) throws SQLException 
+	{
+		ArrayList<Message> messages = new ArrayList<Message>();
+		try
+		{
+			messages = dm.requestMessagesReceived(userId);
+		}
+		catch (SQLException e)
+		{
+			throw e;
+		}
+		
+		return messages;
+	}
+	
+	public ArrayList<Message> getMessagesSent(int userId) throws SQLException
+	{
+		ArrayList<Message> messages = new ArrayList<Message>();
+		try
+		{
+			messages = dm.requestMessagesSent(userId);
+		}
+		catch (SQLException e)
+		{
+			throw e;
+		}
+		
+		return messages;
 	}
 }
