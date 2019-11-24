@@ -14,6 +14,9 @@ local.properties
 .loadpath
 .recommenders
 
+# binary java files not needed
+*.class
+
 # External tool builders
 .externalToolBuilders/
 
