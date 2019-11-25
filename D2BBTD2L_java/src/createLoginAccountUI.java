@@ -58,6 +58,7 @@ public class createLoginAccountUI {
 	private Button enterTA;
 	private Button enterProf;
 	private Button enterAdmin;
+	private Button back;
 	
 	Label emailL = new Label("E-mail:");
 	Label facultyL = new Label("Faculty:");
@@ -67,6 +68,11 @@ public class createLoginAccountUI {
 	private GridPane specific;
 	
 	private Text message;
+	
+	public createLoginAccountUI()
+	{
+		
+	}
 	
 	public createLoginAccountUI(createLoginAccountControl control) {
 		this.control = control;
@@ -131,6 +137,7 @@ public class createLoginAccountUI {
 		enterTA = new Button("Create account");
 		enterProf = new Button("Create account");
 		enterAdmin = new Button("Create account");
+		back = new Button("Back");
 		message = new Text();
 		
 		enterStudent.setOnAction(e -> submitStudentAccountCreationForm());
@@ -189,7 +196,7 @@ public class createLoginAccountUI {
 		root.getChildren().add(specific);
 		root.getChildren().add(message);
 		
-		Scene scene = new Scene(root, 400, 400);
+		Scene scene = new Scene(root, 900, 600);
 		return scene;
 	}
 	
@@ -223,6 +230,7 @@ public class createLoginAccountUI {
 	
 	public void enterStudentAccountInfo(Account ac) {
 		//create account with generic info
+		control = new createLoginAccountControl();
 		int id = control.createAccount(ac);
 		if (id == -1) {
 			displayFailureMessage();
@@ -259,6 +267,7 @@ public class createLoginAccountUI {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void enterTAAccountInfo(Account ac, String email) {
+		control = new createLoginAccountControl();
 		int id = control.createAccount(ac);
 		if (id == -1) {
 			displayFailureMessage();
@@ -298,6 +307,7 @@ public class createLoginAccountUI {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void enterProfAccountInfo(Account ac, String faculty) {
+		control = new createLoginAccountControl();
 		int id = control.createAccount(ac);
 		
 		if (id == -1) {
@@ -342,6 +352,7 @@ public class createLoginAccountUI {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void enterAdminAccountInfo(Account ac, String position) {
+		control = new createLoginAccountControl();
 		int id = control.createAccount(ac);
 		if (id == -1) {
 			displayFailureMessage();
@@ -368,6 +379,12 @@ public class createLoginAccountUI {
 		String position = positionTF.getText();
 		ac.setAccountType(2);
 		enterAdminAccountInfo(ac, position);
+	}
+	
+	public void processBackButtonPress()
+	{
+		AdminMainMenu amm = new AdminMainMenu();
+		amm.resetToMainMenu();
 	}
 
 	/** 

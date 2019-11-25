@@ -44,7 +44,7 @@ public class AdminMainMenu
 		mainMenuIconView.setFitHeight(100);
 		mainMenuIconView.setFitWidth(100);
 		
-		lblWelcome = new Label("Welcome Mr.Couturier");
+		lblWelcome = new Label("Welcome Mr/Mrs/Ms/Undefined/NotPreferringToSay/Other/AttackHelicopter Name");
 		lblWelcome.setPrefSize(489, 50);
 		lblWelcome.setStyle("-fx-background-color: WHITE");
 		lblWelcome.setFont(Font.font ("Verdana", 20));
@@ -94,7 +94,13 @@ public class AdminMainMenu
 	
 	public void processCreateAccountButtonPress(ActionEvent event)
 	{
-		//display create account form
+		createLoginAccountUI clau = new createLoginAccountUI();
+		clau.displayCreateLoginAccount(MainMenu.getStage());
+	}
+	
+	public void resetToMainMenu()
+	{
+		displayAdminMainMenu(MainMenu.getStage());
 	}
 	
 	public void processAddCourseButtonPress(ActionEvent event)

@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -64,6 +65,7 @@ public class StudentMainMenu
 		btnUploadAssignment = new Button("Upload Assignment");
 		btnUploadAssignment.setOnAction(this::processUploadAssignmentsButtonPress);
 		btnUploadAssignment.setPrefWidth(150);
+		btnUploadAssignment.setTooltip(new Tooltip("Upload an assignment"));
 		
 		btnNotifications = new Button("Notifications");
 		btnNotifications.setOnAction(this::processNotificationsButtonPress);
