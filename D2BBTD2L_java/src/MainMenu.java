@@ -18,7 +18,7 @@ public class MainMenu extends Application
 	//Non-javafx variables
 	//-------------------------------------------
 	private static DataManager dm;
-	private static int userId;
+	private static Account userAccount;
 	
 	//Splash screen variables
 	//-------------------------------------------
@@ -33,7 +33,6 @@ public class MainMenu extends Application
 	public void start(Stage primaryStage)
 	{	
 		stgMain = primaryStage;
-		//stgMain.initStyle(StageStyle.UNDECORATED);
 		stgMain.setResizable(false);
 		dm = new DataManager();
 		
@@ -62,14 +61,29 @@ public class MainMenu extends Application
 			public void handle(WorkerStateEvent event)
 			{
 				temp.close();
-				//If logged in user is student
-				//displayStudentMainMenu(stgMain);
-				//If logged in user is admin
-				displayAdminMenu(stgMain);
-				//If logged in user is professor
-				//displayProfMenu(stgMain);
-				//If logged in user is TA
-				//displayTAMenu(stgMain);
+				
+				//Login
+				//If login successful
+				Account temp = new Account(1, "TestUsername", "TestPassword", 2, "TestFirstName", "TestLastName");
+				userAccount = temp;
+					if(userAccount.getAccountType() == 1)
+					{
+						displayStudentMainMenu(stgMain);
+					}
+					else if(userAccount.getAccountType() == 2)
+					{
+						displayAdminMenu(stgMain);
+					}
+					/*
+					else if(userAccount.getAccountId() == 3)
+					{
+						displayTAMainMenu(stgMain);
+					}
+					else if(userAccount.getAccountId() == 4)
+					{
+						displayProfMainMenu(stgMain);
+					}
+					*/
 			}
 		});
 		new Thread(sleeper).start();
@@ -140,7 +154,7 @@ public class MainMenu extends Application
 	
 	public static int getUserId()
 	{
-		return userId;
+		return userAccount.getAccountId();
 	}
 
 
@@ -149,8 +163,8 @@ public class MainMenu extends Application
 		return dm;
 	}
 	
-	public static void setUserId(int userIdIn)
+	public static void setUser(Account user)
 	{
-		userId = userIdIn;
+		userAccount = user;
 	}
 }
