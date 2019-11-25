@@ -4,15 +4,22 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class MainMenu extends Application
 {
+	//Non-javafx variables
+	//-------------------------------------------
 	private static DataManager dm;
 	private static int userId;
 	
+	//Splash screen variables
+	//-------------------------------------------
+	
+	//Normal javafx variables
+	//-------------------------------------------
 	private static Stage stgMain;
 	private static Scene scMain;
 	private static GridPane mainPane;
@@ -32,7 +39,7 @@ public class MainMenu extends Application
 	{
 		launch(args);
 	}
-
+	
 	private void initMainMenuComponents()
 	{		
 		lblWelcome = new Label("Welcome to D2BBTD2L");
