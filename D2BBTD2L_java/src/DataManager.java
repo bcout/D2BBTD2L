@@ -524,6 +524,12 @@ public class DataManager {
 			return -1;
 		}	
 	}
+
+	public AssignmentSubmission[] getAssSubs()
+	{
+		/* TODO */
+	}
+
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->

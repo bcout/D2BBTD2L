@@ -8,6 +8,8 @@
  * @author sdownwar
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
+import java.util.Date;
+
 public class ViewMarksControl {
 	/** 
 	* <!-- begin-UML-doc -->
@@ -16,25 +18,14 @@ public class ViewMarksControl {
 	*/
 	private DataManager dataManager;
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void getMarks()
+	public ViewMarksControl(DataManager dm)
 	{
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		dataManager = dm;
 	}
 
-	public Assignment[] getAssignments()
+	public AssignmentSubmission[] getAssSubs()
 	{
-		return new Assignment[] {
-			new Assignment("2043 big project", 1),
-			new Assignment("oof ouch owie", 2)
-		};
+		return dm.getAssSubs();
 	}
 
 	/** 

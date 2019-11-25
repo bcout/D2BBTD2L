@@ -1,6 +1,3 @@
-
-
-import java.util.Set;
 import java.sql.Blob;
 import java.util.Date;
 import java.util.Set;
@@ -25,20 +22,17 @@ public class Assignment {
 
 	//public Account account;
 
-	public Assignment() {
-		
-	}
-
-    public Assignment() {}
+	    public Assignment() {}
 	
-	public Assignment(String name, int id)
+	public Assignment(String name, int id, Date due)
 	{
 		this.name = name;
 		this.id = id;
+		dueDate = due;
 	}
 
 	public String toString()
 	{
-		return "ID: " + id + "| " + name;
+		return "ID: " + id + " | " + name;
 	}
 }

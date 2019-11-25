@@ -6,6 +6,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Label;
+
+import java.util.Date;
 
 /**
  * 
@@ -20,7 +24,9 @@ import javafx.scene.control.ListView;
 public class ViewMarksUI
 {
 	private Scene assSum; //Assignment summary
+	private ListView<AssignmentSubmission> lv;
 	private ViewMarksControl ctrl;
+	private Stage stg;
 
 	public ViewMarksUI()
 	{
@@ -35,25 +41,27 @@ public class ViewMarksUI
 		pane.setAlignment(Pos.CENTER);
 
 		//Listview
-		ListView<Assignment> lv = new ListView<Assignment>();
-		for(Assignment a : ctrl.getAssignments())
+		lv = new ListView<AssignmentSubmission>();
+		for(AssignmentSubmission a : ctrl.getAssSubs())
 		{
 			lv.getItems().add(a);
 		}
-		pane.add(lv, 5, 1);
+		lv.setOnMouseClicked(this::assSubClicked);
+		pane.add(lv, 0, 6);
 		
 		//Back btn
 		Button btnExit = new Button("Back");
 		btnExit.setOnAction(this::backToMenu);
 		btnExit.setPrefWidth(50);
-		pane.add(btnExit, 5, 1);
+		pane.add(btnExit, 5, 0);
 		
 		assSum = new Scene(pane, 900, 600);
 		return assSum;
 	}
 
-	public void display(Stage stg)
+	public void display(Stage s)
 	{
+		stg = s;
 		stg.setScene(initScene());
 		stg.show();
 	}
@@ -104,8 +112,42 @@ public class ViewMarksUI
 		// end-user-code
 	}
 
+	private void assSubClicked(MouseEvent event)
+	{
+		AssignmentSubmission assSub =  lv.getSelectionModel().getSelectedItem();
+		//Redirect to assignment details
+		GridPane pane = new GridPane();
+		pane.setHgap(10);
+		pane.setVgap(10);
+		pane.setAlignment(Pos.CENTER);
+		Button exit = new Button("BEGONE!");
+		exit.setOnAction(this::assList);
+		exit.setPrefWidth(500);
+		pane.add(exit, 5, 1);
+
+		Label lid = new Label("ID: " + assSub.id);
+		pane.add(lid, 0, 1);
+
+		Label lnm = new Label(assSub.assignment.name);
+		pane.add(lnm, 2, 5);
+
+		Label lgd = new Label(assSub.grade + "%");
+		pane.add(lgd, 3, 5);
+
+		Scene assDeets = new Scene(pane, 900, 600);
+		stg.setScene(assDeets);
+		stg.show();
+	}
+
+	private void assList(ActionEvent e)
+	{
+		stg.setScene(assSum);
+		stg.show();
+	}
+
 	private void backToMenu(ActionEvent event)
 	{
+		/* TODO! */
 		MainMenu mm = new MainMenu();
 		mm.resetToMainMenu();
 	}
