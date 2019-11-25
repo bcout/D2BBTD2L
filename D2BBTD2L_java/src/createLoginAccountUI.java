@@ -67,11 +67,17 @@ public class createLoginAccountUI {
 	private GridPane specific;
 	
 	private Text message;
+	
 	public createLoginAccountUI(createLoginAccountControl control) {
 		this.control = control;
 	}
 	
-	public void initSceneComponents() {
+	public void displayCreateLoginAccount(Stage stg) {
+		stg.setScene(initScene());
+		stg.show();
+	}
+	
+	private void initSceneComponents() {
 		String[] types  = {"Student", "Professor", "TA", "Administrator"};
 		typesComboBox = new ComboBox(FXCollections.observableArrayList(types));
 		
@@ -138,7 +144,7 @@ public class createLoginAccountUI {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	
-	public Scene displayAccountCreationForm() {
+	private Scene initScene() {
 		initSceneComponents();
 		GridPane pane = new GridPane();
 		
@@ -176,8 +182,6 @@ public class createLoginAccountUI {
 		
 		specific.setVgap(20);
 		specific.setHgap(20);
-
-		specific.setGridLinesVisible(true);
 	
 		root.setVgap(10);
 		root.setConstraints(specific,0,1);
@@ -194,12 +198,19 @@ public class createLoginAccountUI {
 		String password = passTF.getText();
 		String firstName = fnameTF.getText();
 		String lastName = lnameTF.getText();
+		if (username.equals("") || password.equals("") || firstName.equals("") || lastName.equals("")) {
+			return null;
+		}
 		Account ac = new Account(username,password,firstName,lastName);
 		return ac;
 	}
 	
 	public void submitStudentAccountCreationForm() {
 		Account ac = makeAccount();
+		if (ac == null) {
+			displayFillFieldsRequest();
+			return;
+		}
 		ac.setAccountType(1);
 		enterStudentAccountInfo(ac);
 	}
@@ -238,6 +249,10 @@ public class createLoginAccountUI {
 		message.setText("Failure to make account");
 	}
 	
+	public void displayFillFieldsRequest() {
+		message.setText("Please fill all fields");
+	}
+	
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -259,6 +274,10 @@ public class createLoginAccountUI {
 	
 	public void submitTAAccountCreationForm() {
 		Account ac = makeAccount();
+		if (ac == null || emailTF.getText().equals("")) {
+			displayFillFieldsRequest();
+			return;
+		}
 		ac.setAccountType(3);
 		String email = emailTF.getText();
 		enterTAAccountInfo(ac, email);
@@ -299,6 +318,10 @@ public class createLoginAccountUI {
 	*/
 	public void submitProfAccountCreationForm() {
 		Account ac = makeAccount();
+		if (ac == null || facultyTF.getText().equals("")) {
+			displayFillFieldsRequest();
+			return;
+		}
 		String faculty = facultyTF.getText();
 		ac.setAccountType(4);
 		enterProfAccountInfo(ac, faculty);
@@ -338,6 +361,10 @@ public class createLoginAccountUI {
 	*/
 	public void submitAdminAccountCreationForm() {
 		Account ac = makeAccount();
+		if (ac == null || positionTF.getText().equals("")) {
+			displayFillFieldsRequest();
+			return;
+		}
 		String position = positionTF.getText();
 		ac.setAccountType(2);
 		enterAdminAccountInfo(ac, position);
