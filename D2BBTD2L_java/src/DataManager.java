@@ -36,14 +36,14 @@ public class DataManager {
 			System.err.println(e.toString());
 		}
 		String url = "jdbc:mysql://cs2043.cs.unb.ca:3306/cs204301ateam2";
-		try 
+		/*try 
 		{
-			connection = DriverManager.getConnection(url, "cs204301ateam2", "Z34SRYfW");
-		}
-		catch (SQLException e)
-		{
-			System.err.println("Database connection error.");
-		}
+			//connection = DriverManager.getConnection(url, "cs204301ateam2", "Z34SRYfW");
+			}*/
+		/*catch (SQLException e)
+		{//TMP!
+			System.out.println("Database connection error.");
+			}*/
 	}
 	
 	/** 
@@ -528,6 +528,7 @@ public class DataManager {
 	public AssignmentSubmission[] getAssSubs()
 	{
 		/* TODO */
+		return new AssignmentSubmission[] {};
 	}
 
 	/** 

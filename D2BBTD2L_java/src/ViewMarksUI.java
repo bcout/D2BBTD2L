@@ -28,9 +28,9 @@ public class ViewMarksUI
 	private ViewMarksControl ctrl;
 	private Stage stg;
 
-	public ViewMarksUI()
+	public ViewMarksUI(DataManager dm)
 	{
-		ctrl = new ViewMarksControl();
+		ctrl = new ViewMarksControl(dm);
 	}
 
 	private Scene initScene()
@@ -54,6 +54,9 @@ public class ViewMarksUI
 		btnExit.setOnAction(this::backToMenu);
 		btnExit.setPrefWidth(50);
 		pane.add(btnExit, 5, 0);
+
+		Label ttl = new Label("Assignent Marks list");
+		pane.add(ttl, 0, 0);
 		
 		assSum = new Scene(pane, 900, 600);
 		return assSum;
@@ -115,14 +118,15 @@ public class ViewMarksUI
 	private void assSubClicked(MouseEvent event)
 	{
 		AssignmentSubmission assSub =  lv.getSelectionModel().getSelectedItem();
+		if(assSub == null) return;
 		//Redirect to assignment details
 		GridPane pane = new GridPane();
 		pane.setHgap(10);
 		pane.setVgap(10);
 		pane.setAlignment(Pos.CENTER);
-		Button exit = new Button("BEGONE!");
+		Button exit = new Button("Back");
 		exit.setOnAction(this::assList);
-		exit.setPrefWidth(500);
+		exit.setPrefWidth(50);
 		pane.add(exit, 5, 1);
 
 		Label lid = new Label("ID: " + assSub.id);

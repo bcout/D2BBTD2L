@@ -25,7 +25,7 @@ public class ViewMarksControl {
 
 	public AssignmentSubmission[] getAssSubs()
 	{
-		return dm.getAssSubs();
+		return dataManager.getAssSubs();
 	}
 
 	/** 

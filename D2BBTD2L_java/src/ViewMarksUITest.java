@@ -11,7 +11,7 @@ public class ViewMarksUITest extends Application
 	public void start(Stage ps)
 	{
 		ps.setResizable(false);
-		ViewMarksUI v = new ViewMarksUI();
+		ViewMarksUI v = new ViewMarksUI(new DataManager());
 		v.display(ps);
 	}
 
