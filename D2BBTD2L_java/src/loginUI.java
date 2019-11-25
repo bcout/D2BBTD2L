@@ -50,16 +50,15 @@ public class loginUI
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void displayLoginConfirmation() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void displayLoginConfirmation() 
+	{
+		//Set the user id here once they've logged in along with other things by calling setUserIdMainMenu and passing it the id of the user who just logged in
+		//Thanks Logan
 	}
 	
-	public int getUserId()
+	public void setUserIdMainMenu(int userId)
 	{
-		return userId;
+		MainMenu.setUserId(userId);
 	}
 	
 	

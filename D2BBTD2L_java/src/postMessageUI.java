@@ -245,8 +245,9 @@ public class postMessageUI
 
 	private void processExitButtonPress(ActionEvent event)
 	{
-		MainMenu mm = new MainMenu();
-		mm.resetToMainMenu();
+		//if student is logged in
+		StudentMainMenu smm = new StudentMainMenu();
+		smm.resetToMainMenu();
 	}
 
 	private void processPostMessageButtonPress(ActionEvent event)

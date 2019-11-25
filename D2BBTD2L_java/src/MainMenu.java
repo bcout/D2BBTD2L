@@ -1,84 +1,146 @@
-
-
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import javafx.application.*;
-import javafx.event.ActionEvent;
-import javafx.geometry.HPos;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class MainMenu extends Application
 {
-	private static Stage stgMain;
+	//Non-javafx variables
+	//-------------------------------------------
 	private static DataManager dm;
-
-	private Scene scMain;
-	private GridPane mainPane;
-	private Button btnViewMessages;
-	private Button btnQuit;
-	private Label lblWelcome;
+	private static int userId;
+	
+	//Splash screen variables
+	//-------------------------------------------
+	private Scene splashScene;
+	private GridPane splashPane;
+	private Image logo;
+	
+	//javafx variables
+	//-------------------------------------------
+	private static Stage stgMain;
 
 	public void start(Stage primaryStage)
-	{
+	{	
 		stgMain = primaryStage;
+		//stgMain.initStyle(StageStyle.UNDECORATED);
 		stgMain.setResizable(false);
 		dm = new DataManager();
-		displayMainMenu(stgMain);
+		
+		Stage temp = new Stage();
+		temp.initStyle(StageStyle.UNDECORATED);
+		displaySplashScreen(temp);
+		
+		Task<Void> sleeper = new Task<Void>()
+		{
+			protected Void call() throws Exception
+			{
+				try
+				{
+					Thread.sleep(2500);
+				}
+				catch(InterruptedException e)
+				{
+					
+				}
+				return null;
+			}
+		};
+		
+		sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>()
+		{
+			public void handle(WorkerStateEvent event)
+			{
+				temp.close();
+				//If logged in user is student
+				//displayStudentMainMenu(stgMain);
+				//If logged in user is admin
+				displayAdminMenu(stgMain);
+				//If logged in user is professor
+				//displayProfMenu(stgMain);
+				//If logged in user is TA
+				//displayTAMenu(stgMain);
+			}
+		});
+		new Thread(sleeper).start();
 	}
 
 	public static void main(String[] args)
 	{
 		launch(args);
 	}
-
-	private void initMainMenuComponents()
-	{		
-		lblWelcome = new Label("Welcome to D2BBTD2L");
-		lblWelcome.setPrefSize(300, 100);
-		lblWelcome.setStyle("-fx-background-color: WHITE");
-		lblWelcome.setFont(Font.font ("Verdana", 20));
-		lblWelcome.setAlignment(Pos.CENTER);
-		
-		btnQuit = new Button("Quit");
-		btnQuit.setOnAction(this::processExitButtonPress);
-		btnQuit.setPrefWidth(50);
-		
-		btnViewMessages = new Button("View Messages");
-		btnViewMessages.setOnAction(this::processPostMessageButtonPress);
-		btnViewMessages.setPrefWidth(120);
-
-		mainPane = new GridPane();
-		mainPane.setHgap(20);
-		mainPane.setVgap(20);
-		mainPane.setAlignment(Pos.CENTER);
-	}
-
-	private Scene initMainMenu()
+	
+	private Scene initSplashScreen()
 	{
-		initMainMenuComponents();
-
-		mainPane.add(btnQuit, 10, 1);
-		mainPane.add(lblWelcome, 5, 5);
-		mainPane.add(btnViewMessages, 1, 1);
-
-		scMain = new Scene(mainPane, 900, 600);
-		return scMain;
+		
+		try 
+		{
+			logo = new Image(new FileInputStream("images/logo.png"));
+		} 
+		catch (FileNotFoundException e) 
+		{
+			System.err.println(e.getMessage());
+		}
+		ImageView logoView = new ImageView(logo);
+		
+		splashPane = new GridPane();
+		splashPane = new GridPane();
+		splashPane.setHgap(20);
+		splashPane.setVgap(20);
+		splashPane.setAlignment(Pos.CENTER);
+		splashPane.setStyle("-fx-background-color: WHITE");
+		
+		splashPane.add(logoView, 1, 1);
+		splashScene = new Scene(splashPane, 400, 300);
+		return splashScene;
 	}
-
-	private void displayMainMenu(Stage stg)
+	
+	private void displaySplashScreen(Stage stg)
 	{
-		stg.setScene(initMainMenu());
+		stg.setScene(initSplashScreen());
 		stg.show();
+	}
+	
+	public void displayStudentMainMenu(Stage stg)
+	{
+		StudentMainMenu smm = new StudentMainMenu();
+		smm.displayStudentMainMenu(stg);
+	}
+	
+	public void displayAdminMenu(Stage stg)
+	{
+		AdminMainMenu amm = new AdminMainMenu();
+		amm.displayAdminMainMenu(stg);
+	}
+	
+	public void displayProfMenu(Stage stg)
+	{
+		
+	}
+	
+	public void displayTAMenu(Stage stg)
+	{
+		
 	}
 
 	public static Stage getStage()
 	{
 		return stgMain;
+	}
+	
+	public static int getUserId()
+	{
+		return userId;
 	}
 
 
@@ -86,21 +148,9 @@ public class MainMenu extends Application
 	{
 		return dm;
 	}
-
-
-	public void resetToMainMenu()
-	{
-		displayMainMenu(getStage());
-	}
-
-	public void processPostMessageButtonPress(ActionEvent event)
-	{
-		viewMessagesUI vmu = new viewMessagesUI();
-		vmu.displayViewMessages(stgMain);
-	}
 	
-	public void processExitButtonPress(ActionEvent event)
+	public static void setUserId(int userIdIn)
 	{
-		stgMain.close();
+		userId = userIdIn;
 	}
 }

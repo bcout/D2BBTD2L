@@ -101,6 +101,7 @@ public class viewMessagesUI
 	public viewMessagesUI()
 	{
 		vmc = new viewMessagesControl();
+		userId = MainMenu.getUserId();
 	}
 
 	private void initViewMessagesComponents()
@@ -143,6 +144,7 @@ public class viewMessagesUI
 		viewMessagesPane.setHgap(10);
 		viewMessagesPane.setVgap(10);
 		viewMessagesPane.setAlignment(Pos.CENTER);
+		viewMessagesPane.setStyle("-fx-background-color: whitesmoke");
 		//viewMessagesPane.setGridLinesVisible(true);
 	}
 
@@ -232,16 +234,17 @@ public class viewMessagesUI
 
 	private void processExitButtonPress(ActionEvent event)
 	{
-		MainMenu mm = new MainMenu();
-		mm.resetToMainMenu();
+		//if student is logged in
+		StudentMainMenu smm = new StudentMainMenu();
+		smm.resetToMainMenu();
 	}
 
 	private void processReceivedMessageChosen(MouseEvent event)
 	{
-		viewMessagesControl vmu = new viewMessagesControl();
 		Message m = messagesTable.getSelectionModel().getSelectedItem();
 		lblTxtMessage.setText(m.getMessageText());
 		lblName.setText(m.getFromAccount().getFullName());
+		
 		//lblDate.setText(string);
 	}
 
