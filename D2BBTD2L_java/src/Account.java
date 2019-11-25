@@ -134,6 +134,7 @@ public class Account
 	 */
 	public Account(int accountId, String username, String password, int accountType, String firstName, String lastName)
 	{
+		this.accountId = accountId;
 		this.username = username;
 		this.password = password;
 		this.accountType = accountType;
