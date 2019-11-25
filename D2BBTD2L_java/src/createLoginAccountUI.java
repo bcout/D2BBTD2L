@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import javafx.scene.text.Text.*; 
 import javafx.scene.paint.*; 
 import javafx.scene.text.*;
+
 /**
  * 
  */
@@ -175,6 +176,8 @@ public class createLoginAccountUI {
 		
 		specific.setVgap(20);
 		specific.setHgap(20);
+
+		specific.setGridLinesVisible(true);
 	
 		root.setVgap(10);
 		root.setConstraints(specific,0,1);
@@ -187,17 +190,17 @@ public class createLoginAccountUI {
 	}
 	
 	public Account makeAccount() {
-		Account ac = new Account();
-		ac.username = unameTF.getText();
-		ac.password = passTF.getText();
-		ac.firstName = fnameTF.getText();
-		ac.lastName = lnameTF.getText();
+		String username = unameTF.getText();
+		String password = passTF.getText();
+		String firstName = fnameTF.getText();
+		String lastName = lnameTF.getText();
+		Account ac = new Account(username,password,firstName,lastName);
 		return ac;
 	}
 	
 	public void submitStudentAccountCreationForm() {
 		Account ac = makeAccount();
-		ac.accountType = 1;
+		ac.setAccountType(1);
 		enterStudentAccountInfo(ac);
 	}
 
@@ -256,7 +259,7 @@ public class createLoginAccountUI {
 	
 	public void submitTAAccountCreationForm() {
 		Account ac = makeAccount();
-		ac.accountType = 3;
+		ac.setAccountType(3);
 		String email = emailTF.getText();
 		enterTAAccountInfo(ac, email);
 	}
@@ -297,7 +300,7 @@ public class createLoginAccountUI {
 	public void submitProfAccountCreationForm() {
 		Account ac = makeAccount();
 		String faculty = facultyTF.getText();
-		ac.accountType = 4;
+		ac.setAccountType(4);
 		enterProfAccountInfo(ac, faculty);
 	}
 
@@ -336,7 +339,7 @@ public class createLoginAccountUI {
 	public void submitAdminAccountCreationForm() {
 		Account ac = makeAccount();
 		String position = positionTF.getText();
-		ac.accountType = 2;
+		ac.setAccountType(2);
 		enterAdminAccountInfo(ac, position);
 	}
 
