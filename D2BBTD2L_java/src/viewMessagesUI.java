@@ -144,6 +144,7 @@ public class viewMessagesUI
 		viewMessagesPane.setHgap(10);
 		viewMessagesPane.setVgap(10);
 		viewMessagesPane.setAlignment(Pos.CENTER);
+		viewMessagesPane.setStyle("-fx-background-color: whitesmoke");
 		//viewMessagesPane.setGridLinesVisible(true);
 	}
 

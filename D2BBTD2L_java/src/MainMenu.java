@@ -28,23 +28,33 @@ public class MainMenu extends Application
 	//-------------------------------------------
 	private Scene splashScene;
 	private GridPane splashPane;
-	private Label message;
 	private Image logo;
 	
-	//Normal javafx variables
+	//javafx variables
 	//-------------------------------------------
 	private static Stage stgMain;
 	private static Scene scMain;
-	private static GridPane mainPane;
-	private static Button btnViewMessages;
-	private static Button btnQuit;
-	private static Label lblWelcome;
+	private GridPane mainPane;
+	private Label lblWelcome;
+	private Image mainMenuLogo;
+	private ImageView mainMenuLogoView;
+	private Image mainMenuIcon;
+	private ImageView mainMenuIconView;
+	
+	//Buttons
+	//-------------------------------------------
+	private Button btnViewMessages;
+	private Button btnQuit;
+	private Button btnMarks;
+	private Button btnNotifications;
+	private Button btnAssignments;
+	private Button btnUploadAssignment;
+	//-------------------------------------------
 
 	public void start(Stage primaryStage)
 	{	
 		stgMain = primaryStage;
 		stgMain.setResizable(false);
-		stgMain.centerOnScreen();
 		dm = new DataManager();
 		
 		Stage temp = new Stage();
@@ -72,7 +82,14 @@ public class MainMenu extends Application
 			public void handle(WorkerStateEvent event)
 			{
 				temp.close();
+				//If logged in user is student
 				displayMainMenu(stgMain);
+				//If logged in user is admin
+				//displayAdminMenu(stgMain);
+				//If logged in user is professor
+				//displayProfMenu(stgMain);
+				//If logged in user is TA
+				//displayTAMenu(stgMain);
 			}
 		});
 		new Thread(sleeper).start();
@@ -85,8 +102,6 @@ public class MainMenu extends Application
 	
 	private Scene initSplashScreen()
 	{
-		message = new Label("D2BBTD2L");
-		message.setPrefWidth(100);
 		
 		try 
 		{
@@ -117,12 +132,45 @@ public class MainMenu extends Application
 	}
 	
 	private void initMainMenuComponents()
-	{		
-		lblWelcome = new Label("Welcome to D2BBTD2L");
-		lblWelcome.setPrefSize(300, 100);
+	{
+		try 
+		{
+			mainMenuLogo = new Image(new FileInputStream("images/D2BBTD2L_Logo.png"));
+			mainMenuIcon = new Image(new FileInputStream("images/logo.png"));
+		} 
+		catch (FileNotFoundException e) 
+		{
+			System.err.println(e.getMessage());
+		}
+		mainMenuLogoView = new ImageView(mainMenuLogo);
+		mainMenuLogoView.setFitHeight(160);
+		mainMenuLogoView.setFitWidth(489);
+		
+		mainMenuIconView = new ImageView(mainMenuIcon);
+		mainMenuIconView.setFitHeight(100);
+		mainMenuIconView.setFitWidth(100);
+		
+		lblWelcome = new Label("Welcome Brennan");
+		lblWelcome.setPrefSize(489, 50);
 		lblWelcome.setStyle("-fx-background-color: WHITE");
 		lblWelcome.setFont(Font.font ("Verdana", 20));
 		lblWelcome.setAlignment(Pos.CENTER);
+		
+		btnAssignments = new Button("Assignments");
+		btnAssignments.setOnAction(this::processAssignmentsButtonPress);
+		btnAssignments.setPrefWidth(120);
+		
+		btnUploadAssignment = new Button("Upload Assignment");
+		btnUploadAssignment.setOnAction(this::processUploadAssignmentsButtonPress);
+		btnUploadAssignment.setPrefWidth(150);
+		
+		btnNotifications = new Button("Notifications");
+		btnNotifications.setOnAction(this::processNotificationsButtonPress);
+		btnNotifications.setPrefWidth(100);
+		
+		btnMarks = new Button("Marks");
+		btnMarks.setOnAction(this::processMarksButtonPress);
+		btnMarks.setPrefWidth(100);
 		
 		btnQuit = new Button("Quit");
 		btnQuit.setOnAction(this::processExitButtonPress);
@@ -136,15 +184,24 @@ public class MainMenu extends Application
 		mainPane.setHgap(20);
 		mainPane.setVgap(20);
 		mainPane.setAlignment(Pos.CENTER);
+		mainPane.setStyle("-fx-background-color: WHITE");
+		//mainPane.setGridLinesVisible(true);
 	}
 
 	private Scene initMainMenu()
 	{
 		initMainMenuComponents();
 
-		mainPane.add(btnQuit, 10, 1);
-		mainPane.add(lblWelcome, 5, 5);
-		mainPane.add(btnViewMessages, 1, 1);
+		//Col, row
+		mainPane.add(btnQuit, 7, 3);
+		mainPane.add(btnMarks, 2, 3);
+		mainPane.add(btnNotifications, 3, 3);
+		mainPane.add(btnAssignments, 4, 3);
+		mainPane.add(btnUploadAssignment, 5, 3);
+		mainPane.add(lblWelcome, 2, 1, 5, 1);
+		mainPane.add(mainMenuIconView, 1, 0);
+		mainPane.add(mainMenuLogoView, 2, 7, 5, 5);
+		mainPane.add(btnViewMessages, 1, 3);
 
 		scMain = new Scene(mainPane, 900, 600);
 		return scMain;
@@ -187,6 +244,26 @@ public class MainMenu extends Application
 	public void processExitButtonPress(ActionEvent event)
 	{
 		stgMain.close();
+	}
+	
+	public void processMarksButtonPress(ActionEvent event)
+	{
+		//display viewMarks
+	}
+	
+	public void processNotificationsButtonPress(ActionEvent event)
+	{
+		//display viewNotifications
+	}
+	
+	public void processUploadAssignmentsButtonPress(ActionEvent event)
+	{
+		//display upload assignment form
+	}
+	
+	public void processAssignmentsButtonPress(ActionEvent event)
+	{
+		//display assignments
 	}
 	
 	public static void setUserId(int userIdIn)
