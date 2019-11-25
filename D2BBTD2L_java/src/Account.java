@@ -1,8 +1,3 @@
-
-/**
- * 
- */
-
 import java.util.Set;
 
 /** 
@@ -142,11 +137,41 @@ public class Account
 		this.lastName = lastName;
 	}
 	
+	public Account(String username, String password, String firstName, String lastName) {
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+	
+	public void setAccountType(int type) {
+		accountType = type;
+	}
+	
 	public int getAccountId()
 	{
 		return accountId;
 	}
 	
+	public String getUsername() {
+		return username;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+	
+	public int getAccountType() {
+		return accountType;
+	}
 	public String getFullName()
 	{
 		return lastName + ", " + firstName;

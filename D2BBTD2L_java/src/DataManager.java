@@ -312,6 +312,7 @@ public class DataManager {
 		return false;
 	}
 
+	
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -494,16 +495,65 @@ public class DataManager {
 		return messages;
 	}
 
+	public int handleCreateAccount(Account ac, int type) {
+		try {
+			String query = "insert into Account (username,password,accountType,firstName,lastName)" + 
+							"values (?,sha1(?),?,?,?)";
+			PreparedStatement pst = connection.prepareStatement(query);
+			pst.setString(1, ac.getUsername());
+			pst.setString(2, ac.getPassword());
+			pst.setInt(3, ac.getAccountType());
+			pst.setString(4, ac.getFirstName());
+			pst.setString(5,ac.getLastName());
+			
+			pst.executeUpdate();
+			
+			String query2 = "select accountId from Account where username = ?;";
+			PreparedStatement getID  = connection.prepareStatement(query2);
+			getID.setString(1, ac.getUsername());
+			ResultSet rs = getID.executeQuery();
+			
+			int id = 0;
+			while(rs.next()) {
+				 id = Integer.parseInt(rs.getString(1));
+			}
+			return id;
+		} catch (SQLException e) {
+			//if insert was unsuccessful then -1 is returned. This is so the UI has something to identify.
+			System.err.println(e.getMessage());
+			return -1;
+		}	
+	}
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void handleCreateStudent() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void handleCreateStudent(StudentAccount st) {
+		try {
+			Statement stmt = connection.createStatement();
+			String query = "insert into StudentAccount (accountId, hasReadNotifications) values ('" + st.accountId + 
+							"', " + st.hasUnreadNotifications + ")";
+			stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+	
+	/** 
+	* <!-- begin-UML-doc -->
+	* <!-- end-UML-doc -->
+	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	*/
+	public void handleCreateTA(TA_Account ta) {
+		try {
+			Statement stmt = connection.createStatement();
+			String query = "insert into TA_Account (accountId,email) values ('" +
+							ta.accountId + "', '" + ta.email + "')";
+			stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		}
 	}
 
 	/** 
@@ -511,11 +561,15 @@ public class DataManager {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void handleCreateTA() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void handleCreateProf(ProfessorAccount profAc) {
+		try {
+			Statement stmt = connection.createStatement();
+			String query = "insert into ProfessorAccount (accountId,faculty) values " +
+							"('" + profAc.accountId + "', '" + profAc.faculty + "')";
+			stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		}
 	}
 
 	/** 
@@ -523,23 +577,15 @@ public class DataManager {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void handleCreateProf() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void handleCreateAdmin() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void handleCreateAdmin(AdminAccount adminAc) {
+		try {
+			Statement stmt = connection.createStatement();
+			String query = "insert into AdminAccount (accountId,position) values " +
+							"('" + adminAc.accountId + "', '" + adminAc.position + "')";
+			stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		}
 	}
 
 	/** 
