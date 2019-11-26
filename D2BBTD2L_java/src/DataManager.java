@@ -550,7 +550,7 @@ public class DataManager {
 			}
 			
 			//execute the sql statement
-			pst.execute();
+			pst.executeUpdate();
 			return true;
 		} catch (SQLException e) {
 			System.err.println(e.toString());
