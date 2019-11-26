@@ -1,19 +1,10 @@
 /**
- * 
- */
-
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author bcouturi
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+ * Control class for the 'createLoginAccount' admin use case.
+ * @author Ben Donkin
+ *
  */
 public class createLoginAccountControl {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	
 	private DataManager dataManager;
 
 	
@@ -30,38 +21,22 @@ public class createLoginAccountControl {
 	public int createAccount(Account acc) {
 		return dataManager.handleCreateAccount(acc, acc.getAccountType());
 	}
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	
 	public void createStudent(StudentAccount studAcc) {
 		dataManager.handleCreateStudent(studAcc);
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	
 	public void createTA(TA_Account TA_Acc) {
 		dataManager.handleCreateTA(TA_Acc);
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	
 	public void createProf(ProfessorAccount profAc) {
 		dataManager.handleCreateProf(profAc);
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	
 	public void createAdmin(AdminAccount adminAc) {
 		dataManager.handleCreateAdmin(adminAc);
 	}
