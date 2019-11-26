@@ -31,6 +31,7 @@ public class StudentMainMenu
 	private Button btnNotifications;
 	private Button btnAssignments;
 	private Button btnUploadAssignment;
+	private Button btnLogout;
 	//-------------------------------------------
 	
 	private void initMainMenuComponents()
@@ -52,7 +53,7 @@ public class StudentMainMenu
 		mainMenuIconView.setFitHeight(100);
 		mainMenuIconView.setFitWidth(100);
 		
-		lblWelcome = new Label("Welcome Brennan");
+		lblWelcome = new Label("Welcome " + MainMenu.getUserAccount().getFullNameInformal());
 		lblWelcome.setPrefSize(489, 50);
 		lblWelcome.setStyle("-fx-background-color: WHITE");
 		lblWelcome.setFont(Font.font ("Verdana", 20));
@@ -62,6 +63,10 @@ public class StudentMainMenu
 		btnAssignments.setOnAction(this::processAssignmentsButtonPress);
 		btnAssignments.setPrefWidth(120);
 		
+		btnLogout = new Button("Logout");
+		btnLogout.setOnAction(this::processLogoutButtonPress);
+		btnLogout.setPrefWidth(70);
+		
 		btnUploadAssignment = new Button("Upload Assignment");
 		btnUploadAssignment.setOnAction(this::processUploadAssignmentsButtonPress);
 		btnUploadAssignment.setPrefWidth(150);
@@ -69,7 +74,7 @@ public class StudentMainMenu
 		
 		btnNotifications = new Button("Notifications");
 		btnNotifications.setOnAction(this::processNotificationsButtonPress);
-		btnNotifications.setPrefWidth(100);
+		btnNotifications.setPrefWidth(120);
 		
 		btnMarks = new Button("Marks");
 		btnMarks.setOnAction(this::processMarksButtonPress);
@@ -77,10 +82,10 @@ public class StudentMainMenu
 		
 		btnQuit = new Button("Quit");
 		btnQuit.setOnAction(this::processExitButtonPress);
-		btnQuit.setPrefWidth(50);
+		btnQuit.setPrefWidth(70);
 		
 		btnViewMessages = new Button("Messages");
-		btnViewMessages.setOnAction(this::processPostMessageButtonPress);
+		btnViewMessages.setOnAction(this::processViewMessageButtonPress);
 		btnViewMessages.setPrefWidth(100);
 
 		mainPane = new GridPane();
@@ -88,7 +93,7 @@ public class StudentMainMenu
 		mainPane.setVgap(20);
 		mainPane.setAlignment(Pos.CENTER);
 		mainPane.setStyle("-fx-background-color: WHITE");
-		mainPane.setGridLinesVisible(true);
+		//mainPane.setGridLinesVisible(true);
 	}
 
 	private Scene initMainMenu()
@@ -96,7 +101,8 @@ public class StudentMainMenu
 		initMainMenuComponents();
 
 		//Col, row
-		mainPane.add(btnQuit, 7, 3);
+		mainPane.add(btnLogout, 6, 0);
+		mainPane.add(btnQuit, 6, 3);
 		mainPane.add(btnMarks, 2, 3);
 		mainPane.add(btnNotifications, 3, 3);
 		mainPane.add(btnAssignments, 4, 3);
@@ -121,7 +127,7 @@ public class StudentMainMenu
 		displayStudentMainMenu(MainMenu.getStage());
 	}
 	
-	public void processPostMessageButtonPress(ActionEvent event)
+	public void processViewMessageButtonPress(ActionEvent event)
 	{
 		viewMessagesUI vmu = new viewMessagesUI();
 		vmu.displayViewMessages(MainMenu.getStage());
@@ -150,5 +156,11 @@ public class StudentMainMenu
 	public void processAssignmentsButtonPress(ActionEvent event)
 	{
 		//display assignments
+	}
+	
+	public void processLogoutButtonPress(ActionEvent event)
+	{
+		//display login
+		//MainMenu.setUser(null);
 	}
 }
