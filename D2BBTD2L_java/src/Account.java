@@ -176,6 +176,11 @@ public class Account
 	{
 		return lastName + ", " + firstName;
 	}
+	
+	public String getFullNameInformal()
+	{
+		return firstName + " " + lastName;
+	}
 
 	/** 
 	* <!-- begin-UML-doc -->
