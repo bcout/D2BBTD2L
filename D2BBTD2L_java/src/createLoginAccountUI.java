@@ -27,21 +27,12 @@ import javafx.scene.paint.*;
 import javafx.scene.text.*;
 
 /**
- * 
- */
-
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author bcouturi
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+ * UI class for the 'createLoginAccount' admin use case.
+ * @author Ben Donkin
+ *
  */
 public class createLoginAccountUI {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	
 	private createLoginAccountControl control;
 
 	private ComboBox typesComboBox;
@@ -97,6 +88,7 @@ public class createLoginAccountUI {
         		  specific.getChildren().removeAll(specific.getChildren());
         		  specific.setConstraints(enterStudent,0,0);
         		  specific.getChildren().add(enterStudent);
+        		  
         	  }
         	  else if (type.equals("Administrator")) {
         		  specific.getChildren().removeAll(specific.getChildren());
@@ -144,12 +136,8 @@ public class createLoginAccountUI {
 		enterTA.setOnAction(e -> submitTAAccountCreationForm());
 		enterProf.setOnAction(e -> submitProfAccountCreationForm());
 		enterAdmin.setOnAction(e -> submitAdminAccountCreationForm());
+		back.setOnAction(e -> processBackButtonPress());
 	}
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	
 	private Scene initScene() {
 		initSceneComponents();
@@ -180,19 +168,30 @@ public class createLoginAccountUI {
 		
 		root = new GridPane();
 		root.setAlignment(Pos.CENTER);
-		root.setConstraints(pane, 0, 0);
-		root.getChildren().add(pane);
+		root.setConstraints(pane, 0, 1);
+		pane.setConstraints(back,2,0);
+		root.getChildren().addAll(pane,back);
 
 		specific = new GridPane();
-		
 		specific.setAlignment(Pos.CENTER);
 		
 		specific.setVgap(20);
 		specific.setHgap(20);
 	
+		ColumnConstraints col1 = new ColumnConstraints();
+		ColumnConstraints col2 = new ColumnConstraints();
+		
+		col1.setPrefWidth(150);
+		col2.setPrefWidth(150);
+		
+		specific.getColumnConstraints().addAll(col1,col2);
+		pane.getColumnConstraints().addAll(col1,col2);
+		
 		root.setVgap(10);
-		root.setConstraints(specific,0,1);
-		root.setConstraints(message, 0, 2, 1, 2);
+		root.setHgap(20);
+		
+		root.setConstraints(specific,0,2);
+		root.setConstraints(message, 0, 3, 1, 2);
 		root.getChildren().add(specific);
 		root.getChildren().add(message);
 		
@@ -222,12 +221,6 @@ public class createLoginAccountUI {
 		enterStudentAccountInfo(ac);
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	
 	public void enterStudentAccountInfo(Account ac) {
 		//create account with generic info
 		control = new createLoginAccountControl();
@@ -244,11 +237,6 @@ public class createLoginAccountUI {
 		}
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	public void displayStudentLoginCreationConfirmation() {
 		message.setText("Student account successfully created");
 	}
@@ -261,11 +249,6 @@ public class createLoginAccountUI {
 		message.setText("Please fill all fields");
 	}
 	
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	public void enterTAAccountInfo(Account ac, String email) {
 		control = new createLoginAccountControl();
 		int id = control.createAccount(ac);
@@ -292,20 +275,10 @@ public class createLoginAccountUI {
 		enterTAAccountInfo(ac, email);
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	public void displayTAAccountCreationConfirmation() {
 		message.setText("TA account successfully created");
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	public void enterProfAccountInfo(Account ac, String faculty) {
 		control = new createLoginAccountControl();
 		int id = control.createAccount(ac);
@@ -321,11 +294,6 @@ public class createLoginAccountUI {
 		}
 	}
 	
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	public void submitProfAccountCreationForm() {
 		Account ac = makeAccount();
 		if (ac == null || facultyTF.getText().equals("")) {
@@ -337,20 +305,10 @@ public class createLoginAccountUI {
 		enterProfAccountInfo(ac, faculty);
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	public void displayProfAccountCreationConfirmation() {
 		message.setText("Professor account successfully created");
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	public void enterAdminAccountInfo(Account ac, String position) {
 		control = new createLoginAccountControl();
 		int id = control.createAccount(ac);
@@ -365,11 +323,6 @@ public class createLoginAccountUI {
 		}
 	}
 	
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	public void submitAdminAccountCreationForm() {
 		Account ac = makeAccount();
 		if (ac == null || positionTF.getText().equals("")) {
@@ -387,11 +340,6 @@ public class createLoginAccountUI {
 		amm.resetToMainMenu();
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	public void displayAdminAccountCreationConfirmation() {
 		message.setText("Administrator account successfully created");
 	}
