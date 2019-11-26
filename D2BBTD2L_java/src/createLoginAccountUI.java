@@ -28,7 +28,7 @@ import javafx.scene.text.*;
 
 /**
  * UI class for the 'createLoginAccount' admin use case.
- * @author Ben
+ * @author Ben Donkin
  *
  */
 public class createLoginAccountUI {
