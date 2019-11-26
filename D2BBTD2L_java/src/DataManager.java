@@ -571,6 +571,7 @@ public class DataManager {
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		}
+<<<<<<< HEAD
 	}
 	
 	/** 
