@@ -1095,5 +1095,38 @@ public class DataManager{
 	  statement.executeUpdate();
   }
 
-}
+    public void postNotification(Notification n, CourseOfferingInfo c)
+    {
+       try
+       {
+          PreparedStatement ps = connection.prepareStatement("INSERT INTO Notifications(title, body, courseOfferingId) VALUES (?, ?, ?)");
+          ps.setString(1, n.title);
+          ps.setString(2, n.body);
+          ps.setInt(3, c.courseOfferingId);
 
+          ps.executeQuery();
+       }
+       catch(SQLException e) {}
+    }
+
+    public Notification[] getNotifications(CourseOfferingInfo c)
+    {
+        ArrayList<Notification> arr = new ArrayList<Notification>();
+
+        try
+        {
+           PreparedStatement ps = connection.prepareStatement("SELECT title, body FROM Notifications WHERE courseOfferingId = ?");
+           ps.setInt(1, c.courseOfferingId);
+           ResultSet rs = ps.executeQuery();
+           while(rs.next())
+           {
+              arr.add(new Notification(rs.getString(1), rs.getString(2)));
+           }
+
+           ps.close();
+        }
+        catch(Exception e) {}
+
+        return arr.toArray(new Notification[0]);
+    }
+}
