@@ -14,7 +14,7 @@ import java.util.*;
  * @author Brennan Couturier
  */
 public class DataManager {
-	
+	//yikes
 	Connection connection = null;
 	
 	
