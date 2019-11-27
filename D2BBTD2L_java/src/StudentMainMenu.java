@@ -140,7 +140,8 @@ public class StudentMainMenu
 	
 	private void processMarksButtonPress(ActionEvent event)
 	{
-		//display viewMarks
+		ViewMarksUI vmu = new ViewMarksUI(MainMenu.getDataManager());
+		vmu.display(MainMenu.getStage());
 	}
 	
 	private void processNotificationsButtonPress(ActionEvent event)
