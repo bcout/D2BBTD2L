@@ -6,10 +6,22 @@ public class loginUI
 	
 	private Account user;
 
+	/*
 	public void displayLoginForm(Stage stg) 
 	{
 		
 	}
+	
+	private Scene initLogin()
+	{
+		
+	}
+	
+	private void initLoginComponents()
+	{
+		
+	}
+	*/
 
 
 	public void enterCredentials() 
