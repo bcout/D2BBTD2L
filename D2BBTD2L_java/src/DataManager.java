@@ -45,16 +45,15 @@ public class DataManager{
 		}
 	}
 	
-<<<<<<< HEAD
+
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	private Quiz quiz;
-=======
 
->>>>>>> login
+
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
@@ -833,7 +832,7 @@ public class DataManager{
 		ps.executeUpdate();
 	}
 
-<<<<<<< HEAD
+
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
@@ -874,9 +873,7 @@ public class DataManager{
 		// end-user-code
 	}
 
-=======
-	
->>>>>>> login
+
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
@@ -975,7 +972,7 @@ public class DataManager{
 		return 0;
 		// end-user-code
 	}
-<<<<<<< HEAD
+
 
 	/** 
 	 * <!-- begin-UML-doc -->
@@ -989,6 +986,5 @@ public class DataManager{
 		// end-user-code
 	}
 }
-=======
-}
->>>>>>> login
+
+

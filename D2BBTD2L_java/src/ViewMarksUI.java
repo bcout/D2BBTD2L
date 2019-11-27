@@ -151,8 +151,7 @@ public class ViewMarksUI
 
 	private void backToMenu(ActionEvent event)
 	{
-		/* TODO! */
-		//MainMenu mm = new MainMenu();
-		//mm.displayStudentMainMenu();
+		
+		MainMenu.displayMainMenu();
 	}
 }
