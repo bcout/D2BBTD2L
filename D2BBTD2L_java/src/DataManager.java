@@ -373,15 +373,32 @@ public class DataManager {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	* @author StephenCole19
 	*/
-	public void requestAssignmentFileassignmentId() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void requestAssignment(int assignmentId) {
+		Assignment assignment = new Assignment();
+    	
+	   	 try {
+	            Statement st = connection.createStatement();
+	
+	            ResultSet rs = st.executeQuery("select * from Assignment where AssignmentID = " + assignmentId + ";" );
+	            
+	            rs.next();
+	            
+	            assignment.assignmentId = rs.getInt(1);
+	            assignment.courseOfferingId = rs.getInt(2);
+	            assignment.assingnmentName = rs.getString(3);
+	            assignment.assignmentFile = rs.getBlob(4);
+	            assignment.dueDate = rs.getDate(5);
+	
+	
+	   	 } catch (SQLException e) {
+	            System.err.println("SQL error: Assignment not found");
+	            e.printStackTrace();
+	   	 }
+	
+	   	
+	   	return assignment;
 	}
 
 	/** 
@@ -397,15 +414,17 @@ public class DataManager {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	* @throws SQLException 
+	* @author StephenCole19
 	*/
-	public void uploadAssignmentSubmissionstudentIdfileassignmentId() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void uploadAssignment(String assName, Blob blobFile, Date dueDate) throws SQLException {
+		PreparedStatement ps = connection.prepareStatement(
+		        "INSERT INTO Assignment (courseOfferingId, assignmentName, assignmentFile, dueDate) VALUES (?,?,?,?)");
+		ps.setInt(1, 3);
+		ps.setString(2, assName);
+		ps.setBlob(3, blobFile);
+		ps.setDate(4, dueDate);
+		ps.executeUpdate();
 	}
 
 	/** 
