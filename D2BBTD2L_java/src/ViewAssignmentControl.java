@@ -1,5 +1,3 @@
-package scole4;
-
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -28,7 +26,7 @@ public class ViewAssignmentControl {
 		try {
 			InputStream is = assignment.assignmentFile.getBinaryStream();
 			ReadableByteChannel rbc = Channels.newChannel(is);
-			FileOutputStream fos = new FileOutputStream(System.getProperty("user.home") + "/Downloads/" + assignment.assingnmentName);
+			FileOutputStream fos = new FileOutputStream(System.getProperty("user.home") + "/Downloads/" + assignment.assignmentName);
 			
 			
 			fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
