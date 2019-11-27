@@ -55,7 +55,7 @@ public class ViewMarksUI
 		btnExit.setPrefWidth(50);
 		pane.add(btnExit, 5, 0);
 
-		Label ttl = new Label("Assignent Marks list");
+		Label ttl = new Label("Assignment Marks list");
 		pane.add(ttl, 0, 0);
 		
 		assSum = new Scene(pane, 900, 600);
@@ -132,7 +132,7 @@ public class ViewMarksUI
 		Label lid = new Label("ID: " + assSub.id);
 		pane.add(lid, 0, 1);
 
-		Label lnm = new Label(assSub.assignment.name);
+		Label lnm = new Label(assSub.assignment.assignmentName);
 		pane.add(lnm, 2, 5);
 
 		Label lgd = new Label(assSub.grade + "%");
@@ -152,7 +152,7 @@ public class ViewMarksUI
 	private void backToMenu(ActionEvent event)
 	{
 		/* TODO! */
-		MainMenu mm = new MainMenu();
-		mm.resetToMainMenu();
+		//MainMenu mm = new MainMenu();
+		//mm.displayStudentMainMenu();
 	}
 }

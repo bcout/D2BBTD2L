@@ -10,7 +10,7 @@ public class Assignment {
 
 	public int assignmentId;
 
-	public String assingnmentName;
+	public String assignmentName;
 
 	public Blob assignmentFile;
 
@@ -26,13 +26,13 @@ public class Assignment {
 	
 	public Assignment(String name, int id, Date due)
 	{
-		this.name = name;
-		this.id = id;
+		assignmentName = name;
+		assignmentId = id;
 		dueDate = due;
 	}
 
 	public String toString()
 	{
-		return "ID: " + id + " | " + name;
+		return "ID: " + assignmentId + " | " + assignmentName;
 	}
 }

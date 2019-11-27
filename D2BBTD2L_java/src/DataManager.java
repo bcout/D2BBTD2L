@@ -1,4 +1,3 @@
-
 /**
  * 
  */
@@ -13,7 +12,7 @@ import java.util.*;
  * <!-- end-UML-doc -->
  * @author Brennan Couturier
  */
-public class DataManager {
+public class DataManager{
 	//yikes
 	Connection connection = null;
 	
@@ -571,7 +570,6 @@ public class DataManager {
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		}
-<<<<<<< HEAD
 	}
 	
 	/** 
@@ -733,7 +731,7 @@ public class DataManager {
 	/** 
 	* @author StephenCole19
 	*/
-	public void requestAssignment(int assignmentId) {
+	public Assignment requestAssignment(int assignmentId) {
 		Assignment assignment = new Assignment();
     	
 	   	 try {
@@ -745,7 +743,7 @@ public class DataManager {
 	            
 	            assignment.assignmentId = rs.getInt(1);
 	            assignment.courseOfferingId = rs.getInt(2);
-	            assignment.assingnmentName = rs.getString(3);
+	            assignment.assignmentName = rs.getString(3);
 	            assignment.assignmentFile = rs.getBlob(4);
 	            assignment.dueDate = rs.getDate(5);
 	
@@ -775,7 +773,7 @@ public class DataManager {
 	* @throws SQLException 
 	* @author StephenCole19
 	*/
-	public void uploadAssignment(String assName, Blob blobFile, Date dueDate) throws SQLException {
+	public void uploadAssignment(String assName, Blob blobFile, java.sql.Date dueDate) throws SQLException {
 		PreparedStatement ps = connection.prepareStatement(
 		        "INSERT INTO Assignment (courseOfferingId, assignmentName, assignmentFile, dueDate) VALUES (?,?,?,?)");
 		ps.setInt(1, 3);
