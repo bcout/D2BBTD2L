@@ -38,17 +38,19 @@ public class ViewAssignmentUI {
 	}
 	
 
-
+	/**
+		Just for CLI
+	**/
 	public void displayAssignmentSelectionForm() {
 		 System.out.println("Enter the AssignementID");
 		 
 		 Scanner scanner = new Scanner(System.in);
-         int assignmentID = Integer.parseInt(scanner.next());
-         scanner.close();
+         	int assignmentID = Integer.parseInt(scanner.next());
+         	scanner.close();
          
-         requestDownloadFile(7);
+         	requestDownloadFile(7);
          
-         System.out.println("wow");
+         	System.out.println("wow");
 	}
 	
 	
