@@ -1,7 +1,11 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,7 +14,15 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class loginUI 
@@ -29,6 +41,7 @@ public class loginUI
 	private GridPane loginPane;
 	private Label lblUsername;
 	private Label lblPassword;
+	private Label lblError;
 	private TextField txtUsername;
 	private PasswordField txtPassword;
 	private Button btnLogin;
@@ -64,7 +77,12 @@ public class loginUI
 		
 		txtPassword = new PasswordField();
 		txtPassword.setPrefWidth(150);
-		txtPassword.setSkin(new PasswordSkin(txtPassword));
+		//txtPassword.setSkin(new PasswordSkin(txtPassword));
+		
+		lblError = new Label("");
+		lblError.setPrefSize(300, 50);
+		lblError.setStyle("-fx-background-color: WHITE");
+		lblError.setAlignment(Pos.CENTER);
 		
 		lblUsername = new Label("Username:");
 		lblUsername.setPrefWidth(80);
@@ -95,8 +113,9 @@ public class loginUI
 		loginPane.add(txtPassword, 3, 2);
 		loginPane.add(lblUsername, 2, 1);
 		loginPane.add(lblPassword, 2, 2);
+		loginPane.add(lblError, 2, 5, 3, 1);
 		loginPane.add(mainMenuIconView, 1, 0);
-		loginPane.add(btnQuit, 6, 0);
+		loginPane.add(btnQuit, 5, 0);
 		loginPane.add(btnLogin, 3, 4);
 		loginPane.setStyle("-fx-background-color: WHITE");
 		//loginPane.setGridLinesVisible(true);
@@ -107,24 +126,103 @@ public class loginUI
 
 	private void enterCredentials() 
 	{
+		username = txtUsername.getText().trim();
+		password = txtPassword.getText().trim();
+		
+		if (username.isEmpty() && password.isEmpty())
+		{
+			displayErrorMessage("Username and Password are required fields");
+		}
+		else if (username.isEmpty())
+		{
+			displayErrorMessage("Username is a required field");
+		}
+		else if (password.isEmpty())
+		{
+			displayErrorMessage("Password is a required field");
+		}
+		else
+		{
+			handleLogin(username, password);
+		}
 		
 	}
-
-	private void displayLoginConfirmation() 
+	
+	private void handleLogin(String username, String password)
 	{
-		Account tempUser = new Account(1, "TestUsername", "TestPassword", 1, "Brennan", "Couturier");
-		MainMenu.setUser(tempUser);
-		MainMenu.displayMainMenu();
+		loginControl lc = new loginControl();
+		try 
+		{
+			loginSuccessful = lc.handleLogin(username, password);
+		} 
+		catch (SQLException e) 
+		{
+			displayErrorMessage(e.getMessage());
+			e.printStackTrace();
+		}
+		
+		if (loginSuccessful)
+		{
+			displayLoginConfirmation("Login successful");
+		}
+		else
+		{
+			displayErrorMessage("Login unsuccessful");
+		}
+	}
+
+	private void displayLoginConfirmation(String message) 
+	{
+		lblError.setText(message);
+		lblError.setBorder(new Border(new BorderStroke(Color.GREEN, BorderStrokeStyle.SOLID, null, new BorderWidths(1))));
+		lblError.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, CornerRadii.EMPTY, null)));
+		
+		Task<Void> sleeper = new Task<Void>()
+		{
+			protected Void call() throws Exception
+			{
+				try
+				{
+					Thread.sleep(1000);
+				}
+				catch(InterruptedException e)
+				{
+					
+				}
+				return null;
+			}
+		};
+		
+		sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>()
+		{
+			public void handle(WorkerStateEvent event)
+			{
+				
+				MainMenu.setUser(loginControl.getAccount());
+				MainMenu.displayMainMenu();
+				
+			}
+		});
+		new Thread(sleeper).start();
+		
+		
 	}
 	
 	private void processLoginButtonPress(ActionEvent event)
 	{
-		displayLoginConfirmation();
+		enterCredentials();
 	}
 	
 	private void processExitButtonPress(ActionEvent event)
 	{
 		MainMenu.getStage().close();
+	}
+	
+	private void displayErrorMessage(String errorMessage)
+	{
+		lblError.setText(errorMessage);
+		lblError.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, null, new BorderWidths(1))));
+		lblError.setBackground(new Background(new BackgroundFill(Color.MISTYROSE, CornerRadii.EMPTY, null)));
 	}
 	
 }

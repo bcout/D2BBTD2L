@@ -81,7 +81,7 @@ public class AdminMainMenu
 		mainPane.setVgap(20);
 		mainPane.setAlignment(Pos.CENTER);
 		mainPane.setStyle("-fx-background-color: WHITE");
-		mainPane.setGridLinesVisible(true);
+		//mainPane.setGridLinesVisible(true);
 	}
 	
 	private Scene initMainMenu()

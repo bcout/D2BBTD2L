@@ -13,7 +13,8 @@ public class PasswordSkin extends TextFieldSkin {
             int n = txt.length();
             StringBuilder passwordBuilder = new StringBuilder(n);
             for (int i = 0; i < n; i++)
-                //passwordBuilder.append("*");
+                passwordBuilder.append("*");
+            	/*
             	if (i % 2 == 0)
             	{
             		passwordBuilder.append("*");
@@ -22,6 +23,7 @@ public class PasswordSkin extends TextFieldSkin {
             	{
             		passwordBuilder.append("~");
             	}
+            	*/
 
             return passwordBuilder.toString();
         } else {

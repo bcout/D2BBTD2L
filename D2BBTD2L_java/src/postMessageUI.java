@@ -190,8 +190,9 @@ public class postMessageUI
 	public void writeMessage()
 	{
 		messageText = txtMessageInput.getText().trim();
-		//from_id = currently logged in user id
+		from_id = MainMenu.getUserAccount().getAccountId();
 		String errorMessage = "";
+		postMessageControl pmc = new postMessageControl();
 
 
 		//Take message String and account ids from gui
@@ -241,6 +242,7 @@ public class postMessageUI
 		lblErrorMessage.setText(" Message successfully sent");
 		lblErrorMessage.setBorder(new Border(new BorderStroke(Color.STEELBLUE, BorderStrokeStyle.SOLID, null, new BorderWidths(1))));
 		lblErrorMessage.setBackground(new Background(new BackgroundFill(Color.LIGHTSTEELBLUE, CornerRadii.EMPTY, null)));
+		MainMenu.displayMainMenu();
 	}
 
 	private void processExitButtonPress(ActionEvent event)
