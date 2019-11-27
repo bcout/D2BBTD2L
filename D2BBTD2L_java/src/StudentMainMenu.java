@@ -144,6 +144,8 @@ public class StudentMainMenu
 		vmu.display(MainMenu.getStage());
 	}
 	
+	
+	
 	private void processNotificationsButtonPress(ActionEvent event)
 	{
 		//display viewNotifications
