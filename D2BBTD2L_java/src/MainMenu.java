@@ -35,8 +35,6 @@ public class MainMenu extends Application
 		stgMain = primaryStage;
 		stgMain.setResizable(false);
 		dm = new DataManager();
-		Account tempUser = new Account(1, "TestUsername", "TestPassword", 1, "Brennan", "Couturier");
-		userAccount = tempUser;
 		
 		Stage temp = new Stage();
 		temp.initStyle(StageStyle.UNDECORATED);
@@ -64,17 +62,8 @@ public class MainMenu extends Application
 			{
 				temp.close();
 				
-				//Login
-				//If login successful call displayMainMenu()
-				//i.e. if userAccount was set to something, login was good
-				if (userAccount != null)
-				{
-					displayMainMenu();
-				}
-				else
-				{
-					System.err.println("account is null");
-				}
+				loginUI lu = new loginUI();
+				lu.displayLoginForm(stgMain);
 				
 			}
 		});
@@ -117,31 +106,31 @@ public class MainMenu extends Application
 		stg.show();
 	}
 	
-	private void displayStudentMainMenu(Stage stg)
+	private static void displayStudentMainMenu(Stage stg)
 	{
 		StudentMainMenu smm = new StudentMainMenu();
 		smm.displayStudentMainMenu(stg);
 	}
 	
-	private void displayAdminMenu(Stage stg)
+	private static void displayAdminMenu(Stage stg)
 	{
 		AdminMainMenu amm = new AdminMainMenu();
 		amm.displayAdminMainMenu(stg);
 	}
 	
-	private void displayProfMainMenu(Stage stg)
+	private static void displayProfMainMenu(Stage stg)
 	{
 		ProfMainMenu pmm = new ProfMainMenu();
 		pmm.displayProfMainMenu(stg);
 	}
 	
-	private void displayTAMainMenu(Stage stg)
+	private static void displayTAMainMenu(Stage stg)
 	{
 		TAMainMenu tmm = new TAMainMenu();
 		tmm.displayTAMainMenu(stg);
 	}
 	
-	public void displayMainMenu()
+	public static void displayMainMenu()
 	{
 		if(userAccount.getAccountType() == 1)
 		{
@@ -185,5 +174,12 @@ public class MainMenu extends Application
 	public static void setUser(Account user)
 	{
 		userAccount = user;
+	}
+	
+	public static void processLogout()
+	{
+		loginUI lu = new loginUI();
+		lu.displayLoginForm(stgMain);
+		userAccount = null;
 	}
 }

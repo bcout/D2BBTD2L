@@ -117,35 +117,34 @@ public class ProfMainMenu
 		displayProfMainMenu(MainMenu.getStage());
 	}
 	
-	public void processQuitButtonPress(ActionEvent event)
+	private void processQuitButtonPress(ActionEvent event)
 	{
 		MainMenu.getStage().close();
 	}
 	
-	public void processViewMessageButtonPress(ActionEvent event)
+	private void processViewMessageButtonPress(ActionEvent event)
 	{
 		viewMessagesUI vmu = new viewMessagesUI();
 		vmu.displayViewMessages(MainMenu.getStage());
 	}
 	
-	public void processNotificationsButtonPress(ActionEvent event)
+	private void processNotificationsButtonPress(ActionEvent event)
 	{
 		//display viewNotifications
 	}
 	
-	public void processPostNotificationButtonPress(ActionEvent event)
+	private void processPostNotificationButtonPress(ActionEvent event)
 	{
 		
 	}
 	
-	public void processAssignmentsButtonPress(ActionEvent event)
+	private void processAssignmentsButtonPress(ActionEvent event)
 	{
 		//display assignments
 	}
 	
-	public void processLogoutButtonPress(ActionEvent event)
+	private void processLogoutButtonPress(ActionEvent event)
 	{
-		//display login
-		//MainMenu.setUser(null);
+		MainMenu.processLogout();
 	}
 }

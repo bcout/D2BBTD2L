@@ -81,7 +81,7 @@ public class AdminMainMenu
 		mainPane.setVgap(20);
 		mainPane.setAlignment(Pos.CENTER);
 		mainPane.setStyle("-fx-background-color: WHITE");
-		mainPane.setGridLinesVisible(true);
+		//mainPane.setGridLinesVisible(true);
 	}
 	
 	private Scene initMainMenu()
@@ -107,7 +107,7 @@ public class AdminMainMenu
 		stg.show();
 	}
 	
-	public void processCreateAccountButtonPress(ActionEvent event)
+	private void processCreateAccountButtonPress(ActionEvent event)
 	{
 		createLoginAccountUI clau = new createLoginAccountUI();
 		clau.displayCreateLoginAccount(MainMenu.getStage());
@@ -118,23 +118,22 @@ public class AdminMainMenu
 		displayAdminMainMenu(MainMenu.getStage());
 	}
 	
-	public void processAddCourseButtonPress(ActionEvent event)
+	private void processAddCourseButtonPress(ActionEvent event)
 	{
 		//display addCourseOfferingInfo
 	}
 	
-	public void processAddStudentButtonPress(ActionEvent event)
+	private void processAddStudentButtonPress(ActionEvent event)
 	{
 		//display addStudentCourseRegistrationInfo
 	}
 	
-	public void processLogoutButtonPress(ActionEvent event)
+	private void processLogoutButtonPress(ActionEvent event)
 	{
-		//display login
-		//MainMenu.setUser(null);
+		MainMenu.processLogout();
 	}
 	
-	public void processExitButtonPress(ActionEvent event)
+	private void processExitButtonPress(ActionEvent event)
 	{
 		MainMenu.getStage().close();
 	}

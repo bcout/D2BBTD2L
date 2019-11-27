@@ -127,40 +127,39 @@ public class StudentMainMenu
 		displayStudentMainMenu(MainMenu.getStage());
 	}
 	
-	public void processViewMessageButtonPress(ActionEvent event)
+	private void processViewMessageButtonPress(ActionEvent event)
 	{
 		viewMessagesUI vmu = new viewMessagesUI();
 		vmu.displayViewMessages(MainMenu.getStage());
 	}
 	
-	public void processExitButtonPress(ActionEvent event)
+	private void processExitButtonPress(ActionEvent event)
 	{
 		MainMenu.getStage().close();
 	}
 	
-	public void processMarksButtonPress(ActionEvent event)
+	private void processMarksButtonPress(ActionEvent event)
 	{
 		//display viewMarks
 	}
 	
-	public void processNotificationsButtonPress(ActionEvent event)
+	private void processNotificationsButtonPress(ActionEvent event)
 	{
 		//display viewNotifications
 	}
 	
-	public void processUploadAssignmentsButtonPress(ActionEvent event)
+	private void processUploadAssignmentsButtonPress(ActionEvent event)
 	{
 		//display upload assignment form
 	}
 	
-	public void processAssignmentsButtonPress(ActionEvent event)
+	private void processAssignmentsButtonPress(ActionEvent event)
 	{
 		//display assignments
 	}
 	
-	public void processLogoutButtonPress(ActionEvent event)
+	private void processLogoutButtonPress(ActionEvent event)
 	{
-		//display login
-		//MainMenu.setUser(null);
+		MainMenu.processLogout();
 	}
 }
