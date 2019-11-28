@@ -60,8 +60,7 @@ CREATE TABLE CourseInfo (
 create table CourseRegistration (
   accountId int,
   courseOfferingId int, 
-  primary key(accountId),
-  primary key(courseOfferingId),
+  primary key(accountId,courseOfferingId),
   foreign key(accountId) references Account(accountId),
   foreign key(courseOfferingId) references CourseOfferingInfo(courseOfferingId)
 );
