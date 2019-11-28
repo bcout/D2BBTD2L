@@ -80,6 +80,7 @@ public class ProfMainMenu
 		btnPostNotification.setOnAction(this::processPostNotificationButtonPress);
 		btnPostNotification.setPrefWidth(130);
 		
+		
 		btnNotifications = new Button("Notifications");
 		btnNotifications.setOnAction(this::processNotificationsButtonPress);
 		btnNotifications.setPrefWidth(100);
