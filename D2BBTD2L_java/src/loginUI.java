@@ -1,3 +1,5 @@
+
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
@@ -25,11 +27,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/**
+ * This class displays the login and handles IO
+ * @author Brennan Couturier, 3638808
+ */
 public class loginUI 
 {
 	private Boolean loginSuccessful;
-	
-	private Account user;
+
 	private String username;
 	private String password;
 	

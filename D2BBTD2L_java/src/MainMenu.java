@@ -1,3 +1,5 @@
+
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -13,6 +15,11 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/**
+ * This class starts the application and loads the login screen. Displays whatever main menu corresponds to the logged in user.
+ * @author Brennan Couturier, 3638808
+ * 
+ */
 public class MainMenu extends Application
 {
 	//Non-javafx variables

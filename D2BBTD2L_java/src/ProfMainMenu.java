@@ -13,6 +13,11 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/**
+ * This class displays a main menu for the admin user
+ * @author Brennan Couturier, 3638808
+ *
+ */
 public class ProfMainMenu 
 {
 	private Scene scMain;

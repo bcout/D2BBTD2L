@@ -27,10 +27,7 @@ public class postMessageUI
 
 	//Non javafx variables
 	//-------------------------------------------------------------------------------
-	/**
-	 * This is a reference to the postMessageControl to call the postMessage method
-	 */
-	private postMessageControl pmc;
+
 
 	/**
 	 * This is a boolean to check if the post was successful
@@ -203,6 +200,11 @@ public class postMessageUI
 		{
 			errorMessage = errorMessage + " Message is a required field.";
 		}
+		else if (messageText.length() > 65000)
+		{
+			errorMessage = errorMessage + " Message is way too long.";
+		}
+		
 		if (cbAvailableRecipients.getValue() == null)
 		{
 			errorMessage = errorMessage + " Please select a recipient.";
@@ -213,7 +215,7 @@ public class postMessageUI
 			to_id = cbAvailableRecipients.getValue().getAccountId();
 		}
 
-		if (!errorMessage.isEmpty())
+		if (!errorMessage.isEmpty() && messageText.length() < 2500)
 		{
 			displayErrorMessage(errorMessage);
 		}

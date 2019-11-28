@@ -1,7 +1,11 @@
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
+/**
+ * This class handles all the interaction between the datamanager and the view messages UI.
+ * @author Brennan Couturier, 3638808
+ *
+ */
 public class viewMessagesControl
 {
 
