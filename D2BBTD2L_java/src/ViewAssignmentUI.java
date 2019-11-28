@@ -32,8 +32,8 @@ public class ViewAssignmentUI {
 	private Stage primaryStage;
 	private ViewAssignmentControl control;
 	
-	public ViewAssignmentUI(ViewAssignmentControl control) {
-		this.control = control;
+	public ViewAssignmentUI() {
+		control = new ViewAssignmentControl(MainMenu.getDataManager());
 	}
 	
 
@@ -58,8 +58,9 @@ public class ViewAssignmentUI {
 		
 	}
 	
-	public void displayPostAssignmentForm() { 
-		initPostAssignment();
+	public void displayPostAssignmentForm(Stage stg) { 
+		stg.setScene(initPostAssignment());
+		stg.show();
 		
 	}
 	
@@ -79,17 +80,27 @@ public class ViewAssignmentUI {
 	
 	
 	public void processExitButtonPress(ActionEvent Event) {
-		primaryStage.close();
+		if (MainMenu.getUserAccount().getAccountType() == 1)
+		{
+			StudentMainMenu smm = new StudentMainMenu();
+			smm.resetToMainMenu();
+		}
+		else if (MainMenu.getUserAccount().getAccountType() == 3)
+		{
+			TAMainMenu tmm = new TAMainMenu();
+			tmm.resetToMainMenu();
+		}
+		else if (MainMenu.getUserAccount().getAccountType() == 2)
+		{
+			ProfMainMenu pmm = new ProfMainMenu();
+			pmm.resetToMainMenu();
+		}
 	}
 	
 	public void processDownButtonPress(ActionEvent Event) {
 		int assignID = Integer.parseInt(assID.getText());
 		
-		DataManager dm = new DataManager();
-		ViewAssignmentControl control = new ViewAssignmentControl(dm);
-		ViewAssignmentUI ui = new ViewAssignmentUI(control);
-		
-		ui.requestDownloadFile(assignID);
+		requestDownloadFile(assignID);
 		
 		
 	}

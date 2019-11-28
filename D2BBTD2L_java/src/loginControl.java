@@ -1,54 +1,47 @@
+import java.sql.SQLException;
+
 /**
- * 
+ * This class handles the interaction between the login UI and the datamanager
+ * @author Brennan Couturier, 3638808	
+ *
  */
-
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author bcouturi
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
-public class loginControl {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private DataManager dataManager;
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void getAssignmentSpecificationsassignmentId() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+public class loginControl 
+{
+	private DataManager dm;
+	private static Account a;
+	private boolean loginSuccessful;
+	
+	public loginControl()
+	{
+		dm = MainMenu.getDataManager();
+	}
+	
+	public boolean handleLogin(String username, String password) throws SQLException
+	{
+		try 
+		{
+			a = dm.getAccountFromLoginInfo(username, password);
+		} 
+		catch (SQLException e) 
+		{
+			throw e;
+		}
+		if (a == null)
+		{
+			loginSuccessful = false; //No user with that username found
+		}
+		else
+		{
+			loginSuccessful = true;
+		}
+		
+		return loginSuccessful;
+		
+	}
+	
+	public static Account getAccount()
+	{
+		return a;
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void getStudentId() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void checkCredentials() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
 }

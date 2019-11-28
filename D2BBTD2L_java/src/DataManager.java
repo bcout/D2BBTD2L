@@ -51,6 +51,7 @@ public class DataManager{
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	private Quiz quiz;
+
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
@@ -173,6 +174,52 @@ public class DataManager{
 	 */
 	private StudentAccount studentAccount;
 	
+	public Account getAccountFromLoginInfo(String usernameIn, String passwordIn) throws SQLException
+	{
+		PreparedStatement getAccountFromUsernamePs;
+		String getAccountFromUsernameQuery = "select * from Account where username = ? and password = sha1(?);";
+		
+		Account a = null;
+		
+		try
+		{
+			getAccountFromUsernamePs = connection.prepareStatement(getAccountFromUsernameQuery);
+			getAccountFromUsernamePs.setString(1, usernameIn);
+			getAccountFromUsernamePs.setString(2, passwordIn);
+			ResultSet rs = getAccountFromUsernamePs.executeQuery();
+			
+			if (rs.next())
+			{
+				int id = rs.getInt(1);
+				String username = rs.getString(2);
+				String password = rs.getString(3);
+				int accountType = rs.getInt(4);
+				String firstName = rs.getString(5);
+				String lastName = rs.getString(6);
+				
+				a = new Account(id, username, password, accountType, firstName, lastName);
+			}
+			
+		}
+		catch (SQLException e)
+		{
+			throw e;
+		}
+		
+		if (getAccountFromUsernamePs != null)
+		{
+			try
+			{
+				getAccountFromUsernamePs.close();
+			}
+			catch (SQLException e)
+			{
+				throw e;
+			}
+		}
+		return a;
+	}
+	
 	public Account getAccountFromId(int idIn) throws SQLException
 	{
 		PreparedStatement getAccountFromIdPs;
@@ -186,7 +233,7 @@ public class DataManager{
 			getAccountFromIdPs.setInt(1, idIn);
 			ResultSet rs = getAccountFromIdPs.executeQuery();
 			
-			if (rs != null)
+			if (rs.next())
 			{
 				int id = rs.getInt(1);
 				String username = rs.getString(2);
@@ -279,7 +326,7 @@ public class DataManager{
 			checkAccountExistsPs.setInt(1, accountId);
 			ResultSet rs = checkAccountExistsPs.executeQuery();
 			
-			if(rs != null)
+			if(rs.next())
 			{
 				rs.last();
 				rowNum = rs.getRow();
@@ -427,7 +474,7 @@ public class DataManager{
 			catch (SQLException e)
 			{
 				throw e;
-			}
+			} 
 		}
 		
 		return messages;
@@ -490,7 +537,7 @@ public class DataManager{
 				throw e;
 			}
 		}
-				
+		
 		return messages;
 	}
 
@@ -783,6 +830,7 @@ public class DataManager{
 		ps.executeUpdate();
 	}
 
+
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
@@ -822,6 +870,7 @@ public class DataManager{
 		return null;
 		// end-user-code
 	}
+
 
 	/** 
 	 * <!-- begin-UML-doc -->
@@ -921,16 +970,5 @@ public class DataManager{
 		return 0;
 		// end-user-code
 	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void checkLoginCredentials() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
 }
+
