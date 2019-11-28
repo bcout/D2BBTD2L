@@ -13,7 +13,7 @@ public class viewMessagesControl
 	}
 
 
-	public ArrayList<Message> getMessagesReceived(int userId) throws SQLException
+	public Message[] getMessagesReceived(int userId)
 	{
 		ArrayList<Message> messages = new ArrayList<Message>();
 		try
@@ -22,13 +22,13 @@ public class viewMessagesControl
 		}
 		catch (SQLException e)
 		{
-			throw e;
+			
 		}
 
-		return messages;
+		return messages.toArray(new Message[0]);
 	}
 
-	public ArrayList<Message> getMessagesSent(int userId) throws SQLException
+	public Message[] getMessagesSent(int userId) 
 	{
 		ArrayList<Message> messages = new ArrayList<Message>();
 		try
@@ -37,9 +37,9 @@ public class viewMessagesControl
 		}
 		catch (SQLException e)
 		{
-			throw e;
+			
 		}
 
-		return messages;
+		return messages.toArray(new Message[0]);
 	}
 }
