@@ -83,8 +83,8 @@ public class PostAssignmentUI{
 	
 	
 	public void processExitButtonPress(ActionEvent Event) {
-		StudentMainMenu smm = new StudentMainMenu();
-		smm.resetToMainMenu();
+		ProfMainMenu pmm = new ProfMainMenu();
+		pmm.resetToMainMenu();
 	}
 	
 	public void processSubmitButtonPress(ActionEvent Event) {
