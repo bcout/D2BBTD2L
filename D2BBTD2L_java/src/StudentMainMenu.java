@@ -158,8 +158,7 @@ public class StudentMainMenu
 	
 	private void processUploadAssignmentsButtonPress(ActionEvent event)
 	{
-		PostAssignmentUI pau = new PostAssignmentUI();
-		pau.displayPostAssignmentForm(MainMenu.getStage());
+		//
 	}
 	
 	private void processAssignmentsButtonPress(ActionEvent event)
