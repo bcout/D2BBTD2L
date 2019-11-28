@@ -13,6 +13,11 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/**
+ * This class displays a main menu for the admin user
+ * @author Brennan Couturier, 3638808
+ *
+ */
 public class ProfMainMenu 
 {
 	private Scene scMain;
@@ -29,6 +34,7 @@ public class ProfMainMenu
 	private Button btnAssignments;
 	private Button btnNotifications;
 	private Button btnPostNotification;
+	private Button btnPostAssignment;
 	
 	private void initMainMenuComponents()
 	{
@@ -59,13 +65,17 @@ public class ProfMainMenu
 		btnQuit.setOnAction(this::processQuitButtonPress);
 		btnQuit.setPrefWidth(70);
 		
+		btnPostAssignment = new Button("New Assignment");
+		btnPostAssignment.setOnAction(this::processNewAssignmentButtonPress);
+		btnPostAssignment.setPrefWidth(150);
+		
 		btnLogout = new Button("Logout");
 		btnLogout.setOnAction(this::processLogoutButtonPress);
 		btnLogout.setPrefWidth(70);
 		
 		btnViewMessages = new Button("Messages");
 		btnViewMessages.setOnAction(this::processViewMessageButtonPress);
-		btnViewMessages.setPrefWidth(90);
+		btnViewMessages.setPrefWidth(100);
 		
 		btnAssignments = new Button("Assignments");
 		btnAssignments.setOnAction(this::processAssignmentsButtonPress);
@@ -74,6 +84,7 @@ public class ProfMainMenu
 		btnPostNotification = new Button("New Notification");
 		btnPostNotification.setOnAction(this::processPostNotificationButtonPress);
 		btnPostNotification.setPrefWidth(130);
+		
 		
 		btnNotifications = new Button("Notifications");
 		btnNotifications.setOnAction(this::processNotificationsButtonPress);
@@ -92,12 +103,13 @@ public class ProfMainMenu
 		initMainMenuComponents();
 
 		//Col, row
+		mainPane.add(btnPostAssignment, 5, 3);
 		mainPane.add(btnLogout, 7, 0);
 		mainPane.add(btnQuit, 7, 3);
-		mainPane.add(btnViewMessages, 2, 3);
-		mainPane.add(btnPostNotification, 4, 3);
-		mainPane.add(btnNotifications, 3, 3);
-		mainPane.add(btnAssignments, 5, 3);
+		mainPane.add(btnViewMessages, 1, 3);
+		mainPane.add(btnPostNotification, 3, 3);
+		mainPane.add(btnNotifications, 2, 3);
+		mainPane.add(btnAssignments, 4, 3);
 		mainPane.add(lblWelcome, 2, 1, 5, 1);
 		mainPane.add(mainMenuIconView, 1, 0);
 		mainPane.add(mainMenuLogoView, 2, 7, 5, 5);
@@ -141,6 +153,12 @@ public class ProfMainMenu
 	private void processAssignmentsButtonPress(ActionEvent event)
 	{
 		//display assignments
+	}
+	
+	private void processNewAssignmentButtonPress(ActionEvent event)
+	{
+		PostAssignmentUI pau = new PostAssignmentUI();
+		pau.displayPostAssignmentForm(MainMenu.getStage());
 	}
 	
 	private void processLogoutButtonPress(ActionEvent event)

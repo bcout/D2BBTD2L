@@ -1,5 +1,10 @@
 import java.sql.SQLException;
 
+/**
+ * This class handles the interaction between the login UI and the datamanager
+ * @author Brennan Couturier, 3638808	
+ *
+ */
 public class loginControl 
 {
 	private DataManager dm;

@@ -13,6 +13,11 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/**
+ * This class displays a main menu for the student user
+ * @author Brennan Couturier, 3638808
+ *
+ */
 public class StudentMainMenu 
 {
 	private Scene scMain;
@@ -144,6 +149,8 @@ public class StudentMainMenu
 		vmu.display(MainMenu.getStage());
 	}
 	
+	
+	
 	private void processNotificationsButtonPress(ActionEvent event)
 	{
 		//display viewNotifications
@@ -151,12 +158,13 @@ public class StudentMainMenu
 	
 	private void processUploadAssignmentsButtonPress(ActionEvent event)
 	{
-		//display upload assignment form
+		//
 	}
 	
 	private void processAssignmentsButtonPress(ActionEvent event)
 	{
-		//display assignments
+		ViewAssignmentUI vau = new ViewAssignmentUI();
+		vau.displayPostAssignmentForm(MainMenu.getStage());
 	}
 	
 	private void processLogoutButtonPress(ActionEvent event)

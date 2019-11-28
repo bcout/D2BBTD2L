@@ -41,8 +41,8 @@ public class PostAssignmentUI{
 	
 	private PostAssignmentControl control;
 	
-	public PostAssignmentUI(PostAssignmentControl control) {
-		this.control = control;
+	public PostAssignmentUI() {
+		control = new PostAssignmentControl(MainMenu.getDataManager());
 	}
 	
 	/**
@@ -55,8 +55,9 @@ public class PostAssignmentUI{
 	    
 	}
 	
-	public void displayPostAssignmentForm() { 
-		initPostAssignment();
+	public void displayPostAssignmentForm(Stage stg) { 
+		stg.setScene(initPostAssignment());
+		stg.show();
 		
 	}
 	
@@ -82,18 +83,16 @@ public class PostAssignmentUI{
 	
 	
 	public void processExitButtonPress(ActionEvent Event) {
-		primaryStage.close();
+		ProfMainMenu pmm = new ProfMainMenu();
+		pmm.resetToMainMenu();
 	}
 	
 	public void processSubmitButtonPress(ActionEvent Event) {
-		DataManager dm = new DataManager();
-		PostAssignmentControl control = new PostAssignmentControl(dm);
-		PostAssignmentUI ui = new PostAssignmentUI(control);
 		
 		String assName = assignName.getText();
 		java.util.Date dueDateIn = java.sql.Date.valueOf(date.getValue());
 		
-		boolean wow = ui.requestPostAssignment(assName, selected, dueDateIn);
+		boolean wow = requestPostAssignment(assName, selected, dueDateIn);
 		
 		if(wow == true) {
 			succ.setText("Success!");

@@ -13,6 +13,11 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/**
+ * This class displays the main menu for the TA user
+ * @author Brennan Couturier, 3638808
+ *
+ */
 public class TAMainMenu 
 {
 	private Scene scMain;

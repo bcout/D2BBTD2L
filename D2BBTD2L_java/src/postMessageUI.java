@@ -3,7 +3,10 @@
 
 import java.sql.SQLException;
 
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,10 +27,7 @@ public class postMessageUI
 
 	//Non javafx variables
 	//-------------------------------------------------------------------------------
-	/**
-	 * This is a reference to the postMessageControl to call the postMessage method
-	 */
-	private postMessageControl pmc;
+
 
 	/**
 	 * This is a boolean to check if the post was successful
@@ -200,6 +200,11 @@ public class postMessageUI
 		{
 			errorMessage = errorMessage + " Message is a required field.";
 		}
+		else if (messageText.length() > 65000)
+		{
+			errorMessage = errorMessage + " Message is way too long.";
+		}
+		
 		if (cbAvailableRecipients.getValue() == null)
 		{
 			errorMessage = errorMessage + " Please select a recipient.";
@@ -210,7 +215,7 @@ public class postMessageUI
 			to_id = cbAvailableRecipients.getValue().getAccountId();
 		}
 
-		if (!errorMessage.isEmpty())
+		if (!errorMessage.isEmpty() && messageText.length() < 2500)
 		{
 			displayErrorMessage(errorMessage);
 		}
@@ -242,7 +247,34 @@ public class postMessageUI
 		lblErrorMessage.setText(" Message successfully sent");
 		lblErrorMessage.setBorder(new Border(new BorderStroke(Color.STEELBLUE, BorderStrokeStyle.SOLID, null, new BorderWidths(1))));
 		lblErrorMessage.setBackground(new Background(new BackgroundFill(Color.LIGHTSTEELBLUE, CornerRadii.EMPTY, null)));
-		MainMenu.displayMainMenu();
+		
+		Task<Void> sleeper = new Task<Void>()
+		{
+			protected Void call() throws Exception
+			{
+				try
+				{
+					Thread.sleep(2500);
+				}
+				catch(InterruptedException e)
+				{
+					
+				}
+				return null;
+			}
+		};
+		
+		sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>()
+		{
+			public void handle(WorkerStateEvent event)
+			{
+				viewMessagesUI vmu = new viewMessagesUI();
+				vmu.displayViewMessages(MainMenu.getStage());
+			}
+		});
+		new Thread(sleeper).start();
+		
+		
 	}
 
 	private void processExitButtonPress(ActionEvent event)

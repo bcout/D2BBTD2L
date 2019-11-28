@@ -1,8 +1,13 @@
 
+
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.skin.TextFieldSkin;
 
+/**
+ * This class allows us to customize how the login's password field hides the input.
+ * @author Brennan Couturier, 3638808
+ */
 public class PasswordSkin extends TextFieldSkin {
     public PasswordSkin(TextField textField) {
         super(textField);

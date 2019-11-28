@@ -37,10 +37,6 @@ public class Message
 	 */
 	private Timestamp timeSent;
 	
-	private final SimpleStringProperty receivedDescription;
-	
-	private final SimpleStringProperty sentDescription;
-	
 	private DataManager dm;
 	
 	private Account fromAccount;
@@ -67,9 +63,6 @@ public class Message
 		{
 			System.err.println(e.getMessage());
 		}
-		
-		receivedDescription = new SimpleStringProperty(fromAccount.getFullName() + "\t" + timeSent + "\n" + messageText);
-		sentDescription = new SimpleStringProperty(toAccount.getFullName() + "\t" + timeSent + "\n" + messageText);
 		
 		this.messageId = messageId;
 		this.timeSent = timeSent;
@@ -171,13 +164,43 @@ public class Message
 		return timeSent;
 	}
 	
+	public static boolean wasReceived(Message m)
+	{
+		if (m.getFromAccountId() == MainMenu.getUserAccount().getAccountId())
+		{
+			return false;
+		}
+		
+		return true;
+	}
+	
 	public String getReceivedDescription()
 	{
-		return receivedDescription.get();
+		String result = "";
+		
+		if (messageText.length() >= 25)
+		{
+			result = fromAccount.getFullNameInformal() + "\n" + timeSent.getMonth() + "/"+ timeSent.getDate() + "/" + (timeSent.getYear() + 1900) + "\n" + messageText.substring(0, 22) + "...";
+		}
+		else
+		{
+			result = fromAccount.getFullNameInformal() + "\n" + timeSent.getMonth() + "/"+ timeSent.getDate() + "/" + (timeSent.getYear() + 1900) + "\n" + messageText;
+		}
+		return result;
 	}
 	
 	public String getSentDescription()
 	{
-		return sentDescription.get();
+		String result = "";
+		
+		if (messageText.length() >= 25)
+		{
+			result = toAccount.getFullNameInformal() + "\n" + timeSent.getMonth() + "/"+ timeSent.getDate() + "/" + (timeSent.getYear() + 1900) + "\n" + messageText.substring(0, 22) + "...";
+		}
+		else
+		{
+			result = toAccount.getFullNameInformal() + "\n" + timeSent.getMonth() + "/"+ timeSent.getDate() + "/" + (timeSent.getYear() + 1900) + "\n" + messageText;
+		}
+		return result;
 	}
 }

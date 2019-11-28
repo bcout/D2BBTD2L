@@ -476,7 +476,7 @@ public class DataManager{
 			catch (SQLException e)
 			{
 				throw e;
-			}
+			} 
 		}
 		
 		return messages;
@@ -539,7 +539,7 @@ public class DataManager{
 				throw e;
 			}
 		}
-				
+		
 		return messages;
 	}
 
