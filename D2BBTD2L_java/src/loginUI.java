@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
@@ -11,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -60,15 +63,18 @@ public class loginUI
 	
 	private void initLoginComponents()
 	{
+		
 		try 
 		{
 			mainMenuLogo = new Image(new FileInputStream("images/D2BBTD2L_Logo.png"));
 			mainMenuIcon = new Image(new FileInputStream("images/logo.png"));
-		} 
+			
+		} 		
 		catch (FileNotFoundException e) 
 		{
 			System.err.println(e.getMessage());
 		}
+		
 		mainMenuLogoView = new ImageView(mainMenuLogo);
 		mainMenuLogoView.setFitHeight(160);
 		mainMenuLogoView.setFitWidth(489);
@@ -86,7 +92,6 @@ public class loginUI
 		
 		lblError = new Label("");
 		lblError.setPrefSize(300, 50);
-		lblError.setStyle("-fx-background-color: WHITE");
 		lblError.setAlignment(Pos.CENTER);
 		
 		lblUsername = new Label("Username:");
@@ -122,10 +127,12 @@ public class loginUI
 		loginPane.add(mainMenuIconView, 1, 0);
 		loginPane.add(btnQuit, 5, 0);
 		loginPane.add(btnLogin, 3, 4);
-		loginPane.setStyle("-fx-background-color: WHITE");
 		//loginPane.setGridLinesVisible(true);
 		
 		scLogin = new Scene(loginPane, 900, 600);
+		//scLogin.getStylesheets().add("darkMode.css");
+		scLogin.getStylesheets().add("lightMode.css");
+		
 		return scLogin;
 	}
 
@@ -179,8 +186,12 @@ public class loginUI
 	private void displayLoginConfirmation(String message) 
 	{
 		lblError.setText(message);
+		
+		
 		lblError.setBorder(new Border(new BorderStroke(Color.GREEN, BorderStrokeStyle.SOLID, null, new BorderWidths(1))));
 		lblError.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, CornerRadii.EMPTY, null)));
+		
+		
 		
 		Task<Void> sleeper = new Task<Void>()
 		{
@@ -226,8 +237,12 @@ public class loginUI
 	private void displayErrorMessage(String errorMessage)
 	{
 		lblError.setText(errorMessage);
+		
+		
 		lblError.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, null, new BorderWidths(1))));
 		lblError.setBackground(new Background(new BackgroundFill(Color.MISTYROSE, CornerRadii.EMPTY, null)));
+		
+		
 	}
 	
 }
