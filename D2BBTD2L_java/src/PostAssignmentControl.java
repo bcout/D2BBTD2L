@@ -21,7 +21,7 @@ public class PostAssignmentControl {
 		this.dataManager = dm;
 	}
 	
-	public boolean postAssignment(String assName, File pdfFile, java.util.Date dueDate) {
+	public boolean postAssignment(String courseNumber, String assName, File pdfFile, java.util.Date dueDate) {
 		boolean success = true;
 		
 		Blob blobFile = null;
@@ -35,7 +35,7 @@ public class PostAssignmentControl {
 			
 		    java.sql.Date sqlDate =  new java.sql.Date(dueDate.getTime());
 			
-			dataManager.uploadAssignment(assName, blobFile, sqlDate);
+			dataManager.uploadAssignment(courseNumber, assName, blobFile, sqlDate);
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -52,5 +52,9 @@ public class PostAssignmentControl {
 		
 		
 		return success;
+	}
+
+	public ArrayList<String> getCourseNames(){
+		return dataManager.requestCourseNames();
 	}
 }

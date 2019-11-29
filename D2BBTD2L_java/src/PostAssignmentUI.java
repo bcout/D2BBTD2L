@@ -20,26 +20,18 @@ import javafx.stage.Stage;
 public class PostAssignmentUI{
 	
 	private Scene postScene;
-	
 	private FlowPane postPane;
-	
 	private Label succ;
-	
 	private Button submitBtn;
 	private Button btnExit;
-	
 	private TextField filePath;
 	private TextField assignName;
-	
 	private FileChooser pick;
-	
 	private DatePicker date;
-	
 	private Stage primaryStage;
-	
 	private File selected;
-	
 	private PostAssignmentControl control;
+	private ComboBox courseNameList;
 	
 	public PostAssignmentUI() {
 		control = new PostAssignmentControl(MainMenu.getDataManager());
@@ -73,6 +65,9 @@ public class PostAssignmentUI{
 		filePath.setPromptText("Click for file picker");
 		date = new DatePicker();
 		pick = new FileChooser();
+
+		ArrayList<String> courseNames = control.getCourseNames();
+		courseNameList = new ComboBox(corseNames.toArray());
 		
 		postPane= new FlowPane(Orientation.VERTICAL);
 		
@@ -109,6 +104,7 @@ public class PostAssignmentUI{
 		postPane.getChildren().add(assignName);
 		postPane.getChildren().add(filePath);
 		postPane.getChildren().add(date);
+		postPane.getChildren().add(courseNameList)
 		
 		postPane.getChildren().add(succ);
 		postPane.getChildren().add(submitBtn);

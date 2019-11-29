@@ -806,6 +806,26 @@ public class DataManager{
 	   	return assignment;
 	}
 
+	public ArrayList<String> requestCourseNames(){
+		ArrayList<String> assignmentList = new ArrayList<String>();
+
+		try {
+			Statement st = connection.createStatement();
+
+			ResultSet rs = st.executeQuery("select courseNumber from Course;" );
+			
+			while(rs.next()){
+				assignmentList.add(rs.getString(1))
+			}
+
+			return assignmentList;
+			
+		} catch (SQLException e) {
+			System.err.println("SQL error: Assignment not found");
+			e.printStackTrace();
+		}
+	}
+
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
@@ -818,14 +838,38 @@ public class DataManager{
 		// end-user-code
 	}
 
+	public int retrieveCourseOfferingID(String courseNumber){
+		try {
+			Statement st = connection.createStatement();
+
+			ResultSet rs = st.executeQuery("select courseId from Course where courseNumber ="+ courseNumber +";" );
+			
+			rs.next();
+			int courseID = rs.getInt(1);
+
+			ResultSet rs = st.executeQuery("select courseOfferingId from CourseOfferingInfo where courseId ="+ courseID +";" );
+			
+			rs.next();
+			int courseOfferingID = rs.getInt(1);
+
+			return courseOfferingID;
+			
+		} catch (SQLException e) {
+			System.err.println("SQL error: Assignment not found");
+			e.printStackTrace();
+		}
+	}
+
 	/** 
 	* @throws SQLException 
 	* @author StephenCole19
 	*/
-	public void uploadAssignment(String assName, Blob blobFile, java.sql.Date dueDate) throws SQLException {
+	public void uploadAssignment(String courseNumber, String assName, Blob blobFile, java.sql.Date dueDate) throws SQLException {
+		int courseOfferingID = retrieveCourseOfferingID(courseNumber);
+
 		PreparedStatement ps = connection.prepareStatement(
 		        "INSERT INTO Assignment (courseOfferingId, assignmentName, assignmentFile, dueDate) VALUES (?,?,?,?)");
-		ps.setInt(1, 3);
+		ps.setInt(1, courseOfferingID);
 		ps.setString(2, assName);
 		ps.setBlob(3, blobFile);
 		ps.setDate(4, dueDate);
