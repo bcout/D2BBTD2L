@@ -234,4 +234,9 @@ public class Account
 	{
 		return lastName + ", " + firstName;
 	}
+	
+	public String getFullDetails()
+	{
+		return accountId + ", " + username + ", " + password + ", " + accountType + ", " + firstName + ", " + lastName;
+	}
 }

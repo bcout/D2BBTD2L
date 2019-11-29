@@ -1,4 +1,3 @@
-
 /**
  * 
  */
@@ -9,12 +8,12 @@
 import java.sql.*;
 import java.util.*;
 /** 
-* <!-- begin-UML-doc -->
-* <!-- end-UML-doc -->
-* @author Brennan Couturier
-*/
-public class DataManager {
-	
+ * <!-- begin-UML-doc -->
+ * <!-- end-UML-doc -->
+ * @author Brennan Couturier
+ */
+public class DataManager{
+	//yikes
 	Connection connection = null;
 	
 	
@@ -27,7 +26,7 @@ public class DataManager {
 	 */
 	public DataManager() 
 	{
-		try 
+		try
 		{
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 		}
@@ -42,137 +41,186 @@ public class DataManager {
 		}
 		catch (SQLException e)
 		{
-			System.err.println("Database connection error.");
+			System.out.println("Database connection error.");
 		}
 	}
 	
+
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	private Quiz quiz;
+
+
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	private Assignment assignment;
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	private AssignmentSubmission assignmentSolution;
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	private Notification notification;
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	private LockerItem locker;
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	private CourseInfo courseInfo;
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	private TA_Account account;
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	private TA_Account account2;
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	private TA_Account account3;
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	private TA_Account account4;
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	private ProfessorAccount professorAccount;
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	private StudentAccount userAccount;
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	private AdminAccount adminAccount;
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	private CourseRegistration courseRegistration;
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	private CourseOfferingInfo courseOfferingInfo;
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	private Account account5;
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	private CourseOfferingInfo courseOfferingInfo2;
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	private AdminAccount adminAccount2;
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	private ProfessorAccount professorAccount2;
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	private TA_Account tA_Account;
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	private StudentAccount studentAccount;
+	
+	public Account getAccountFromLoginInfo(String usernameIn, String passwordIn) throws SQLException
+	{
+		PreparedStatement getAccountFromUsernamePs;
+		String getAccountFromUsernameQuery = "select * from Account where username = ? and password = sha1(?);";
+		
+		Account a = null;
+		
+		try
+		{
+			getAccountFromUsernamePs = connection.prepareStatement(getAccountFromUsernameQuery);
+			getAccountFromUsernamePs.setString(1, usernameIn);
+			getAccountFromUsernamePs.setString(2, passwordIn);
+			ResultSet rs = getAccountFromUsernamePs.executeQuery();
+			
+			if (rs.next())
+			{
+				int id = rs.getInt(1);
+				String username = rs.getString(2);
+				String password = rs.getString(3);
+				int accountType = rs.getInt(4);
+				String firstName = rs.getString(5);
+				String lastName = rs.getString(6);
+				
+				a = new Account(id, username, password, accountType, firstName, lastName);
+			}
+			
+		}
+		catch (SQLException e)
+		{
+			throw e;
+		}
+		
+		if (getAccountFromUsernamePs != null)
+		{
+			try
+			{
+				getAccountFromUsernamePs.close();
+			}
+			catch (SQLException e)
+			{
+				throw e;
+			}
+		}
+		return a;
+	}
 	
 	public Account getAccountFromId(int idIn) throws SQLException
 	{
@@ -187,7 +235,7 @@ public class DataManager {
 			getAccountFromIdPs.setInt(1, idIn);
 			ResultSet rs = getAccountFromIdPs.executeQuery();
 			
-			if (rs != null)
+			if (rs.next())
 			{
 				int id = rs.getInt(1);
 				String username = rs.getString(2);
@@ -280,7 +328,7 @@ public class DataManager {
 			checkAccountExistsPs.setInt(1, accountId);
 			ResultSet rs = checkAccountExistsPs.executeQuery();
 			
-			if(rs != null)
+			if(rs.next())
 			{
 				rs.last();
 				rowNum = rs.getRow();
@@ -309,15 +357,15 @@ public class DataManager {
 			}
 		}
 		
-		return false;
+        return false;
 	}
 
 	
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
 	 * @throws SQLException 
-	*/
+	 */
 	public boolean handleMessageSubmit(String messageText, int from_accountId, int to_accountId) throws SQLException 
 	{
 		
@@ -365,10 +413,10 @@ public class DataManager {
 	}
 
 	/** 
-	* This method retrieves from the database all the messages that have a passed user's id as the recipient's id
+	 * This method retrieves from the database all the messages that have a passed user's id as the recipient's id
 	 * @throws SQLException
 	 * @param userId The id of the user whose messages will be retrieved
-	*/
+	 */
 	
 	public ArrayList<Message> requestMessagesReceived(int userId) throws SQLException 
 	{
@@ -428,7 +476,7 @@ public class DataManager {
 			catch (SQLException e)
 			{
 				throw e;
-			}
+			} 
 		}
 		
 		return messages;
@@ -491,7 +539,7 @@ public class DataManager {
 				throw e;
 			}
 		}
-				
+		
 		return messages;
 	}
 
@@ -524,6 +572,39 @@ public class DataManager {
 			return -1;
 		}	
 	}
+
+	public AssignmentSubmission[] getAssSubs()
+	{
+		PreparedStatement ps;
+		AssignmentSubmission[] a;
+		ArrayList<AssignmentSubmission> arr = new ArrayList<AssignmentSubmission>();
+		try
+		{
+			ps = connection.prepareStatement("SELECT * FROM AssignmentSubmission t1 JOIN Assignment t2 ON t1.assignmentId = t2.assignmentId");
+			ResultSet rs = ps.executeQuery();
+
+			while(rs.next())
+			{
+				AssignmentSubmission assSub = new AssignmentSubmission(
+					new Assignment(
+						rs.getString(9),
+						rs.getInt(4),
+						rs.getDate(11)
+						),
+					rs.getInt(1),
+					rs.getDouble(5)
+					);
+
+				arr.add(assSub);
+			}
+
+			ps.close();
+		}
+		catch(SQLException e) {}
+
+		return arr.toArray(new AssignmentSubmission[0]);
+	}
+
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -589,10 +670,10 @@ public class DataManager {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	public void getNotifications() {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -601,10 +682,10 @@ public class DataManager {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	public void markNotificationsRead() {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -613,10 +694,10 @@ public class DataManager {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	public void getMarks() {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -625,10 +706,10 @@ public class DataManager {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	public void markFeedbackRead() {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -637,10 +718,10 @@ public class DataManager {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	public void addCourseInfo() {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -649,10 +730,10 @@ public class DataManager {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	public void addsAssingmentInfo() {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -661,10 +742,10 @@ public class DataManager {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	public void addMark() {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -673,10 +754,10 @@ public class DataManager {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	public void getLocker() {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -685,10 +766,10 @@ public class DataManager {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	public void getLockerItem() {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -697,22 +778,39 @@ public class DataManager {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	* @author StephenCole19
 	*/
-	public void requestAssignmentFileassignmentId() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public Assignment requestAssignment(int assignmentId) {
+		Assignment assignment = new Assignment();
+    	
+	   	 try {
+	            Statement st = connection.createStatement();
+	
+	            ResultSet rs = st.executeQuery("select * from Assignment where AssignmentID = " + assignmentId + ";" );
+	            
+	            rs.next();
+	            
+	            assignment.assignmentId = rs.getInt(1);
+	            assignment.courseOfferingId = rs.getInt(2);
+	            assignment.assignmentName = rs.getString(3);
+	            assignment.assignmentFile = rs.getBlob(4);
+	            assignment.dueDate = rs.getDate(5);
+	
+	
+	   	 } catch (SQLException e) {
+	            System.err.println("SQL error: Assignment not found");
+	            e.printStackTrace();
+	   	 }
+	
+	   	
+	   	return assignment;
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	public void getAssignmentSpecificationsassignmentId() {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -721,23 +819,26 @@ public class DataManager {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	* @throws SQLException 
+	* @author StephenCole19
 	*/
-	public void uploadAssignmentSubmissionstudentIdfileassignmentId() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void uploadAssignment(String assName, Blob blobFile, java.sql.Date dueDate) throws SQLException {
+		PreparedStatement ps = connection.prepareStatement(
+		        "INSERT INTO Assignment (courseOfferingId, assignmentName, assignmentFile, dueDate) VALUES (?,?,?,?)");
+		ps.setInt(1, 3);
+		ps.setString(2, assName);
+		ps.setBlob(3, blobFile);
+		ps.setDate(4, dueDate);
+		ps.executeUpdate();
 	}
 
+
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param offeringInfo
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @param offeringInfo
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	public void addCourseOfferingInfo(CourseOfferingInfoObject offeringInfo) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -746,11 +847,11 @@ public class DataManager {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param notification
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @param notification
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	public void postNotification(notificationObject notification) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -759,12 +860,12 @@ public class DataManager {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param courseId
-	* @return
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @param courseId
+	 * @return
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	public Set<CourseInfoObject> retrieveCourseInfo(int courseId) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -772,13 +873,14 @@ public class DataManager {
 		// end-user-code
 	}
 
+
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param paths
-	* @return
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @param paths
+	 * @return
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	public Boolean uploadFilesToLocker(String... paths) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -787,10 +889,10 @@ public class DataManager {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	public void createNewQuiz() {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -799,10 +901,10 @@ public class DataManager {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	public void postQuizResults() {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -811,10 +913,10 @@ public class DataManager {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	public void getQuiz() {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -823,10 +925,10 @@ public class DataManager {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	public void submitAnswers() {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -835,10 +937,10 @@ public class DataManager {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	public void getAvailableQuizzes() {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -847,10 +949,10 @@ public class DataManager {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	public void addCourseRegistrationInfoArrayListCourseRegistrationObject() {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -859,11 +961,11 @@ public class DataManager {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @return
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	public double getTotalLockerSize() {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -871,11 +973,12 @@ public class DataManager {
 		// end-user-code
 	}
 
+
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
 	public void checkLoginCredentials() {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -883,3 +986,5 @@ public class DataManager {
 		// end-user-code
 	}
 }
+
+

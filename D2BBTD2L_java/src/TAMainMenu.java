@@ -13,6 +13,11 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/**
+ * This class displays the main menu for the TA user
+ * @author Brennan Couturier, 3638808
+ *
+ */
 public class TAMainMenu 
 {
 	private Scene scMain;
@@ -118,35 +123,34 @@ public class TAMainMenu
 		displayTAMainMenu(MainMenu.getStage());
 	}
 	
-	public void processPostMarksButtonPress(ActionEvent event)
+	private void processPostMarksButtonPress(ActionEvent event)
 	{
 		//
 	}
 	
-	public void processQuitButtonPress(ActionEvent event)
+	private void processQuitButtonPress(ActionEvent event)
 	{
 		MainMenu.getStage().close();
 	}
 	
-	public void processViewMessageButtonPress(ActionEvent event)
+	private void processViewMessageButtonPress(ActionEvent event)
 	{
 		viewMessagesUI vmu = new viewMessagesUI();
 		vmu.displayViewMessages(MainMenu.getStage());
 	}
 	
-	public void processNotificationsButtonPress(ActionEvent event)
+	private void processNotificationsButtonPress(ActionEvent event)
 	{
 		//display viewNotifications
 	}
 	
-	public void processAssignmentsButtonPress(ActionEvent event)
+	private void processAssignmentsButtonPress(ActionEvent event)
 	{
 		//display assignments
 	}
 	
-	public void processLogoutButtonPress(ActionEvent event)
+	private void processLogoutButtonPress(ActionEvent event)
 	{
-		//display login
-		//MainMenu.setUser(null);
+		MainMenu.processLogout();
 	}
 }

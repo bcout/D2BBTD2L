@@ -27,10 +27,5 @@ public class viewCourseInfoControl {
 	* @return
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public Set<CourseInfoObject> retrieveCourseInfo(int courseId) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
-	}
+	
 }

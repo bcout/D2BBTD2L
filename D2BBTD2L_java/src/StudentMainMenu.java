@@ -13,6 +13,11 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/**
+ * This class displays a main menu for the student user
+ * @author Brennan Couturier, 3638808
+ *
+ */
 public class StudentMainMenu 
 {
 	private Scene scMain;
@@ -127,40 +132,43 @@ public class StudentMainMenu
 		displayStudentMainMenu(MainMenu.getStage());
 	}
 	
-	public void processViewMessageButtonPress(ActionEvent event)
+	private void processViewMessageButtonPress(ActionEvent event)
 	{
 		viewMessagesUI vmu = new viewMessagesUI();
 		vmu.displayViewMessages(MainMenu.getStage());
 	}
 	
-	public void processExitButtonPress(ActionEvent event)
+	private void processExitButtonPress(ActionEvent event)
 	{
 		MainMenu.getStage().close();
 	}
 	
-	public void processMarksButtonPress(ActionEvent event)
+	private void processMarksButtonPress(ActionEvent event)
 	{
-		//display viewMarks
+		ViewMarksUI vmu = new ViewMarksUI(MainMenu.getDataManager());
+		vmu.display(MainMenu.getStage());
 	}
 	
-	public void processNotificationsButtonPress(ActionEvent event)
+	
+	
+	private void processNotificationsButtonPress(ActionEvent event)
 	{
 		//display viewNotifications
 	}
 	
-	public void processUploadAssignmentsButtonPress(ActionEvent event)
+	private void processUploadAssignmentsButtonPress(ActionEvent event)
 	{
-		//display upload assignment form
+		//
 	}
 	
-	public void processAssignmentsButtonPress(ActionEvent event)
+	private void processAssignmentsButtonPress(ActionEvent event)
 	{
-		//display assignments
+		ViewAssignmentUI vau = new ViewAssignmentUI();
+		vau.displayPostAssignmentForm(MainMenu.getStage());
 	}
 	
-	public void processLogoutButtonPress(ActionEvent event)
+	private void processLogoutButtonPress(ActionEvent event)
 	{
-		//display login
-		//MainMenu.setUser(null);
+		MainMenu.processLogout();
 	}
 }

@@ -1,0 +1,52 @@
+/* 
+    Document   : darkMode
+*/
+
+.root
+{
+    -fx-font-size: 11pt;
+    -fx-font-family: "Helvetica";
+    -fx-base: rgb(33,36,40);
+    -fx-background: rgb(0,0,0);
+}
+
+.check-box
+{
+	
+}
+
+.button
+{
+    -fx-text-fill: WHITE;
+    -fx-border-color: rgb(101,28,90);
+    -fx-border-radius: 5;
+    -fx-padding: 3 6 6 6;
+}
+
+.borders
+{
+    -fx-border-color: rgb(103, 100, 78);
+    -fx-border-style: dotted;
+    -fx-border-width: 1.5;
+    -fx-border-insets: -5;
+}
+
+.label
+{
+	-fx-text-fill: WHITE;
+	-fx-background-color: rgb(0,0,0);
+	-fx-fill: rgb(0,0,0);
+    
+}
+
+.text-field
+{
+	-fx-text-fill: BLACK;
+	-fx-border-color: rgb(101,28,90);
+}
+
+.text-field:focused
+{
+	-fx-text-fill: BLACK;
+	-fx-border-color: rgb(101,28,90);
+}
