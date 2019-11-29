@@ -41,7 +41,7 @@ public class DataManager{
 		}
 		catch (SQLException e)
 		{
-			System.out.println("Database connection error.");
+			System.err.println("Database connection error.");
 		}
 	}
 	
@@ -985,6 +985,46 @@ public class DataManager{
 
 		// end-user-code
 	}
-}
 
+        public String[] getAvailableTAs() {
+          ArrayList<String> results = new ArrayList<String>();
+          try {
+            String query = "{select firstName,lastName from Account"
+                            + "where accountType=3}";
+            PreparedStatement statement = connection.prepareStatement
+            (query);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+              String firstName = rs.getString("firstName");
+              String lastName = rs.getString("lastName");
+              results.add(firstName + " " + lastName);
+            }
+          } catch (SQLException e) {
+            System.err.println("Could not retrieve available TAs "
+                               + e.getMessage());
+          }
+          return results.toArray(new String[results.size()]);
+        }
+
+        public String[] getAvailableProfessors() {
+          ArrayList<String> results = new ArrayList<String>();
+          try {
+            String query = "{select firstName,lastName from Account"
+                            + "where accountType=4}";
+            PreparedStatement statement = connection.prepareStatement
+            (query);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+              String firstName = rs.getString("firstName");
+              String lastName = rs.getString("lastName");
+              results.add(firstName + " " + lastName);
+            }
+          } catch (SQLException e) {
+            System.err.println("Could not retrieve available professors "
+                               + e.getMessage());
+          }
+          return results.toArray(new String[results.size()]);
+        }
+
+}
 

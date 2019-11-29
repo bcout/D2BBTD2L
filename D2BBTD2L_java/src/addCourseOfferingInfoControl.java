@@ -21,10 +21,18 @@ public class addCourseOfferingInfoControl {
   }
 
   public String[] getAvailableTAs() {
+    return dataManager.getAvailableTAs();
+  }
+
+  public String[] getHardCodedTAs() {
     return new String[]{"This","is","hardcoded"};
   }
 
   public String[] getAvailableProfessors() {
+    return dataManager.getAvailableProfessors();
+  }
+
+  public String[] getHardCodedProfessors() {
     return new String[]{"This","is","hardcoded"};
   }
 
@@ -35,13 +43,4 @@ public class addCourseOfferingInfoControl {
   public Boolean addCourseOfferingInfo(CourseOfferingInfoObject offeringInfo) {
     return true;
   }
-}
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private DataManager dataManager;
-
-
 }

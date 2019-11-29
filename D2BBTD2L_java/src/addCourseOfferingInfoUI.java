@@ -18,7 +18,7 @@ import javafx.collections.FXCollections;
 /** 
 * <!-- begin-UML-doc -->
 * <!-- end-UML-doc -->
-* @author bcouturi
+* @author justend29
 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 */
 public class addCourseOfferingInfoUI {
@@ -135,7 +135,7 @@ public class addCourseOfferingInfoUI {
 
    debug += courseNum + "  ";
 
-   if(courseNum == null || courseNum == "") {
+   if(courseNum == null || courseNum.compareTo("")==0) {
      confirmationLabel.setText("A year must be provided");
      return null;
    }
@@ -147,7 +147,7 @@ public class addCourseOfferingInfoUI {
 
     debug += roomNum + "  ";
 
-    if(roomNum == null || roomNum == "") {
+    if(roomNum == null || roomNum.compareTo("")==0) {
       confirmationLabel.setText("A room number must be provided");  
       return null;
     }
@@ -158,7 +158,7 @@ public class addCourseOfferingInfoUI {
     double courseLen = 0;
     try {
       courseLen = Double.parseDouble(courseLength.getText());
-      debug += courseLen + "  ";
+      debug += courseLen + "   ";
     } catch (Exception e) {
       confirmationLabel.setText("The course length could not be read"); 
       return 0;
@@ -174,11 +174,11 @@ public class addCourseOfferingInfoUI {
 
   private int parseTerm() {
     String termName = (String)(termInput.getValue());
-    int termNum =0;
-    String[] availableTerms = control.getAvailableTerms();
+    int termNum = 0;
+    String[] availableTerms = control.getAvailableTerms().clone();
 
     for(String term : availableTerms) {
-      if(termName != term) {
+      if(termName.compareTo(term)!=0) {
         termNum++; 
       } else {
         return termNum;
@@ -209,8 +209,13 @@ public class addCourseOfferingInfoUI {
   private String parseProfessor() {
     String profIn = (String)(professorInput.getValue());
 
-    for(String professor : control.getAvailableProfessors()) {
-      if(profIn == professor) {
+    debug+= "professor: " + profIn + "   ";
+
+    // or getAvailableTAs
+    String[] availableProfessors = control.getHardCodedProfessors().clone(); 
+
+    for(String professor : availableProfessors) {
+      if(profIn.compareTo(professor)==0) {
         return professor; 
       }
     }
@@ -222,9 +227,10 @@ public class addCourseOfferingInfoUI {
     String taIn = (String)(TA_Input.getValue());
 
     debug += taIn + "  ";
+    String[] availableTAs = control.getHardCodedTAs().clone();
 
     for(String TA : control.getAvailableTAs()) {
-      if(taIn == TA) {
+      if(taIn.compareTo(TA)==0) {
         return TA;
       }
     }
@@ -233,14 +239,14 @@ public class addCourseOfferingInfoUI {
   }
 
   private void processSubmitButton(ActionEvent event) {
-    if(parseCourseNumber() != null && parseRoomNumber() != null &&
-       parseLength() != 0 && parseTerm() != 0 && parseYear() != 0
-       && parseProfessor() != null && parseTA() != null ) {
-      confirmationLabel.setText("button has been pressed - everything parsed");
-    }
-    System.out.println(debug);
-    confirmationLabel.setText("fail");
-    // parse methods will update confirmation label upon failure
+  //  if(parseCourseNumber() != null && parseRoomNumber() != null &&
+  //     parseLength() != 0 && parseTerm() != 0 && parseYear() != 0
+  //     && parseProfessor() != null && parseTA() != null ) {
+  //    confirmationLabel.setText("button has been pressed - everything parsed");
+  //  }
+  //  System.out.println(debug);
+  //  confirmationLabel.setText("fail");
+  //  // parse methods will update confirmation label upon failure
   }
 
   private void processBackButton(ActionEvent event) {
@@ -252,7 +258,7 @@ public class addCourseOfferingInfoUI {
   }
 
   private Scene initScene() {
-    initSceneComponents();
+    //initSceneComponents();
     return new Scene(vLayout); 
   }
 
