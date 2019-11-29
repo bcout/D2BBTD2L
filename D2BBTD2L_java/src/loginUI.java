@@ -68,7 +68,6 @@ public class loginUI
 		{
 			mainMenuLogo = new Image(new FileInputStream("images/D2BBTD2L_Logo.png"));
 			mainMenuIcon = new Image(new FileInputStream("images/logo.png"));
-			
 		} 		
 		catch (FileNotFoundException e) 
 		{
