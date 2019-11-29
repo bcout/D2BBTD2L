@@ -26,6 +26,7 @@ public class MainMenu extends Application
 	//-------------------------------------------
 	private static DataManager dm;
 	private static Account userAccount;
+	private static Boolean darkModeEnabled;
 	
 	//Splash screen variables
 	//-------------------------------------------
@@ -42,6 +43,7 @@ public class MainMenu extends Application
 		stgMain = primaryStage;
 		stgMain.setResizable(false);
 		dm = new DataManager();
+		darkModeEnabled = false;
 		
 		Stage temp = new Stage();
 		temp.initStyle(StageStyle.UNDECORATED);
@@ -188,5 +190,15 @@ public class MainMenu extends Application
 		loginUI lu = new loginUI();
 		lu.displayLoginForm(stgMain);
 		userAccount = null;
+	}
+	
+	public static Boolean getDarkModeEnabled()
+	{
+		return darkModeEnabled;
+	}
+	
+	public static void setDarkModeEnabled(Boolean value)
+	{
+		darkModeEnabled = value;
 	}
 }
