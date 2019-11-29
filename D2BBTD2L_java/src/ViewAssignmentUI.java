@@ -28,9 +28,9 @@ public class ViewAssignmentUI {
 	private FlowPane viewPane;
 	private Button downBtn;
 	private Button btnExit;
-	private TextField assID;
 	private Stage primaryStage;
 	private ViewAssignmentControl control;
+	private ComboBox assignmentList;
 	
 	public ViewAssignmentUI() {
 		control = new ViewAssignmentControl(MainMenu.getDataManager());
@@ -41,15 +41,15 @@ public class ViewAssignmentUI {
 		Just for CLI
 	**/
 	public void displayAssignmentSelectionForm() {
-		 System.out.println("Enter the AssignementID");
-		 
-		 Scanner scanner = new Scanner(System.in);
-         	int assignmentID = Integer.parseInt(scanner.next());
-         	scanner.close();
-         
-         	requestDownloadFile(7);
-         
-         	System.out.println("wow");
+		System.out.println("Enter the AssignementID");
+		
+		Scanner scanner = new Scanner(System.in);
+			int assignmentID = Integer.parseInt(scanner.next());
+				scanner.close();
+        
+				requestDownloadFile(7);
+        
+				System.out.println("wow");
 	}
 	
 	
@@ -67,8 +67,10 @@ public class ViewAssignmentUI {
 	public void loadPostAssignmentScene() {
 		btnExit = new Button("Exit");
 		downBtn = new Button("Download");
-		assID = new TextField();
 		assID.setPromptText("Enter AssignmentID");
+
+		ArrayList<String> assignments = control.getAssignmentNames();
+		assignmentList = new ComboBox(assignments.toArray());
 
 		viewPane= new FlowPane(Orientation.VERTICAL);
 
@@ -98,9 +100,9 @@ public class ViewAssignmentUI {
 	}
 	
 	public void processDownButtonPress(ActionEvent Event) {
-		int assignID = Integer.parseInt(assID.getText());
+		String assignName = assignmentList.getValue();
 		
-		requestDownloadFile(assignID);
+		requestDownloadFile(assignName);
 		
 		
 	}
@@ -110,7 +112,7 @@ public class ViewAssignmentUI {
 		loadPostAssignmentScene();
 		
 		viewPane.getChildren().add(btnExit);
-		viewPane.getChildren().add(assID);
+		viewPane.getChildren().add(assignmentList);
 		
 		viewPane.getChildren().add(downBtn);
 		
