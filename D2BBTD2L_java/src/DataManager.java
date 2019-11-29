@@ -817,6 +817,7 @@ public class DataManager{
 			while(rs.next()){
 				assignmentList.add(rs.getString(3))
 			}
+			return assignmentList;
 			
 		} catch (SQLException e) {
 			System.err.println("SQL error: Assignment not found");
