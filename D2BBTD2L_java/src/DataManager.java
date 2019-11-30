@@ -1003,7 +1003,8 @@ public class DataManager{
             System.err.println("Could not retrieve available TAs "
                                + e.getMessage());
           }
-          return results.toArray(new String[results.size()]);
+          //return results.toArray(new String[results.size()]);
+          return new String[]{"hey","there"};
         }
 
         public String[] getAvailableProfessors() {
@@ -1023,7 +1024,8 @@ public class DataManager{
             System.err.println("Could not retrieve available professors "
                                + e.getMessage());
           }
-          return results.toArray(new String[results.size()]);
+          //return results.toArray(new String[results.size()]);
+          return new String[]{"hey","there"};
         }
 
 }

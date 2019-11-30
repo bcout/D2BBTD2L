@@ -7,6 +7,7 @@ public class addCourseOfferingInfoUITest extends Application {
     launch(args);
   }
 
+  @Override
   public void start(Stage stage) {
     DataManager dm = new DataManager();
     addCourseOfferingInfoUI ui = new addCourseOfferingInfoUI(dm);

@@ -105,14 +105,14 @@ public class addCourseOfferingInfoUI {
     vLayout.getChildren().add(new HBox(hSpacing,yearInputLbl,yearInput));
     // professor input
     String[] availableProfessors =
-    control.getAvailableProfessors();
+    control.getHardCodedProfessors();
     professorInputLbl = new Label("Professor");
     professorInput = new
       ComboBox(FXCollections.observableArrayList(availableProfessors));
     vLayout.getChildren().add(new HBox(hSpacing, professorInputLbl,
           professorInput));
     // TA input
-    String[] availableTAs = control.getAvailableTAs();
+    String[] availableTAs = control.getHardCodedTAs();
     TA_InputLbl = new Label("TA");
     TA_Input = new
       ComboBox(FXCollections.observableArrayList(availableTAs));
@@ -128,6 +128,7 @@ public class addCourseOfferingInfoUI {
     vLayout.getChildren().add(new HBox(hSpacing,backButton, submitButton,
           addCourseButton));
     vLayout.getChildren().add(confirmationLabel);
+
   }
 
   private String parseCourseNumber() {
@@ -239,14 +240,14 @@ public class addCourseOfferingInfoUI {
   }
 
   private void processSubmitButton(ActionEvent event) {
-  //  if(parseCourseNumber() != null && parseRoomNumber() != null &&
-  //     parseLength() != 0 && parseTerm() != 0 && parseYear() != 0
-  //     && parseProfessor() != null && parseTA() != null ) {
-  //    confirmationLabel.setText("button has been pressed - everything parsed");
-  //  }
-  //  System.out.println(debug);
-  //  confirmationLabel.setText("fail");
-  //  // parse methods will update confirmation label upon failure
+    if(parseCourseNumber() != null && parseRoomNumber() != null &&
+       parseLength() != 0 && parseTerm() != 0 && parseYear() != 0
+       && parseProfessor() != null && parseTA() != null ) {
+      confirmationLabel.setText("button has been pressed - everything parsed");
+    }
+    System.out.println(debug);
+    confirmationLabel.setText("fail");
+    // parse methods will update confirmation label upon failure
   }
 
   private void processBackButton(ActionEvent event) {
@@ -258,7 +259,7 @@ public class addCourseOfferingInfoUI {
   }
 
   private Scene initScene() {
-    //initSceneComponents();
+    initSceneComponents();
     return new Scene(vLayout); 
   }
 
