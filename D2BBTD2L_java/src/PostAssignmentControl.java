@@ -33,7 +33,7 @@ public class PostAssignmentControl {
 			blobFile = new SerialBlob(pdfData);
 			
 			
-		    java.sql.Date sqlDate =  new java.sql.Date(dueDate.getTime());
+		    	java.sql.Date sqlDate =  new java.sql.Date(dueDate.getTime());
 			
 			dataManager.uploadAssignment(courseNumber, assName, blobFile, sqlDate);
 			
@@ -53,7 +53,6 @@ public class PostAssignmentControl {
 		
 		return success;
 	}
-
 	public ArrayList<String> getCourseNames(){
 		return dataManager.requestCourseNames();
 	}
