@@ -37,15 +37,6 @@ public class PostAssignmentUI{
 		control = new PostAssignmentControl(MainMenu.getDataManager());
 	}
 	
-	/**
-	 * Testing CLI
-	 */
-	public boolean requestPostAssignment(String assName, File pdfFile, java.util.Date dueDateIn) {
-	    boolean ret = control.postAssignment(assName, pdfFile, dueDateIn);
-	    
-	    return ret;
-	    
-	}
 	
 	public void displayPostAssignmentForm(Stage stg) { 
 		stg.setScene(initPostAssignment());
@@ -55,11 +46,11 @@ public class PostAssignmentUI{
 	
 	public void loadPostAssignmentScene() {
 		succ = new Label("Pending");
-		
+				
 		btnExit = new Button("Exit");
 		assignName = new TextField();
 		assignName.setPromptText("Assignment Name");
-		
+
 		submitBtn = new Button("Submit!");
 		filePath = new TextField();
 		filePath.setPromptText("Click for file picker");
@@ -67,11 +58,12 @@ public class PostAssignmentUI{
 		pick = new FileChooser();
 
 		ArrayList<String> courseNames = control.getCourseNames();
-		courseNameList = new ComboBox(corseNames.toArray());
-		
+		courseNameList = new ComboBox();
+		courseNameList.getItems().addAll(courseNames.toArray());
+
 		postPane= new FlowPane(Orientation.VERTICAL);
-		
-		
+
+
 		btnExit.setOnAction(this::processExitButtonPress);
 		submitBtn.setOnAction(this::processSubmitButtonPress);
 	}
@@ -86,8 +78,9 @@ public class PostAssignmentUI{
 		
 		String assName = assignName.getText();
 		java.util.Date dueDateIn = java.sql.Date.valueOf(date.getValue());
+		String courseName = (String) courseNameList.getValue();
 		
-		boolean wow = requestPostAssignment(assName, selected, dueDateIn);
+		boolean wow = control.postAssignment(courseName, assName, selected, dueDateIn);
 		
 		if(wow == true) {
 			succ.setText("Success!");
@@ -104,7 +97,7 @@ public class PostAssignmentUI{
 		postPane.getChildren().add(assignName);
 		postPane.getChildren().add(filePath);
 		postPane.getChildren().add(date);
-		postPane.getChildren().add(courseNameList)
+		postPane.getChildren().add(courseNameList);
 		
 		postPane.getChildren().add(succ);
 		postPane.getChildren().add(submitBtn);
@@ -112,13 +105,18 @@ public class PostAssignmentUI{
 		postPane.setVgap(10);
 		postPane.setAlignment(Pos.CENTER);
 		postPane.setColumnHalignment(HPos.CENTER); 
-        postPane.setRowValignment(VPos.CENTER); 
-        postPane.setStyle("-fx-background-color: yellow;");
-        
-        filePath.setOnMouseClicked(e -> {
-            selected = pick.showOpenDialog(primaryStage);
-            filePath.setText(selected.getPath());
-        });
+	    	postPane.setRowValignment(VPos.CENTER); 
+	    	postPane.setStyle("-fx-background-color: yellow;");
+	    
+	    	filePath.setOnMouseClicked(e -> {
+	        	selected = pick.showOpenDialog(primaryStage);
+	        	filePath.setText(selected.getPath());
+	    	});
+	    
+	    
+		return postScene = new Scene(postPane, 900, 600);
+		
+	}
         
         
 		return postScene = new Scene(postPane, 900, 600);
