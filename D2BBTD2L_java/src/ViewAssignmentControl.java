@@ -19,7 +19,7 @@ public class ViewAssignmentControl {
 
 
 	
-	public void downloadFile(Strinf assignmentName) {
+	public void downloadFile(String assignmentName) {
 		
 		Assignment assignment = retrieveAssignmentFile(assignmentName);
 		
