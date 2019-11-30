@@ -5,10 +5,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.Node;
+import javafx.scene.layout.GridPane;
 import javafx.event.ActionEvent;
 import javafx.collections.FXCollections;
+import javafx.geometry.Pos;
 /**
  * 
  */
@@ -23,7 +24,6 @@ import javafx.collections.FXCollections;
 */
 public class addCourseOfferingInfoUI {
   
-  String debug = new String();
   
   public addCourseOfferingInfoUI() {
     control = new addCourseOfferingInfoControl();
@@ -53,16 +53,16 @@ public class addCourseOfferingInfoUI {
   private TextField courseLength;
   // term input
   private Label termInputLbl;
-  private ComboBox termInput;
+  private ComboBox<String> termInput;
   // year input
   private Label yearInputLbl;
-  private ComboBox yearInput;
+  private ComboBox<Integer> yearInput;
   // professor input
   private Label professorInputLbl;
-  private ComboBox professorInput;
+  private ComboBox<String> professorInput;
   // TA input
   private Label TA_InputLbl;
-  private ComboBox TA_Input;
+  private ComboBox<String> TA_Input;
   // extra
   private Button backButton;
   private Button addCourseButton;
@@ -70,53 +70,70 @@ public class addCourseOfferingInfoUI {
   private Label confirmationLabel;
 
   // Layout
-  VBox vLayout;
-  double hSpacing = 5;
+  GridPane pane = null;
+  final double vGap = 5;
+  final double labelWidth = 200;
   Stage stage = null;
 
   // creates all the necessary scene components
   private void initSceneComponents() {
-    // Layout
-    vLayout = new VBox(10);
+    
+    //Layout
+    pane = new GridPane();
+    pane.setAlignment(Pos.CENTER);
+    pane.setVgap(vGap);
 
     // course number input
     courseNumberLbl = new Label("Course Number");
+    courseNumberLbl.setPrefWidth(labelWidth);
     courseNumber = new TextField();
-    vLayout.getChildren().add(new HBox(hSpacing,courseNumberLbl,courseNumber));
+    pane.add(courseNumberLbl,0,0);
+    pane.add(courseNumber,1,0);
     // room number input
     roomNumberLbl = new Label("Room Number");
+    roomNumberLbl.setPrefWidth(labelWidth);
     roomNumber = new TextField();
-    vLayout.getChildren().add(new HBox(hSpacing,roomNumberLbl,roomNumber));
+    pane.add(roomNumberLbl, 0, 1);
+    pane.add(roomNumber,1,1);
     // course length input
     courseLengthLbl = new Label("Course Length (min)");
+    courseLengthLbl.setPrefWidth(labelWidth);
     courseLength = new TextField("50");
-    vLayout.getChildren().add(new HBox(hSpacing,courseLengthLbl,courseLength));
+    pane.add(courseLengthLbl,0,2);
+    pane.add(courseLength,1,2);
     // term input
     termInputLbl = new Label("Available Term");
+    termInputLbl.setPrefWidth(labelWidth);
     String[] availableTerms = control.getAvailableTerms();
     termInput = new
-      ComboBox(FXCollections.observableArrayList(availableTerms));
-    vLayout.getChildren().add(new HBox(hSpacing,termInputLbl,termInput));
+      ComboBox<String>(FXCollections.observableArrayList(availableTerms));
+    pane.add(termInputLbl,0,3);
+    pane.add(termInput,1,3);
     // year input
     yearInputLbl = new Label("Available Year");
+    yearInputLbl.setPrefWidth(labelWidth);
     Integer[] availableYears = control.getAvailableYears();
     yearInput = new
-      ComboBox(FXCollections.observableArrayList(availableYears));
-    vLayout.getChildren().add(new HBox(hSpacing,yearInputLbl,yearInput));
+      ComboBox<Integer>(FXCollections.observableArrayList(availableYears));
+    pane.add(yearInputLbl,0,4);
+    pane.add(yearInput,1,4);
     // professor input
     String[] availableProfessors =
     control.getHardCodedProfessors();
     professorInputLbl = new Label("Professor");
+    professorInputLbl.setPrefWidth(labelWidth);
     professorInput = new
-      ComboBox(FXCollections.observableArrayList(availableProfessors));
-    vLayout.getChildren().add(new HBox(hSpacing, professorInputLbl,
-          professorInput));
+      ComboBox<String>(FXCollections.observableArrayList(availableProfessors));
+    pane.add(professorInputLbl,0,5);
+    pane.add(professorInput,1,5);
     // TA input
     String[] availableTAs = control.getHardCodedTAs();
     TA_InputLbl = new Label("TA");
+    TA_InputLbl.setPrefWidth(labelWidth);
     TA_Input = new
-      ComboBox(FXCollections.observableArrayList(availableTAs));
-    vLayout.getChildren().add(new HBox(hSpacing,TA_InputLbl,TA_Input));
+      ComboBox<String>(FXCollections.observableArrayList(availableTAs));
+    pane.add(TA_InputLbl,0,6);
+    pane.add(TA_Input,1,6);
     // extra
     backButton = new Button("Main Menu");
     backButton.setOnAction(this::processBackButton);
@@ -125,16 +142,15 @@ public class addCourseOfferingInfoUI {
     submitButton = new Button("Submit");
     submitButton.setOnAction(this::processSubmitButton);
     confirmationLabel = new Label("Enter details");
-    vLayout.getChildren().add(new HBox(hSpacing,backButton, submitButton,
-          addCourseButton));
-    vLayout.getChildren().add(confirmationLabel);
-
+    confirmationLabel.setPrefWidth(500);
+    pane.add(addCourseButton,0,7);
+    pane.add(backButton,1,7);
+    pane.add(submitButton, 0, 9, 2, 1);
+    pane.add(confirmationLabel, 0, 10, 2, 1);
   }
 
   private String parseCourseNumber() {
    String courseNum = courseNumber.getText();
-
-   debug += courseNum + "  ";
 
    if(courseNum == null || courseNum.compareTo("")==0) {
      confirmationLabel.setText("A year must be provided");
@@ -145,8 +161,6 @@ public class addCourseOfferingInfoUI {
 
   private String parseRoomNumber() {
     String roomNum = roomNumber.getText();
-
-    debug += roomNum + "  ";
 
     if(roomNum == null || roomNum.compareTo("")==0) {
       confirmationLabel.setText("A room number must be provided");  
@@ -159,7 +173,6 @@ public class addCourseOfferingInfoUI {
     double courseLen = 0;
     try {
       courseLen = Double.parseDouble(courseLength.getText());
-      debug += courseLen + "   ";
     } catch (Exception e) {
       confirmationLabel.setText("The course length could not be read"); 
       return 0;
@@ -191,17 +204,16 @@ public class addCourseOfferingInfoUI {
   }
 
   private int parseYear() {
-    int yearIn = 0;
-
+    Integer yearIn = 0;
     try {
-      yearIn = Integer.parseInt((String)(yearInput.getValue()));
-      for(int year : control.getAvailableYears()) {
-        if(yearIn == year) {
-          return year; 
+      yearIn = yearInput.getValue(); 
+      // getAvailableYears returns Integer[]
+      Integer[] availableYears = control.getAvailableYears();
+      for(Integer year : availableYears) {
+          return year.intValue(); 
         }
-      }
       confirmationLabel.setText("The requested year is not available");
-    } catch (Exception e) {
+    } catch (NumberFormatException e) {
       confirmationLabel.setText("The requested year could not be read");
     }
     return 0;
@@ -209,14 +221,14 @@ public class addCourseOfferingInfoUI {
 
   private String parseProfessor() {
     String profIn = (String)(professorInput.getValue());
-
-    debug+= "professor: " + profIn + "   ";
+    System.out.println("Professor inputted: " + profIn);
 
     // or getAvailableTAs
     String[] availableProfessors = control.getHardCodedProfessors().clone(); 
-
+    
     for(String professor : availableProfessors) {
-      if(profIn.compareTo(professor)==0) {
+      System.out.println(professor);
+      if(profIn.equals(professor)) {
         return professor; 
       }
     }
@@ -226,12 +238,13 @@ public class addCourseOfferingInfoUI {
 
   private String parseTA() {
     String taIn = (String)(TA_Input.getValue());
+    System.out.println("TA inputted: " + taIn);
 
-    debug += taIn + "  ";
     String[] availableTAs = control.getHardCodedTAs().clone();
 
-    for(String TA : control.getAvailableTAs()) {
-      if(taIn.compareTo(TA)==0) {
+    for(String TA : availableTAs) {
+      System.out.println(TA);
+      if(taIn.equals(TA)) {
         return TA;
       }
     }
@@ -240,14 +253,24 @@ public class addCourseOfferingInfoUI {
   }
 
   private void processSubmitButton(ActionEvent event) {
-    if(parseCourseNumber() != null && parseRoomNumber() != null &&
-       parseLength() != 0 && parseTerm() != 0 && parseYear() != 0
-       && parseProfessor() != null && parseTA() != null ) {
+    String courseNum = parseCourseNumber();
+    String roomNum = parseRoomNumber();
+    double courseLength = parseLength();
+    int term = parseTerm();
+    int year = parseYear();
+    String professor = parseProfessor();
+    String TA = parseTA();
+
+    System.out.println(courseNum + roomNum + courseLength + term + professor +
+    TA + year);
+    if(courseNum != null && roomNum != null &&
+      courseLength != 0 && term != 0 && year != 0 &&
+      professor != null && TA != null ) {
       confirmationLabel.setText("button has been pressed - everything parsed");
+    } else {
+      confirmationLabel.setText("fail");
+      // parse methods will update confirmation label upon failure
     }
-    System.out.println(debug);
-    confirmationLabel.setText("fail");
-    // parse methods will update confirmation label upon failure
   }
 
   private void processBackButton(ActionEvent event) {
@@ -260,7 +283,7 @@ public class addCourseOfferingInfoUI {
 
   private Scene initScene() {
     initSceneComponents();
-    return new Scene(vLayout); 
+    return new Scene(pane); 
   }
 
   public void displayAddCourseOfferingInfoForm(Stage stage) {
