@@ -786,7 +786,7 @@ public class DataManager{
 			try {
 				Statement st = connection.createStatement();
 
-				ResultSet rs = st.executeQuery("select * from Assignment where AssignmentName = " + assignmentName + ";" );
+				ResultSet rs = st.executeQuery("select * from Assignment where AssignmentName = '" + assignmentName + "';" );
 				
 				rs.next();
 				
@@ -815,14 +815,14 @@ public class DataManager{
 			ResultSet rs = st.executeQuery("select AssignmentName from Assignment;" );
 			
 			while(rs.next()){
-				assignmentList.add(rs.getString(3))
+				assignmentList.add(rs.getString(1));
 			}
-			return assignmentList;
 			
 		} catch (SQLException e) {
 			System.err.println("SQL error: Assignment not found");
 			e.printStackTrace();
 		}
+		return assignmentList;
 	}
 
 	/** 
