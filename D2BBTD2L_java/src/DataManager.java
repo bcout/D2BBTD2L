@@ -839,25 +839,26 @@ public class DataManager{
 	}
 
 	public int retrieveCourseOfferingID(String courseNumber){
+		int courseOfferingID = -1;
 		try {
 			Statement st = connection.createStatement();
 
-			ResultSet rs = st.executeQuery("select courseId from Course where courseNumber ="+ courseNumber +";" );
+			ResultSet rs = st.executeQuery("select courseId from Course where courseNumber = '"+ courseNumber +"';" );
 			
 			rs.next();
 			int courseID = rs.getInt(1);
 
-			ResultSet rs = st.executeQuery("select courseOfferingId from CourseOfferingInfo where courseId ="+ courseID +";" );
+			rs = st.executeQuery("select courseOfferingId from CourseOfferingInfo where courseId ="+ courseID +";" );
 			
 			rs.next();
-			int courseOfferingID = rs.getInt(1);
+			courseOfferingID = rs.getInt(1);
 
-			return courseOfferingID;
 			
 		} catch (SQLException e) {
 			System.err.println("SQL error: Assignment not found");
 			e.printStackTrace();
 		}
+		return courseOfferingID;
 	}
 
 	/** 
