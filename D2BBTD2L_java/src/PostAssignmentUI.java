@@ -2,6 +2,7 @@ import java.io.File;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import javafx.application.Application;
