@@ -6,6 +6,9 @@
 //import static CourseOfferingInfoObject.*;
 //import static notificationObject.*;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Set;
+
 import java.util.*;
 /** 
  * <!-- begin-UML-doc -->
@@ -953,11 +956,35 @@ public class DataManager{
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void addCourseRegistrationInfoArrayListCourseRegistrationObject() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	*/
+	public boolean addCourseRegistrationInfo(ArrayList<CourseRegistration> cr) {
+		try {
+			
+			String query = "insert into CourseRegistration (accountId,courseOfferingId) values";
+			
+			//Creates a string for the prepared statement with an appropriate amount of '?'s
+			for (int i=0; i<cr.size();i++) {
+				query += " (?,?)";
+			}
+			System.out.println(query);
+			PreparedStatement pst = connection.prepareStatement(query);
+			
+			//Adds all of the CourseRegistration info into the query
+			for (int i=0; i<cr.size(); i++) {
+				//int stdID = cr.get(i).accountIdstudent;
+				//***********implement check for if the student is in the student account table ******
+				pst.setInt((2*i + 1), cr.get(i).accountIdstudent);
+				//*****implement check for if the course is being offered*****
+				pst.setInt((2*i + 2),cr.get(i).courseOfferingId);
+			}
+			
+			//execute the sql statement
+			pst.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			System.err.println(e.toString());
+			return false;
+		}
 	}
 
 	/** 
@@ -986,5 +1013,3 @@ public class DataManager{
 		// end-user-code
 	}
 }
-
-

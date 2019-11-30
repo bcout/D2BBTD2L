@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  * 
  */
@@ -16,16 +19,35 @@ public class addCourseRegistrationInfoUI {
 	*/
 	private addCourseRegistrationInfoControl control;
 
+	public addCourseRegistrationInfoUI(addCourseRegistrationInfoControl control) {
+		this.control = control;
+	}
+	
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void displayCourseRegistrationForm() {
-		// begin-user-code
-		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		ArrayList<CourseRegistration> cr = new ArrayList<CourseRegistration>();
+		System.out.println("'0' to stop");
+		while (true) {
+			System.out.println("Enter stdntID:");
+			int stdtID = sc.nextInt();
+			System.out.println("Enter courseOffereingID:");
+			int offID = sc.nextInt();
+			if (stdtID == 0 || offID == 0) {
+				break;
+			}
+			cr.add(new CourseRegistration(stdtID,offID));
+		}
 
-		// end-user-code
+		if (enterCourseRegistrationInfo(cr)) {
+			displayConfirmationMessage();
+		} else {
+			displayFailureMessage();
+		}
 	}
 
 	/** 
@@ -33,8 +55,8 @@ public class addCourseRegistrationInfoUI {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void enterCourseRegistrationInfo(CourseRegistration cr) {
-		
+	public boolean enterCourseRegistrationInfo(ArrayList<CourseRegistration> cr) {
+		return control.submitCourseRegistrationInfo(cr);
 	}
 
 	/** 
@@ -43,6 +65,10 @@ public class addCourseRegistrationInfoUI {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void displayConfirmationMessage() {
-		System.out.println("Success");
+		System.out.println("Succes");
+	}
+	
+	public void displayFailureMessage() {
+		System.out.println("Failure");
 	}
 }
