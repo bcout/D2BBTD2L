@@ -85,7 +85,7 @@ public class addCourseOfferingInfoUI {
   Stage stage = null;
 
   // creates all the necessary scene components
-  private void initSceneComponents() {
+  private void initSceneComponents() throws Exception {
     
     //Layout
     pane = new GridPane();
@@ -95,23 +95,26 @@ public class addCourseOfferingInfoUI {
     // course number input
     courseNumberLbl = new Label("Course Number");
     courseNumberLbl.setPrefWidth(labelWidth);
-    String[] availableCourses = control.getHardCodedCourses();
+    String[] availableCourses = control.getAvailableCourses();
     courseNumber = new
-      ComboBox(FXCollections.observableArrayList(availableCourses));
+      ComboBox<>(FXCollections.observableArrayList(availableCourses));
     pane.add(courseNumberLbl,0,0);
     pane.add(courseNumber,1,0);
+    
     // room number input
     roomNumberLbl = new Label("Room Number");
     roomNumberLbl.setPrefWidth(labelWidth);
     roomNumber = new TextField();
     pane.add(roomNumberLbl, 0, 1);
     pane.add(roomNumber,1,1);
+    
     // course length input
     courseLengthLbl = new Label("Course Length (min)");
     courseLengthLbl.setPrefWidth(labelWidth);
     courseLength = new TextField("50");
     pane.add(courseLengthLbl,0,2);
     pane.add(courseLength,1,2);
+    
     // term input
     termInputLbl = new Label("Available Term");
     termInputLbl.setPrefWidth(labelWidth);
@@ -120,6 +123,7 @@ public class addCourseOfferingInfoUI {
       ComboBox<String>(FXCollections.observableArrayList(availableTerms));
     pane.add(termInputLbl,0,3);
     pane.add(termInput,1,3);
+    
     // year input
     yearInputLbl = new Label("Available Year");
     yearInputLbl.setPrefWidth(labelWidth);
@@ -128,29 +132,33 @@ public class addCourseOfferingInfoUI {
       ComboBox<Integer>(FXCollections.observableArrayList(availableYears));
     pane.add(yearInputLbl,0,4);
     pane.add(yearInput,1,4);
+    
     // professor input
     String[] availableProfessors =
-    control.getHardCodedProfessors();
+    control.getAvailableProfessors();
     professorInputLbl = new Label("Professor");
     professorInputLbl.setPrefWidth(labelWidth);
     professorInput = new
       ComboBox<String>(FXCollections.observableArrayList(availableProfessors));
     pane.add(professorInputLbl,0,5);
     pane.add(professorInput,1,5);
+    
     // TA input
-    String[] availableTAs = control.getHardCodedTAs();
+    String[] availableTAs = control.getAvailableTAs();
     TA_InputLbl = new Label("TA");
     TA_InputLbl.setPrefWidth(labelWidth);
     TA_Input = new
       ComboBox<String>(FXCollections.observableArrayList(availableTAs));
     pane.add(TA_InputLbl,0,6);
     pane.add(TA_Input,1,6);
+    
     // Time input
     timeLabel = new Label("Class Time");
     String[] availableTimes = control.getAvailableTimes();
-    timeInput = new ComboBox(FXCollections.observableArrayList(availableTimes));
+    timeInput = new ComboBox<>(FXCollections.observableArrayList(availableTimes));
     pane.add(timeLabel, 0, 7);
     pane.add(timeInput, 1, 7);
+    
     // Days of the week
     HBox dowHbox = new HBox(4);
     daysOfWeekBoxes = new CheckBox[5];
@@ -160,6 +168,7 @@ public class addCourseOfferingInfoUI {
       dowHbox.getChildren().add(daysOfWeekBoxes[i]);
     }
     pane.add(dowHbox,0,8,2,1);
+    
     // extra
     backButton = new Button("Main Menu");
     backButton.setOnAction(this::processBackButton);
@@ -181,16 +190,7 @@ public class addCourseOfferingInfoUI {
     if(input == null || input.equals("")) {
       throw new Exception("Must select course number"); 
     }
-    String[] availableCourseNames = control.getHardCodedCourses();
-    int courseId = 1;
-    for(String courseName : availableCourseNames) {
-      if(!courseName.equals(input)) {
-        courseId++;
-      } else {
-        return courseId;
-      }
-    }
-    throw new Exception("course number not found");
+    return control.getCourseId(input);
   }
 
   private String parseRoomNumber() throws Exception {
@@ -248,19 +248,10 @@ public class addCourseOfferingInfoUI {
     if(profIn == null || profIn.equals("")) {
       throw new Exception("Must select a professor name");
     }
-
-    // or getAvailableTAs
-    String[] availableProfessors = control.getHardCodedProfessors().clone(); 
-    
-    int professorId = 1;
-    for(String professor : availableProfessors) {
-      if(!profIn.equals(professor)) {
-        professorId++;
-      } else {
-        return professorId; 
-      }
-    }
-    throw new Exception("Selected professor not found");
+    String[] names = profIn.split("~");
+    int profId = control.getAccountId(names[0], names[1]);
+    System.out.println("Prof ID returned from DB: " + profId);
+    return profId;
   }
 
   private int parseTA() throws Exception { // returns TA_ID from ta name
@@ -269,17 +260,8 @@ public class addCourseOfferingInfoUI {
       throw new Exception("Must select a TA name");
     }
 
-    String[] availableTAs = control.getHardCodedTAs().clone();
-
-    int taId = 1;
-    for(String TA : availableTAs) {
-      if(!taIn.equals(TA)) {
-        taId++;
-      } else {
-        return taId;
-      }
-    }
-    throw new Exception("Selected TA not found");
+    String[] names = taIn.split("~");
+    return control.getAccountId(names[0], names[1]);
   }
 
   private boolean[] parseDow() {
@@ -330,7 +312,12 @@ public class addCourseOfferingInfoUI {
   }
 
   private Scene initScene() {
-    initSceneComponents();
+	try {
+      initSceneComponents();
+	} catch (Exception e) {
+	  System.err.println(e.getMessage());
+	  confirmationLabel.setText(e.getMessage());
+	}
     return new Scene(pane); 
   }
 

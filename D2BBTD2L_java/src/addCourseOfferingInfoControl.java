@@ -4,6 +4,8 @@
  */
 
 import java.util.ArrayList;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class addCourseOfferingInfoControl {
@@ -63,5 +65,13 @@ public class addCourseOfferingInfoControl {
   public void addCourseOfferingInfo(CourseOfferingInfoObject offering) throws
   Exception {
     dataManager.addCourseOfferingInfo(offering);
+  }
+  
+  public int getAccountId(String firstName, String lastName) throws SQLException {
+      return dataManager.getAccountId(firstName, lastName);
+  }
+  
+  public int getCourseId(String courseNum) throws SQLException {
+      return dataManager.getCourseId(courseNum);
   }
 }

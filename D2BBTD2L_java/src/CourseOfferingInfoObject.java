@@ -24,6 +24,7 @@ public class CourseOfferingInfoObject {
     this.professorId = profId;
     this.TA_id = TA_id;
     this.daysOfWeek = dow;
+    this.time = time;
   }
 
   public int getCourseId() {

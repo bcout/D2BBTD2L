@@ -32,14 +32,13 @@ create table Course (
 CREATE TABLE CourseOfferingInfo
 (
   courseOfferingId INT AUTO_INCREMENT,
-  /* varchar for same reason as above */
   professorId INT NOT NULL,
   taId INT NOT NULL,
   roomNum VARCHAR(10) NOT NULL,
   courseId INT NOT NULL,
   term int NOT NULL,
   year int NOT NULL,
-  classLength INT NOT NULL CHECK (length > 0),
+  classLength INT NOT NULL CHECK (classLength > 0),
   classTime varchar(30) NOT NULL, /* time will not be used at all*/
   monday boolean,
   tuesday boolean,
