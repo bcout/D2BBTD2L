@@ -4,6 +4,7 @@
  */
 
 import java.util.ArrayList;
+import java.sql.SQLException;
 
 public class addCourseOfferingInfoControl {
   private DataManager dataManager;
@@ -20,7 +21,7 @@ public class addCourseOfferingInfoControl {
     return new String[]{"Fall","Winter","SummerA","SummerB"};
   }
 
-  public String[] getAvailableTAs() {
+  public String[] getAvailableTAs() throws SQLException {
     return dataManager.getAvailableTAs();
   }
 
@@ -28,7 +29,7 @@ public class addCourseOfferingInfoControl {
     return new String[]{"This","is","hardcoded"};
   }
 
-  public String[] getAvailableProfessors() {
+  public String[] getAvailableProfessors() throws SQLException {
     return dataManager.getAvailableProfessors();
   }
 
@@ -51,7 +52,16 @@ public class addCourseOfferingInfoControl {
     return times.toArray(new String[times.size()]);
   }
 
-  public Boolean addCourseOfferingInfo(CourseOfferingInfoObject offeringInfo) {
-    return true;
+  public String[] getAvailableCourses() throws SQLException {
+    return dataManager.getAvailableCourses(); // course numbers
+  }
+
+  public String[] getHardCodedCourses() {
+    return new String[]{"info1103","cs2043","cs3113"};
+  }
+
+  public void addCourseOfferingInfo(CourseOfferingInfoObject offering) throws
+  Exception {
+    dataManager.addCourseOfferingInfo(offering);
   }
 }

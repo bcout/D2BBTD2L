@@ -41,12 +41,11 @@ public class addCourseOfferingInfoUI {
    * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
    */
   private addCourseOfferingInfoControl control;
-  private CourseOfferingInfoObject courseOffering;
 
   // UI Elements
   // course number
   private Label courseNumberLbl;
-  private TextField courseNumber;
+  private ComboBox<String> courseNumber;
   // room number
   private Label roomNumberLbl;
   private TextField roomNumber;
@@ -96,7 +95,9 @@ public class addCourseOfferingInfoUI {
     // course number input
     courseNumberLbl = new Label("Course Number");
     courseNumberLbl.setPrefWidth(labelWidth);
-    courseNumber = new TextField();
+    String[] availableCourses = control.getHardCodedCourses();
+    courseNumber = new
+      ComboBox(FXCollections.observableArrayList(availableCourses));
     pane.add(courseNumberLbl,0,0);
     pane.add(courseNumber,1,0);
     // room number input
@@ -174,107 +175,111 @@ public class addCourseOfferingInfoUI {
     pane.add(confirmationLabel, 0, 11, 2, 1);
   }
 
-  private String parseCourseNumber() {
-   String courseNum = courseNumber.getText();
-
-   if(courseNum == null || courseNum.compareTo("")==0) {
-     confirmationLabel.setText("A year must be provided");
-     return null;
-   }
-   return courseNum;
+  // gets courseID from room number
+  private int parseCourseNumber() throws Exception {
+    String input = courseNumber.getValue();
+    if(input == null || input.equals("")) {
+      throw new Exception("Must select course number"); 
+    }
+    String[] availableCourseNames = control.getHardCodedCourses();
+    int courseId = 1;
+    for(String courseName : availableCourseNames) {
+      if(!courseName.equals(input)) {
+        courseId++;
+      } else {
+        return courseId;
+      }
+    }
+    throw new Exception("course number not found");
   }
 
-  private String parseRoomNumber() {
+  private String parseRoomNumber() throws Exception {
     String roomNum = roomNumber.getText();
 
     if(roomNum == null || roomNum.compareTo("")==0) {
-      confirmationLabel.setText("A room number must be provided");  
-      return null;
+      throw new Exception("Must input a room number");
     }
     return roomNum; 
   }
 
-  private double parseLength() {
+  private double parseLength() throws Exception {
     double courseLen = 0;
     try {
       courseLen = Double.parseDouble(courseLength.getText());
     } catch (Exception e) {
-      confirmationLabel.setText("The course length could not be read"); 
-      return 0;
+      throw new Exception("Couldn't parse length. May be empty"); 
     }
-
     if(courseLen <= 0) {
-      confirmationLabel.setText("A positive course length must be"
-      + "provided"); 
-      return 0;
+      throw new Exception("A positive course length must be provided");
     }
     return courseLen;
   }
 
-  private int parseTerm() {
+  private int parseTerm() throws Exception {
     String termName = (String)(termInput.getValue());
+    if(termName == null || termName.equals("")) {
+      throw new Exception("Must select a term");
+    }
     int termNum = 1;
     String[] availableTerms = control.getAvailableTerms().clone();
 
     for(String term : availableTerms) {
-      if(termName.equals(term)) {
+      if(!termName.equals(term)) {
         termNum++; 
       } else {
         return termNum;
       }
     }
-
-    confirmationLabel.setText("The requested term is not available"); 
-    return 0;
+    throw new Exception("term not found");
   }
 
-  private int parseYear() {
+  private int parseYear() throws Exception {
     Integer yearIn = 0;
-    try {
-      yearIn = yearInput.getValue(); 
-      // getAvailableYears returns Integer[]
-      Integer[] availableYears = control.getAvailableYears();
-      for(Integer year : availableYears) {
-          return year.intValue(); 
-        }
-      confirmationLabel.setText("The requested year is not available");
-    } catch (NumberFormatException e) {
-      confirmationLabel.setText("The requested year could not be read");
+    yearIn = yearInput.getValue(); 
+    if(yearIn == null) {
+      throw new Exception("Must select a year");
     }
-    return 0;
+    return yearIn;
   }
 
-  private String parseProfessor() {
+  private int parseProfessor() throws Exception { // returns professorId from professor name
     String profIn = (String)(professorInput.getValue());
-    System.out.println("Professor inputted: " + profIn);
+
+    if(profIn == null || profIn.equals("")) {
+      throw new Exception("Must select a professor name");
+    }
 
     // or getAvailableTAs
     String[] availableProfessors = control.getHardCodedProfessors().clone(); 
     
+    int professorId = 1;
     for(String professor : availableProfessors) {
-      System.out.println(professor);
-      if(profIn.equals(professor)) {
-        return professor; 
+      if(!profIn.equals(professor)) {
+        professorId++;
+      } else {
+        return professorId; 
       }
     }
-    confirmationLabel.setText("The requested professor is not available");
-    return null; 
+    throw new Exception("Selected professor not found");
   }
 
-  private String parseTA() {
+  private int parseTA() throws Exception { // returns TA_ID from ta name
     String taIn = (String)(TA_Input.getValue());
-    System.out.println("TA inputted: " + taIn);
+    if(taIn == null || taIn.equals("")) {
+      throw new Exception("Must select a TA name");
+    }
 
     String[] availableTAs = control.getHardCodedTAs().clone();
 
+    int taId = 1;
     for(String TA : availableTAs) {
-      System.out.println(TA);
-      if(taIn.equals(TA)) {
-        return TA;
+      if(!taIn.equals(TA)) {
+        taId++;
+      } else {
+        return taId;
       }
     }
-    confirmationLabel.setText("The requested TA is not available");
-    return null;
+    throw new Exception("Selected TA not found");
   }
 
   private boolean[] parseDow() {
@@ -285,33 +290,34 @@ public class addCourseOfferingInfoUI {
     return dow;
   }
 
-  private String parseTime() {
+  private String parseTime() throws Exception {
     String inputTime = timeInput.getValue();
     if(inputTime != null && !inputTime.equals("")) {
      return inputTime; 
     }
-    return null;
+    throw new Exception("must select a time");
   }
 
   private void processSubmitButton(ActionEvent event) {
-    String courseNum = parseCourseNumber();
-    String roomNum = parseRoomNumber();
-    double courseLength = parseLength();
-    int term = parseTerm();
-    int year = parseYear();
-    String professor = parseProfessor();
-    String TA = parseTA();
-    boolean[] dow = parseDow();
-    String time = parseTime();
+    try { 
+      int courseId = parseCourseNumber();
+      String roomNum = parseRoomNumber();
+      double courseLength = parseLength();
+      int term = parseTerm();
+      int year = parseYear();
+      int professorId = parseProfessor();
+      int TA_id = parseTA();
+      boolean[] dow = parseDow();
+      String time = parseTime();
 
-    System.out.println(courseNum + roomNum + term);
-    if(courseNum != null && roomNum != null &&
-       courseLength != 0 && term != 0 && year != 0 &&
-       professor != null && TA != null && time != null ) {
-       confirmationLabel.setText("button has been pressed - everything parsed");
-    } else {
-      confirmationLabel.setText("fail");
-      // parse methods will update confirmation label upon failure
+      CourseOfferingInfoObject offering = 
+        new CourseOfferingInfoObject(courseId, roomNum, courseLength, term,
+        year, professorId, TA_id, dow, time);
+
+      control.addCourseOfferingInfo(offering);
+      confirmationLabel.setText("Successfully Added Student");
+    } catch (Exception e) {
+      confirmationLabel.setText(e.getMessage());
     }
   }
 

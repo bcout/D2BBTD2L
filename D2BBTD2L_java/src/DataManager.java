@@ -839,11 +839,27 @@ public class DataManager{
 	 * @param offeringInfo
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void addCourseOfferingInfo(CourseOfferingInfoObject offeringInfo) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void addCourseOfferingInfo(CourseOfferingInfoObject offering)
+           throws SQLException {
+          PreparedStatement ps = connection.prepareStatement(
+            "insert into CourseOfferingInfo (professorId, taId, roomNum," 
+            + "courseId, term, year, classLength, classTime, monday, tuesday,"
+            + "wednesday,thursday,friday) "
+            + "values(?,?,?,?,?,?,?,?,?,?,?,?)");
+          ps.setInt(1, offering.getTaId());
+          ps.setString(2, offering.getRoomNumber());
+          ps.setInt(3, offering.getCourseId());
+          ps.setInt(4, offering.getTerm());
+          ps.setInt(5, offering.getYear());
+          ps.setInt(6, (int)(offering.getCourseLength()));
+          ps.setString(7, offering.getTime());
+          ps.setBoolean(8, offering.getDOW()[0]);
+          ps.setBoolean(9, offering.getDOW()[1]);
+          ps.setBoolean(10, offering.getDOW()[2]);
+          ps.setBoolean(11, offering.getDOW()[3]);
+          ps.setBoolean(12, offering.getDOW()[4]);
+          
+          ps.executeUpdate();
 	}
 
 	/** 
@@ -986,43 +1002,46 @@ public class DataManager{
 		// end-user-code
 	}
 
-        public String[] getAvailableTAs() {
+        public String[] getAvailableTAs() throws SQLException {
           ArrayList<String> results = new ArrayList<String>();
-          try {
-            String query = "{select firstName,lastName from Account"
-                            + "where accountType=3}";
-            PreparedStatement statement = connection.prepareStatement
-            (query);
-            ResultSet rs = statement.executeQuery();
-            while(rs.next()) {
-              String firstName = rs.getString("firstName");
-              String lastName = rs.getString("lastName");
-              results.add(firstName + " " + lastName);
-            }
-          } catch (SQLException e) {
-            System.err.println("Could not retrieve available TAs "
-                               + e.getMessage());
+          String query = "{select firstName,lastName from Account"
+                          + "where accountType=3}";
+          PreparedStatement statement = connection.prepareStatement
+          (query);
+          ResultSet rs = statement.executeQuery();
+          while(rs.next()) {
+            String firstName = rs.getString("firstName");
+            String lastName = rs.getString("lastName");
+            results.add(firstName + " " + lastName);
           }
           //return results.toArray(new String[results.size()]);
           return new String[]{"hey","there"};
         }
 
-        public String[] getAvailableProfessors() {
+        public String[] getAvailableProfessors() throws SQLException {
           ArrayList<String> results = new ArrayList<String>();
-          try {
-            String query = "{select firstName,lastName from Account"
-                            + "where accountType=4}";
-            PreparedStatement statement = connection.prepareStatement
-            (query);
-            ResultSet rs = statement.executeQuery();
-            while(rs.next()) {
-              String firstName = rs.getString("firstName");
-              String lastName = rs.getString("lastName");
-              results.add(firstName + " " + lastName);
-            }
-          } catch (SQLException e) {
-            System.err.println("Could not retrieve available professors "
-                               + e.getMessage());
+          String query = "{select firstName,lastName from Account"
+                          + "where accountType=4}";
+          PreparedStatement statement = connection.prepareStatement
+          (query);
+          ResultSet rs = statement.executeQuery();
+          while(rs.next()) {
+            String firstName = rs.getString("firstName");
+            String lastName = rs.getString("lastName");
+            results.add(firstName + " " + lastName);
+          }
+          //return results.toArray(new String[results.size()]);
+          return new String[]{"hey","there"};
+        }
+
+        public String[] getAvailableCourses() throws SQLException {
+          ArrayList<String> results = new ArrayList<String>();
+          String query = "{select courseNumber from Course}";
+          PreparedStatement statement = connection.prepareStatement
+          (query);
+          ResultSet rs = statement.executeQuery();
+          while(rs.next()) {
+            results.add("courseNumber");
           }
           //return results.toArray(new String[results.size()]);
           return new String[]{"hey","there"};
