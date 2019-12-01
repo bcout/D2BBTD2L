@@ -818,12 +818,12 @@ public class DataManager{
 				assignmentList.add(rs.getString(1))
 			}
 
-			return assignmentList;
 			
 		} catch (SQLException e) {
 			System.err.println("SQL error: Assignment not found");
 			e.printStackTrace();
 		}
+		return assignmentList;
 	}
 
 	/** 
