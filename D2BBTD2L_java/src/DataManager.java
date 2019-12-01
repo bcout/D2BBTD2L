@@ -41,7 +41,7 @@ public class DataManager{
 		}
 		catch (SQLException e)
 		{
-			System.out.println("Database connection error.");
+			System.err.println("Database connection error.");
 		}
 	}
 	
@@ -839,11 +839,29 @@ public class DataManager{
 	 * @param offeringInfo
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void addCourseOfferingInfo(CourseOfferingInfoObject offeringInfo) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void addCourseOfferingInfo(CourseOfferingInfoObject offering)
+           throws SQLException {
+          System.out.println("in addCourseOfferingInfo");
+          PreparedStatement ps = connection.prepareStatement(
+            "insert into CourseOfferingInfo (professorId, taId, roomNum," 
+            + "courseId, term, year, classLength, classTime, monday, tuesday,"
+            + "wednesday,thursday,friday) "
+            + "values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
+          ps.setInt(1, offering.getProfessorId());
+          ps.setInt(2, offering.getTaId());
+          ps.setString(3, offering.getRoomNumber());
+          ps.setInt(4, offering.getCourseId());
+          ps.setInt(5, offering.getTerm());
+          ps.setInt(6, offering.getYear());
+          ps.setInt(7, (int)(offering.getCourseLength()));
+          ps.setString(8, offering.getTime());
+          ps.setBoolean(9, offering.getDOW()[0]);
+          ps.setBoolean(10, offering.getDOW()[1]);
+          ps.setBoolean(11, offering.getDOW()[2]);
+          ps.setBoolean(12, offering.getDOW()[3]);
+          ps.setBoolean(13, offering.getDOW()[4]);
+          
+          ps.executeUpdate();
 	}
 
 	/** 
@@ -985,6 +1003,74 @@ public class DataManager{
 
 		// end-user-code
 	}
-}
 
+        public String[] getAvailableTAs() throws SQLException {
+          System.out.println("in getAvailableTAs");
+          ArrayList<String> results = new ArrayList<String>();
+          String query = "select firstName,lastName from Account where accountType=3";
+          PreparedStatement statement = connection.prepareStatement
+          (query);
+          ResultSet rs = statement.executeQuery();
+          while(rs.next()) {
+            String firstName = rs.getString("firstName");
+            String lastName = rs.getString("lastName");
+            System.out.println("TA from DB: " + firstName + " " + lastName);
+            results.add(firstName + "~" + lastName);
+          }
+          return results.toArray(new String[results.size()]);
+        }
+
+        public String[] getAvailableProfessors() throws SQLException {
+          System.out.println("in getAvailableProfessors");
+          ArrayList<String> results = new ArrayList<String>();
+          String query = "select firstName,lastName from Account where accountType=4";
+          PreparedStatement statement = connection.prepareStatement(query);
+          ResultSet rs = statement.executeQuery();
+          while(rs.next()) {
+            String firstName = rs.getString("firstName");
+            String lastName = rs.getString("lastName");
+            System.out.println("Profs from DB: " + firstName + " " + lastName);
+            results.add(firstName + "~" + lastName);
+          }
+          return results.toArray(new String[results.size()]);
+        }
+
+        public String[] getAvailableCourses() throws SQLException {
+          System.out.println("in getAvailableCourses");
+          ArrayList<String> results = new ArrayList<String>();
+          String query = "select courseNumber from Course";
+          PreparedStatement statement = connection.prepareStatement(query);
+          ResultSet rs = statement.executeQuery();
+          while(rs.next()) {
+        	String courseNum = rs.getString("courseNumber");
+        	System.out.println("Course Num from DB: " + courseNum);
+            results.add(courseNum);
+          }
+          return results.toArray(new String[results.size()]);
+        }
+        
+        public int getAccountId(String firstName, String lastName) throws SQLException {
+            System.out.println("in getAccountId");
+            PreparedStatement statement = connection.prepareStatement("select accountId from Account where firstName=? and lastName=?");
+            statement.setString(1, firstName);
+            statement.setString(2, lastName);
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            int accountId = rs.getInt("accountId");
+            System.out.println("accountId upon exit: " + accountId);
+            return accountId;
+        }
+        
+        public int getCourseId(String courseNum) throws SQLException {
+            System.out.println("in getCourseId. courseNum: " + courseNum);
+            PreparedStatement statement = connection.prepareStatement("select courseId from Course where courseNumber=?");
+            statement.setString(1, courseNum);
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            int courseId = rs.getInt("courseId");
+            System.out.println("courseId upon exit: " + courseId);
+            return courseId;
+        }
+
+}
 
