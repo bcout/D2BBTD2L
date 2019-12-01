@@ -118,12 +118,6 @@ public class PostAssignmentUI{
 		return postScene = new Scene(postPane, 900, 600);
 		
 	}
-        
-        
-		return postScene = new Scene(postPane, 900, 600);
-		
-	}
-
 
 
 }
