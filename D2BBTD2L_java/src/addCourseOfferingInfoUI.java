@@ -4,12 +4,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
+import javafx.scene.control.CheckBox;
 /**
  * 
  */
@@ -63,6 +65,14 @@ public class addCourseOfferingInfoUI {
   // TA input
   private Label TA_InputLbl;
   private ComboBox<String> TA_Input;
+  // days of the week
+  private CheckBox[] daysOfWeekBoxes;
+  private String[] daysOfWeekNames = 
+    new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+  // Time of the class
+  private Label timeLabel;
+  private ComboBox<String> timeInput;
+
   // extra
   private Button backButton;
   private Button addCourseButton;
@@ -71,7 +81,7 @@ public class addCourseOfferingInfoUI {
 
   // Layout
   GridPane pane = null;
-  final double vGap = 5;
+  final double vGap = 10;
   final double labelWidth = 200;
   Stage stage = null;
 
@@ -134,6 +144,21 @@ public class addCourseOfferingInfoUI {
       ComboBox<String>(FXCollections.observableArrayList(availableTAs));
     pane.add(TA_InputLbl,0,6);
     pane.add(TA_Input,1,6);
+    // Time input
+    timeLabel = new Label("Class Time");
+    String[] availableTimes = control.getAvailableTimes();
+    timeInput = new ComboBox(FXCollections.observableArrayList(availableTimes));
+    pane.add(timeLabel, 0, 7);
+    pane.add(timeInput, 1, 7);
+    // Days of the week
+    HBox dowHbox = new HBox(4);
+    daysOfWeekBoxes = new CheckBox[5];
+    for(int i=0; i<5; ++i) {
+      daysOfWeekBoxes[i] = new CheckBox(daysOfWeekNames[i]);
+      daysOfWeekBoxes[i].setIndeterminate(false);
+      dowHbox.getChildren().add(daysOfWeekBoxes[i]);
+    }
+    pane.add(dowHbox,0,8,2,1);
     // extra
     backButton = new Button("Main Menu");
     backButton.setOnAction(this::processBackButton);
@@ -143,10 +168,10 @@ public class addCourseOfferingInfoUI {
     submitButton.setOnAction(this::processSubmitButton);
     confirmationLabel = new Label("Enter details");
     confirmationLabel.setPrefWidth(500);
-    pane.add(addCourseButton,0,7);
-    pane.add(backButton,1,7);
-    pane.add(submitButton, 0, 9, 2, 1);
-    pane.add(confirmationLabel, 0, 10, 2, 1);
+    pane.add(addCourseButton, 0, 9);
+    pane.add(backButton, 1, 9);
+    pane.add(submitButton, 0, 10, 2, 1);
+    pane.add(confirmationLabel, 0, 11, 2, 1);
   }
 
   private String parseCourseNumber() {
@@ -188,11 +213,11 @@ public class addCourseOfferingInfoUI {
 
   private int parseTerm() {
     String termName = (String)(termInput.getValue());
-    int termNum = 0;
+    int termNum = 1;
     String[] availableTerms = control.getAvailableTerms().clone();
 
     for(String term : availableTerms) {
-      if(termName.compareTo(term)!=0) {
+      if(termName.equals(term)) {
         termNum++; 
       } else {
         return termNum;
@@ -252,6 +277,22 @@ public class addCourseOfferingInfoUI {
     return null;
   }
 
+  private boolean[] parseDow() {
+    boolean[] dow = new boolean[]{false,false,false,false,false};
+    for(int i=0; i<5; ++i) {
+      dow[i] = daysOfWeekBoxes[i].isSelected();
+    }
+    return dow;
+  }
+
+  private String parseTime() {
+    String inputTime = timeInput.getValue();
+    if(inputTime != null && !inputTime.equals("")) {
+     return inputTime; 
+    }
+    return null;
+  }
+
   private void processSubmitButton(ActionEvent event) {
     String courseNum = parseCourseNumber();
     String roomNum = parseRoomNumber();
@@ -260,13 +301,14 @@ public class addCourseOfferingInfoUI {
     int year = parseYear();
     String professor = parseProfessor();
     String TA = parseTA();
+    boolean[] dow = parseDow();
+    String time = parseTime();
 
-    System.out.println(courseNum + roomNum + courseLength + term + professor +
-    TA + year);
+    System.out.println(courseNum + roomNum + term);
     if(courseNum != null && roomNum != null &&
-      courseLength != 0 && term != 0 && year != 0 &&
-      professor != null && TA != null ) {
-      confirmationLabel.setText("button has been pressed - everything parsed");
+       courseLength != 0 && term != 0 && year != 0 &&
+       professor != null && TA != null && time != null ) {
+       confirmationLabel.setText("button has been pressed - everything parsed");
     } else {
       confirmationLabel.setText("fail");
       // parse methods will update confirmation label upon failure

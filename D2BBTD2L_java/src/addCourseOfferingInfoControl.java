@@ -3,7 +3,7 @@
  * 
  */
 
-//import static CourseOfferingInfoObject.*;
+import java.util.ArrayList;
 
 public class addCourseOfferingInfoControl {
   private DataManager dataManager;
@@ -38,6 +38,17 @@ public class addCourseOfferingInfoControl {
 
   public Integer[] getAvailableYears() {
     return new Integer[]{2019,2020,2021,2022};
+  }
+
+  public String[] getAvailableTimes() {
+    ArrayList<String> times = new ArrayList<String>();
+    for(int hour=8; hour<21; ++hour) {
+      for(int minutes=0; minutes<=30; minutes+=30) {
+        times.add(Integer.toString(hour) + ":" +
+        ((minutes==0)?"00":Integer.toString(minutes))); 
+      }
+    }
+    return times.toArray(new String[times.size()]);
   }
 
   public Boolean addCourseOfferingInfo(CourseOfferingInfoObject offeringInfo) {
