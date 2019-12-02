@@ -29,6 +29,8 @@ public class PasswordSkin extends TextFieldSkin {
             		passwordBuilder.append("~");
             	}
             	*/
+            	
+            	
 
             return passwordBuilder.toString();
         } else {
