@@ -61,19 +61,19 @@ public class AdminMainMenu
 		onlyForFormatting = new Label("");
 		onlyForFormatting.setPrefWidth(80);
 		
-		btnAddStudentCourseRegistrationInfo = new Button("Register Student");
+		btnAddStudentCourseRegistrationInfo = new Button("Add Student to Course");
 		btnAddStudentCourseRegistrationInfo.setOnAction(this::processAddStudentButtonPress);
-		btnAddStudentCourseRegistrationInfo.setPrefWidth(150);
+		btnAddStudentCourseRegistrationInfo.setPrefWidth(170);
 		
-		btnAddCourseOfferingInfo = new Button("New Course");
+		btnAddCourseOfferingInfo = new Button("Create Course");
 		btnAddCourseOfferingInfo.setOnAction(this::processAddCourseButtonPress);
-		btnAddCourseOfferingInfo.setPrefWidth(100);
+		btnAddCourseOfferingInfo.setPrefWidth(120);
 		
 		btnLogout = new Button("Logout");
 		btnLogout.setOnAction(this::processLogoutButtonPress);
 		btnLogout.setPrefWidth(70);
 		
-		btnCreateLoginAccount = new Button("New Account");
+		btnCreateLoginAccount = new Button("Create Account");
 		btnCreateLoginAccount.setOnAction(this::processCreateAccountButtonPress);
 		btnCreateLoginAccount.setPrefWidth(120);
 		
@@ -125,7 +125,9 @@ public class AdminMainMenu
 	
 	private void processAddCourseButtonPress(ActionEvent event)
 	{
-		//display addCourseOfferingInfo
+		addCourseOfferingInfoUI acoi = new addCourseOfferingInfoUI();
+		acoi.displayAddCourseOfferingInfoForm(MainMenu.getStage());
+		
 	}
 	
 	private void processAddStudentButtonPress(ActionEvent event)

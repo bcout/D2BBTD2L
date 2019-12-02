@@ -1,122 +1,17 @@
-import java.util.Set;
-
-/** 
-* <!-- begin-UML-doc -->
-* <!-- end-UML-doc -->
-* @author bcouturi
-* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-*/
 public class Account 
 {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	
 	private int accountId;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	
 	private String username;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	
 	private String password;
 	
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private AdminAccount adminAccount;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private TA_Account tA_Account;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private ProfessorAccount professorAccount;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private StudentAccount studentAccount;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Set<Message> message;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Set<Message> message2;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	private int accountType;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Set<CourseOfferingInfo> courseOfferingInfo;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Set<CourseOfferingInfo> courseOfferingInfo2;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	
 	private String firstName;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	
 	private String lastName;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private CourseRegistration courseRegistration;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Set<Assignment> assignmentSubmission;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private LockerItem locker;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private AccountType accountType2;
 	
 	/**
 	 * This constructor is not used to make a new user, it is to make an object out of an existing user. It is used by the DataManager's getAllAccounts method
@@ -137,6 +32,13 @@ public class Account
 		this.lastName = lastName;
 	}
 	
+	/**
+	 * 
+	 * @param username
+	 * @param password
+	 * @param firstName
+	 * @param lastName
+	 */
 	public Account(String username, String password, String firstName, String lastName) {
 		this.username = username;
 		this.password = password;
@@ -144,97 +46,93 @@ public class Account
 		this.lastName = lastName;
 	}
 	
+	/**
+	 * 
+	 * @param type
+	 */
 	public void setAccountType(int type) {
 		accountType = type;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getAccountId()
 	{
 		return accountId;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getUsername() {
 		return username;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getPassword() {
 		return password;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getFirstName() {
 		return firstName;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getLastName() {
 		return lastName;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getAccountType() {
 		return accountType;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getFullName()
 	{
 		return lastName + ", " + firstName;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getFullNameInformal()
 	{
 		return firstName + " " + lastName;
 	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void SQLAddProf() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void SQLAddAdmin() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void SQLAddStudent() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void SQLAddTA() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
 	
+	/**
+	 * 
+	 */
 	public String toString()
 	{
 		return lastName + ", " + firstName;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getFullDetails()
 	{
 		return accountId + ", " + username + ", " + password + ", " + accountType + ", " + firstName + ", " + lastName;
