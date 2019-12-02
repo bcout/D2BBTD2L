@@ -3,8 +3,6 @@
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-import javafx.beans.property.SimpleStringProperty;
-
 /**
  * This class represents a Message object
  * @author Brennan Couturier, 3638808
