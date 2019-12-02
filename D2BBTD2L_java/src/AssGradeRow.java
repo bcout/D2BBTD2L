@@ -43,6 +43,13 @@ public class AssGradeRow implements Cloneable {
 	    return assGrade;
 	  }
 
+  public String getAssGrade() {
+    if(assGrade == null || assGrade < 0) {
+      return "N/A";
+    }
+    return Double.toString(assGrade);
+  }
+
   public Boolean getSubmitted() {
     return submitted;
   }
