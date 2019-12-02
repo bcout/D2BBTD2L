@@ -27,6 +27,8 @@ public class enterMarkUI {
   private TextField gradeInput;
   private Label studentInputLbl;
   private ComboBox<String> studentInput;
+  private Label courseInputLbl;
+  private ComboBox<String> courseInput;
   private Button submitButton;
   private Button backButton;
   private Label confirmationLabel;
@@ -38,16 +40,17 @@ public class enterMarkUI {
 
 
   // non-javafx
-	private enterMarkControl control;
+  private enterMarkControl control;
   private final double hGap = 10;
   private final double vGap = 10;
+  private AssGradeRow[] assGradeRows;
   
   public enterMarkUI() {
     control = new enterMarkControl();  
   }
 
   public enterMarkUI(DataManager dm) {
-    control = new enterMarkControl();
+    control = new enterMarkControl(dm);
   }
 
 	public void displayEnterMarkPage() {
@@ -62,11 +65,21 @@ public class enterMarkUI {
     // student selection input
     studentInputLbl = new Label("Select Student");
     studentInput = new ComboBox<String>();
-    studentInput.setOnAction(this::processStudentSelect);
+    studentInput.setOnAction(this::processSelect);
     studentInput.getItems().addAll(control.getAvailableStudents());
     tempHbox = new HBox(hGap);
     tempHbox.setAlignment(Pos.CENTER);
     tempHbox.getChildren().addAll(studentInputLbl, studentInput);
+    pane.getChildren().add(tempHbox);
+    
+    // course selection input 
+    courseInputLbl = new Label("Select Course");
+    courseInput = new ComboBox<String>();
+    courseInput.setOnAction(this::processSelect);
+    courseInput.getItems().addAll(control.getAccessibleCourseOfferingNames());
+    tempHbox = new HBox(hGap);
+    tempHbox.setAlignment(Pos.CENTER);
+    tempHbox.getChildren().addAll(courseInputLbl, courseInput);
     pane.getChildren().add(tempHbox);
 
     // table of assignments
@@ -95,7 +108,7 @@ public class enterMarkUI {
 
     // grade input
     tempHbox = new HBox(hGap);
-    gradeInputLbl = new Label("Assignment Grade: ");
+    gradeInputLbl = new Label("Assignment Grade (%): ");
     gradeInput = new TextField();
     tempHbox.setAlignment(Pos.CENTER);
     tempHbox.getChildren().addAll(gradeInputLbl, gradeInput);
@@ -117,25 +130,74 @@ public class enterMarkUI {
   }
 
   private void processSubmitButton(ActionEvent event) {
-    confirmationLabel.setText("submit button pressed");
+	try {
+		AssGradeRow row = (AssGradeRow)parseRadioButtons().clone();
+		int assGrade = (int)parseGradeInput().doubleValue();
+		row.setAssGrade(assGrade);
+		control.insertAssignmentSubmissionGrade(row);
+		confirmationLabel.setText("submit button pressed");
+	} catch (Exception e) {
+		confirmationLabel.setText(e.getMessage());
+	}
+    
   }
 
   private void processBackButton(ActionEvent event) {
-    confirmationLabel.setText("back button pressed");
+	  Account account = MainMenu.getUserAccount();
+	  if(account.getAccountType() == 4) {// prof
+	  	ProfMainMenu pmm = new ProfMainMenu();
+      pmm.resetToMainMenu();
+	  } else if(account.getAccountType() == 3) { //TA
+		TAMainMenu tmm = new TAMainMenu();
+		tmm.resetToMainMenu();
+	  }
   }
 
-  private void processStudentSelect(ActionEvent event) {
-    selectAssBtn = new ArrayList<>();
-    toggleGroup = new ToggleGroup();
-    AssGradeRow[] assGradeRows = control.getAssignmentGradeRows();
-    table.getItems().clear();
-    for(AssGradeRow assGradeRow : assGradeRows) {
-      table.getItems().add(assGradeRow); 
-      RadioButton currentBtn = assGradeRow.getRadioButton();
-      currentBtn.setToggleGroup(toggleGroup);
-      selectAssBtn.add(currentBtn);
-    }
-    confirmationLabel.setText("student selected");
+  private void processSelect(ActionEvent event) {
+	  try {
+	    selectAssBtn = new ArrayList<>();
+	    toggleGroup = new ToggleGroup();
+	    
+	    int selectedStudentId;
+	    int selectedCourseOfferingId;
+	    
+	    if(studentInput.getValue() != null && courseInput.getValue() != null) {
+		    selectedStudentId = Integer.parseInt(studentInput.getValue().split("ID: ")[1]);
+		    System.out.println("Selected student id: " + selectedStudentId);
+		    selectedCourseOfferingId = Integer.parseInt(courseInput.getValue().split("ID:")[1]);
+		    System.out.println("Selected course id: " + selectedCourseOfferingId);
+		    
+		    assGradeRows = control.getAssignmentGradeRows(selectedStudentId, selectedCourseOfferingId);
+		    table.getItems().clear();
+		    for(AssGradeRow assGradeRow : assGradeRows) {
+		      table.getItems().add(assGradeRow); 
+		      RadioButton currentBtn = assGradeRow.getRadioButton();
+		      currentBtn.setToggleGroup(toggleGroup);
+		      selectAssBtn.add(currentBtn);
+		    }
+		    if(assGradeRows.length>0) confirmationLabel.setText("Selected");
+		    else confirmationLabel.setText("No Assignments Available");
+	    }
+	  } catch (Exception e) {
+		confirmationLabel.setText("No Assignments Available " + e.getMessage());
+	}
+  }
+  
+  private AssGradeRow parseRadioButtons() throws Exception { // returns assignment submission id
+	  for(int i=0; i<assGradeRows.length; ++i) {
+		  if(selectAssBtn.get(i).isSelected()) {
+			  return assGradeRows[i];
+		  }
+	  }
+	  throw new Exception("No Assignment Selected");
+  }
+  
+  private Double parseGradeInput() throws Exception {
+	  if(gradeInput.getText()==null) throw new Exception("Must supply a grade");
+	  Double grade = Double.parseDouble(gradeInput.getText());
+	  if(grade < 0 || grade > 100) 
+		  throw new Exception("grade must be within 0 and 100");
+	  return grade;
   }
 
   private Scene initScene() {
@@ -153,34 +215,4 @@ public class enterMarkUI {
     stage.show();
   }
 
-	public void enterMarkDetails() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void displayEnterMarkConfirmation() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void clicksentermark() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
 }

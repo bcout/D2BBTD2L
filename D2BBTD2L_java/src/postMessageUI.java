@@ -2,7 +2,6 @@
 
 
 import java.sql.SQLException;
-
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
