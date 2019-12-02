@@ -111,12 +111,6 @@ public class Account
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	private LockerItem locker;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private AccountType accountType2;
 	
 	/**
 	 * This constructor is not used to make a new user, it is to make an object out of an existing user. It is used by the DataManager's getAllAccounts method
