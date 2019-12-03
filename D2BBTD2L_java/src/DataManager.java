@@ -807,7 +807,11 @@ public class DataManager{
 			//Creates a string for the prepared statement with an appropriate amount of '?'s
 			for (int i=0; i<cr.size();i++) {
 				query += " (?,?)";
+				if (i < cr.size()-1) {
+					query += ",";
+				}
 			}
+
 			System.out.println(query);
 			PreparedStatement pst = connection.prepareStatement(query);
 			
