@@ -235,11 +235,8 @@ public class loginUI
 	{
 		lblError.setText(errorMessage);
 		
-		
 		lblError.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, null, new BorderWidths(1))));
 		lblError.setBackground(new Background(new BackgroundFill(Color.MISTYROSE, CornerRadii.EMPTY, null)));
-		
-		
 	}
 	
 }

@@ -12,7 +12,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import java.util.ArrayList;
 
@@ -133,6 +136,31 @@ public class enterMarkUI {
 		row.setAssGrade(assGrade);
 		control.insertAssignmentSubmissionGrade(row);
 		confirmationLabel.setText("Grade has been SET");
+		
+		Task<Void> sleeper = new Task<Void>()
+		{
+			protected Void call() throws Exception
+			{
+				try
+				{
+					Thread.sleep(1000);
+				}
+				catch(InterruptedException e)
+				{
+					
+				}
+				return null;
+			}
+		};
+		
+		sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>()
+		{
+			public void handle(WorkerStateEvent event)
+			{
+				resetToMainMenu();
+			}
+		});
+		new Thread(sleeper).start();
 
 	} catch (Exception e) {
 		confirmationLabel.setText(e.getMessage());
@@ -141,6 +169,11 @@ public class enterMarkUI {
   }
 
   private void processBackButton(ActionEvent event) {
+	 resetToMainMenu();
+  }
+  
+  private void resetToMainMenu()
+  {
 	  Account account = MainMenu.getUserAccount();
 	  if(account.getAccountType() == 4) {// prof
 	  	ProfMainMenu pmm = new ProfMainMenu();
