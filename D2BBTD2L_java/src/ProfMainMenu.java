@@ -35,6 +35,7 @@ public class ProfMainMenu
 	private Button btnNotifications;
 	private Button btnPostNotification;
 	private Button btnPostAssignment;
+	private Button btnPostMarks;
 	
 	private void initMainMenuComponents()
 	{
@@ -68,6 +69,10 @@ public class ProfMainMenu
 		btnPostAssignment = new Button("New Assignment");
 		btnPostAssignment.setOnAction(this::processNewAssignmentButtonPress);
 		btnPostAssignment.setPrefWidth(150);
+		
+		btnPostMarks = new Button("Post Marks");
+		btnPostMarks.setOnAction(this::processPostMarksButtonPress);
+		btnPostMarks.setPrefWidth(100);
 		
 		btnLogout = new Button("Logout");
 		btnLogout.setOnAction(this::processLogoutButtonPress);
@@ -143,6 +148,12 @@ public class ProfMainMenu
 	private void processNotificationsButtonPress(ActionEvent event)
 	{
 		//display viewNotifications
+	}
+	
+	private void processPostMarksButtonPress(ActionEvent event)
+	{
+		enterMarkUI emu = new enterMarkUI();
+		emu.displayEnterMarkPage();
 	}
 	
 	private void processPostNotificationButtonPress(ActionEvent event)
