@@ -3,7 +3,8 @@ import javafx.stage.Stage;
 
 public class TestCourseRegUI extends Application{
 	public void start(Stage stg) {
-		addCourseRegistrationInfoUI ui = new addCourseRegistrationInfoUI();
+		addCourseRegistrationInfoControl control = new addCourseRegistrationInfoControl(new DataManager());
+		addCourseRegistrationInfoUI ui = new addCourseRegistrationInfoUI(control);
 		ui.displayAddCourseRegistrationInfo(stg);
 	}
 	

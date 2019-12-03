@@ -1,5 +1,7 @@
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import javafx.event.*;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -47,6 +49,7 @@ public class addCourseRegistrationInfoUI {
 	public addCourseRegistrationInfoUI(addCourseRegistrationInfoControl control) {
 		this.control = control;
 	}
+	
 	/**
 	 * Initializes the javafx components 
 	 */
@@ -67,6 +70,7 @@ public class addCourseRegistrationInfoUI {
 		
 		addListB.setOnAction(e -> addList());
 		clearListB.setOnAction(e -> list.getItems().clear());
+		enterListB.setOnAction(e -> submitCourseRegistrationForm());
 		list = new TableView<>();
 		TableColumn<CourseRegistration, Integer> column1 = new TableColumn<>("Account ID");
 		column1.setCellValueFactory(new PropertyValueFactory<>("accountIdstudent"));
@@ -121,33 +125,36 @@ public class addCourseRegistrationInfoUI {
 		try {
 			sId = Integer.parseInt(accountTF.getText());
 			cId = Integer.parseInt(courseOffTF.getText());
+			list.getItems().add(new CourseRegistration(sId,cId));
 		} catch (NullPointerException e) {
 			message.setText("Please fill out all fields");
 		} catch (NumberFormatException e) {
 			message.setText("Please enter integer values");
-		}
-		list.getItems().add(new CourseRegistration(sId,cId));
+		}	
 	}
-//	public void displayCourseRegistrationForm() {
-//
-//		ArrayList<CourseRegistration> cr = new ArrayList<CourseRegistration>();
-//		System.out.println("'0' to stop");
-//		while (true) {
-//			System.out.println("Enter stdntID:");
-//
-//			System.out.println("Enter courseOffereingID:");
-//			if (stdtID == 0 || offID == 0) {
-//				break;
-//			}
-//			cr.add(new CourseRegistration(stdtID,offID));
-//		}
-//
-//		if (enterCourseRegistrationInfo(cr)) {
-//			displayConfirmationMessage();
-//		} else {
-//			displayFailureMessage();
-//		}
-//	}
+	public void submitCourseRegistrationForm() {
+
+		ArrayList<CourseRegistration> cr =  new ArrayList<CourseRegistration>(list.getItems());
+
+		int errorID = enterCourseRegistrationInfo(cr);
+		
+		//empty list
+		if (errorID == 2) {
+			message.setText("Please insert registration info");
+		} 
+		//successfully added
+		else if (errorID == 1) {
+			displayConfirmationMessage();
+		} 
+		//non-student account being added
+		else if (errorID == 0) {
+			message.setText("Please ensure that only students are being registered");
+		} 
+		//sql error
+		else {
+			displayFailureMessage();
+		}
+	}
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -155,20 +162,15 @@ public class addCourseRegistrationInfoUI {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 		
-	public boolean enterCourseRegistrationInfo(ArrayList<CourseRegistration> cr) {
+	public int enterCourseRegistrationInfo(ArrayList<CourseRegistration> cr) {
 		return control.submitCourseRegistrationInfo(cr);
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	public void displayConfirmationMessage() {
-		System.out.println("Success");
+		message.setText("Successfully added registration info");
 	}
 	
 	public void displayFailureMessage() {
-		System.out.println("Failure");
+		System.out.println("Failed to add registration info");
 	}
 }

@@ -1,12 +1,12 @@
 import java.util.Set;
 
 
-public class CourseRegistration {
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
+public class CourseRegistration implements Comparable<CourseRegistration> {
 
 	private int accountIdstudent;
 	
@@ -25,6 +25,15 @@ public class CourseRegistration {
 		return courseOfferingId;
 	}
 	
+	public int compareTo(CourseRegistration cr) {
+		if (this.accountIdstudent == cr.getAccountIdstudent() &&
+				this.courseOfferingId == cr.getCourseOfferingId()) {
+			return 0;
+		} else {
+			return -1;
+		}
+		
+	}
 	//////////////////////////////////////////
 	//Following properties may not be needed//
 	//////////////////////////////////////////
