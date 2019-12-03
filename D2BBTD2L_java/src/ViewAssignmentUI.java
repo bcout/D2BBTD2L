@@ -45,23 +45,9 @@ public class ViewAssignmentUI {
 	}
 	
 
-	/**
-		Just for CLI
-	**/
-	public void displayAssignmentSelectionForm() {
-		System.out.println("Enter the AssignementID");
-		
-		Scanner scanner = new Scanner(System.in);
-			int assignmentID = Integer.parseInt(scanner.next());
-				scanner.close();
-        
-				requestDownloadFile(7);
-        
-				System.out.println("wow");
-	}
 	
 	
-	public void requestDownloadFile(int assignmentID) {
+	public void requestDownloadFile(String assignmentID) {
 		control.downloadFile(assignmentID);
 		
 	}

@@ -837,7 +837,7 @@ public class DataManager{
       ResultSet rs = st.executeQuery("select courseNumber from Course;" );
 			
 			while(rs.next()){
-				assignmentList.add(rs.getString(1));
+				courseList.add(rs.getString(1));
 			}
      } catch (SQLException e) {
 			System.err.println("SQL error: Assignment not found");
