@@ -815,7 +815,7 @@ public class DataManager{
 			ResultSet rs = st.executeQuery("select courseNumber from Course;" );
 			
 			while(rs.next()){
-				assignmentList.add(rs.getString(1))
+				assignmentList.add(rs.getString(1));
 			}
 
 			
