@@ -33,11 +33,8 @@ public class ViewAssignmentControl {
 			fos.close();
 			rbc.close();		
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 	}
 
