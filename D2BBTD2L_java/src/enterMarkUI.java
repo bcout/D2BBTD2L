@@ -132,7 +132,8 @@ public class enterMarkUI {
 		int assGrade = (int)parseGradeInput().doubleValue();
 		row.setAssGrade(assGrade);
 		control.insertAssignmentSubmissionGrade(row);
-		confirmationLabel.setText("submit button pressed");
+		confirmationLabel.setText("Grade has been SET");
+
 	} catch (Exception e) {
 		confirmationLabel.setText(e.getMessage());
 	}
@@ -203,7 +204,7 @@ public class enterMarkUI {
     } catch (Exception e) {
       confirmationLabel.setText(e.getMessage());
     }
-    return new Scene(pane);
+    return new Scene(pane, 900, 600);
   }
 
   public void displayEnterMarkForm(Stage stage) {

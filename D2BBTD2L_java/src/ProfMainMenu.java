@@ -108,7 +108,7 @@ public class ProfMainMenu
 		initMainMenuComponents();
 
 		//Col, row
-		mainPane.add(btnPostAssignment, 5, 3);
+		mainPane.add(btnPostMarks, 5, 3);
 		mainPane.add(btnLogout, 7, 0);
 		mainPane.add(btnQuit, 7, 3);
 		mainPane.add(btnViewMessages, 1, 3);
@@ -153,7 +153,7 @@ public class ProfMainMenu
 	private void processPostMarksButtonPress(ActionEvent event)
 	{
 		enterMarkUI emu = new enterMarkUI();
-		emu.displayEnterMarkPage();
+		emu.displayEnterMarkForm(MainMenu.getStage());
 	}
 	
 	private void processPostNotificationButtonPress(ActionEvent event)
