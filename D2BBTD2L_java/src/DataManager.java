@@ -780,50 +780,70 @@ public class DataManager{
 	/** 
 	* @author StephenCole19
 	*/
-	public Assignment requestAssignment(int assignmentId) {
+	public Assignment requestAssignment(String assignmentName) {
 		Assignment assignment = new Assignment();
     	
-	   	 try {
-	            Statement st = connection.createStatement();
+			try {
+				Statement st = connection.createStatement();
+
+				ResultSet rs = st.executeQuery("select * from Assignment where AssignmentName = '" + assignmentName + "';" );
+				
+				rs.next();
+				
+				assignment.assignmentId = rs.getInt(1);
+				assignment.courseOfferingId = rs.getInt(2);
+				assignment.assignmentName = rs.getString(3);
+				assignment.assignmentFile = rs.getBlob(4);
+				assignment.dueDate = rs.getDate(5);
 	
-	            ResultSet rs = st.executeQuery("select * from Assignment where AssignmentID = " + assignmentId + ";" );
-	            
-	            rs.next();
-	            
-	            assignment.assignmentId = rs.getInt(1);
-	            assignment.courseOfferingId = rs.getInt(2);
-	            assignment.assignmentName = rs.getString(3);
-	            assignment.assignmentFile = rs.getBlob(4);
-	            assignment.dueDate = rs.getDate(5);
 	
-	
-	   	 } catch (SQLException e) {
-	            System.err.println("SQL error: Assignment not found");
-	            e.printStackTrace();
+	   		} catch (SQLException e) {
+				System.err.println("SQL error: Assignment not found");
+				e.printStackTrace();
 	   	 }
 	
 	   	
 	   	return assignment;
 	}
 
-	public ArrayList<String> requestCourseNames(){
+
+	public ArrayList<String> requestAssignmentNames(){
+
 		ArrayList<String> assignmentList = new ArrayList<String>();
 
 		try {
 			Statement st = connection.createStatement();
 
-			ResultSet rs = st.executeQuery("select courseNumber from Course;" );
+			ResultSet rs = st.executeQuery("select AssignmentName from Assignment;" );
+
 			
 			while(rs.next()){
 				assignmentList.add(rs.getString(1));
 			}
-
 			
 		} catch (SQLException e) {
 			System.err.println("SQL error: Assignment not found");
 			e.printStackTrace();
 		}
 		return assignmentList;
+	}
+  
+  public ArrayList<String> requestCourseNames(){
+		ArrayList<String> courseList = new ArrayList<String>();
+
+		try {
+			Statement st = connection.createStatement();
+      
+      ResultSet rs = st.executeQuery("select courseNumber from Course;" );
+			
+			while(rs.next()){
+				assignmentList.add(rs.getString(1));
+			}
+     } catch (SQLException e) {
+			System.err.println("SQL error: Assignment not found");
+			e.printStackTrace();
+		}
+		return courseList;
 	}
 
 	/** 
@@ -865,6 +885,7 @@ public class DataManager{
 	* @throws SQLException 
 	* @author StephenCole19
 	*/
+
 	public void uploadAssignment(String courseNumber, String assName, Blob blobFile, java.sql.Date dueDate) throws SQLException {
 		int courseOfferingID = retrieveCourseOfferingID(courseNumber);
 
