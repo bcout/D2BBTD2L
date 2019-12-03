@@ -20,17 +20,7 @@ public class enterMarkControl {
     dataManager = dm;
   }
 
-  public String[] getAvailableStudents() {
-    return new String[]{"these", "are", "hardcoded", "students"}; 
-  }
-
-  public AssGradeRow[] getAssignmentGradeRows() {
-    return new AssGradeRow[]{new AssGradeRow("assignment 5",80,true),
-                             new AssGradeRow("assignment 2",null,false),
-                             new AssGradeRow("lab assignment",null,true)};
-  }
-
-
+  
   public String[] getAvailableStudents() throws SQLException { // returns names and ids
 	System.out.println("In control get students");
     String[] names = dataManager.getAvailableStudentNames(); 
