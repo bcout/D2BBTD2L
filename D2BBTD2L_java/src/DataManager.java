@@ -49,13 +49,9 @@ public class DataManager{
 		}
 	}
 	
-	/**
-	 * 
-	 * @param usernameIn
-	 * @param passwordIn
-	 * @return
-	 * @throws SQLException
-	 */
+	
+	private StudentAccount studentAccount;
+	
 	public Account getAccountFromLoginInfo(String usernameIn, String passwordIn) throws SQLException
 	{
 		PreparedStatement getAccountFromUsernamePs;

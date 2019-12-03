@@ -171,6 +171,6 @@ public class addCourseRegistrationInfoUI {
 	}
 	
 	public void displayFailureMessage() {
-		System.out.println("Failed to add registration info");
+		message.setText("Failed to add registration info");
 	}
 }
