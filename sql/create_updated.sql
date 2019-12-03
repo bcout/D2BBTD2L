@@ -124,7 +124,7 @@ CREATE TABLE AssignmentSubmission
     check (grade >=0 and grade <=100),
     PRIMARY KEY (assignmentSubmissionId),
     FOREIGN KEY (assignmentId) REFERENCES Assignment(assignmentId),
-    FOREIGN KEY (accountId) REFERENCES StudentAccount(accountId)
+    FOREIGN KEY (accountId) REFERENCES Account(accountId)
 );
 
 CREATE TABLE Message

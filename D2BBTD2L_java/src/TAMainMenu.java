@@ -123,7 +123,8 @@ public class TAMainMenu
 	
 	private void processPostMarksButtonPress(ActionEvent event)
 	{
-		//
+		enterMarkUI ui = new enterMarkUI();
+    ui.displayEnterMarkForm(MainMenu.getStage());
 	}
 	
 	private void processQuitButtonPress(ActionEvent event)
