@@ -602,7 +602,6 @@ public class DataManager{
 	
 	   		} catch (SQLException e) {
 				System.err.println("SQL error: Assignment not found");
-				e.printStackTrace();
 	   	 }
 	
 	   	
@@ -626,7 +625,6 @@ public class DataManager{
 			
 		} catch (SQLException e) {
 			System.err.println("SQL error: Assignment not found");
-			e.printStackTrace();
 		}
 		return assignmentList;
 	}
@@ -644,7 +642,6 @@ public class DataManager{
 			}
      } catch (SQLException e) {
 			System.err.println("SQL error: Assignment not found");
-			e.printStackTrace();
 		}
 		return courseList;
 	}
@@ -679,7 +676,6 @@ public class DataManager{
 			
 		} catch (SQLException e) {
 			System.err.println("SQL error: Assignment not found");
-			e.printStackTrace();
 		}
 		return courseOfferingID;
 	}
