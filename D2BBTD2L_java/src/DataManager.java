@@ -222,6 +222,23 @@ public class DataManager{
 		return a;
 	}
 	
+	public void uploadAssignmentSubmission(int Id, int Id2, Blob bob) throws SQLException {
+		
+		PreparedStatement statement;
+		String query = "INSERT INTO AssignmentSubmission (feedbackRead, accountId, assignmentId, submissionFile) VALUES (?,?,?,?)";
+		try {
+			statement = connection.prepareStatement(query);
+			statement.setInt(1, 0);
+			statement.setInt(2, Id2);
+			statement.setInt(3, Id);
+			statement.setBlob(4, bob);
+			statement.executeUpdate();
+		}
+		catch (SQLException e){
+			throw e;
+		}
+	}
+	
 	public Account getAccountFromId(int idIn) throws SQLException
 	{
 		PreparedStatement getAccountFromIdPs;
@@ -265,6 +282,48 @@ public class DataManager{
 		}
 		
 		return a;
+	}
+	
+	public ArrayList<Assignment> getActiveAssignments() throws SQLException {
+		Account user = MainMenu.getUserAccount();
+		int userID = user.getAccountId();
+		
+		PreparedStatement getAssignments;
+		String getAssis = "select * from Assignment natural join CourseRegistration where accountId=?";
+		
+		ArrayList<Assignment> Assignments = new ArrayList<Assignment>();
+		try {
+			getAssignments = connection.prepareStatement(getAssis);
+			getAssignments.setInt(1, userID);
+			
+			ResultSet rs = getAssignments.executeQuery();
+			
+			while (rs.next()) {
+				int Id = rs.getInt("assignmentId");
+				String name = rs.getString("assignmentName");
+				java.util.Date date = rs.getTimestamp("dueDate");
+				
+				Assignment out = new Assignment(name, Id, date);
+				Assignments.add(out);
+			}
+		}
+		catch (SQLException e){
+			throw e;
+		}
+		if (getAssignments != null)
+		{
+			try
+			{
+				getAssignments.close();
+			}
+			catch (SQLException e)
+			{
+				throw e;
+			}
+			
+		}
+		
+		return Assignments;
 	}
 	
 	public ArrayList<Account> getAllAccounts() throws SQLException
