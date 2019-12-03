@@ -39,13 +39,10 @@ public class PostAssignmentControl {
 			dataManager.uploadAssignment(courseNumber, assName, blobFile, sqlDate);
 			
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 			success = false;
 		} catch (IOException e) {
-			e.printStackTrace();
 			success = false;
 		} catch (SQLException e) {
-			e.printStackTrace();
 			success = false;
 		}
 		
