@@ -31,20 +31,24 @@ create table Course (
 
 CREATE TABLE CourseOfferingInfo
 (
-    courseOfferingId INT AUTO_INCREMENT,
-    /* varchar for same reason as above */
-   professorId INT NOT NULL,
-   taId INT NOT NULL,
-    roomNum VARCHAR(10) NOT NULL,
-    courseId INT NOT NULL,
-   term VARCHAR(10) NOT NULL,
-   year YEAR(4) NOT NULL,
-   length INT NOT NULL CHECK (length > 0),
-   time INT NOT NULL,
-    PRIMARY KEY (courseOfferingId),
-    FOREIGN KEY (courseId) REFERENCES Course(courseId),
-   FOREIGN KEY (professorId) REFERENCES Account(accountId),
-   FOREIGN KEY (taId) REFERENCES Account(accountId)
+  courseOfferingId INT AUTO_INCREMENT,
+  professorId INT NOT NULL,
+  taId INT NOT NULL,
+  roomNum VARCHAR(10) NOT NULL,
+  courseId INT NOT NULL,
+  term int NOT NULL,
+  year int NOT NULL,
+  classLength INT NOT NULL CHECK (classLength > 0),
+  classTime varchar(30) NOT NULL, /* time will not be used at all*/
+  monday boolean,
+  tuesday boolean,
+  wednesday boolean,
+  thursday boolean,
+  friday boolean,
+  PRIMARY KEY (courseOfferingId),
+  FOREIGN KEY (courseId) REFERENCES Course(courseId),
+  FOREIGN KEY (professorId) REFERENCES Account(accountId),
+  FOREIGN KEY (taId) REFERENCES Account(accountId)
 );
 
 CREATE TABLE CourseInfo (
