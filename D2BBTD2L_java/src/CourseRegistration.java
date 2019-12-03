@@ -1,7 +1,6 @@
 import java.util.Set;
 
-
-public class CourseRegistration {
+public class CourseRegistration implements Comparable<CourseRegistration> {
 
 	private int accountIdstudent;
 	
@@ -20,6 +19,15 @@ public class CourseRegistration {
 		return courseOfferingId;
 	}
 	
+	public int compareTo(CourseRegistration cr) {
+		if (this.accountIdstudent == cr.getAccountIdstudent() &&
+				this.courseOfferingId == cr.getCourseOfferingId()) {
+			return 0;
+		} else {
+			return -1;
+		}
+		
+	}
 	//////////////////////////////////////////
 	//Following properties may not be needed//
 	//////////////////////////////////////////

@@ -956,10 +956,9 @@ public class DataManager{
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	*/
-	public boolean addCourseRegistrationInfo(ArrayList<CourseRegistration> cr) {
+	public int addCourseRegistrationInfo(ArrayList<CourseRegistration> cr) {
+		int out = 1;
 		try {
-			
 			String query = "insert into CourseRegistration (accountId,courseOfferingId) values";
 			
 			//Creates a string for the prepared statement with an appropriate amount of '?'s
@@ -971,20 +970,49 @@ public class DataManager{
 			
 			//Adds all of the CourseRegistration info into the query
 			for (int i=0; i<cr.size(); i++) {
-				//int stdID = cr.get(i).accountIdstudent;
-				//***********implement check for if the student is in the student account table ******
-				pst.setInt((2*i + 1), cr.get(i).accountIdstudent);
-				//*****implement check for if the course is being offered*****
-				pst.setInt((2*i + 2),cr.get(i).courseOfferingId);
+				int stdID = cr.get(i).getAccountIdstudent();
+				int errorID = isStudent(stdID);
+				if (errorID == 1) {
+					pst.setInt((2*i + 1), stdID);
+					pst.setInt((2*i + 2),cr.get(i).getCourseOfferingId());
+				} else if (errorID == -1){
+					 out = -1;
+					 return out;
+				} else {
+					out = 0;
+					return out;
+				}
 			}
-			
 			//execute the sql statement
 			pst.executeUpdate();
-			return true;
+			pst.close();
 		} catch (SQLException e) {
 			System.err.println(e.toString());
-			return false;
+			out = -1;
 		}
+		return out;
+	}
+	
+	public int isStudent(int accountId) {
+		int out = 0;
+		try {	
+			String query = "select accountType from Account where accountId = ?";
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setInt(1,accountId);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				if (rs.getInt(1) == 1) {
+					out = 1;
+				} 
+			}
+			ps.close();
+			
+		} catch (SQLException e) {
+			System.err.println(e.toString());
+			out = -1;
+		}
+		return out;
+		
 	}
 
 	/** 
