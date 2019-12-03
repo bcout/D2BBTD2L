@@ -806,13 +806,16 @@ public class DataManager{
 	   	return assignment;
 	}
 
+
 	public ArrayList<String> requestAssignmentNames(){
+
 		ArrayList<String> assignmentList = new ArrayList<String>();
 
 		try {
 			Statement st = connection.createStatement();
 
 			ResultSet rs = st.executeQuery("select AssignmentName from Assignment;" );
+
 			
 			while(rs.next()){
 				assignmentList.add(rs.getString(1));
@@ -823,6 +826,24 @@ public class DataManager{
 			e.printStackTrace();
 		}
 		return assignmentList;
+	}
+  
+  public ArrayList<String> requestCourseNames(){
+		ArrayList<String> courseList = new ArrayList<String>();
+
+		try {
+			Statement st = connection.createStatement();
+      
+      ResultSet rs = st.executeQuery("select courseNumber from Course;" );
+			
+			while(rs.next()){
+				assignmentList.add(rs.getString(1));
+			}
+     } catch (SQLException e) {
+			System.err.println("SQL error: Assignment not found");
+			e.printStackTrace();
+		}
+		return courseList;
 	}
 
 	/** 
@@ -837,13 +858,40 @@ public class DataManager{
 		// end-user-code
 	}
 
+	public int retrieveCourseOfferingID(String courseNumber){
+		int courseOfferingID = -1;
+		try {
+			Statement st = connection.createStatement();
+
+			ResultSet rs = st.executeQuery("select courseId from Course where courseNumber = '"+ courseNumber +"';" );
+			
+			rs.next();
+			int courseID = rs.getInt(1);
+
+			rs = st.executeQuery("select courseOfferingId from CourseOfferingInfo where courseId ="+ courseID +";" );
+			
+			rs.next();
+			courseOfferingID = rs.getInt(1);
+
+			
+		} catch (SQLException e) {
+			System.err.println("SQL error: Assignment not found");
+			e.printStackTrace();
+		}
+		return courseOfferingID;
+	}
+
 	/** 
 	* @throws SQLException 
 	* @author StephenCole19
 	*/
-	public void uploadAssignment(String assName, Blob blobFile, java.sql.Date dueDate) throws SQLException {
-		PreparedStatement ps = connection.prepareStatement("INSERT INTO Assignment (courseOfferingId, assignmentName, assignmentFile, dueDate) VALUES (?,?,?,?)");
-		ps.setInt(1, 3);
+
+	public void uploadAssignment(String courseNumber, String assName, Blob blobFile, java.sql.Date dueDate) throws SQLException {
+		int courseOfferingID = retrieveCourseOfferingID(courseNumber);
+
+		PreparedStatement ps = connection.prepareStatement(
+		        "INSERT INTO Assignment (courseOfferingId, assignmentName, assignmentFile, dueDate) VALUES (?,?,?,?)");
+		ps.setInt(1, courseOfferingID);
 		ps.setString(2, assName);
 		ps.setBlob(3, blobFile);
 		ps.setDate(4, dueDate);
