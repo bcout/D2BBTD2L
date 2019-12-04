@@ -16,14 +16,17 @@ public class CourseRegistration implements Comparable<CourseRegistration> {
 	
 	private String courseNumber;
 	
-	private String term;
+	private int term;
 	
-	public CourseRegistration(int stdntID, int offID, String username, String courseNumber, String term) {
+	private int year;
+	
+	public CourseRegistration(int stdntID, int offID, String username, String courseNumber, int term, int year) {
 		accountIdstudent = stdntID;
 		courseOfferingId = offID;
 		this.username = username;
 		this.courseNumber = courseNumber;
 		this.term = term;
+		this.year = year;
 	}
 
 	public int getAccountIdstudent() {
@@ -42,8 +45,12 @@ public class CourseRegistration implements Comparable<CourseRegistration> {
 		return courseNumber;
 	}
 	
-	public String getTerm() {
+	public int getTerm() {
 		return term;
+	}
+	
+	public int getYear() {
+		return year;
 	}
 	
 	public int compareTo(CourseRegistration cr) {

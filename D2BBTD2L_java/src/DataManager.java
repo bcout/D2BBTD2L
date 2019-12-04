@@ -45,6 +45,7 @@ public class DataManager{
 		catch (SQLException e)
 		{
 			System.err.println("Database connection error.");
+			System.err.println(e.getMessage());
 		}
 	}
 	
@@ -266,6 +267,28 @@ public class DataManager{
 		
 		return accounts;
 	}
+	public ArrayList<CourseOfferingInfoObject> getAllOfferedCourses() {
+		ArrayList<CourseOfferingInfoObject> courses = new ArrayList<>();
+		
+		try {
+			String query = "select co.courseOfferingId, c.courseNumber, co.term, co.year from Course c natural join CourseOfferingInfo co where c.courseId = co.courseId";
+			PreparedStatement ps = connection.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				String cNum = rs.getString(2);
+				int term = rs.getInt(3);
+				int year = rs.getInt(4);
+				int id = rs.getInt(1);
+				courses.add(new CourseOfferingInfoObject(id,cNum,term,year));
+			}
+			ps.close();
+		} catch (SQLException e) {
+			courses = null;
+			System.err.println(e.getMessage());
+		}
+		
+		return courses;
+	}
 	
 	public ArrayList<Account> getAllStudentAccounts() 
 	{
@@ -292,8 +315,8 @@ public class DataManager{
 				Account a = new Account(id, username, password, accountType, firstName, lastName);
 				
 				accounts.add(a);
-				getAllAccountsPs.close();
 			}
+			getAllAccountsPs.close();
 		}
 		catch (SQLException e)
 		{
@@ -820,11 +843,7 @@ public class DataManager{
           
           ps.executeUpdate();
 	}
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+
 	public int addCourseRegistrationInfo(ArrayList<CourseRegistration> cr) {
 		int out = 1;
 		try {
@@ -844,17 +863,9 @@ public class DataManager{
 			//Adds all of the CourseRegistration info into the query
 			for (int i=0; i<cr.size(); i++) {
 				int stdID = cr.get(i).getAccountIdstudent();
-				int errorID = isStudent(stdID);
-				if (errorID == 1) {
-					pst.setInt((2*i + 1), stdID);
-					pst.setInt((2*i + 2),cr.get(i).getCourseOfferingId());
-				} else if (errorID == -1){
-					 out = -1;
-					 return out;
-				} else {
-					out = 0;
-					return out;
-				}
+				
+				pst.setInt((2*i + 1), stdID);
+				pst.setInt((2*i + 2),cr.get(i).getCourseOfferingId());
 			}
 			//execute the sql statement
 			pst.executeUpdate();
@@ -865,31 +876,7 @@ public class DataManager{
 		}
 		return out;
 	}
-	
-	public int isStudent(int accountId) {
-		int out = 0;
-		try {	
-			String query = "select accountType from Account where accountId = ?";
-			PreparedStatement ps = connection.prepareStatement(query);
-			ps.setInt(1,accountId);
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				if (rs.getInt(1) == 1) {
-					out = 1;
-				} 
-			}
-			ps.close();
-			
-		} catch (SQLException e) {
-			System.err.println(e.toString());
-			out = -1;
-		}
-		return out;
-		
-	}
 
-
-	
   public String[] getAvailableTAs() throws SQLException {
     System.out.println("in getAvailableTAs");
     ArrayList<String> results = new ArrayList<String>();
