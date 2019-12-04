@@ -35,10 +35,10 @@ public class DataManager{
 		{
 			System.err.println(e.toString());
 		}
-		String url = "jdbc:mysql://cs2043.cs.unb.ca:3306/cs204301ateam2";
+		String url = "jdbc:mysql://cs2043.cs.unb.ca:3306/cs204301ateam1";
 		try 
 		{
-			connection = DriverManager.getConnection(url, "cs204301ateam2", "Z34SRYfW");
+			connection = DriverManager.getConnection(url, "cs204301ateam1", "U5LEdT9K");
 		}
 		catch (SQLException e)
 		{
