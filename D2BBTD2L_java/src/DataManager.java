@@ -19,7 +19,6 @@ public class DataManager{
 	//yikes
 	Connection connection = null;
 	
-	
 	/**
 	 * This is the DataManager constructor that forms a connection to the cs204301ateam2 database
 	 * A potential place for update would be the fact that a connection is established every time 
@@ -268,12 +267,43 @@ public class DataManager{
 		return accounts;
 	}
 	
-	/**
-	 * 
-	 * @param accountId
-	 * @return
-	 * @throws SQLException
-	 */
+	public ArrayList<Account> getAllStudentAccounts() 
+	{
+		PreparedStatement getAllAccountsPs;
+		String getAllAccountsQuery = "select * from Account where accountType = 1;";
+		
+		ArrayList<Account> accounts = new ArrayList<Account>();
+		
+		try
+		{
+			getAllAccountsPs = connection.prepareStatement(getAllAccountsQuery);
+			
+			ResultSet rs = getAllAccountsPs.executeQuery();
+			
+			while (rs.next())
+			{
+				int id = rs.getInt(1);
+				String username = rs.getString(2);
+				String password = rs.getString(3);
+				int accountType = rs.getInt(4);
+				String firstName = rs.getString(5);
+				String lastName = rs.getString(6);
+				
+				Account a = new Account(id, username, password, accountType, firstName, lastName);
+				
+				accounts.add(a);
+				getAllAccountsPs.close();
+			}
+		}
+		catch (SQLException e)
+		{
+			accounts = null;
+			System.err.println(e.getMessage());
+		}
+		
+		return accounts;
+	}
+	
 	public boolean accountExists(int accountId) throws SQLException
 	{
 		PreparedStatement checkAccountExistsPs;
