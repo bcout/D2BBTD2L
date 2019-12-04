@@ -6,45 +6,17 @@ type: 2 (admin)
 firstName: root
 lastName: root
 
-
 Student 1
 -------------
-username: studentTest1
-password: student1
-type: 1
-firstName: Student
-lastName: Test 1
-
-
-Student 2
--------------
-username: studentTest2
-password: student2
-type: 1
-firstName: Student2
-lastName: Test 2
-
+username: student1
+password: student
 
 Prof 1
 -------------
 username: prof1
 password: prof
-type: 4
-firstName: profTest
-lastName: 1
 
 TA 1
 -------------
-username: Ta1
-password: ta
-type: 3
-firstName: TA
-lastName: Test 1
-
-TA 2
--------------
-username: TA2
-password: TA2
-type: 3
-firstName: TA
-lastName: Test2
+username: TA1
+password: TA
