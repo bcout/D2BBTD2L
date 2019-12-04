@@ -127,7 +127,6 @@ public class AdminMainMenu
 	{
 		addCourseOfferingInfoUI acoi = new addCourseOfferingInfoUI();
 		acoi.displayAddCourseOfferingInfoForm(MainMenu.getStage());
-		
 	}
 	
 	private void processAddStudentButtonPress(ActionEvent event)

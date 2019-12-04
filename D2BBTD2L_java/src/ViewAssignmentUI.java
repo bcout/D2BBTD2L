@@ -10,6 +10,9 @@ import java.util.Scanner;
 
 import com.oracle.tools.packager.IOUtils;
 
+import java.util.ArrayList;
+
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Orientation;
@@ -17,8 +20,12 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
@@ -28,32 +35,20 @@ public class ViewAssignmentUI {
 	private FlowPane viewPane;
 	private Button downBtn;
 	private Button btnExit;
-	private TextField assID;
 	private Stage primaryStage;
 	private ViewAssignmentControl control;
+	private ComboBox assignmentList;
+	private Button newAssignment;
+	private Label succ;
 	
 	public ViewAssignmentUI() {
 		control = new ViewAssignmentControl(MainMenu.getDataManager());
 	}
 	
 
-	/**
-		Just for CLI
-	**/
-	public void displayAssignmentSelectionForm() {
-		 System.out.println("Enter the AssignementID");
-		 
-		 Scanner scanner = new Scanner(System.in);
-         	int assignmentID = Integer.parseInt(scanner.next());
-         	scanner.close();
-         
-         	requestDownloadFile(7);
-         
-         	System.out.println("wow");
-	}
 	
 	
-	public void requestDownloadFile(int assignmentID) {
+	public void requestDownloadFile(String assignmentID) {
 		control.downloadFile(assignmentID);
 		
 	}
@@ -67,15 +62,20 @@ public class ViewAssignmentUI {
 	public void loadPostAssignmentScene() {
 		btnExit = new Button("Exit");
 		downBtn = new Button("Download");
-		assID = new TextField();
-		assID.setPromptText("Enter AssignmentID");
+		succ = new Label("All files will go directly to your Downloads file.");
+		newAssignment = new Button("New Assignment");
+
+		ArrayList<String> assignments = control.getAssignmentNames();
+		assignmentList = new ComboBox();
+		assignmentList.getItems().addAll(assignments.toArray());
 
 		viewPane= new FlowPane(Orientation.VERTICAL);
 
 		
-		
 		btnExit.setOnAction(this::processExitButtonPress);
 		downBtn.setOnAction(this::processDownButtonPress);
+		newAssignment.setOnAction(this::processNewAssignmentButtonPress);
+		
 	}
 	
 	
@@ -90,7 +90,7 @@ public class ViewAssignmentUI {
 			TAMainMenu tmm = new TAMainMenu();
 			tmm.resetToMainMenu();
 		}
-		else if (MainMenu.getUserAccount().getAccountType() == 2)
+		else if (MainMenu.getUserAccount().getAccountType() == 4)
 		{
 			ProfMainMenu pmm = new ProfMainMenu();
 			pmm.resetToMainMenu();
@@ -98,27 +98,39 @@ public class ViewAssignmentUI {
 	}
 	
 	public void processDownButtonPress(ActionEvent Event) {
-		int assignID = Integer.parseInt(assID.getText());
+		String assignName = (String) assignmentList.getValue();
 		
-		requestDownloadFile(assignID);
+		control.downloadFile(assignName);
 		
-		
+		succ.setText("Success!");
+	}
+	
+	private void processNewAssignmentButtonPress(ActionEvent event)
+	{
+		PostAssignmentUI pau = new PostAssignmentUI();
+		pau.displayPostAssignmentForm(MainMenu.getStage());
 	}
 	
 	
 	public Scene initPostAssignment() {
 		loadPostAssignmentScene();
 		
+		
 		viewPane.getChildren().add(btnExit);
-		viewPane.getChildren().add(assID);
+		if(MainMenu.getUserAccount().getAccountType() == 4)
+		{
+			viewPane.getChildren().add(newAssignment);
+		}
+		viewPane.getChildren().add(assignmentList);
+		viewPane.getChildren().add(succ);
 		
 		viewPane.getChildren().add(downBtn);
 		
 		viewPane.setVgap(10);
 		viewPane.setAlignment(Pos.CENTER);
 		viewPane.setColumnHalignment(HPos.CENTER); 
-        viewPane.setRowValignment(VPos.CENTER); 
-        viewPane.setStyle("-fx-background-color: yellow;");
+        	viewPane.setRowValignment(VPos.CENTER); 
+        	viewPane.setStyle("-fx-background-color: yellow;");
         
         
         
