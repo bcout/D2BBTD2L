@@ -1,6 +1,5 @@
 import java.util.Set;
 
-
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
@@ -51,6 +50,10 @@ public class CourseRegistration implements Comparable<CourseRegistration> {
 	
 	public int getYear() {
 		return year;
+	}
+	
+	public String getTerm() {
+		return term;
 	}
 	
 	public int compareTo(CourseRegistration cr) {

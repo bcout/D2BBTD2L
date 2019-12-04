@@ -21,6 +21,7 @@ import javafx.stage.Stage;
  * @author Ben Donkin
  *
  */
+
 public class addCourseRegistrationInfoUI {
 	
 	private addCourseRegistrationInfoControl control;
@@ -160,7 +161,6 @@ public class addCourseRegistrationInfoUI {
 			message.setText("Please enter integer values");
 		}	
 	}
-	
 	public void submitCourseRegistrationForm() {
 
 		ArrayList<CourseRegistration> cr =  new ArrayList<CourseRegistration>(list.getItems());
@@ -180,7 +180,6 @@ public class addCourseRegistrationInfoUI {
 			displayFailureMessage();
 		}
 	}
-		
 	public int enterCourseRegistrationInfo(ArrayList<CourseRegistration> cr) {
 		return control.submitCourseRegistrationInfo(cr);
 	}

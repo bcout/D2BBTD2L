@@ -23,6 +23,7 @@ public class addCourseRegistrationInfoControl {
 		
 		return dataManager.addCourseRegistrationInfo(noDups);
 	}
+
 	
 	public ArrayList<Account> getAllStudentAccounts() {
 		return dataManager.getAllStudentAccounts();
