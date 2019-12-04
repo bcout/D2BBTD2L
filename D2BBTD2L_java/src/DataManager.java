@@ -319,6 +319,53 @@ public class DataManager{
 		
         return false;
 	}
+	
+	/**
+	 * 
+	 * @param courseNumber
+	 * @param courseDescription
+	 * @return
+	 * @throws SQLException
+	 */
+	public boolean createCourse(String courseNumber, String courseDescription) throws SQLException
+	{
+		boolean success = false;
+		
+		PreparedStatement createCoursePs;
+		String createCourseQuery = "insert into Course(courseNumber, courseDescription) values (?,?);";
+		
+		try
+		{
+			createCoursePs = connection.prepareStatement(createCourseQuery);
+			createCoursePs.setString(1, courseNumber);
+			createCoursePs.setString(2, courseDescription);
+			
+			int numRowsChanged = createCoursePs.executeUpdate();
+			
+			if (numRowsChanged == 1)
+			{
+				success = true;
+			}
+		}
+		catch (SQLException e)
+		{
+			throw e;
+		}
+		
+		if (createCoursePs != null)
+		{
+			try
+			{
+				createCoursePs.close();
+			}
+			catch (SQLException e)
+			{
+				throw e;
+			}
+		}
+		
+		return success;
+	}
 
 	
 	/**
@@ -709,18 +756,6 @@ public class DataManager{
 			System.err.println("SQL error: Assignment not found");
 		}
 		return courseList;
-	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void getAssignmentSpecificationsassignmentId() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
 	}
 
 	public int retrieveCourseOfferingID(String courseNumber){
