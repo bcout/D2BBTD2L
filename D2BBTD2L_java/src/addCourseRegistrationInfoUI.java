@@ -6,6 +6,7 @@ import javafx.event.*;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -42,6 +43,9 @@ public class addCourseRegistrationInfoUI {
 	
 	private TableView<CourseRegistration> list;
 	
+	private ComboBox students;
+	private ComboBox courses;
+	
 	public addCourseRegistrationInfoUI() {
 		
 	}
@@ -72,15 +76,25 @@ public class addCourseRegistrationInfoUI {
 		clearListB.setOnAction(e -> list.getItems().clear());
 		enterListB.setOnAction(e -> submitCourseRegistrationForm());
 		list = new TableView<>();
-		TableColumn<CourseRegistration, Integer> column1 = new TableColumn<>("Account ID");
-		column1.setCellValueFactory(new PropertyValueFactory<>("accountIdstudent"));
+		TableColumn<CourseRegistration, String> column1 = new TableColumn<>("Username");
+		column1.setCellValueFactory(new PropertyValueFactory<>("username"));
 		
-		TableColumn<CourseRegistration, Integer> column2 = new TableColumn<>("Course Offering ID");
-		column2.setCellValueFactory(new PropertyValueFactory<>("courseOfferingId"));
+		TableColumn<CourseRegistration, String> column2 = new TableColumn<>("Course Number");
+		column2.setCellValueFactory(new PropertyValueFactory<>("courseNumber"));
 		column2.setMinWidth(200);
+		
+		TableColumn<CourseRegistration, String> column3 = new TableColumn<>("Term");
+		column3.setCellValueFactory(new PropertyValueFactory<>("term"));
+		
+		students = new ComboBox();
+		students.getItems().addAll(control.getAllStudentAccounts());
+		
+		courses = new ComboBox();
+		courses.getItems().addAll(control.getAllOfferedCourses());
 		
 		list.getColumns().add(column1);
         list.getColumns().add(column2);
+        list.getColumns().add(column3);
         root = new GridPane();
 	}
 	

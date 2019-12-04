@@ -6,9 +6,18 @@ public class CourseRegistration implements Comparable<CourseRegistration> {
 	
 	private int courseOfferingId; 
 	
-	public CourseRegistration(int stdntID, int offID) {
+	private String username;
+	
+	private String courseNumber;
+	
+	private String term;
+	
+	public CourseRegistration(int stdntID, int offID, String username, String courseNumber, String term) {
 		accountIdstudent = stdntID;
 		courseOfferingId = offID;
+		this.username = username;
+		this.courseNumber = courseNumber;
+		this.term = term;
 	}
 
 	public int getAccountIdstudent() {
@@ -19,6 +28,18 @@ public class CourseRegistration implements Comparable<CourseRegistration> {
 		return courseOfferingId;
 	}
 	
+	public String getUsername() {
+		return username;
+	}
+	
+	public String getCourseNumber() {
+		return courseNumber;
+	}
+	
+	public String getTerm() {
+		return term;
+	}
+	
 	public int compareTo(CourseRegistration cr) {
 		if (this.accountIdstudent == cr.getAccountIdstudent() &&
 				this.courseOfferingId == cr.getCourseOfferingId()) {
@@ -26,7 +47,6 @@ public class CourseRegistration implements Comparable<CourseRegistration> {
 		} else {
 			return -1;
 		}
-		
 	}
 	//////////////////////////////////////////
 	//Following properties may not be needed//
