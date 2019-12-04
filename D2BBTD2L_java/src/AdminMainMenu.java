@@ -32,6 +32,7 @@ public class AdminMainMenu
 	private Button btnAddCourseOfferingInfo;
 	private Button btnAddStudentCourseRegistrationInfo;
 	private Button btnLogout;
+	private Button btnCreateCourse;
 	
 	private void initMainMenuComponents()
 	{
@@ -65,9 +66,13 @@ public class AdminMainMenu
 		btnAddStudentCourseRegistrationInfo.setOnAction(this::processAddStudentButtonPress);
 		btnAddStudentCourseRegistrationInfo.setPrefWidth(170);
 		
-		btnAddCourseOfferingInfo = new Button("Create Course");
+		btnAddCourseOfferingInfo = new Button("New Class");
 		btnAddCourseOfferingInfo.setOnAction(this::processAddCourseButtonPress);
 		btnAddCourseOfferingInfo.setPrefWidth(120);
+		
+		btnCreateCourse = new Button("New Course");
+		btnCreateCourse.setOnAction(this::processCreateCourseButtonPress);
+		btnCreateCourse.setPrefWidth(100);
 		
 		btnLogout = new Button("Logout");
 		btnLogout.setOnAction(this::processLogoutButtonPress);
@@ -93,11 +98,12 @@ public class AdminMainMenu
 	{
 		initMainMenuComponents();
 
-		mainPane.add(btnLogout, 7, 0);
+		mainPane.add(btnLogout, 6, 0);
 		mainPane.add(btnAddCourseOfferingInfo, 2, 3);
+		mainPane.add(btnCreateCourse, 1, 3);
 		mainPane.add(btnAddStudentCourseRegistrationInfo, 3, 3);
 		mainPane.add(btnCreateLoginAccount, 4, 3);
-		mainPane.add(btnQuit, 7, 3);
+		mainPane.add(btnQuit, 6, 3);
 		mainPane.add(lblWelcome, 2, 1, 5, 1);
 		mainPane.add(mainMenuIconView, 1, 0);
 		mainPane.add(mainMenuLogoView, 2, 7, 5, 5);
@@ -132,6 +138,12 @@ public class AdminMainMenu
 	private void processAddStudentButtonPress(ActionEvent event)
 	{
 		//display addStudentCourseRegistrationInfo
+	}
+	
+	private void processCreateCourseButtonPress(ActionEvent event)
+	{
+		CreateCourseUI ccu = new CreateCourseUI();
+		ccu.displayCreateCourse(MainMenu.getStage());
 	}
 	
 	private void processLogoutButtonPress(ActionEvent event)

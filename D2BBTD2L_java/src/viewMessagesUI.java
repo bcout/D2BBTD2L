@@ -226,19 +226,22 @@ public class viewMessagesUI
 	private void processReceivedMessageChosen(MouseEvent event)
 	{
 		Message m =  messagesList.getSelectionModel().getSelectedItem();
-		if(Message.wasReceived(m))
+		if (m != null)
 		{
-			lblName.setText(m.getFromAccount().getFullName());
-		}
-		else
-		{
-			lblName.setText(m.getToAccount().getFullName());
-		}
-				
-		lblTxtMessage.setText(" " + m.getMessageText());
-		Timestamp timeSent = m.getTimeSent();
-		lblDate.setText(timeSent.getMonth() + "/"+ timeSent.getDate() + "/" + (timeSent.getYear() + 1900));
-		btnDeleteMessage.setDisable(false);
+			if(Message.wasReceived(m))
+			{
+				lblName.setText(m.getFromAccount().getFullName());
+			}
+			else
+			{
+				lblName.setText(m.getToAccount().getFullName());
+			}
+			
+			lblTxtMessage.setText(" " + m.getMessageText());
+			Timestamp timeSent = m.getTimeSent();
+			lblDate.setText(timeSent.getMonth() + "/"+ timeSent.getDate() + "/" + (timeSent.getYear() + 1900));
+			btnDeleteMessage.setDisable(false);
+		}			
 	}
 
 	public void resetToViewMessagesUI()
