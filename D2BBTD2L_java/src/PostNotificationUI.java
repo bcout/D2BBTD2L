@@ -1,35 +1,54 @@
-
-/**
- * 
- */
-
-//import static notificationObject.*;
+import javafx.application.*;
+import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Label;
 
 /** 
-* <!-- begin-UML-doc -->
-* <!-- end-UML-doc -->
-* @author bcouturi
-* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+* @author sdownward
 */
-public class postNotificationUI {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private postNotificationControl class3;
+public class PostNotificationUI
+{
+    private PostNotificationControl ctrl;
+    private Scene ass;
+    private Stage stg;
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void displayPostNotificationForm() {
-		// begin-user-code
-		// TODO Auto-generated method stub
+    public PostNotificationUI()
+    {
+        ctrl = new PostNotificationControl(MainMenu.getDataManager());
+    }
 
-		// end-user-code
-	}
+    public Scene initScene()
+    {
+        GridPane pane = new GridPane();
+        pane.setHgap(10);
+        pane.setVgap(10);
+        pane.setAlignment(Pos.CENTER);
+
+        //Back btn
+        Button b = new Button("Back");
+        b.setOnAction(this::backToMenu);
+        b.setPrefWidth(50);
+        pane.add(b, 5, 0);
+
+        Label l = new Label("Post Notification");
+        pane.add(l, 0, 0);
+        
+        ass = new Scene(pane, 900, 600);
+        return ass;
+    }
+
+	public void display(Stage s)
+    {
+        stg = s;
+        stg.setScene(initScene());
+        stg.show();
+    }
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -55,5 +74,10 @@ public class postNotificationUI {
 		// TODO Auto-generated method stub
 
 		// end-user-code
+	}
+
+    private void backToMenu(ActionEvent event)
+	{	
+		MainMenu.displayMainMenu();
 	}
 }

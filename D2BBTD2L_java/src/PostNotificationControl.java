@@ -14,7 +14,7 @@ public class PostNotificationControl {
         dm = d;
     }
 
-	public void postNotification(Notification n, CourseOfferingInfo c)
+	public void postNotification(Notification n, CourseOfferingInfoObject c)
     {
         dm.postNotification(n, c);
 	}

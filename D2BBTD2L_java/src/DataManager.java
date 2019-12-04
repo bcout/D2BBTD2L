@@ -40,10 +40,10 @@ public class DataManager{
 		{
 			System.err.println(e.toString());
 		}
-		String url = "jdbc:mysql://cs2043.cs.unb.ca:3306/cs204301ateam2";
+		String url = "jdbc:mysql://cs2043.cs.unb.ca:3306/cs204301ateam1";
 		try 
 		{
-			connection = DriverManager.getConnection(url, "cs204301ateam2", "Z34SRYfW");
+			connection = DriverManager.getConnection(url, "cs204301ateam1", "U5LEdT9K");
 		}
 		catch (SQLException e)
 		{
@@ -845,12 +845,10 @@ public class DataManager{
 		ps.executeUpdate();
 	}
 
-
-	/**
-	 * 
-	 * @param offering
-	 * @throws SQLException
-	 */
+    public CourseOfferingInfoObject getCourseOfferings()
+    {
+    }
+    
 	public void addCourseOfferingInfo(CourseOfferingInfoObject offering)
            throws SQLException {
           System.out.println("in addCourseOfferingInfo");
@@ -1095,28 +1093,28 @@ public class DataManager{
 	  statement.executeUpdate();
   }
 
-    public void postNotification(Notification n, CourseOfferingInfo c)
+    public void postNotification(Notification n, CourseOfferingInfoObject c)
     {
        try
        {
           PreparedStatement ps = connection.prepareStatement("INSERT INTO Notifications(title, body, courseOfferingId) VALUES (?, ?, ?)");
           ps.setString(1, n.title);
           ps.setString(2, n.body);
-          ps.setInt(3, c.courseOfferingId);
+          ps.setInt(3, c.id);
 
           ps.executeQuery();
        }
        catch(SQLException e) {}
     }
 
-    public Notification[] getNotifications(CourseOfferingInfo c)
+    public Notification[] getNotifications(CourseOfferingInfoObject c)
     {
         ArrayList<Notification> arr = new ArrayList<Notification>();
 
         try
         {
            PreparedStatement ps = connection.prepareStatement("SELECT title, body FROM Notifications WHERE courseOfferingId = ?");
-           ps.setInt(1, c.courseOfferingId);
+           ps.setInt(1, c.id);
            ResultSet rs = ps.executeQuery();
            while(rs.next())
            {

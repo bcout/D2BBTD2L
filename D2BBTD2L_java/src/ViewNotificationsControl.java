@@ -6,12 +6,12 @@ public class ViewNotificationsControl
 {
 	private DataManager dm;
 
-    public ViewNotificationControl(DataManager dm)
+    public ViewNotificationsControl(DataManager dm)
     {
         this.dm = dm;
     }
 
-	public Notification[] getNotifications(CourseOfferingInfo c)
+	public Notification[] getNotifications(CourseOfferingInfoObject c)
     {
         return dm.getNotifications(c);
 	}

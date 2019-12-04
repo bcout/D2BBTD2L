@@ -15,11 +15,10 @@ import java.util.Date;
  * 
  */
 
-/** 
+/**
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
  * @author sdownwar
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class ViewMarksUI
 {
@@ -57,6 +56,12 @@ public class ViewMarksUI
 
 		Label ttl = new Label("Assignment Marks list");
 		pane.add(ttl, 0, 0);
+
+        
+
+        //Courseinfo dropdown
+        ComboBox c = new ComboBox(FXCollections 
+                                  .observableArrayList());
 		
 		assSum = new Scene(pane, 900, 600);
 		return assSum;
@@ -67,28 +72,6 @@ public class ViewMarksUI
 		stg = s;
 		stg.setScene(initScene());
 		stg.show();
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void clickcourseassignments() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void displaySummarizedAssignments()
-	{
-		
 	}
 
 	private void assSubClicked(MouseEvent event)
@@ -126,8 +109,7 @@ public class ViewMarksUI
 	}
 
 	private void backToMenu(ActionEvent event)
-	{
-		
+	{	
 		MainMenu.displayMainMenu();
 	}
 }
