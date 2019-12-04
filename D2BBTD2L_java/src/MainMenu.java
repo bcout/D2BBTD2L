@@ -28,6 +28,7 @@ public class MainMenu extends Application
 	private static Account userAccount;
 	private static Boolean darkModeEnabled;
 	
+	
 	//Splash screen variables
 	//-------------------------------------------
 	private Scene splashScene;
