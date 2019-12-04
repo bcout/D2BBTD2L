@@ -32,6 +32,7 @@ public class AdminMainMenu
 	private Button btnAddCourseOfferingInfo;
 	private Button btnAddStudentCourseRegistrationInfo;
 	private Button btnLogout;
+	private Button btnCreateCourse;
 	
 	private void initMainMenuComponents()
 	{
@@ -65,9 +66,13 @@ public class AdminMainMenu
 		btnAddStudentCourseRegistrationInfo.setOnAction(this::processAddStudentButtonPress);
 		btnAddStudentCourseRegistrationInfo.setPrefWidth(170);
 		
-		btnAddCourseOfferingInfo = new Button("Create Course");
+		btnAddCourseOfferingInfo = new Button("New Class");
 		btnAddCourseOfferingInfo.setOnAction(this::processAddCourseButtonPress);
 		btnAddCourseOfferingInfo.setPrefWidth(120);
+		
+		btnCreateCourse = new Button("New Course");
+		btnCreateCourse.setOnAction(this::processCreateCourseButtonPress);
+		btnCreateCourse.setPrefWidth(100);
 		
 		btnLogout = new Button("Logout");
 		btnLogout.setOnAction(this::processLogoutButtonPress);
@@ -132,6 +137,11 @@ public class AdminMainMenu
 	private void processAddStudentButtonPress(ActionEvent event)
 	{
 		//display addStudentCourseRegistrationInfo
+	}
+	
+	private void processCreateCourseButtonPress(ActionEvent event)
+	{
+		
 	}
 	
 	private void processLogoutButtonPress(ActionEvent event)
