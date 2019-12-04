@@ -38,6 +38,7 @@ public class ViewAssignmentUI {
 	private Stage primaryStage;
 	private ViewAssignmentControl control;
 	private ComboBox assignmentList;
+	private Button newAssignment;
 	private Label succ;
 	
 	public ViewAssignmentUI() {
@@ -62,6 +63,7 @@ public class ViewAssignmentUI {
 		btnExit = new Button("Exit");
 		downBtn = new Button("Download");
 		succ = new Label("All files will go directly to your Downloads file.");
+		newAssignment = new Button("New Assignment");
 
 		ArrayList<String> assignments = control.getAssignmentNames();
 		assignmentList = new ComboBox();
@@ -72,6 +74,8 @@ public class ViewAssignmentUI {
 		
 		btnExit.setOnAction(this::processExitButtonPress);
 		downBtn.setOnAction(this::processDownButtonPress);
+		newAssignment.setOnAction(this::processNewAssignmentButtonPress);
+		
 	}
 	
 	
@@ -99,15 +103,24 @@ public class ViewAssignmentUI {
 		control.downloadFile(assignName);
 		
 		succ.setText("Success!");
-		
-		
+	}
+	
+	private void processNewAssignmentButtonPress(ActionEvent event)
+	{
+		PostAssignmentUI pau = new PostAssignmentUI();
+		pau.displayPostAssignmentForm(MainMenu.getStage());
 	}
 	
 	
 	public Scene initPostAssignment() {
 		loadPostAssignmentScene();
 		
+		
 		viewPane.getChildren().add(btnExit);
+		if(MainMenu.getUserAccount().getAccountType() == 4)
+		{
+			viewPane.getChildren().add(newAssignment);
+		}
 		viewPane.getChildren().add(assignmentList);
 		viewPane.getChildren().add(succ);
 		

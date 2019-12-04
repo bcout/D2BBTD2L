@@ -71,8 +71,8 @@ public class PostAssignmentUI{
 	
 	
 	public void processExitButtonPress(ActionEvent Event) {
-		ProfMainMenu pmm = new ProfMainMenu();
-		pmm.resetToMainMenu();
+		ViewAssignmentUI vau = new ViewAssignmentUI();
+		vau.displayPostAssignmentForm(MainMenu.getStage());
 	}
 	
 	public void processSubmitButtonPress(ActionEvent Event) {
