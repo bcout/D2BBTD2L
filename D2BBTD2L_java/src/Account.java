@@ -1,18 +1,18 @@
 public class Account 
 {
-	
+
 	private int accountId;
-	
+
 	private String username;
-	
+
 	private String password;
-	
+
 	private int accountType;
-	
+
 	private String firstName;
-	
+
 	private String lastName;
-	
+
 	/**
 	 * This constructor is not used to make a new user, it is to make an object out of an existing user. It is used by the DataManager's getAllAccounts method
 	 * @param accountId The id number of the account
@@ -31,9 +31,9 @@ public class Account
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param username
 	 * @param password
 	 * @param firstName
@@ -45,92 +45,92 @@ public class Account
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param type
 	 */
 	public void setAccountType(int type) {
 		accountType = type;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public int getAccountId()
 	{
 		return accountId;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public String getUsername() {
 		return username;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public String getPassword() {
 		return password;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public String getFirstName() {
 		return firstName;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public String getLastName() {
 		return lastName;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public int getAccountType() {
 		return accountType;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public String getFullName()
 	{
 		return lastName + ", " + firstName;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public String getFullNameInformal()
 	{
 		return firstName + " " + lastName;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 */
 	public String toString()
 	{
 		return lastName + ", " + firstName;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public String getFullDetails()

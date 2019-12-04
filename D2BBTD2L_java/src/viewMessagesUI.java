@@ -222,6 +222,7 @@ public class viewMessagesUI
 		smm.resetToMainMenu();
 	}
 
+	@SuppressWarnings("deprecation")
 	private void processReceivedMessageChosen(MouseEvent event)
 	{
 		Message m =  messagesList.getSelectionModel().getSelectedItem();

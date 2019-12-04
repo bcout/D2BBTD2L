@@ -70,7 +70,6 @@ public class ViewAssignmentUI {
 		viewPane= new FlowPane(Orientation.VERTICAL);
 
 		
-		
 		btnExit.setOnAction(this::processExitButtonPress);
 		downBtn.setOnAction(this::processDownButtonPress);
 	}
@@ -87,7 +86,7 @@ public class ViewAssignmentUI {
 			TAMainMenu tmm = new TAMainMenu();
 			tmm.resetToMainMenu();
 		}
-		else if (MainMenu.getUserAccount().getAccountType() == 2)
+		else if (MainMenu.getUserAccount().getAccountType() == 4)
 		{
 			ProfMainMenu pmm = new ProfMainMenu();
 			pmm.resetToMainMenu();

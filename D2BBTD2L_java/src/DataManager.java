@@ -728,101 +728,183 @@ public class DataManager{
 	}
 
 
-		/**
-		 * 
-		 * @return
-		 * @throws SQLException
-		 */
-        public String[] getAvailableTAs() throws SQLException {
-          System.out.println("in getAvailableTAs");
-          ArrayList<String> results = new ArrayList<String>();
-          String query = "select firstName,lastName from Account where accountType=3";
-          PreparedStatement statement = connection.prepareStatement
-          (query);
-          ResultSet rs = statement.executeQuery();
-          while(rs.next()) {
-            String firstName = rs.getString("firstName");
-            String lastName = rs.getString("lastName");
-            System.out.println("TA from DB: " + firstName + " " + lastName);
-            results.add(firstName + "~" + lastName);
-          }
-          return results.toArray(new String[results.size()]);
-        }
-        
-        /**
-         * 
-         * @return
-         * @throws SQLException
-         */
-        public String[] getAvailableProfessors() throws SQLException {
-          System.out.println("in getAvailableProfessors");
-          ArrayList<String> results = new ArrayList<String>();
-          String query = "select firstName,lastName from Account where accountType=4";
-          PreparedStatement statement = connection.prepareStatement(query);
-          ResultSet rs = statement.executeQuery();
-          while(rs.next()) {
-            String firstName = rs.getString("firstName");
-            String lastName = rs.getString("lastName");
-            System.out.println("Profs from DB: " + firstName + " " + lastName);
-            results.add(firstName + "~" + lastName);
-          }
-          return results.toArray(new String[results.size()]);
-        }
-        
-        /**
-         * 
-         * @return
-         * @throws SQLException
-         */
-        public String[] getAvailableCourses() throws SQLException {
-          System.out.println("in getAvailableCourses");
-          ArrayList<String> results = new ArrayList<String>();
-          String query = "select courseNumber from Course";
-          PreparedStatement statement = connection.prepareStatement(query);
-          ResultSet rs = statement.executeQuery();
-          while(rs.next()) {
-        	String courseNum = rs.getString("courseNumber");
-        	System.out.println("Course Num from DB: " + courseNum);
-            results.add(courseNum);
-          }
-          return results.toArray(new String[results.size()]);
-        }
-        
-        /**
-         * 
-         * @param firstName
-         * @param lastName
-         * @return
-         * @throws SQLException
-         */
-        public int getAccountId(String firstName, String lastName) throws SQLException {
-            System.out.println("in getAccountId");
-            PreparedStatement statement = connection.prepareStatement("select accountId from Account where firstName=? and lastName=?");
-            statement.setString(1, firstName);
-            statement.setString(2, lastName);
-            ResultSet rs = statement.executeQuery();
-            rs.next();
-            int accountId = rs.getInt("accountId");
-            System.out.println("accountId upon exit: " + accountId);
-            return accountId;
-        }
-        
-        /**
-         * 
-         * @param courseNum
-         * @return
-         * @throws SQLException
-         */
-        public int getCourseId(String courseNum) throws SQLException {
-            System.out.println("in getCourseId. courseNum: " + courseNum);
-            PreparedStatement statement = connection.prepareStatement("select courseId from Course where courseNumber=?");
-            statement.setString(1, courseNum);
-            ResultSet rs = statement.executeQuery();
-            rs.next();
-            int courseId = rs.getInt("courseId");
-            System.out.println("courseId upon exit: " + courseId);
-            return courseId;
-        }
+	
+  public String[] getAvailableTAs() throws SQLException {
+    System.out.println("in getAvailableTAs");
+    ArrayList<String> results = new ArrayList<String>();
+    String query = "select firstName,lastName from Account where accountType=3";
+    PreparedStatement statement = connection.prepareStatement
+      (query);
+    ResultSet rs = statement.executeQuery();
+    while(rs.next()) {
+      String firstName = rs.getString("firstName");
+      String lastName = rs.getString("lastName");
+      System.out.println("TA from DB: " + firstName + " " + lastName);
+      results.add(firstName + "~" + lastName);
+    }
+    return results.toArray(new String[results.size()]);
+  }
+
+  public String[] getAvailableProfessors() throws SQLException {
+    System.out.println("in getAvailableProfessors");
+    ArrayList<String> results = new ArrayList<String>();
+    String query = "select firstName,lastName from Account where accountType=4";
+    PreparedStatement statement = connection.prepareStatement(query);
+    ResultSet rs = statement.executeQuery();
+    while(rs.next()) {
+      String firstName = rs.getString("firstName");
+      String lastName = rs.getString("lastName");
+      System.out.println("Profs from DB: " + firstName + " " + lastName);
+      results.add(firstName + "~" + lastName);
+    }
+    return results.toArray(new String[results.size()]);
+  }
+
+  public String[] getAvailableCourses() throws SQLException {
+    System.out.println("in getAvailableCourses");
+    ArrayList<String> results = new ArrayList<String>();
+    String query = "select courseNumber from Course";
+    PreparedStatement statement = connection.prepareStatement(query);
+    ResultSet rs = statement.executeQuery();
+    while(rs.next()) {
+      String courseNum = rs.getString("courseNumber");
+      System.out.println("Course Num from DB: " + courseNum);
+      results.add(courseNum);
+    }
+    return results.toArray(new String[results.size()]);
+  }
+
+  public int getAccountId(String firstName, String lastName) throws SQLException {
+    System.out.println("in getAccountId");
+    PreparedStatement statement = connection.prepareStatement("select accountId from Account where firstName=? and lastName=?");
+    statement.setString(1, firstName);
+    statement.setString(2, lastName);
+    ResultSet rs = statement.executeQuery();
+    rs.next();
+    int accountId = rs.getInt("accountId");
+    System.out.println("accountId upon exit: " + accountId);
+    return accountId;
+  }
+
+  public int getCourseId(String courseNum) throws SQLException {
+    System.out.println("in getCourseId. courseNum: " + courseNum);
+    PreparedStatement statement = connection.prepareStatement("select courseId from Course where courseNumber=?");
+    statement.setString(1, courseNum);
+    ResultSet rs = statement.executeQuery();
+    rs.next();
+    int courseId = rs.getInt("courseId");
+    System.out.println("courseId upon exit: " + courseId);
+    return courseId;
+  }
+
+  public String[] getAvailableStudentNames() throws SQLException {
+    System.out.println("in getAvailableStudents");
+    ArrayList<String> results = new ArrayList<String>();
+    String query = "select firstName,lastName from Account where accountType=1";
+    PreparedStatement statement = connection.prepareStatement(query);
+    ResultSet rs = statement.executeQuery();
+    while(rs.next()) {
+      String firstName = rs.getString("firstName");
+      String lastName = rs.getString("lastName");
+      System.out.println("Students from DB: " + firstName + " " + lastName);
+      results.add(firstName + "~" + lastName);
+    }
+    return results.toArray(new String[results.size()]);
+  }
+
+  public Integer[] getAvailableStudentIds() throws SQLException {
+    System.out.println("in getAvailableStudentIds");
+    ArrayList<Integer> results = new ArrayList<Integer>();
+    String query = "select accountId from Account where accountType=1";
+    PreparedStatement statement = connection.prepareStatement(query);
+    ResultSet rs = statement.executeQuery();
+    while(rs.next()) {
+      int studentId = rs.getInt("accountId");
+      System.out.println("Student Ids from DB: " + studentId);
+      results.add(studentId);
+    }
+    return results.toArray(new Integer[results.size()]);
+  }
+  
+  public AssGradeRow[] getAccessibleAssignments(int studentId, int courseOfferingId) throws SQLException { 
+	  String query =
+	  // assignment info for students in specified courseOffering
+	  "select assignmentName, grade, assignmentSubmissionId " + 
+	  "from Assignment " + 
+	  "left join AssignmentSubmission " + 
+	  "on Assignment.assignmentId=AssignmentSubmission.assignmentId " + 
+	  "where Assignment.assignmentId in (select assignmentId " + 
+	  "					   from Account " + 
+	  "					   natural join CourseOfferingInfo " + 
+	  "					   natural join Assignment " + 
+	  "					   where accountId=? and courseOfferingId=?)";
+	  PreparedStatement statement = connection.prepareStatement(query);
+	  statement.setInt(1, studentId);
+	  statement.setInt(2, courseOfferingId);
+	  
+	  ArrayList<AssGradeRow> results = new ArrayList<>();
+	  ResultSet rs = statement.executeQuery();
+	  while(rs.next()) {
+		  String assName = rs.getString("assignmentName");
+		  Integer assGrade = rs.getInt("grade");
+		  assGrade = rs.wasNull() ? null : assGrade;
+		  Integer assSubId = rs.getInt("assignmentSubmissionId");
+		  assSubId = rs.wasNull() ? null : assSubId;
+		  Boolean submitted = assSubId!=null;
+		  System.out.println("Row results: " + assName + " " + assGrade + " " +submitted+" " + assSubId);
+		  results.add(new AssGradeRow(assName, assGrade, submitted, assSubId));
+	  }
+	  System.out.println("num grades: " + results.size());
+	  return results.toArray(new AssGradeRow[results.size()]);
+  }
+  
+  public CourseOfferingInfoObject[] getAccessibleCourseOfferings() throws SQLException {
+	  // returns courses accessible to currently logged in user (ta or professor)
+	  Account account = MainMenu.getUserAccount();// new Account(31, "prof1", "prof", 4, "profTest", "1");
+	  int accountType = account.getAccountType();
+	  int accountId = account.getAccountId();
+	  System.out.println("account type: " + accountType + "  account id: " + accountId);
+	  
+	  String query = null;
+	  if(accountType == 3) {
+		  query = "select courseOfferingId, courseNumber, term, year from Course natural join CourseOfferingInfo where taId=?";
+	  } else if(accountType == 4){
+		  query = "select courseOfferingId, courseNumber, term, year from Course natural join CourseOfferingInfo where professorId=?";
+	  } else {
+		  throw new SQLException("account type invalid");
+	  }
+	  
+	  System.out.println("in getAccessibleCourses");
+	  ArrayList<CourseOfferingInfoObject> results = new ArrayList<>();
+	  
+	  PreparedStatement statement = connection.prepareStatement(query);
+	  statement.setInt(1, accountId);
+	  
+	  ResultSet rs = statement.executeQuery();
+	  while(rs.next()) {
+	    int offeringId = rs.getInt("courseOfferingId");
+	    String courseNum = rs.getString("courseNumber");
+	    int term = rs.getInt("term");
+	    int year = rs.getInt("year");
+	    results.add(new CourseOfferingInfoObject(offeringId, courseNum, term, year));
+	  }
+	  System.out.println("Number of accessible courses: " + results.size());
+	  return results.toArray(new CourseOfferingInfoObject[results.size()]);
+  }
+  
+  public void insertAssignmentSubmissionGrade(AssGradeRow row) throws Exception {
+	  Boolean submitted = row.getSubmitted();
+	  if(!submitted) {
+		  throw new Exception("There is no assignment submission to mark");
+	  } 
+	  String query = "update AssignmentSubmission " +
+			         "set grade=? " +
+			         "where assignmentSubmissionId=?";
+	  PreparedStatement statement = connection.prepareStatement(query);
+	  statement.setInt(1, row.getAssGradeInt());
+	  statement.setInt(2, row.getAssSubId());
+	  statement.executeUpdate();
+  }
 
 }
 
