@@ -145,7 +145,8 @@ public class TAMainMenu
 	
 	private void processAssignmentsButtonPress(ActionEvent event)
 	{
-		//display assignments
+		ViewAssignmentUI vau = new ViewAssignmentUI();
+		vau.displayPostAssignmentForm(MainMenu.getStage());
 	}
 	
 	private void processLogoutButtonPress(ActionEvent event)
