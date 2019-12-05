@@ -1,0 +1,42 @@
+/* 
+    Document   : light mode
+*/
+
+.root
+{
+    -fx-font-size: 11pt;
+    -fx-font-family: "Helvetica";
+    -fx-base: rgb(239,240,241);
+    -fx-background: rgb(255,255,255);
+}
+
+.check-box
+{
+	
+}
+
+.button
+{
+    
+}
+
+.borders
+{
+    
+}
+
+.label
+{
+	
+    
+}
+
+.text-field
+{
+	
+}
+
+.text-field:focused
+{
+	
+}

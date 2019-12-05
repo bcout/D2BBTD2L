@@ -103,24 +103,6 @@ public class DataManager{
 	}
 	
 
-	public void uploadAssignmentSubmission(int Id, int Id2, Blob bob) throws SQLException {
-		
-		PreparedStatement statement;
-		String query = "INSERT INTO AssignmentSubmission (feedbackRead, accountId, assignmentId, submissionFile) VALUES (?,?,?,?)";
-		try {
-			statement = connection.prepareStatement(query);
-			statement.setInt(1, 0);
-			statement.setInt(2, Id2);
-			statement.setInt(3, Id);
-			statement.setBlob(4, bob);
-			statement.executeUpdate();
-		}
-		catch (SQLException e){
-			throw e;
-		}
-	}
-	
-
 	/**
 	 * 
 	 * @param idIn
@@ -234,11 +216,6 @@ public class DataManager{
 
 		return Assignments;
 	}
-	
-	
-	
-	
-=======
 
 	public ArrayList<Account> getAllAccounts() throws SQLException
 	{
