@@ -90,18 +90,22 @@ public class enterMarkUI {
     TableColumn<RadioButton, AssGradeRow> radioCol =
       new TableColumn<>("Select");
     radioCol.setCellValueFactory(new PropertyValueFactory<>("radioButton"));
+    radioCol.prefWidthProperty().bind(table.widthProperty().multiply(0.2));
 
     TableColumn<String, AssGradeRow> assNameCol = 
       new TableColumn<>("Assignment");
     assNameCol.setCellValueFactory(new PropertyValueFactory<>("assName"));
+    assNameCol.prefWidthProperty().bind(table.widthProperty().multiply(0.4));
 
     TableColumn<Boolean, AssGradeRow> submittedCol =
       new TableColumn<>("Submitted");
     submittedCol.setCellValueFactory(new PropertyValueFactory<>("submitted"));
+    submittedCol.prefWidthProperty().bind(table.widthProperty().multiply(0.2));
 
     TableColumn<String, AssGradeRow> gradeCol =
       new TableColumn<>("Grade");
     gradeCol.setCellValueFactory(new PropertyValueFactory<>("assGrade"));
+    gradeCol.prefWidthProperty().bind(table.widthProperty().multiply(0.2));
 
     table.getColumns().addAll(radioCol, assNameCol, submittedCol, gradeCol);
     pane.getChildren().add(table);
@@ -132,36 +136,16 @@ public class enterMarkUI {
   private void processSubmitButton(ActionEvent event) {
 	try {
 		AssGradeRow row = (AssGradeRow)parseRadioButtons().clone();
-		int assGrade = (int)parseGradeInput().doubleValue();
-		row.setAssGrade(assGrade);
+		double assGrade = parseGradeInput().doubleValue();
+		row.setAssGrade((int)assGrade);
 		control.insertAssignmentSubmissionGrade(row);
-		confirmationLabel.setText("Grade has been SET");
+		getNewData();
+		boolean isInteger = (assGrade % 1) == 0;
+		if(isInteger)
+			confirmationLabel.setText("Grade has been SET");
+		else 
+			confirmationLabel.setText("Grade has been truncated to" + (int)assGrade);
 		
-		Task<Void> sleeper = new Task<Void>()
-		{
-			protected Void call() throws Exception
-			{
-				try
-				{
-					Thread.sleep(1000);
-				}
-				catch(InterruptedException e)
-				{
-					
-				}
-				return null;
-			}
-		};
-		
-		sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>()
-		{
-			public void handle(WorkerStateEvent event)
-			{
-				resetToMainMenu();
-			}
-		});
-		new Thread(sleeper).start();
-
 	} catch (Exception e) {
 		confirmationLabel.setText(e.getMessage());
 	}
@@ -183,35 +167,39 @@ public class enterMarkUI {
 		tmm.resetToMainMenu();
 	  }
   }
+  
+  private void getNewData() {
+	  try {
+		    selectAssBtn = new ArrayList<>();
+		    toggleGroup = new ToggleGroup();
+		    
+		    int selectedStudentId;
+		    int selectedCourseOfferingId;
+		    
+		    if(studentInput.getValue() != null && courseInput.getValue() != null) {
+			    selectedStudentId = Integer.parseInt(studentInput.getValue().split("ID: ")[1]);
+			    System.out.println("Selected student id: " + selectedStudentId);
+			    selectedCourseOfferingId = Integer.parseInt(courseInput.getValue().split("ID:")[1]);
+			    System.out.println("Selected course id: " + selectedCourseOfferingId);
+			    
+			    assGradeRows = control.getAssignmentGradeRows(selectedStudentId, selectedCourseOfferingId);
+			    table.getItems().clear();
+			    for(AssGradeRow assGradeRow : assGradeRows) {
+			      table.getItems().add(assGradeRow); 
+			      RadioButton currentBtn = assGradeRow.getRadioButton();
+			      currentBtn.setToggleGroup(toggleGroup);
+			      selectAssBtn.add(currentBtn);
+			    }
+			    if(assGradeRows.length>0) confirmationLabel.setText("Selected");
+			    else confirmationLabel.setText("No Assignments Available");
+		    }
+		  } catch (Exception e) {
+			confirmationLabel.setText("No Assignments Available " + e.getMessage());
+		}
+  }
 
   private void processSelect(ActionEvent event) {
-	  try {
-	    selectAssBtn = new ArrayList<>();
-	    toggleGroup = new ToggleGroup();
-	    
-	    int selectedStudentId;
-	    int selectedCourseOfferingId;
-	    
-	    if(studentInput.getValue() != null && courseInput.getValue() != null) {
-		    selectedStudentId = Integer.parseInt(studentInput.getValue().split("ID: ")[1]);
-		    System.out.println("Selected student id: " + selectedStudentId);
-		    selectedCourseOfferingId = Integer.parseInt(courseInput.getValue().split("ID:")[1]);
-		    System.out.println("Selected course id: " + selectedCourseOfferingId);
-		    
-		    assGradeRows = control.getAssignmentGradeRows(selectedStudentId, selectedCourseOfferingId);
-		    table.getItems().clear();
-		    for(AssGradeRow assGradeRow : assGradeRows) {
-		      table.getItems().add(assGradeRow); 
-		      RadioButton currentBtn = assGradeRow.getRadioButton();
-		      currentBtn.setToggleGroup(toggleGroup);
-		      selectAssBtn.add(currentBtn);
-		    }
-		    if(assGradeRows.length>0) confirmationLabel.setText("Selected");
-		    else confirmationLabel.setText("No Assignments Available");
-	    }
-	  } catch (Exception e) {
-		confirmationLabel.setText("No Assignments Available " + e.getMessage());
-	}
+	  getNewData();
   }
   
   private AssGradeRow parseRadioButtons() throws Exception { // returns assignment submission id
