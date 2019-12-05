@@ -144,7 +144,7 @@ public class AdminMainMenu
 
 	private void processNewCourseButtonPress(ActionEvent event)
 	{
-		createCourseUI ccu = new createCourseUI();
+		CreateCourseUI ccu = new CreateCourseUI();
 		ccu.displayCreateCourse(MainMenu.getStage());
 	}
 
