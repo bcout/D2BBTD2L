@@ -5,6 +5,7 @@
  * @author justend29
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
+/*@author Justen Di Ruscio*/
 
 import java.sql.*;
 
