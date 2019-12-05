@@ -18,7 +18,8 @@ import java.util.Set;
  * <!-- end-UML-doc -->
  * @author Brennan Couturier
  */
-public class DataManager{
+public class DataManager
+{
 	//yikes
 	Connection connection = null;
 	
@@ -154,10 +155,8 @@ public class DataManager{
 		
 		return a;
 	}
-	
 
-	
-	public void uploadAssignmentSubmission(int Id, int Id2, Blob bob) throws SQLException {
+    public void uploadAssignmentSubmission(int Id, int Id2, Blob bob) throws SQLException {
 
 		PreparedStatement statement;
 		String query = "INSERT INTO AssignmentSubmission (feedbackRead, accountId, assignmentId, submissionFile) VALUES (?,?,?,?)";
@@ -172,8 +171,7 @@ public class DataManager{
 		catch (SQLException e){
 			throw e;
 		}
-	}
-	
+    }
 
 	public ArrayList<Assignment> getActiveAssignments() throws SQLException {
 		Account user = MainMenu.getUserAccount();
@@ -264,6 +262,7 @@ public class DataManager{
 		
 		return accounts;
 	}
+
 	public ArrayList<CourseOfferingInfoObject> getAllOfferedCourses() {
 		ArrayList<CourseOfferingInfoObject> courses = new ArrayList<>();
 		
@@ -845,13 +844,7 @@ public class DataManager{
 		ps.setDate(4, dueDate);
 		ps.executeUpdate();
 	}
-
-
-	/**
-	 * 
-	 * @param offering
-	 * @throws SQLException
-	 */
+    
 	public void addCourseOfferingInfo(CourseOfferingInfoObject offering)
            throws SQLException {
           System.out.println("in addCourseOfferingInfo");
@@ -1096,5 +1089,42 @@ public class DataManager{
 	  statement.executeUpdate();
   }
 
-}
+    public void postNotification(Notification n, CourseOfferingInfoObject c) throws Exception
+    {
+       try
+       {
+          PreparedStatement ps = connection.prepareStatement("INSERT INTO Notification(title, body, courseOfferingId) VALUES (?, ?, ?)");
+          ps.setString(1, n.title);
+          ps.setString(2, n.body);
+          ps.setInt(3, c.courseId);
 
+          ps.executeUpdate();
+       }
+       catch(SQLException e)
+           {
+               System.out.println(e.getMessage());
+               throw new Exception();
+           }
+    }
+
+    public Notification[] getNotifications()
+    {
+        ArrayList<Notification> arr = new ArrayList<Notification>();
+
+        try
+        {
+           PreparedStatement ps = connection.prepareStatement("SELECT body, title, courseNumber FROM Notification t1 JOIN CourseRegistration t2 ON t1.courseOfferingId = t2.courseOfferingId JOIN CourseOfferingInfo t3 ON t1.courseOfferingID = t3.courseOfferingId JOIN Course t4 ON t3.courseId = t4.courseId WHERE t2.accountId = ?");
+           ps.setInt(1, MainMenu.getUserId());
+           ResultSet rs = ps.executeQuery();
+           while(rs.next())
+           {
+               arr.add(new Notification(rs.getString(1), rs.getString(2), rs.getString(3)));
+           }
+
+           ps.close();
+        }
+        catch(Exception e) {}
+
+        return arr.toArray(new Notification[0]);
+    }
+}
