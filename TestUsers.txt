@@ -11,6 +11,12 @@ Student 1
 username: student1
 password: student
 
+
+Student 2
+-------------
+username: justen
+password: password
+
 Prof 1
 -------------
 username: prof1
