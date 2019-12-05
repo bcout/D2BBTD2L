@@ -11,10 +11,24 @@ Student 1
 username: student1
 password: student
 
-
 Student 2
 -------------
 username: justen
+password: password
+
+Chris Ruff (Student)
+-------------
+username: cruff
+password: pass
+
+Ben Donkin (Student)
+------------
+username: bdonkin
+password: pass
+
+Mark EMark (Student)
+-------------
+username: mark1XD
 password: password
 
 Prof 1
