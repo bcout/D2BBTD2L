@@ -1019,7 +1019,12 @@ public class DataManager{
   public AssGradeRow[] getAccessibleAssignments(int studentId, int courseOfferingId) throws SQLException { 
 	  String query =
 	  // assignment info for students in specified courseOffering
-	  "select assignmentName, grade, assignmentSubmissionId " + 
+	  "select assignmentName, grade, assignmentSubmissionId " +
+	  "from Assignment " +
+      "left join AssignmentSubmission " +
+	  "on Assignment.assignmentId=AssignmentSubmission.assignmentId " +
+      "where accountId=? and courseOfferingId=?";
+	  /*"select assignmentName, grade, assignmentSubmissionId " + 
 	  "from Assignment " + 
 	  "left join AssignmentSubmission " + 
 	  "on Assignment.assignmentId=AssignmentSubmission.assignmentId " + 
@@ -1027,7 +1032,7 @@ public class DataManager{
 	  "					   from Account " + 
 	  "					   natural join CourseOfferingInfo " + 
 	  "					   natural join Assignment " + 
-	  "					   where accountId=? and courseOfferingId=?)";
+	  "					   where accountId=? and courseOfferingId=?)";*/
 	  PreparedStatement statement = connection.prepareStatement(query);
 	  statement.setInt(1, studentId);
 	  statement.setInt(2, courseOfferingId);

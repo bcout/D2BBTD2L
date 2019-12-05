@@ -1,6 +1,7 @@
 import javafx.scene.control.RadioButton;
 
 // DataModel for table in enterMarkUI
+/*@author Justen Di Ruscio*/
 public class AssGradeRow implements Cloneable {
   private String assName;
   private Integer assGrade = 0;

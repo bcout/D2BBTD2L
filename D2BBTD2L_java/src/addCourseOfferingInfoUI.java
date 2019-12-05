@@ -292,7 +292,7 @@ public class addCourseOfferingInfoUI {
         year, professorId, TA_id, dow, time);
 
       control.addCourseOfferingInfo(offering);
-      confirmationLabel.setText("Successfully Added Student");
+      confirmationLabel.setText("Successfully Created Course Offering");
     } catch (Exception e) {
       confirmationLabel.setText(e.getMessage());
     }

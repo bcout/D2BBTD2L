@@ -1,8 +1,5 @@
 
-/**
- * 
- */
-
+/*@author Justen Di Ruscio*/
 import java.util.ArrayList;
 import java.sql.SQLException;
 
