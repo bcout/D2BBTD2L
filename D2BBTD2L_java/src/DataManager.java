@@ -41,10 +41,10 @@ public class DataManager
 		{
 			System.err.println(e.toString());
 		}
-		String url = "jdbc:mysql://cs2043.cs.unb.ca:3306/cs204301ateam1";
+		String url = "jdbc:mysql://cs2043.cs.unb.ca:3306/cs204301ateam2";
 		try 
 		{
-			connection = DriverManager.getConnection(url, "cs204301ateam1", "U5LEdT9K");
+			connection = DriverManager.getConnection(url, "cs204301ateam2", "Z34SRYfW");
 		}
 		catch (SQLException e)
 		{
@@ -155,6 +155,23 @@ public class DataManager
 		
 		return a;
 	}
+
+    public void uploadAssignmentSubmission(int Id, int Id2, Blob bob) throws SQLException {
+
+		PreparedStatement statement;
+		String query = "INSERT INTO AssignmentSubmission (feedbackRead, accountId, assignmentId, submissionFile) VALUES (?,?,?,?)";
+		try {
+			statement = connection.prepareStatement(query);
+			statement.setInt(1, 0);
+			statement.setInt(2, Id2);
+			statement.setInt(3, Id);
+			statement.setBlob(4, bob);
+			statement.executeUpdate();
+		}
+		catch (SQLException e){
+			throw e;
+		}
+    }
 
 	public ArrayList<Assignment> getActiveAssignments() throws SQLException {
 		Account user = MainMenu.getUserAccount();
@@ -1071,18 +1088,22 @@ public class DataManager
 	  statement.executeUpdate();
   }
 
-    public void postNotification(Notification n, CourseOfferingInfoObject c)
+    public void postNotification(Notification n, CourseOfferingInfoObject c) throws Exception
     {
        try
        {
-          PreparedStatement ps = connection.prepareStatement("INSERT INTO Notifications(title, body, courseOfferingId) VALUES (?, ?, ?)");
+          PreparedStatement ps = connection.prepareStatement("INSERT INTO Notification(title, body, courseOfferingId) VALUES (?, ?, ?)");
           ps.setString(1, n.title);
           ps.setString(2, n.body);
-          ps.setInt(3, c.id);
+          ps.setInt(3, c.courseId);
 
-          ps.executeQuery();
+          ps.executeUpdate();
        }
-       catch(SQLException e) {}
+       catch(SQLException e)
+           {
+               System.out.println(e.getMessage());
+               throw new Exception();
+           }
     }
 
     public Notification[] getNotifications(CourseOfferingInfoObject c)
@@ -1091,7 +1112,7 @@ public class DataManager
 
         try
         {
-           PreparedStatement ps = connection.prepareStatement("SELECT title, body FROM Notifications WHERE courseOfferingId = ?");
+           PreparedStatement ps = connection.prepareStatement("SELECT title, body FROM Notification WHERE courseOfferingId = ?");
            ps.setInt(1, c.id);
            ResultSet rs = ps.executeQuery();
            while(rs.next())

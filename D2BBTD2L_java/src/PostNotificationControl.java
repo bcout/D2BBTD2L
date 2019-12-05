@@ -16,7 +16,7 @@ public class PostNotificationControl {
         dm = d;
     }
 
-	public void postNotification(Notification n, CourseOfferingInfoObject c)
+	public void postNotification(Notification n, CourseOfferingInfoObject c) throws Exception
     {
         dm.postNotification(n, c);
 	}
