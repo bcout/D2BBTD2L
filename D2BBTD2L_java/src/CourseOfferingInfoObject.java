@@ -1,6 +1,7 @@
  /* @author justend29
  */
 public class CourseOfferingInfoObject {
+  private int offeringId;
   private int courseId;
   private String courseNum;
   private String roomNumber;
@@ -40,6 +41,7 @@ public class CourseOfferingInfoObject {
 	  this.time = null;
 	  this.courseNum = courseNum;
   }
+  
   
   public String toString() {
 	  String termName = "N/A";
@@ -82,6 +84,11 @@ public class CourseOfferingInfoObject {
   public String getTime() {
     return time; 
   }
-  
+  public String getCourseNum() {
+	  return courseNum;
+  }
+  public int getOfferingId() {
+	  return offeringId;
+  }
 
 }

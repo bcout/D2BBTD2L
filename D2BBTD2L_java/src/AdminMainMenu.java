@@ -138,6 +138,8 @@ public class AdminMainMenu
 	private void processAddStudentButtonPress(ActionEvent event)
 	{
 		//display addStudentCourseRegistrationInfo
+		addCourseRegistrationInfoUI regui = new addCourseRegistrationInfoUI();
+		regui.displayAddCourseRegistrationInfo(MainMenu.getStage());
 	}
 
 	private void processNewCourseButtonPress(ActionEvent event)

@@ -6,7 +6,13 @@
 //import static CourseOfferingInfoObject.*;
 //import static notificationObject.*;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Set;
+
 import java.util.*;
+import java.util.ArrayList;
+import java.util.Set;
+
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
@@ -15,7 +21,6 @@ import java.util.*;
 public class DataManager{
 	//yikes
 	Connection connection = null;
-	
 	
 	/**
 	 * This is the DataManager constructor that forms a connection to the cs204301ateam2 database
@@ -43,16 +48,13 @@ public class DataManager{
 		catch (SQLException e)
 		{
 			System.err.println("Database connection error.");
+			System.err.println(e.getMessage());
 		}
 	}
 	
-	/**
-	 * 
-	 * @param usernameIn
-	 * @param passwordIn
-	 * @return
-	 * @throws SQLException
-	 */
+	
+	private StudentAccount studentAccount;
+	
 	public Account getAccountFromLoginInfo(String usernameIn, String passwordIn) throws SQLException
 	{
 		PreparedStatement getAccountFromUsernamePs;
@@ -268,13 +270,66 @@ public class DataManager{
 		
 		return accounts;
 	}
+	public ArrayList<CourseOfferingInfoObject> getAllOfferedCourses() {
+		ArrayList<CourseOfferingInfoObject> courses = new ArrayList<>();
+		
+		try {
+			String query = "select co.courseOfferingId, c.courseNumber, co.term, co.year from Course c natural join CourseOfferingInfo co where c.courseId = co.courseId";
+			PreparedStatement ps = connection.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				String cNum = rs.getString(2);
+				int term = rs.getInt(3);
+				int year = rs.getInt(4);
+				int id = rs.getInt(1);
+				courses.add(new CourseOfferingInfoObject(id,cNum,term,year));
+			}
+			ps.close();
+		} catch (SQLException e) {
+			courses = null;
+			System.err.println(e.getMessage());
+		}
+		
+		return courses;
+	}
 	
-	/**
-	 * 
-	 * @param accountId
-	 * @return
-	 * @throws SQLException
-	 */
+	public ArrayList<Account> getAllStudentAccounts() 
+	{
+		PreparedStatement getAllAccountsPs;
+		String getAllAccountsQuery = "select * from Account where accountType = 1;";
+		
+		ArrayList<Account> accounts = new ArrayList<Account>();
+		
+		try
+		{
+			getAllAccountsPs = connection.prepareStatement(getAllAccountsQuery);
+			
+			ResultSet rs = getAllAccountsPs.executeQuery();
+			
+			while (rs.next())
+			{
+				int id = rs.getInt(1);
+				String username = rs.getString(2);
+				String password = rs.getString(3);
+				int accountType = rs.getInt(4);
+				String firstName = rs.getString(5);
+				String lastName = rs.getString(6);
+				
+				Account a = new Account(id, username, password, accountType, firstName, lastName);
+				
+				accounts.add(a);
+			}
+			getAllAccountsPs.close();
+		}
+		catch (SQLException e)
+		{
+			accounts = null;
+			System.err.println(e.getMessage());
+		}
+		
+		return accounts;
+	}
+	
 	public boolean accountExists(int accountId) throws SQLException
 	{
 		PreparedStatement checkAccountExistsPs;
@@ -827,8 +882,43 @@ public class DataManager{
           ps.executeUpdate();
 	}
 
+	/** 
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
+	public int addCourseRegistrationInfo(ArrayList<CourseRegistration> cr) {
+		int out = 1;
+		try {
+			String query = "insert into CourseRegistration (accountId,courseOfferingId) values";
+			
+			//Creates a string for the prepared statement with an appropriate amount of '?'s
+			for (int i=0; i<cr.size();i++) {
+				query += " (?,?)";
+				if (i < cr.size()-1) {
+					query += ",";
+				}
+			}
 
-	
+			PreparedStatement pst = connection.prepareStatement(query);
+			
+			//Adds all of the CourseRegistration info into the query
+			for (int i=0; i<cr.size(); i++) {
+				int stdID = cr.get(i).getAccountIdstudent();
+				
+				pst.setInt((2*i + 1), stdID);
+				pst.setInt((2*i + 2),cr.get(i).getCourseOfferingId());
+			}
+			//execute the sql statement
+			pst.executeUpdate();
+			pst.close();
+		} catch (SQLException e) {
+			System.err.println(e.toString());
+			out = -1;
+		}
+		return out;
+	}
+
   public String[] getAvailableTAs() throws SQLException {
     System.out.println("in getAvailableTAs");
     ArrayList<String> results = new ArrayList<String>();
