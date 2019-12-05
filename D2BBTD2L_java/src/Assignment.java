@@ -35,4 +35,16 @@ public class Assignment {
 	{
 		return "ID: " + assignmentId + " | " + assignmentName;
 	}
+	public Date getDate() {
+		return dueDate;
+	}
+
+	public String getAssignmentName() {
+		return assignmentName;
+	}
+
+	public int getAssignmentId() {
+		return assignmentId;
+	}
+	
 }

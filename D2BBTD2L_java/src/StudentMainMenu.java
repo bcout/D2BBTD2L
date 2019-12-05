@@ -158,7 +158,8 @@ public class StudentMainMenu
 	
 	private void processUploadAssignmentsButtonPress(ActionEvent event)
 	{
-		//
+		uploadAssignmentUI ui = new uploadAssignmentUI();
+		ui.displayAssignmentUploadForm(MainMenu.getStage());
 	}
 	
 	private void processAssignmentsButtonPress(ActionEvent event)
