@@ -34,6 +34,7 @@ public class Assignment {
 	{
 		return "ID: " + assignmentId + " | " + assignmentName;
 	}
+
 	
 	public Date getDate() {
 		return dueDate;

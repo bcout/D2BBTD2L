@@ -1,4 +1,7 @@
+
+
 import java.io.File;
+
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
@@ -12,7 +15,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class uploadAssignmentUI {
-	
+
 	private Scene scene;
 	private Button back;
 	private Button upload;
@@ -26,27 +29,27 @@ public class uploadAssignmentUI {
 	private Label click;
 	private ComboBox combo;
 	private ArrayList<Assignment> choices;
-	
+
+
 	private uploadAssignmentControl control;
+
 
 	public uploadAssignmentUI() {
 		control = new uploadAssignmentControl(MainMenu.getDataManager());
 	}
-	
-	
+
+
 	public void displayAssignmentUploadForm(Stage stg) {
 		stg.setScene(initUploadAssignment());
 		stg.show();
 	}
 
 	
-	public void selectAssignmentsubmitFile() {
-		
-	}
 	
+
 	public void loadUploadAssignmentScene() {
 		confirmation = new Label("");
-		
+
 		back = new Button("Back to Main Menu");
 		combo = new ComboBox();
 		choices = control.getActiveAssignments();
@@ -59,18 +62,19 @@ public class uploadAssignmentUI {
 		filePath = new TextField();
 		click = new Label("Click to choose a file");
 		choose = new FileChooser();
-		
+
 		postPane= new FlowPane(Orientation.VERTICAL);
-		
-		
-		
+
+
+
 		back.setOnAction(this::processBackButtonPress);
 		upload.setOnAction(this::processUploadButtonPress);
 	}
 
+	
 	public Scene initUploadAssignment() {
 		loadUploadAssignmentScene();
-		
+
 		postPane.getChildren().add(back);
 		postPane.getChildren().add(assiID);
 		postPane.getChildren().add(combo);
@@ -83,51 +87,43 @@ public class uploadAssignmentUI {
 		postPane.setColumnHalignment(HPos.CENTER); 
         postPane.setRowValignment(VPos.CENTER); 
         postPane.setStyle("-fx-background-color: pink;");
-        
+
         filePath.setOnMouseClicked(e -> {
             file = choose.showOpenDialog(primaryStage);
-            filePath.setText(file.getPath());
+            if (file != null) {
+            	filePath.setText(file.getPath());
+            }
         });
-        
+
         scene = new Scene(postPane, 900, 600);
 		return scene;
 	}
-	
+
 	public void uploadAssignment(Assignment choice, File inputFile) {
 		if (control.checkDueDateassignmentSpecifications(choice, inputFile)){
 			String suc = control.processAssingmentUpload(choice.getAssignmentId(), inputFile);
-			//if (suc == true) {
-			//	confirmation.setText("Upload was successful");
-			//}
-			//else {
-			//	confirmation.setText("Could not upload file");
-			//}
+		
 			confirmation.setText(suc);
 		}
 		else {
 			confirmation.setText("Submission past due date");
 		}
-		
+
 	}
-	
+
 	public void processBackButtonPress(ActionEvent Event) {
 		StudentMainMenu menu = new StudentMainMenu();
 		menu.resetToMainMenu();
 	}
-	
-	
+
+
 	public void processUploadButtonPress(ActionEvent Event) {
-		
+
 		Assignment choice = (Assignment) combo.getValue();
-		
+
 		uploadAssignment(choice, file);
 	}
-}
-
-
-
-
-
+} 
 
 
 

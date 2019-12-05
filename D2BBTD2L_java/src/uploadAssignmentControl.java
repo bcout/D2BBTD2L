@@ -1,3 +1,5 @@
+
+
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.*;
@@ -13,12 +15,16 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;  
 public class uploadAssignmentControl {
 	
+
+
 	private DataManager dataManager;
 
+	
 	public uploadAssignmentControl(DataManager dm) {
 		this.dataManager = dm;
 	} 
-	
+
+
 	public String processAssingmentUpload(int assignmentId, File inputFile) {
 		String out = "Your assignment was successfuly uploaded";
 		Blob blobFile;
@@ -29,9 +35,9 @@ public class uploadAssignmentControl {
 			dis.close();
 			blobFile = new SerialBlob(pdfData);
 			int studentId = MainMenu.getUserAccount().getAccountId();
-			System.out.println(studentId);
+
 			dataManager.uploadAssignmentSubmission(assignmentId, studentId, blobFile);
-			
+
 		} catch (FileNotFoundException e) {
 			out = "Could not find file";
 		} catch (IOException e) {
@@ -40,7 +46,7 @@ public class uploadAssignmentControl {
 			e.printStackTrace();
 			out = "Your file was too large";
 		}
-	
+
 		return out;
 	}
 
@@ -61,6 +67,7 @@ public class uploadAssignmentControl {
 	      }
 		return out;
 	}
+
 	
 	public ArrayList<Assignment> getActiveAssignments(){
 		ArrayList<Assignment> assignments;
@@ -71,4 +78,4 @@ public class uploadAssignmentControl {
 		}
 		return assignments;
 	}
-}
+} 
