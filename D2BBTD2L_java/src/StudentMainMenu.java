@@ -153,7 +153,8 @@ public class StudentMainMenu
 	
 	private void processNotificationsButtonPress(ActionEvent event)
 	{
-		//display viewNotifications
+        ViewNotificationsUI v = new ViewNotificationsUI(MainMenu.getDataManager());
+        v.display(MainMenu.getStage());
 	}
 	
 	private void processUploadAssignmentsButtonPress(ActionEvent event)

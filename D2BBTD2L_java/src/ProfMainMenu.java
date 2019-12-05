@@ -158,7 +158,8 @@ public class ProfMainMenu
 	
 	private void processPostNotificationButtonPress(ActionEvent event)
 	{
-		
+		PostNotificationUI p = new PostNotificationUI();
+        p.display(MainMenu.getStage());
 	}
 	
 	private void processAssignmentsButtonPress(ActionEvent event)

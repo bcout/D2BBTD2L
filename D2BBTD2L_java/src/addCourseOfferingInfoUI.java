@@ -288,7 +288,7 @@ public class addCourseOfferingInfoUI {
       String time = parseTime();
 
       CourseOfferingInfoObject offering = 
-        new CourseOfferingInfoObject(courseId, roomNum, courseLength, term,
+          new CourseOfferingInfoObject(-1, courseId, roomNum, courseLength, term,
         year, professorId, TA_id, dow, time);
 
       control.addCourseOfferingInfo(offering);

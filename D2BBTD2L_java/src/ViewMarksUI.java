@@ -15,11 +15,10 @@ import java.util.Date;
  * 
  */
 
-/** 
+/**
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
  * @author sdownwar
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class ViewMarksUI
 {
@@ -69,55 +68,9 @@ public class ViewMarksUI
 		stg.show();
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void clickcourseassignments() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void displaySummarizedAssignments()
-	{
-		
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void clicksanassignment() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void displayAssignment() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
 	private void assSubClicked(MouseEvent event)
 	{
-		AssignmentSubmission assSub =  lv.getSelectionModel().getSelectedItem();
+		AssignmentSubmission assSub = lv.getSelectionModel().getSelectedItem();
 		if(assSub == null) return;
 		//Redirect to assignment details
 		GridPane pane = new GridPane();
@@ -150,8 +103,7 @@ public class ViewMarksUI
 	}
 
 	private void backToMenu(ActionEvent event)
-	{
-		
+	{	
 		MainMenu.displayMainMenu();
 	}
 }

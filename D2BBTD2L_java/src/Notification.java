@@ -5,62 +5,31 @@
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
- * @author bcouturi
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+ * @author Stephen Downward 3636303
  */
-public class Notification {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Object notificationId;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Object courseOfferingId;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Object body;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Object title;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private CourseOfferingInfo course;
+public class Notification
+{
+	public String body;
+	public String title;
+    public String courseNum;
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void sqlselectnotificationswhereuseridmatchesuser() {
-		// begin-user-code
-		// TODO Auto-generated method stub
+    public Notification(String b, String t)
+    {
+        body = b;
+        title = t;
+        courseNum = null;
+    }
 
-		// end-user-code
-	}
+    public Notification(String b, String t, String c)
+    {
+        body = b;
+        title = t;
+        courseNum = c;
+    }
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void sqlinsertNotification() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
+    public String toString()
+    {
+        String s = courseNum + " | " + body;
+        return s.length() >= 35 ? s.substring(0, 32) + "..." : s;
+    }
 }

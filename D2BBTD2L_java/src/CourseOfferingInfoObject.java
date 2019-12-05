@@ -1,22 +1,23 @@
  /* @author justend29
  */
 public class CourseOfferingInfoObject {
-  private int offeringId;
-  private int courseId;
-  private String courseNum;
-  private String roomNumber;
-  private double courseLength; // in minutes
-  private int term; // 1 - 4
-  private int year;
-  private int professorId;
-  private int TA_id;
-  private boolean[] daysOfWeek = new boolean[]{false,false,false,false,false};
-  private String time;
+    public int id;
+  public int courseId;
+  public String roomNumber;
+  public double courseLength; // in minutes
+  public int term; // 1 - 4
+  public int year;
+  public int professorId;
+  public int TA_id;
+  public boolean[] daysOfWeek = new boolean[]{false,false,false,false,false};
+  public String time;
+    public String courseNum;
 
-  public CourseOfferingInfoObject(int courseId, String roomNum,
+    public CourseOfferingInfoObject(int id, int courseId, String roomNum,
                                   double courseLength, int term, int year,
                                   int profId, int TA_id,
                                   boolean[] dow, String time) {
+        this.id = id;
     this.courseId = courseId;
     this.roomNumber = roomNum;
     this.courseLength = courseLength;
@@ -30,7 +31,7 @@ public class CourseOfferingInfoObject {
   }
   
   public CourseOfferingInfoObject(int courseId, String courseNum, int term, int year) {
-	  this.courseId = courseId;
+ 	  this.courseId = courseId;
 	  this.roomNumber = null;
 	  this.courseLength = 0;
 	  this.term = term;
@@ -88,7 +89,7 @@ public class CourseOfferingInfoObject {
 	  return courseNum;
   }
   public int getOfferingId() {
-	  return offeringId;
+	  return id;
   }
 
 }
