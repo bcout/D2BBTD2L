@@ -1,16 +1,35 @@
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
+/**
+ * Control class for AddCourseRegistrationInfoControl
+ * @author Ben Donkin
+ *
+ */
 public class addCourseRegistrationInfoControl {
-
+	
 	private DataManager dataManager;
 
-	
-	public addCourseRegistrationInfoControl(DataManager dm) {
-		dataManager = dm;
+	public addCourseRegistrationInfoControl() {
+		dataManager = MainMenu.getDataManager();
 	}
-	public void submitCourseRegistrationInfoArrayListCourseRegistrationObject() {
-		// begin-user-code
-		// TODO Auto-generated method stub
+	
+	public int submitCourseRegistrationInfo(ArrayList<CourseRegistration> cr) {
+		if (cr.size() == 0) {
+			return 2;
+		}
+		LinkedHashSet<CourseRegistration> hs = new LinkedHashSet<>(cr);
+		ArrayList<CourseRegistration> noDups = new ArrayList<>(hs);
+		
+		return dataManager.addCourseRegistrationInfo(noDups);
+	}
 
-		// end-user-code
+	
+	public ArrayList<Account> getAllStudentAccounts() {
+		return dataManager.getAllStudentAccounts();
+	}
+	
+	public ArrayList<CourseOfferingInfoObject> getAllOfferedCourses() {
+		return dataManager.getAllOfferedCourses();
 	}
 }
