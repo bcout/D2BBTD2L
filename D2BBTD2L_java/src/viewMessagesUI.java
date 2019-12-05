@@ -218,26 +218,39 @@ public class viewMessagesUI
 	private void processExitButtonPress(ActionEvent event)
 	{
 		//if student is logged in
-		StudentMainMenu smm = new StudentMainMenu();
-		smm.resetToMainMenu();
+		if(MainMenu.getUserAccount().getAccountType() == 1)
+		{
+			StudentMainMenu smm = new StudentMainMenu();
+			smm.resetToMainMenu();
+		}
+		else if(MainMenu.getUserAccount().getAccountType() == 3)
+		{
+			TAMainMenu tmm = new TAMainMenu();
+			tmm.resetToMainMenu();
+		}
+		
 	}
 
+	@SuppressWarnings("deprecation")
 	private void processReceivedMessageChosen(MouseEvent event)
 	{
 		Message m =  messagesList.getSelectionModel().getSelectedItem();
-		if(Message.wasReceived(m))
+		if (m != null)
 		{
-			lblName.setText(m.getFromAccount().getFullName());
-		}
-		else
-		{
-			lblName.setText(m.getToAccount().getFullName());
-		}
-				
-		lblTxtMessage.setText(" " + m.getMessageText());
-		Timestamp timeSent = m.getTimeSent();
-		lblDate.setText(timeSent.getMonth() + "/"+ timeSent.getDate() + "/" + (timeSent.getYear() + 1900));
-		btnDeleteMessage.setDisable(false);
+			if(Message.wasReceived(m))
+			{
+				lblName.setText(m.getFromAccount().getFullName());
+			}
+			else
+			{
+				lblName.setText(m.getToAccount().getFullName());
+			}
+			
+			lblTxtMessage.setText(" " + m.getMessageText());
+			Timestamp timeSent = m.getTimeSent();
+			lblDate.setText(timeSent.getMonth() + "/"+ timeSent.getDate() + "/" + (timeSent.getYear() + 1900));
+			btnDeleteMessage.setDisable(false);
+		}			
 	}
 
 	public void resetToViewMessagesUI()

@@ -19,9 +19,9 @@ public class ViewAssignmentControl {
 
 
 	
-	public void downloadFile(int assignmentId) {
+	public void downloadFile(String assignmentName) {
 		
-		Assignment assignment = retrieveAssignmentFile(assignmentId);
+		Assignment assignment = retrieveAssignmentFile(assignmentName);
 		
 		try {
 			InputStream is = assignment.assignmentFile.getBinaryStream();
@@ -33,16 +33,16 @@ public class ViewAssignmentControl {
 			fos.close();
 			rbc.close();		
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 	}
 
+	public ArrayList<String> getAssignmentNames(){
+		return dataManager.requestAssignmentNames();
+	}
 
-	public Assignment retrieveAssignmentFile(int assignmentId) {
-		 return dataManager.requestAssignment(assignmentId);
+	public Assignment retrieveAssignmentFile(String assignmentName) {
+		return dataManager.requestAssignment(assignmentName);
 	}
 }

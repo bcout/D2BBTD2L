@@ -6,7 +6,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -34,7 +33,6 @@ public class TAMainMenu
 	private Button btnViewMessages;
 	private Button btnAssignments;
 	private Button btnNotifications;
-	private Button btnEnterMarks;
 	
 	private void initMainMenuComponents()
 	{
@@ -125,7 +123,8 @@ public class TAMainMenu
 	
 	private void processPostMarksButtonPress(ActionEvent event)
 	{
-		//
+		enterMarkUI ui = new enterMarkUI();
+    ui.displayEnterMarkForm(MainMenu.getStage());
 	}
 	
 	private void processQuitButtonPress(ActionEvent event)
@@ -146,7 +145,8 @@ public class TAMainMenu
 	
 	private void processAssignmentsButtonPress(ActionEvent event)
 	{
-		//display assignments
+		ViewAssignmentUI vau = new ViewAssignmentUI();
+		vau.displayPostAssignmentForm(MainMenu.getStage());
 	}
 	
 	private void processLogoutButtonPress(ActionEvent event)

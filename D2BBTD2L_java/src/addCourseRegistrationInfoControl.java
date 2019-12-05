@@ -1,34 +1,35 @@
-/**
- * 
- */
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author bcouturi
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+/**
+ * Control class for AddCourseRegistrationInfoControl
+ * @author Ben Donkin
+ *
  */
 public class addCourseRegistrationInfoControl {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	
 	private DataManager dataManager;
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	
-	public addCourseRegistrationInfoControl(DataManager dm) {
-		dataManager = dm;
+	public addCourseRegistrationInfoControl() {
+		dataManager = MainMenu.getDataManager();
 	}
-	public void submitCourseRegistrationInfoArrayListCourseRegistrationObject() {
-		// begin-user-code
-		// TODO Auto-generated method stub
+	
+	public int submitCourseRegistrationInfo(ArrayList<CourseRegistration> cr) {
+		if (cr.size() == 0) {
+			return 2;
+		}
+		LinkedHashSet<CourseRegistration> hs = new LinkedHashSet<>(cr);
+		ArrayList<CourseRegistration> noDups = new ArrayList<>(hs);
+		
+		return dataManager.addCourseRegistrationInfo(noDups);
+	}
 
-		// end-user-code
+	
+	public ArrayList<Account> getAllStudentAccounts() {
+		return dataManager.getAllStudentAccounts();
+	}
+	
+	public ArrayList<CourseOfferingInfoObject> getAllOfferedCourses() {
+		return dataManager.getAllOfferedCourses();
 	}
 }

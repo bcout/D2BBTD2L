@@ -1,6 +1,5 @@
 import java.sql.Blob;
 import java.util.Date;
-import java.util.Set;
 
 /**
 	Assignment class
@@ -35,16 +34,17 @@ public class Assignment {
 	{
 		return "ID: " + assignmentId + " | " + assignmentName;
 	}
+
+	
 	public Date getDate() {
 		return dueDate;
 	}
-
+	
 	public String getAssignmentName() {
 		return assignmentName;
 	}
-
+	
 	public int getAssignmentId() {
 		return assignmentId;
 	}
-	
 }

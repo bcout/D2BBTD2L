@@ -1,10 +1,10 @@
-import javafx.application.Application;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.Scene;
-import javafx.scene.Node;
+
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -22,7 +22,6 @@ import javafx.scene.control.CheckBox;
 * <!-- begin-UML-doc -->
 * <!-- end-UML-doc -->
 * @author justend29
-* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 */
 public class addCourseOfferingInfoUI {
   
@@ -74,7 +73,6 @@ public class addCourseOfferingInfoUI {
 
   // extra
   private Button backButton;
-  private Button addCourseButton;
   private Button submitButton;
   private Label confirmationLabel;
 
@@ -172,13 +170,10 @@ public class addCourseOfferingInfoUI {
     // extra
     backButton = new Button("Main Menu");
     backButton.setOnAction(this::processBackButton);
-    addCourseButton = new Button("Create New Course");
-    addCourseButton.setOnAction(this::processAddCourseButton);
     submitButton = new Button("Submit");
     submitButton.setOnAction(this::processSubmitButton);
     confirmationLabel = new Label("Enter details");
     confirmationLabel.setPrefWidth(500);
-    pane.add(addCourseButton, 0, 9);
     pane.add(backButton, 1, 9);
     pane.add(submitButton, 0, 10, 2, 1);
     pane.add(confirmationLabel, 0, 11, 2, 1);
@@ -304,11 +299,13 @@ public class addCourseOfferingInfoUI {
   }
 
   private void processBackButton(ActionEvent event) {
-    confirmationLabel.setText("this should go to the main scene");
+    AdminMainMenu amm = new AdminMainMenu();
+    amm.resetToMainMenu();
   }
 
   private void processAddCourseButton(ActionEvent event) {
-    confirmationLabel.setText("This should go to the add course scene");
+    AdminMainMenu mm = new AdminMainMenu();
+    mm.resetToMainMenu();
   }
 
   private Scene initScene() {
@@ -318,7 +315,7 @@ public class addCourseOfferingInfoUI {
 	  System.err.println(e.getMessage());
 	  confirmationLabel.setText(e.getMessage());
 	}
-    return new Scene(pane); 
+    return new Scene(pane, 900, 600); 
   }
 
   public void displayAddCourseOfferingInfoForm(Stage stage) {

@@ -1,8 +1,9 @@
  /* @author justend29
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class CourseOfferingInfoObject {
+  private int offeringId;
   private int courseId;
+  private String courseNum;
   private String roomNumber;
   private double courseLength; // in minutes
   private int term; // 1 - 4
@@ -25,6 +26,35 @@ public class CourseOfferingInfoObject {
     this.TA_id = TA_id;
     this.daysOfWeek = dow;
     this.time = time;
+    this.courseNum = null;
+  }
+  
+  public CourseOfferingInfoObject(int courseId, String courseNum, int term, int year) {
+	  this.courseId = courseId;
+	  this.roomNumber = null;
+	  this.courseLength = 0;
+	  this.term = term;
+	  this.year = year;
+	  this.professorId = 0;
+	  this.TA_id = 0;
+	  this.daysOfWeek = null;
+	  this.time = null;
+	  this.courseNum = courseNum;
+  }
+  
+  
+  public String toString() {
+	  String termName = "N/A";
+	  if(term == 0) {
+		  termName = "Fall";
+	  } else if (term == 1) {
+		  termName = "Winter";
+	  } else if (term == 2) {
+		  termName = "SummerA";
+	  } else if (term == 3) {
+		  termName = "SummerB";
+	  }
+	  return courseNum + " Term: " + termName + " " + year + " ID:" + courseId;
   }
 
   public int getCourseId() {
@@ -54,4 +84,11 @@ public class CourseOfferingInfoObject {
   public String getTime() {
     return time; 
   }
+  public String getCourseNum() {
+	  return courseNum;
+  }
+  public int getOfferingId() {
+	  return offeringId;
+  }
+
 }

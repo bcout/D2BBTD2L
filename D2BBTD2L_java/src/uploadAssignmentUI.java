@@ -1,4 +1,7 @@
-	import java.io.File;
+
+
+import java.io.File;
+
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
@@ -12,6 +15,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class uploadAssignmentUI {
+
 	private Scene scene;
 	private Button back;
 	private Button upload;
@@ -25,6 +29,7 @@ public class uploadAssignmentUI {
 	private Label click;
 	private ComboBox combo;
 	private ArrayList<Assignment> choices;
+
 
 	private uploadAssignmentControl control;
 
@@ -119,5 +124,6 @@ public class uploadAssignmentUI {
 		uploadAssignment(choice, file);
 	}
 } 
+
 
 

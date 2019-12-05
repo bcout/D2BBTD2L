@@ -1,7 +1,9 @@
 
+
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.*;
+
 import javax.sql.rowset.serial.SerialBlob;
 
 import java.io.DataInputStream;
@@ -14,12 +16,14 @@ import java.time.LocalDateTime;
 public class uploadAssignmentControl {
 	
 
+
 	private DataManager dataManager;
 
 	
 	public uploadAssignmentControl(DataManager dm) {
 		this.dataManager = dm;
 	} 
+
 
 	public String processAssingmentUpload(int assignmentId, File inputFile) {
 		String out = "Your assignment was successfuly uploaded";
@@ -31,6 +35,7 @@ public class uploadAssignmentControl {
 			dis.close();
 			blobFile = new SerialBlob(pdfData);
 			int studentId = MainMenu.getUserAccount().getAccountId();
+
 			dataManager.uploadAssignmentSubmission(assignmentId, studentId, blobFile);
 
 		} catch (FileNotFoundException e) {
@@ -46,7 +51,6 @@ public class uploadAssignmentControl {
 	}
 
 	
-
 	public boolean checkDueDateassignmentSpecifications(Assignment choice, File inputFile) {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		boolean out = false;
