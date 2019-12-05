@@ -52,9 +52,6 @@ public class CourseRegistration implements Comparable<CourseRegistration> {
 		return year;
 	}
 	
-	public String getTerm() {
-		return term;
-	}
 	
 	public int compareTo(CourseRegistration cr) {
 		if (this.accountIdstudent == cr.getAccountIdstudent() &&
@@ -64,19 +61,5 @@ public class CourseRegistration implements Comparable<CourseRegistration> {
 			return -1;
 		}
 	}
-	//////////////////////////////////////////
-	//Following properties may not be needed//
-	//////////////////////////////////////////
-	
-	private Set<CourseOfferingInfo> courseOfferingInfo;
 
-	private CourseOfferingInfo course;
-
-	private StudentAccount userAccount;
-
-	private Set<Account> account;
-
-	public void sqlinsert() {
-
-	}
 }
