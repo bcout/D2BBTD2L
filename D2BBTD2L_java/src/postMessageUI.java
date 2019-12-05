@@ -10,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.*;
@@ -87,7 +88,7 @@ public class postMessageUI
 	/**
 	 * This will be the text field where the user will write their message
 	 */
-	private TextField txtMessageInput;
+	private TextArea txtMessageInput;
 
 	/**
 	 * This combo box will be filled with all the users that the user can send a message to.
@@ -128,9 +129,10 @@ public class postMessageUI
 		lblErrorMessage.setPrefWidth(400);
 		lblErrorMessage.setPrefHeight(50);
 
-		txtMessageInput = new TextField();
+		txtMessageInput = new TextArea();
 		txtMessageInput.setPrefSize(400, 200);
-		txtMessageInput.setAlignment(Pos.TOP_LEFT);
+		txtMessageInput.setWrapText(true);
+		
 
 		postMessageControl pmc = new postMessageControl();
 		try
