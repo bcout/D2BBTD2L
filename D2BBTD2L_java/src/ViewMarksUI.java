@@ -70,7 +70,7 @@ public class ViewMarksUI
 
 	private void assSubClicked(MouseEvent event)
 	{
-		AssignmentSubmission assSub =  lv.getSelectionModel().getSelectedItem();
+		AssignmentSubmission assSub = lv.getSelectionModel().getSelectedItem();
 		if(assSub == null) return;
 		//Redirect to assignment details
 		GridPane pane = new GridPane();

@@ -69,7 +69,6 @@ public class PostNotificationUI
 
         m = new Text("");
         pane.add(m, 3, 2);
-        //pane.setGridLinesVisible(true);
 
         ass = new Scene(pane, 900, 600);
         return ass;

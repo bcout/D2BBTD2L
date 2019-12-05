@@ -11,8 +11,8 @@ public class ViewNotificationsControl
         this.dm = dm;
     }
 
-	public Notification[] getNotifications(CourseOfferingInfoObject c)
+	public Notification[] getNotifications()
     {
-        return dm.getNotifications(c);
+        return dm.getNotifications();
 	}
 }

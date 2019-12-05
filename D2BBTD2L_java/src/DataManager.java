@@ -1106,18 +1106,18 @@ public class DataManager
            }
     }
 
-    public Notification[] getNotifications(CourseOfferingInfoObject c)
+    public Notification[] getNotifications()
     {
         ArrayList<Notification> arr = new ArrayList<Notification>();
 
         try
         {
-           PreparedStatement ps = connection.prepareStatement("SELECT title, body FROM Notification WHERE courseOfferingId = ?");
-           ps.setInt(1, c.id);
+           PreparedStatement ps = connection.prepareStatement("SELECT body, title, courseNumber FROM Notification t1 JOIN CourseRegistration t2 ON t1.courseOfferingId = t2.courseOfferingId JOIN CourseOfferingInfo t3 ON t1.courseOfferingID = t3.courseOfferingId JOIN Course t4 ON t3.courseId = t4.courseId WHERE t2.accountId = ?");
+           ps.setInt(1, MainMenu.getUserId());
            ResultSet rs = ps.executeQuery();
            while(rs.next())
            {
-              arr.add(new Notification(rs.getString(1), rs.getString(2)));
+               arr.add(new Notification(rs.getString(1), rs.getString(2), rs.getString(3)));
            }
 
            ps.close();
