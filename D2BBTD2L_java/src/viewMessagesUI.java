@@ -218,8 +218,17 @@ public class viewMessagesUI
 	private void processExitButtonPress(ActionEvent event)
 	{
 		//if student is logged in
-		StudentMainMenu smm = new StudentMainMenu();
-		smm.resetToMainMenu();
+		if(MainMenu.getUserAccount().getAccountType() == 1)
+		{
+			StudentMainMenu smm = new StudentMainMenu();
+			smm.resetToMainMenu();
+		}
+		else if(MainMenu.getUserAccount().getAccountType() == 3)
+		{
+			TAMainMenu tmm = new TAMainMenu();
+			tmm.resetToMainMenu();
+		}
+		
 	}
 
 	@SuppressWarnings("deprecation")
