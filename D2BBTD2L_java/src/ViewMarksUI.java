@@ -56,12 +56,6 @@ public class ViewMarksUI
 
 		Label ttl = new Label("Assignment Marks list");
 		pane.add(ttl, 0, 0);
-
-        
-
-        //Courseinfo dropdown
-        ComboBox c = new ComboBox(FXCollections 
-                                  .observableArrayList());
 		
 		assSum = new Scene(pane, 900, 600);
 		return assSum;

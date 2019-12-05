@@ -8,6 +8,18 @@ import javafx.stage.Stage;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Label;
+import java.util.*;
+import javafx.application.Application; 
+import javafx.scene.Scene; 
+import javafx.scene.control.*; 
+import javafx.scene.layout.*; 
+import javafx.event.ActionEvent; 
+import javafx.event.EventHandler; 
+import javafx.collections.*; 
+import javafx.stage.Stage; 
+import javafx.scene.text.Text.*; 
+import javafx.scene.paint.*; 
+import javafx.scene.text.*; 
 
 /** 
 * @author sdownward
@@ -38,7 +50,14 @@ public class PostNotificationUI
 
         Label l = new Label("Post Notification");
         pane.add(l, 0, 0);
-        
+
+        ArrayList<CourseOfferingInfoObject> cs = ctrl.getCourseOfferings();
+
+        ComboBox c = 
+            new ComboBox(FXCollections 
+                         .observableArrayList(cs)); 
+        pane.add(c, 5, 5);
+
         ass = new Scene(pane, 900, 600);
         return ass;
     }

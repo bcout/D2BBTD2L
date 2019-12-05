@@ -11,6 +11,7 @@ public class CourseOfferingInfoObject {
   public int TA_id;
   public boolean[] daysOfWeek = new boolean[]{false,false,false,false,false};
   public String time;
+    public String courseNum;
 
     public CourseOfferingInfoObject(int id, int courseId, String roomNum,
                                   double courseLength, int term, int year,
@@ -88,7 +89,7 @@ public class CourseOfferingInfoObject {
 	  return courseNum;
   }
   public int getOfferingId() {
-	  return offeringId;
+	  return id;
   }
 
 }

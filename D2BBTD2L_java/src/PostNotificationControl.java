@@ -1,3 +1,5 @@
+import java.util.*;
+
 /**
 * @author Stephen Downward 3636303
 */
@@ -18,4 +20,9 @@ public class PostNotificationControl {
     {
         dm.postNotification(n, c);
 	}
+
+    public ArrayList<CourseOfferingInfoObject> getCourseOfferings()
+    {
+        return dm.getAllOfferedCourses();
+    }
 }
