@@ -135,7 +135,7 @@ public class viewMessagesUI
 		
 		btnReceivedItems.setDisable(true);
 		
-		viewMessagesPane.add(btnDeleteMessage, 0, 7);
+		//viewMessagesPane.add(btnDeleteMessage, 0, 7);
 		viewMessagesPane.add(btnExit, 5, 1);
 		viewMessagesPane.add(lblFromTo, 2, 5);
 		viewMessagesPane.add(lblName, 3, 5);

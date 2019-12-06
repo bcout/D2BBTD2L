@@ -172,6 +172,7 @@ public class Message
 		return true;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public String getReceivedDescription()
 	{
 		String result = "";
@@ -187,6 +188,7 @@ public class Message
 		return result;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public String getSentDescription()
 	{
 		String result = "";

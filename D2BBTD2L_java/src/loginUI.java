@@ -2,6 +2,7 @@
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -62,23 +63,10 @@ public class loginUI
 	private void initLoginComponents()
 	{
 		
-		try 
-		{
-			mainMenuLogo = new Image(new FileInputStream("images/D2BBTD2L_Logo.png"));
-			mainMenuIcon = new Image(new FileInputStream("images/logo.png"));
-		} 		
-		catch (FileNotFoundException e) 
-		{
-			System.err.println(e.getMessage());
-		}
 		
-		mainMenuLogoView = new ImageView(mainMenuLogo);
-		mainMenuLogoView.setFitHeight(160);
-		mainMenuLogoView.setFitWidth(489);
-		
-		mainMenuIconView = new ImageView(mainMenuIcon);
+		mainMenuIconView = MainMenu.getCompanyLogo();	
 		mainMenuIconView.setFitHeight(100);
-		mainMenuIconView.setFitWidth(100);		
+		mainMenuIconView.setFitWidth(100);
 		
 		txtUsername = new TextField("");
 		txtUsername.setPrefWidth(150);

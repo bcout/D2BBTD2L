@@ -2,6 +2,9 @@
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
+
+import javax.imageio.ImageIO;
 
 import javafx.application.*;
 import javafx.concurrent.Task;
@@ -38,6 +41,10 @@ public class MainMenu extends Application
 	//javafx variables
 	//-------------------------------------------
 	private static Stage stgMain;
+	private static InputStream companyLogo;
+	private static InputStream D2BBTD2L;
+	private static ImageView logoView;
+	private static ImageView d2bbtd2lView;
 
 	public void start(Stage primaryStage)
 	{	
@@ -45,6 +52,7 @@ public class MainMenu extends Application
 		stgMain.setResizable(false);
 		dm = new DataManager();
 		darkModeEnabled = false;
+		
 		
 		Stage temp = new Stage();
 		temp.initStyle(StageStyle.UNDECORATED);
@@ -85,18 +93,31 @@ public class MainMenu extends Application
 		launch(args);
 	}
 	
-	private Scene initSplashScreen()
+	private void loadImages()
 	{
+		companyLogo = MainMenu.class.getResourceAsStream("/logo.png");
+		logoView = new ImageView();
+		logoView.setImage(new Image(companyLogo));
 		
-		try 
-		{
-			logo = new Image(new FileInputStream("images/logo.png"));
-		} 
-		catch (FileNotFoundException e) 
-		{
-			System.err.println(e.getMessage());
-		}
-		ImageView logoView = new ImageView(logo);
+		D2BBTD2L = MainMenu.class.getResourceAsStream("/D2BBTD2L_Logo.png");
+		d2bbtd2lView = new ImageView();
+		d2bbtd2lView.setImage(new Image(D2BBTD2L));
+		
+	}
+	
+	public static ImageView getCompanyLogo()
+	{
+		return logoView;
+	}
+	
+	public static ImageView getD2BBTD2LLogo()
+	{
+		return d2bbtd2lView;
+	}
+	
+	private Scene initSplashScreen()
+	{		
+		loadImages();
 		
 		splashPane = new GridPane();
 		splashPane = new GridPane();
