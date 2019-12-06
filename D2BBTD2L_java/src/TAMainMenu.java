@@ -131,7 +131,8 @@ public class TAMainMenu
 	
 	private void processNotificationsButtonPress(ActionEvent event)
 	{
-		//display viewNotifications
+		ViewNotificationsUI vnu = new ViewNotificationsUI(MainMenu.getDataManager());
+		vnu.display(MainMenu.getStage());
 	}
 	
 	private void processAssignmentsButtonPress(ActionEvent event)

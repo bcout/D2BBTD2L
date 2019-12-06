@@ -228,6 +228,11 @@ public class viewMessagesUI
 			TAMainMenu tmm = new TAMainMenu();
 			tmm.resetToMainMenu();
 		}
+		else if(MainMenu.getUserAccount().getAccountType() == 4)
+		{
+			ProfMainMenu pmm = new ProfMainMenu();
+			pmm.resetToMainMenu();
+		}
 		
 	}
 
