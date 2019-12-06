@@ -223,6 +223,11 @@ public class viewMessagesUI
 			StudentMainMenu smm = new StudentMainMenu();
 			smm.resetToMainMenu();
 		}
+		else if(MainMenu.getUserAccount().getAccountType() == 2)
+		{
+			AdminMainMenu amm = new AdminMainMenu();
+			amm.displayAdminMainMenu(MainMenu.getStage());
+		}
 		else if(MainMenu.getUserAccount().getAccountType() == 3)
 		{
 			TAMainMenu tmm = new TAMainMenu();

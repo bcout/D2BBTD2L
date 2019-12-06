@@ -34,6 +34,7 @@ public class AdminMainMenu
 	private Button btnAddStudentCourseRegistrationInfo;
 	private Button btnLogout;
 	private Button btnCreateCourse;
+	private Button btnViewMessages;
 
 	private void initMainMenuComponents()
 	{
@@ -57,6 +58,10 @@ public class AdminMainMenu
 		btnAddStudentCourseRegistrationInfo = new Button("Add Student to Course");
 		btnAddStudentCourseRegistrationInfo.setOnAction(this::processAddStudentButtonPress);
 		btnAddStudentCourseRegistrationInfo.setPrefWidth(170);
+		
+		btnViewMessages = new Button("Messages");
+		btnViewMessages.setOnAction(this::processViewMessageButtonPress);
+		btnViewMessages.setPrefWidth(100);
 
 		btnAddCourseOfferingInfo = new Button("New Class");
 		btnAddCourseOfferingInfo.setOnAction(this::processAddCourseButtonPress);
@@ -92,7 +97,8 @@ public class AdminMainMenu
 
 		mainPane.add(btnLogout, 6, 0);
 		mainPane.add(btnAddCourseOfferingInfo, 2, 3);
-		mainPane.add(btnCreateCourse, 1, 3);
+		mainPane.add(btnViewMessages, 1, 3);
+		mainPane.add(btnCreateCourse, 5, 3);
 		mainPane.add(btnAddStudentCourseRegistrationInfo, 3, 3);
 		mainPane.add(btnCreateLoginAccount, 4, 3);
 		mainPane.add(btnQuit, 6, 3);
@@ -129,7 +135,6 @@ public class AdminMainMenu
 
 	private void processAddStudentButtonPress(ActionEvent event)
 	{
-		//display addStudentCourseRegistrationInfo
 		addCourseRegistrationInfoUI regui = new addCourseRegistrationInfoUI();
 		regui.displayAddCourseRegistrationInfo(MainMenu.getStage());
 	}
@@ -148,5 +153,11 @@ public class AdminMainMenu
 	private void processExitButtonPress(ActionEvent event)
 	{
 		MainMenu.getStage().close();
+	}
+	
+	private void processViewMessageButtonPress(ActionEvent event)
+	{
+		viewMessagesUI vmu = new viewMessagesUI();
+		vmu.displayViewMessages(MainMenu.getStage());
 	}
 }
