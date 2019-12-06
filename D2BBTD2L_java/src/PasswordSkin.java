@@ -3,6 +3,7 @@
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.skin.TextFieldSkin;
+import javafx.scene.paint.Color;
 
 /**
  * This class allows us to customize how the login's password field hides the input.
@@ -14,11 +15,13 @@ public class PasswordSkin extends TextFieldSkin {
     }
 
     protected String maskText(String txt) {
-        if (getSkinnable() instanceof PasswordField) {
+        if (getSkinnable() instanceof PasswordField)
+        {
             int n = txt.length();
             StringBuilder passwordBuilder = new StringBuilder(n);
             for (int i = 0; i < n; i++)
-                passwordBuilder.append("*");
+            {
+            	 //passwordBuilder.append("*");
             	/*
             	if (i % 2 == 0)
             	{
@@ -28,12 +31,14 @@ public class PasswordSkin extends TextFieldSkin {
             	{
             		passwordBuilder.append("~");
             	}
-            	*/
-            	
-            	
+        		*/
+            }
+               
 
             return passwordBuilder.toString();
-        } else {
+        } 
+        else 
+        {
             return txt;
         }
     }

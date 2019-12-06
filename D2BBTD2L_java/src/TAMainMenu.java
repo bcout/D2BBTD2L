@@ -36,20 +36,11 @@ public class TAMainMenu
 	
 	private void initMainMenuComponents()
 	{
-		try 
-		{
-			mainMenuLogo = new Image(new FileInputStream("images/D2BBTD2L_Logo.png"));
-			mainMenuIcon = new Image(new FileInputStream("images/logo.png"));
-		} 
-		catch (FileNotFoundException e) 
-		{
-			System.err.println(e.getMessage());
-		}
-		mainMenuLogoView = new ImageView(mainMenuLogo);
+		mainMenuLogoView = MainMenu.getD2BBTD2LLogo();
 		mainMenuLogoView.setFitHeight(160);
 		mainMenuLogoView.setFitWidth(489);
 		
-		mainMenuIconView = new ImageView(mainMenuIcon);
+		mainMenuIconView = MainMenu.getCompanyLogo();
 		mainMenuIconView.setFitHeight(100);
 		mainMenuIconView.setFitWidth(100);
 		
